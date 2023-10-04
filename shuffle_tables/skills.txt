@@ -1,0 +1,164 @@
+HEADER	Description	Rate1	Rate2	Rate3	Type	Multiplier	Bonus Effect	Bonus1	Bonus2	Bonus3	Bonus4	SP1	SP2	SP3	SP4
+Opportunist	Rarely increases damage.	5	10	10	Offensive	1.5	Multiply Damage	1.4	1.8	2.0	3.4	3	10	25	50
+Heavy Hitter	Sometimes increases damage.	20	50	80	Offensive	1.5	Multiply Damage	1.5	2.0	2.2	2.7	5	15	40	70
+Dragon Talon	Sometimes increases damage.	40	70	100	Offensive	1.5	Activation Rate	10	15	20	30	5	15	40	70
+Power of 4	Increases damage when you make a match of four.	0	100	0	Offensive	1.5	Multiply Damage	1.5	1.8	2.1	2.4	5	30	70	120
+Power of 5	Increases damage when you make a match of five.	0	0	100	Offensive	1.5	Multiply Damage	1.5	1.8	2.1	2.4	5	30	70	120
+Last-Ditch Effort	Increases damage when things are looking desperate.	50	100	100	Offensive	5.0	Multiply Damage	1.2	1.5	2.0	3.0	5	20	40	100
+Hitting Streak	Increases damage when it is triggered in a row.	60	100	100	Offensive	1.2	Activation Rate	10	15	20	30	5	20	40	100
+Damage Streak	Increases damage when it is triggered in a row.	60	100	100	Offensive	1.2	Multiply Damage	1.1	1.3	1.5	2.0	5	20	40	100
+Risk-Taker	Increases damage randomly.	50	70	100	Offensive	1.0	Multiply Damage	1.5	1.8	2.0	2.5	2	9	30	70
+Swarm	Increases damage when things are looking desperate.	60	80	100	Offensive	5.0	Activation Rate	10	20	30	40	2	9	30	70
+Steely Resolve	Increases damage when things are looking desperate.	60	80	100	Offensive	4.0	Multiply Damage	1.1	1.2	2.5	3.5	5	20	40	100
+Pyre	Increases damage done by any Fire types in the combo.	50	100	100	Offensive	2.0	Activation Rate	10	20	30	40	5	30	70	120
+Dancing Dragons	Increases damage done by any Dragon types in the combo.	60	100	100	Offensive	2.0	Activation Rate	10	15	20	30	5	20	40	100
+Pummel	Increases damage done by any Fighting types in the combo.	15	50	100	Offensive	2.0	Activation Rate	20	25	40	50	5	30	70	120
+Pixie Power	Increases damage done by any Fairy types in the combo.	15	40	80	Offensive	2.0	Activation Rate	20	30	40	60	5	20	40	100
+Sinister Power	Increases damage done by any Dark types in the combo.	15	40	80	Offensive	2.0	Activation Rate	20	30	40	60	5	20	40	100
+Crowd Control	Increases damage when there are more of this Pokémon in the puzzle area.	20	60	80	Offensive	50.0	Activation Rate	10	15	20	40	5	20	40	100
+Counterattack	Deals even more damage the more disruptions there are.	25	75	100	Offensive	20.0	Add Damage	10.0	15.0	20.0	30.0	2	9	30	100
+Vitality Drain	Damage varies depending on the opponent’s remaining HP.	15	30	60	Offensive	1.0	Activation Rate	5	10	20	30	3	10	25	50
+Quake	Sometimes increases damage and leaves opponent paralyzed for a short period of time.	20	35	60	Offensive	1.2	Activation Rate	10	20	30	40	2	9	30	70
+Fearless	Increases damage in the combo if the opponent is Ghost type.	10	50	100	Offensive	1.0	Multiply Damage	1.2	1.4	1.5	2.0	2	9	30	70
+Swat	Increases damage against Flying, Bug, or Fairy types.	20	40	100	Offensive	1.0	Multiply Damage	1.1	1.2	1.4	1.6	2	9	30	70
+Brute Force	Increases damage for attacks that are not very effective.	50	100	100	Offensive	1.0	Multiply Damage	2.0	2.5	3.0	4.0	2	9	30	70
+Quirky	Sometimes erases one extra matching Pokémon elsewhere.	30	50	100	Defensive	1.0	Activation Rate	30	40	50	70	3	10	25	50
+Quirky+	Sometimes erases two extra matching Pokémon elsewhere.	25	35	100	Defensive	1.0	Activation Rate	10	20	40	65	2	9	30	70
+Prank	Sometimes changes when a foe will next disrupt your play.	20	40	100	Defensive	1.0	Activation Rate	10	20	30	40	3	10	25	50
+Stabilize	Sometimes erases one of the foe's disruptions on the board.	30	50	100	Defensive	1.0	Activation Rate	10	20	50	70	2	9	30	70
+Stabilize+	Sometimes erases two of the foe's disruptions on the board.	20	50	80	Defensive	1.0	Activation Rate	10	20	40	50	5	20	40	100
+Disrupt Buster	Rarely erases all of the foe's disruptions.	1	5	10	Defensive	1.0	Activation Rate	5	10	15	30	10	50	100	200
+Rock Break	Destroys one breakable-rock disruption without fail.	100	100	100	Defensive	1.0	Multiply Damage	1.5	1.7	1.8	2.0	3	10	25	50
+Cloud Clear	Clears away one black-cloud disruption without fail.	100	100	100	Defensive	1.0	Multiply Damage	1.5	1.7	1.8	2.0	3	10	25	50
+Block Smash	Clears one unbreakable-block disruption without fail.	100	100	100	Defensive	1.0	Multiply Damage	1.5	1.7	1.8	2.0	3	10	25	50
+Eject	Removes one non-Support Pokémon icon without fail.	100	100	100	Defensive	1.0	Multiply Damage	1.5	1.7	1.8	2.0	2	9	30	70
+Barrier Bash	Removes one barrier-type disruption without fail.	100	100	100	Defensive	1.0	Multiply Damage	1.2	1.5	1.7	2.0	2	9	30	70
+Swap	Sometimes replaces a disruption with this Pokémon.	30	50	100	Defensive	1.0	Activation Rate	20	30	50	70	3	10	25	50
+Chill	Delays your opponent's disruptions.	20	30	100	Offensive	1.0	Activation Rate	10	20	25	30	2	9	30	70
+Astonish	Delays your opponent's disruptions.	20	30	100	Offensive	1.0	Multiply Damage	1.1	1.2	1.4	1.5	2	9	30	70
+Flap	Delays your opponent's disruptions.	20	30	100	Offensive	1.0	Multiply Damage	1.1	1.2	1.4	1.5	5	20	40	100
+Mind Zap	Delays your opponent's disruptions.	10	40	100	Offensive	1.0	Activation Rate	5	10	20	25	5	20	40	100
+Burn	Leaves the foe burned.	5	55	80	Offensive	1.0	Activation Rate	5	10	15	20	5	30	70	120
+Spookify	Leaves the foe spooked.	5	45	80	Offensive	1.0	Activation Rate	10	15	20	30	5	20	40	100
+Freeze	Leaves the foe frozen.	5	35	70	Offensive	1.0	Activation Rate	10	12	15	20	5	20	40	100
+Sleep Charm	Leaves the foe asleep.	5	30	80	Offensive	1.0	Activation Rate	10	15	18	25	5	20	40	100
+Paralyze	Leaves the foe paralyzed.	10	30	80	Offensive	1.0	Activation Rate	5	8	10	15	2	9	30	70
+Mega Boost	Fills the Mega Gauge of a Pokémon of the same type.	50	100	100	Mega Boost	3.0	Activation Rate	10	15	20	40	5	20	40	100
+Hyper Punch	Sometimes deals even more damage.	10	50	50	Offensive	3.0	Activation Rate	10	15	20	30	2	9	30	70
+Power of 4+	Deals even more damage when you make a match of four.	0	80	0	Offensive	3.0	Multiply Damage	1.1	1.2	1.3	1.5	5	30	70	120
+Power of 5+	Deals even more damage when you make a match of five.	0	0	80	Offensive	3.0	Multiply Damage	1.1	1.2	1.4	1.7	5	30	70	120
+Crowd Power	Increases damage when there are more of this Pokémon in the puzzle area.	25	70	90	Offensive	50.0	Add Damage	10.0	20.0	30.0	50.0	5	20	40	100
+Double Normal	Deals a lot more damage done by any Normal types in the combo.	20	60	80	Offensive	4.0	Activation Rate	5	10	15	20	5	20	40	100
+Mega Boost+	Fills the Mega Gauge of the same type of Pokémon more.	50	100	100	Mega Boost	6.0	Activation Rate	5	10	20	30	5	30	70	120
+Mega Boost++	Fills the Mega Gauge of same type of Pokémon even more.	10	20	60	Mega Boost	9.0	Activation Rate	5	10	20	40	5	30	70	120
+Stabilize++	Occasionally erases five of the foe's disruptions on the board.	25	50	100	Defensive	1.0	Activation Rate	10	15	20	25	5	30	70	120
+Rock Break+	Sometimes destroys three breakable-rock disruptions.	50	100	100	Defensive	1.0	Activation Rate	10	15	20	30	5	30	70	120
+Rock Break++	Sometimes destroys five breakable-rock disruptions.	40	100	100	Defensive	1.0	Activation Rate	5	10	15	20	5	30	70	120
+Cloud Clear+	Sometimes clears away three black-cloud disruptions.	50	100	100	Defensive	1.0	Activation Rate	10	15	20	30	5	30	70	120
+Cloud Clear++	Sometimes clears away five black-cloud disruptions.	40	100	100	Defensive	1.0	Activation Rate	5	10	15	20	5	30	70	120
+Block Smash+	Sometimes clears three unbreakable-block disruptions.	50	100	100	Defensive	1.0	Activation Rate	10	15	20	30	5	30	70	120
+Block Smash++	Sometimes clears five unbreakable-block disruptions.	40	100	100	Defensive	1.0	Activation Rate	5	10	15	20	5	30	70	120
+Eject+	Sometimes removes three non-Support Pokémon icons.	50	100	100	Defensive	1.0	Activation Rate	10	15	20	30	5	30	70	120
+Eject++	Sometimes removes five non-Support Pokémon icons.	40	100	100	Defensive	1.0	Activation Rate	5	10	15	20	5	30	70	120
+Barrier Bash+	Sometimes removes three barrier-type disruptions.	50	100	100	Defensive	1.0	Activation Rate	10	15	20	30	5	30	70	120
+Barrier Bash++	Sometimes removes five barrier-type disruptions.	40	100	100	Defensive	1.0	Activation Rate	5	10	15	20	5	30	70	120
+Swap+	Sometimes replaces three disruptions with this Pokémon.	25	50	100	Defensive	1.0	Activation Rate	10	20	30	35	5	30	70	120
+Swap++	Sometimes replaces five disruptions with this Pokémon.	20	50	100	Defensive	1.0	Activation Rate	5	10	20	30	5	30	70	120
+Shock Attack	Leaves the foe paralyzed for a longer period of time.	20	30	80	Offensive	1.0	Activation Rate	5	7	10	15	5	20	40	100
+Nosedive	Sometimes deals a lot more damage.	15	40	70	Offensive	5.0	Activation Rate	10	15	20	30	5	30	70	120
+Sky Blast	Increases damage done by any Flying types in the combo.	10	60	90	Offensive	2.0	Activation Rate	5	10	15	20	5	30	70	120
+Poisonous Mist	Damage varies depending on the opponent’s remaining HP.	25	45	30	Offensive	1.0	Activation Rate	10	15	20	25	3	10	25	50
+Downpour	Damage varies depending on the opponent’s remaining HP.	25	45	30	Offensive	1.0	Activation Rate	10	15	20	25	3	10	25	50
+Super Bolt	Rarely deals a ton of damage.	10	20	50	Offensive	10.0	Multiply Damage	1.1	1.2	1.3	1.5	2	9	30	100
+Good Luck	Makes it more likely to receive items when set as a Support.	0	0	0	Offensive	1.2	Add Damage	0.02	0.05	0.08	0.1	10	50	100	200
+Cross Attack	Increases damage when making a + shaped match.	100	100	100	Offensive	3.0	Multiply Damage	1.1	1.2	1.4	1.5	2	9	30	100
+L-Boost	Increases damage when making an L-shaped match.	100	100	100	Offensive	3.0	Multiply Damage	1.1	1.2	1.4	1.5	2	9	30	100
+T-Boost	Increases damage when making a T-shaped match.	100	100	100	Offensive	3.0	Multiply Damage	1.1	1.2	1.4	1.5	2	9	30	100
+Cheer	Increases the chance that the next match's skill is triggered.	60	100	100	Offensive	1.0	Activation Rate	10	15	20	40	3	10	25	50
+Paralysis Combo	Increases damage done by combos if the foe is paralyzed.	40	60	100	Offensive	1.5	Activation Rate	20	25	30	40	2	9	30	70
+Sleep Combo	Increases damage done by combos if the foe is asleep.	40	60	100	Offensive	1.5	Activation Rate	20	25	30	40	5	20	40	100
+Relentless	Increases damage done by combos if foe has any status condition.	70	80	100	Offensive	1.2	Multiply Damage	1.2	1.3	1.5	1.7	5	20	40	100
+Poison Pact	Increases damage done by Poison types in the combo.	40	60	80	Offensive	2.0	Activation Rate	10	20	30	50	5	30	70	120
+Ice Dance	Increases damage done by Ice types in the combo.	30	50	70	Offensive	1.8	Activation Rate	10	15	20	30	5	20	40	100
+Ground Forces	Increases damage done by Ground types in the combo.	20	60	80	Offensive	2.0	Activation Rate	15	20	25	30	5	20	40	100
+Flash Mob	Increases damage when there are more Pokémon with the same type in the puzzle area.	5	40	60	Offensive	30.0	Activation Rate	20	30	40	60	2	9	30	70
+Poison	Leaves the foe poisoned.	10	40	70	Offensive	1.2	Activation Rate	5	10	20	30	5	20	40	100
+Toxic Stress	Increases damage when it is triggered in a row.	50	100	100	Offensive	1.5	Activation Rate	5	10	15	20	5	20	40	100
+Psyburst	Sometimes deals a lot more damage.	50	50	50	Offensive	5.0	Multiply Damage	1.2	1.5	1.9	2.4	5	30	70	120
+Whirlpool	Delays your opponent's disruptions.	30	60	90	Offensive	1.0	Activation Rate	5	10	15	20	2	9	30	70
+Constrict	Delays your opponent's disruptions even more.	20	50	90	Offensive	2.0	Activation Rate	5	10	15	20	5	20	40	100
+Final Effort	Deals a ton of damage when there are no more moves left.	70	80	100	Offensive	9.0	Multiply Damage	2.0	2.5	3.0	4.0	2	9	30	70
+Fury of 5	Deals even more damage when you make a match of five.	0	0	90	Offensive	4.0	Multiply Damage	1.5	2.0	3.0	4.0	10	50	100	200
+Dragon Sweep	Sometimes removes two non-Support Pokémon.	80	80	80	Defensive	1.0	Multiply Damage	2.0	2.2	2.5	3.0	5	20	40	100
+Dragon Shriek	Leaves the foe paralyzed for a longer period of time.	20	40	80	Offensive	1.0	Multiply Damage	1.2	1.4	1.6	2.0	5	20	40	100
+Goad	Sometimes forces the foe to trigger its disruption immediately.	5	30	80	Offensive	1.0	Activation Rate	5	10	15	20	10	50	100	200
+Rockify	Sometimes turns two non- Support Pokémon into rocks.	60	80	100	Defensive	1.0	Activation Rate	5	10	15	20	2	9	30	70
+Blockify	Sometimes turns two non- Support Pokémon into blocks.	60	80	100	Defensive	1.0	Activation Rate	5	10	15	20	2	9	30	70
+Prospector	Changes one rock into a Coin.	3	10	30	Defensive	1.0	Activation Rate	2	5	10	15	10	50	100	200
+Alchemist	Changes one block into a Coin.	3	10	30	Defensive	1.0	Activation Rate	2	5	10	15	10	50	100	200
+Transform	Changes up to 3 of this Pokémon into another Support Pokémon.	50	100	100	Defensive	1.0	Activation Rate	5	10	20	30	5	20	40	100
+Big Wave	Increases damage done by any Water types in the combo.	30	60	90	Offensive	2.0	Activation Rate	5	10	15	20	5	20	40	100
+Conduction	Increases damage done by any Electric types in the combo.	20	60	90	Offensive	2.0	Activation Rate	10	20	30	40	5	30	70	120
+Metal Combo	Increases damage done by any Steel types in the combo.	5	100	100	Offensive	2.0	Activation Rate	10	15	25	45	15	45	100	150
+Phantom Combo	Increases damage done by any Ghost types in the combo.	5	100	100	Offensive	2.0	Activation Rate	10	15	25	45	15	45	100	150
+Shadow Dance	Deals even more damage done by Ghost types in the combo when you make a match of five.	0	0	70	Offensive	3.0	Activation Rate	5	10	20	30	2	9	27	54
+Typeless Combo	Increases damage done by any types in the combo.	40	40	40	Offensive	2.5	Activation Rate	10	15	20	35	15	45	100	150
+Leaf Combo	Increases damage done by any Grass types in the combo.	30	60	90	Offensive	2.0	Activation Rate	10	15	20	30	5	30	70	120
+Rock Combo	Increases damage done by any Rock types in the combo.	30	60	90	Offensive	2.0	Activation Rate	10	15	20	30	5	30	70	120
+Bug Combo	Increases damage done by any Bug types in the combo.	30	60	90	Offensive	2.0	Activation Rate	10	15	20	30	5	30	70	120
+Psychic Combo	Increases damage done by any Psychic types in the combo.	10	60	90	Offensive	2.0	Activation Rate	10	15	20	30	5	30	70	120
+Poison Rush	Increases damage done by combos if the foe is poisoned.	60	70	100	Offensive	2.0	Activation Rate	10	20	30	40	2	9	30	70
+Cross Attack+	Deals even more damage when making a + shaped match.	80	90	100	Offensive	4.0	Multiply Damage	1.1	1.2	1.5	3.0	5	30	70	120
+Three Force	Increases damage when you make a match of three.	100	0	0	Offensive	2.0	Multiply Damage	1.2	1.5	2.0	2.5	2	9	30	70
+Full Power	Rarely deals a ton of damage when you make a match of four.	0	10	0	Offensive	10.0	Activation Rate	10	15	20	30	5	20	40	100
+Demolish	Sometimes deals a ton of damage when you make a match of four.	0	80	0	Offensive	9.0	Activation Rate	2	4	6	9	3	11	23	61
+Extinction	Rarely deals a ton of damage when you make a match of five.	0	0	35	Offensive	16.0	Activation Rate	10	15	20	35	5	30	70	120
+Super Arrow	Rarely deals a ton of damage when you make a match of four.	0	30	0	Offensive	8.0	Activation Rate	5	10	15	20	5	30	70	120
+Super Tackle	Rarely deals a ton of damage when you make a match of four.	0	30	0	Offensive	8.0	Activation Rate	5	10	15	20	5	30	70	120
+Super Voice	Rarely deals a ton of damage when you make a match of four.	0	30	0	Offensive	8.0	Activation Rate	5	10	15	20	5	30	70	120
+Unity Power	Sometimes deals a lot more damage.	25	40	80	Offensive	5.0	Multiply Damage	1.2	1.5	1.8	2.4	5	20	40	100
+4 Up	Increases damage when you make a match of four. Skill Level will go up more easily!	0	100	0	Offensive	1.5	Multiply Damage	1.5	1.8	2.0	2.2	2	9	27	54
+Beast Power	Sometimes deals a lot more damage.	17	53	73	Offensive	7.0	Multiply Damage	1.1	1.2	1.3	1.4	3	11	23	61
+Try Hard	Rarely deals a ton of damage.	10	20	50	Offensive	10.0	Multiply Damage	1.2	1.5	1.8	2.5	10	50	100	200
+5 Up	Increases damage when you make a match of five. Skill Level will go up more easily!	0	0	100	Offensive	1.5	Multiply Damage	1.5	1.8	2.0	2.2	2	9	27	54
+Hyper Bolt	Deals a lot more damage when things are looking desperate.	70	70	70	Offensive	7.0	Multiply Damage	1.2	1.3	1.5	2.0	5	30	70	120
+Non Stop+	Deals even more damage the more times in a row it is triggered.	20	40	60	Offensive	2.0	Multiply Damage	1.1	1.3	1.5	2.0	5	30	70	120
+Up, Up, Up	Deals even more damage the more times in a row it is triggered.	20	50	100	Offensive	2.0	Activation Rate	20	30	40	50	10	50	100	200
+Hitting Streak+	Deals even more damage the more times in a row it is triggered.	60	60	60	Offensive	1.5	Activation Rate	5	10	15	20	5	30	70	120
+Big Eater	Damage varies depending on the opponent’s remaining HP.	40	70	90	Offensive	1.0	Activation Rate	3	5	7	9	5	30	70	120
+Hyper Drain	Damage varies depending on the opponent’s remaining HP.	0	60	100	Offensive	1.0	Activation Rate	10	20	25	30	2	9	30	70
+Absorb	Damage varies depending on the opponent’s remaining HP.	60	70	100	Offensive	1.0	Activation Rate	5	10	15	20	3	10	25	50
+Counterattack+	Deals even more damage the more disruptions there are.	20	50	70	Offensive	100.0	Activation Rate	10	15	20	30	5	30	70	120
+Crowd Control+	Deals even more damage when there are more of this Pokémon in the puzzle area.	15	40	80	Offensive	100.0	Activation Rate	10	25	30	40	5	20	40	100
+Rock Shot	Erases two breakable-rock disruptions and increases damage.	60	100	100	Defensive	2.0	Multiply Damage	1.5	2.0	3.0	4.0	5	30	70	120
+Quirky++	Rarely erases five extra matching Pokémon elsewhere.	10	25	100	Defensive	1.0	Activation Rate	15	25	45	75	5	30	70	120
+Blindside	Sometimes erases two extra matching Pokémon elsewhere.	60	100	100	Defensive	1.0	Multiply Damage	2.0	2.5	3.0	4.0	5	20	40	100
+Cloud Shot	Clears away two black-cloud disruptions and increases damage.	60	100	100	Defensive	2.0	Multiply Damage	1.5	2.0	3.0	4.0	5	30	70	120
+Barrier Shot	Removes two barrier-type disruptions and increases damage.	60	100	100	Defensive	2.0	Multiply Damage	1.5	2.0	3.0	4.0	5	30	70	120
+Barrier Break	Rarely removes all barrier-type disruptions.	20	40	70	Defensive	1.0	Activation Rate	10	20	25	40	5	30	70	120
+Shot Out	Erases two non-Support Pokémon and increases damage.	60	100	100	Defensive	2.0	Multiply Damage	1.5	2.0	3.0	4.0	5	30	70	120
+Eliminate	Rarely removes all non-Support Pokémon.	35	45	65	Defensive	1.0	Activation Rate	5	7	10	13	5	30	70	120
+Block Off	Rarely clears 10 unbreakable-block disruptions.	20	30	60	Defensive	1.0	Activation Rate	10	20	30	40	5	30	70	120
+Destruction	Erases one unbreakable-block disruption and deals a lot more damage.	80	90	100	Defensive	5.0	Multiply Damage	1.2	1.4	1.6	1.8	10	50	100	200
+Block Shot	Erases two unbreakable-block disruptions and increases damage.	60	100	100	Defensive	2.0	Multiply Damage	1.5	2.0	3.0	4.0	5	30	70	120
+Freeze+	Sometimes leaves the foe frozen for a long time when you make a match of four or more.	0	35	70	Offensive	1.0	Activation Rate	10	15	25	30	5	30	70	120
+Spookify+	Sometimes leaves foe spooked for even longer when you make a match of four or more.	0	45	80	Offensive	1.0	Activation Rate	10	15	20	30	5	20	40	100
+Fascinate	Delays your opponent's disruptions.	30	30	30	Offensive	1.0	Activation Rate	5	10	15	30	5	20	40	100
+Shadow Shock	Delays your opponent's disruptions and deals even more damage.	15	50	100	Offensive	3.0	Multiply Damage	1.5	2.0	3.0	3.5	5	30	70	120
+Crushing Step	Delays your opponent's disruptions and increases damage.	30	40	50	Offensive	2.0	Multiply Damage	1.2	1.5	2.0	2.5	5	20	40	100
+Power Hug	Delays your opponent's disruptions and deals a lot more damage.	30	50	80	Offensive	5.0	Multiply Damage	1.2	1.5	1.8	2.0	3	10	25	50
+Daunt	Delays your opponent's disruptions and increases damage.	70	70	70	Offensive	1.5	Multiply Damage	1.2	1.5	1.8	2.0	2	9	30	70
+Nap Time	Leaves the foe asleep.	30	60	90	Offensive	1.0	Activation Rate	5	10	15	20	5	20	40	100
+Paralyze+	Rarely leaves the foe paralyzed for an even longer period of time.	1	15	65	Offensive	1.0	Activation Rate	4	6	8	10	2	9	30	70
+Lightning	Leaves the foe paralyzed for a short period of time.	40	70	90	Offensive	1.0	Multiply Damage	1.2	1.5	2.0	2.5	5	20	40	100
+Burn+	Rarely leaves the foe burned for an even longer period of time.	5	25	50	Offensive	1.0	Activation Rate	15	25	40	50	5	30	70	120
+Possession	Delays your opponent's disruptions.	40	40	40	Offensive	1.0	Activation Rate	10	15	20	33	5	20	40	100
+Calm Down	Delays your opponent's disruptions.	20	40	70	Offensive	1.0	Activation Rate	5	7	10	15	5	20	40	100
+Sand Sport	Delays your opponent's disruptions even more.	20	40	80	Offensive	1.0	Multiply Damage	1.5	2.0	3.0	4.0	5	20	40	100
+Rockify+	Sometimes turns up to 10 non-Support Pokémon into rocks.	25	40	70	Defensive	1.0	Activation Rate	10	20	30	40	5	30	70	120
+Blockify+	Sometimes turns up to 10 non-Support Pokémon into blocks.	25	40	70	Defensive	1.0	Activation Rate	10	20	30	40	5	30	70	120
+Super Cheer	Guarantees that the next match's skill is triggered.	10	40	70	Offensive	1.0	Activation Rate	10	15	20	30	15	45	100	150
+Rock Shot α	Erases seven breakable-rock disruptions and increases damage.	50	100	100	Defensive	2.0	Multiply Damage	2.0	3.0	4.0	5.0	10	50	100	200
+Barrier Shot Ω	Removes seven barrier-type disruptions and increases damage.	50	100	100	Defensive	2.0	Multiply Damage	2.0	3.0	4.0	5.0	10	50	100	200
+Hide and Seek	Sometimes erases seven extra matching Pokémon elsewhere.	40	50	60	Defensive	1.0	Activation Rate	10	20	30	40	15	45	100	150
+Hammering Streak	Increases damage when it is triggered in a row.	100	100	100	Offensive	1.5	Multiply Damage	1.5	2.0	2.5	3.0	5	30	70	120

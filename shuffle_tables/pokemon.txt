@@ -1,0 +1,1086 @@
+HEADER	Dex	Type	BP	RML	MaxAP	Skill	SS	Icons	MSU	Mega Power	Fake
+Bulbasaur	1	Grass	40	20	125	Power of 4	Mega Boost+	0	99	
+Ivysaur	2	Grass	50	5	100	Vitality Drain		0	99	
+Venusaur	3	Grass	60	20	135	Vitality Drain		0	99	
+Charmander	4	Fire	40	20	125	Power of 4	Mega Boost+	0	99	
+Charmeleon	5	Fire	50	5	100	Burn		0	99	
+Charizard	6	Fire	60	20	135	Burn	Unity Power	0	99	
+Squirtle	7	Water	40	20	125	Power of 4	Mega Boost+	0	99	
+Wartortle	8	Water	50	5	100	Stabilize		0	99	
+Blastoise	9	Water	60	20	135	Stabilize+		0	99	
+Caterpie	747	Bug	30	5	85	Flash Mob		0	99	
+Metapod	748	Bug	40	5	90	Swap++		0	99	
+Butterfree	749	Bug	60	5	105	Rock Shot		0	99	
+Weedle	423	Poison	30	5	85	Mind Zap		0	99	
+Kakuna	424	Poison	40	5	90	Last-Ditch Effort		0	99	
+Beedrill	425	Poison	60	5	105	Block Smash	Swap++	0	99	
+Pidgey	10	Flying	30	10	100	Opportunist	Shock Attack	0	99	
+Pidgeotto	11	Flying	50	5	100	Flap	Sky Blast	0	99	
+Pidgeot	12	Flying	60	20	135	Flap		0	99	
+Rattata	379	Normal	30	5	85	Prank		0	99	
+Raticate	380	Normal	60	5	105	Counterattack		0	99	
+Spearow	469	Flying	30	10	100	Last-Ditch Effort		0	99	
+Fearow	470	Flying	60	5	105	Rock Break+		0	99	
+Ekans	693	Poison	40	5	90	Constrict		0	99	
+Arbok	694	Poison	60	5	105	Poison		0	99	
+Pikachu	16	Electric	50	20	130	Paralyze	Unity Power	0	99	
+Raichu	17	Electric	60	5	105	Paralyze	Lightning	0	99	
+Sandshrew	680	Ground	50	5	100	Damage Streak	Three Force	0	99	
+Sandslash	681	Ground	60	7	111	Counterattack	Sand Sport	0	99	
+Nidoran-F	48	Poison	40	5	90	Opportunist	Mega Boost++	0	99	
+Nidorina	49	Poison	50	5	100	Opportunist		0	99	
+Nidoqueen	50	Poison	70	5	110	Power of 4		0	99	
+Nidoran-M	51	Poison	40	5	90	Opportunist	Mega Boost++	0	99	
+Nidorino	52	Poison	50	5	100	Opportunist		0	99	
+Nidoking	53	Poison	70	5	110	Power of 5		0	99	
+Clefairy	499	Fairy	50	15	120	Crowd Control	Barrier Shot	0	99	
+Clefable	500	Fairy	60	15	125	Pixie Power		0	99	
+Vulpix	61	Fire	40	15	115	Opportunist	Super Cheer	0	99	
+Ninetales	62	Fire	70	5	110	Block Smash	Burn+	0	99	
+Jigglypuff	411	Fairy	40	10	105	Barrier Bash	Last-Ditch Effort	0	99	
+Wigglytuff	412	Fairy	60	5	105	Stabilize+		0	99	
+Zubat	317	Poison	30	5	85	Paralyze		0	99	
+Golbat	318	Poison	60	5	105	Power of 4		0	99	
+Oddish	479	Grass	50	5	100	Mega Boost		0	99	
+Gloom	480	Grass	60	5	105	Paralyze		0	99	
+Vileplume	481	Grass	70	5	110	Power of 5+		0	99	
+Paras	454	Bug	40	15	115	Paralyze	Paralyze+	0	99	
+Parasect	455	Bug	60	15	125	Sleep Charm		0	99	
+Venonat	750	Bug	50	5	100	Nap Time		0	99	
+Venomoth	751	Bug	60	15	125	Sleep Combo		0	99	
+Diglett	704	Ground	30	20	120	Stabilize+	Super Cheer	0	99	
+Dugtrio	705	Ground	60	10	120	Block Shot		0	99	
+Meowth	84	Normal	40	5	90	Mega Boost		0	99	
+Persian	85	Normal	60	5	105	Brute Force		0	99	
+Psyduck	504	Water	50	5	100	Downpour		0	99	
+Golduck	505	Water	70	5	110	Heavy Hitter		0	99	
+Mankey	467	Fighting	50	5	100	Crowd Control		0	99	
+Primeape	468	Fighting	60	5	105	Power of 5+		0	99	
+Growlithe	438	Fire	50	5	100	Risk-Taker		0	99	
+Arcanine	439	Fire	70	10	125	Power of 4+		0	99	
+Poliwag	591	Water	50	5	100	Cheer		0	99	
+Poliwhirl	592	Water	50	5	100	Sleep Combo		0	99	
+Poliwrath	593	Water	70	10	125	Eject+	Big Wave	0	99	
+Abra	484	Psychic	50	5	100	Rock Break		0	99	
+Kadabra	485	Psychic	60	5	105	Counterattack		0	99	
+Alakazam	486	Psychic	70	5	110	Risk-Taker		0	99	
+Machop	343	Fighting	50	10	115	Pummel		0	99	
+Machoke	344	Fighting	60	5	105	Stabilize		0	99	
+Machamp	345	Fighting	70	10	125	Eject	Risk-Taker	0	99	
+Bellsprout	652	Grass	50	5	100	Constrict		0	99	
+Weepinbell	653	Grass	60	5	105	L-Boost		0	99	
+Victreebel	654	Grass	60	5	105	Hitting Streak+		0	99	
+Tentacool	676	Poison	50	5	100	Toxic Stress		0	99	
+Tentacruel	677	Poison	70	5	110	Poison Pact		0	99	
+Geodude	588	Rock	50	5	100	Quake		0	99	
+Graveler	589	Rock	60	5	105	Rockify		0	99	
+Golem	590	Rock	70	10	125	Cross Attack	Non Stop+	0	99	
+Ponyta	691	Fire	60	5	105	Flash Mob		0	99	
+Rapidash	692	Fire	70	5	110	Non Stop+	Shot Out	0	99	
+Slowpoke	81	Psychic	50	5	100	Stabilize	Swap++	0	99	
+Slowbro	82	Psychic	60	20	135	Barrier Bash		0	99	
+Magnemite	440	Electric	50	5	100	Barrier Bash		0	99	
+Magneton	441	Electric	60	10	120	Crowd Control	Three Force	0	99	
+Farfetch'd	166	Flying	50	5	100	Quirky	Power of 4+	0	99	
+Doduo	388	Flying	50	5	100	Block Smash		0	99	
+Dodrio	389	Flying	60	10	120	Risk-Taker	Three Force	0	99	
+Seel	603	Water	50	5	100	Freeze		0	99	
+Dewgong	604	Water	60	5	105	Hitting Streak		0	99	
+Grimer	325	Poison	50	5	100	Crowd Control		0	99	
+Muk	326	Poison	70	10	125	Power of 4+	Block Shot	0	99	
+Shellder	574	Water	50	5	100	Block Smash		0	99	
+Cloyster	575	Water	70	5	110	Rock Break		0	99	
+Gastly	112	Ghost	50	5	100	Spookify		0	99	
+Haunter	113	Ghost	60	5	105	Quirky		0	99	
+Gengar	114	Ghost	70	5	110	Power of 5	Spookify	0	99	
+Onix	180	Rock	50	5	100	Eject	Power of 5+/Rockify+	0	99	
+Drowzee	570	Psychic	50	5	100	Sleep Charm		0	99	
+Hypno	571	Psychic	60	5	105	Sleep Combo		0	99	
+Krabby	689	Water	50	5	100	Block Smash+		0	99	
+Kingler	690	Water	60	5	105	Hyper Punch		0	99	
+Voltorb	601	Electric	50	5	100	Mega Boost+		0	99	
+Electrode	602	Electric	60	10	120	Rock Break++	Quirky++	0	99	
+Exeggcute	428	Grass	50	5	100	Crowd Control		0	99	
+Exeggutor	429	Grass	70	5	110	Cloud Clear+		0	99	
+Cubone	115	Ground	50	10	115	Rock Break	Mega Boost+	0	99	
+Marowak	116	Ground	60	5	105	Damage Streak		0	99	
+Hitmonlee	565	Fighting	60	5	105	Cross Attack	Shot Out	0	99	
+Hitmonchan	566	Fighting	60	5	105	Hyper Punch	Paralyze/Freeze/Burn	0	99	
+Lickitung	219	Normal	50	15	120	Last-Ditch Effort		0	99	
+Koffing	460	Poison	50	5	100	Barrier Bash		0	99	
+Weezing	461	Poison	60	15	125	Quirky+	Rock Shot	0	99	
+Rhyhorn	534	Ground	50	5	100	Brute Force		0	99	
+Rhydon	535	Ground	60	5	105	Power of 4		0	99	
+Chansey	41	Normal	60	5	105	Mega Boost	Super Cheer	0	99	
+Tangela	224	Grass	60	5	105	Stabilize	Constrict	0	99	
+Kangaskhan	57	Normal	50	10	115	Power of 4	Rock Break++	0	99	
+Horsea	547	Water	40	5	90	Last-Ditch Effort		0	99	
+Seadra	548	Water	60	5	105	Dancing Dragons		0	99	
+Goldeen	687	Water	50	5	100	Eject+		0	99	
+Seaking	688	Water	60	5	105	Whirlpool		0	99	
+Staryu	277	Water	50	5	100	Prank		0	99	
+Starmie	278	Water	70	5	110	Power of 5		0	99	
+Mr. Mime	295	Psychic	60	5	105	Prank		0	99	
+Scyther	138	Bug	70	20	140	Swarm	L-Boost	0	99	
+Jynx	472	Ice	60	5	105	Barrier Bash+	Block Shot	0	99	
+Electabuzz	518	Electric	60	5	105	Heavy Hitter		0	99	
+Magmar	521	Fire	60	5	105	Cloud Clear+		0	99	
+Pinsir	233	Bug	70	10	125	Power of 4	Bug Combo	0	99	
+Tauros	483	Normal	70	5	110	Quake		0	99	
+Magikarp	477	Water	30	10	100	Swap++	Risk-Taker/Dragon Sweep	0	99	
+Gyarados	478	Water	70	20	140	Power of 5+	Mega Boost	0	99	
+Lapras	98	Water	50	5	100	Power of 4	Shock Attack	0	99	
+Ditto	706	Normal	40	20	125	Transform		0	99	
+Eevee	23	Normal	40	5	90	Mega Boost	Eject+/Hammering Streak	0	99	
+Vaporeon	24	Water	50	5	100	Mega Boost	Eject+/Hammering Streak	0	99	
+Jolteon	25	Electric	50	5	100	Mega Boost	Eject+/Hammering Streak	0	99	
+Flareon	26	Fire	50	5	100	Mega Boost	Eject+/Hammering Streak	0	99	
+Porygon	398	Normal	50	10	115	Barrier Bash+	Flash Mob	0	99	
+Omanyte	473	Water	50	5	100	Sleep Charm		0	99	
+Omastar	474	Water	60	5	105	Rock Break+		0	99	
+Kabuto	475	Rock	50	5	100	Rock Break+		0	99	
+Kabutops	476	Rock	60	5	105	Barrier Bash+		0	99	
+Aerodactyl	148	Rock	60	5	105	Cloud Clear	Swap++	0	99	
+Snorlax	179	Normal	70	20	140	Brute Force	Stabilize++/Try Hard	0	99	
+Articuno	149	Ice	70	20	140	Power of 4	Freeze	0	99	
+Zapdos	150	Electric	70	20	140	Power of 4	Paralyze	0	99	
+Moltres	151	Fire	70	20	140	Power of 4	Burn	0	99	
+Dratini	117	Dragon	50	5	100	Opportunist		0	99	
+Dragonair	118	Dragon	60	5	105	Dancing Dragons	Flash Mob	0	99	
+Dragonite	119	Dragon	80	10	130	Dancing Dragons		0	99	
+Mewtwo	158	Psychic	80	20	145	Swap	Power of 4/Psyburst	0	99	
+Mew	159	Psychic	50	20	130	Power of 5	Block Smash+/Eject+/Barrier Bash+/Power of 4+	0	99	
+Chikorita	579	Grass	50	15	120	Rock Break+		0	99	
+Bayleef	580	Grass	60	5	105	T-Boost		0	99	
+Meganium	581	Grass	70	20	140	Stabilize+	Block Shot	0	99	
+Cyndaquil	582	Fire	50	15	120	Rock Break+		0	99	
+Quilava	583	Fire	60	5	105	L-Boost		0	99	
+Typhlosion	584	Fire	70	20	140	Hyper Punch	Rock Shot	0	99	
+Totodile	585	Water	50	15	120	Rock Break+		0	99	
+Croconaw	586	Water	60	5	105	Cross Attack		0	99	
+Feraligatr	587	Water	70	20	140	Paralyze	Barrier Shot	0	99	
+Sentret	426	Normal	30	5	85	Crowd Control		0	99	
+Furret	427	Normal	60	5	105	Astonish		0	99	
+Hoothoot	493	Flying	30	5	85	Swap		0	99	
+Noctowl	494	Flying	60	5	105	Power of 5		0	99	
+Ledyba	674	Bug	30	5	85	Crowd Control		0	99	
+Ledian	675	Bug	50	5	100	Barrier Bash+		0	99	
+Spinarak	401	Bug	30	5	85	Rock Break		0	99	
+Ariados	402	Bug	50	10	115	Power of 5	Block Shot	0	99	
+Crobat	319	Poison	70	5	110	Poisonous Mist		0	99	
+Chinchou	394	Electric	50	5	100	Astonish		0	99	
+Lanturn	395	Electric	60	5	105	Cloud Clear+		0	99	
+Pichu	15	Electric	30	10	100	Opportunist	Daunt	0	99	
+Cleffa	498	Fairy	30	20	120	Mega Boost	Super Cheer	0	99	
+Igglybuff	410	Fairy	30	5	85	Sleep Charm		0	99	
+Togepi	18	Fairy	30	5	85	Opportunist	Block Smash++	0	99	
+Togetic	19	Fairy	50	5	100	Pixie Power	Shock Attack	0	99	
+Natu	523	Psychic	50	5	100	Astonish		0	99	
+Xatu	524	Psychic	60	5	105	Power of 4		0	99	
+Mareep	36	Electric	40	5	90	Opportunist		0	99	
+Flaaffy	37	Electric	50	5	100	Opportunist	Paralyze+	0	99	
+Ampharos	38	Electric	70	5	110	Dancing Dragons	Mega Boost/Paralysis Combo	0	99	
+Bellossom	482	Grass	70	5	110	Mind Zap	Paralyze+	0	99	
+Marill	59	Fairy	40	5	90	Opportunist		0	99	
+Azumarill	60	Fairy	60	10	120	Opportunist	Risk-Taker	0	99	
+Sudowoodo	22	Rock	60	5	105	Opportunist	Flash Mob	0	99	
+Politoed	594	Water	70	5	110	Crowd Control	Relentless	0	99	
+Hoppip	655	Grass	30	5	85	Barrier Bash++		0	99	
+Skiploom	656	Grass	50	5	100	Sleep Combo		0	99	
+Jumpluff	657	Grass	60	15	125	Barrier Bash+		0	99	
+Aipom	609	Normal	50	5	100	L-Boost		0	99	
+Sunkern	644	Grass	30	5	85	Eject++		0	99	
+Sunflora	645	Grass	60	5	105	Constrict		0	99	
+Yanma	506	Bug	50	5	100	Hitting Streak		0	99	
+Wooper	788	Ground	30	5	85	Quirky+		0	99	
+Quagsire	789	Ground	60	5	105	Ground Forces		0	99	
+Espeon	27	Psychic	50	5	100	Mega Boost	Eject+/Hammering Streak	0	99	
+Umbreon	28	Dark	50	5	100	Mega Boost	Eject+/Hammering Streak	0	99	
+Murkrow	443	Dark	60	5	105	Stabilize	Eject++	0	99	
+Slowking	83	Psychic	60	5	105	Power of 5		0	99	
+Misdreavus	146	Ghost	60	5	105	Astonish	Super Cheer	0	99	
+Unown (A)	999	Normal	30	0	55	Opportunist		0	99	
+Unown (B)	999	Normal	30	0	55	Opportunist		0	99	
+Unown (C)	537	Psychic	50	5	100	Relentless		0	99	
+Unown (D)	999	Normal	30	0	55	Opportunist		0	99	
+Unown (E)	537	Psychic	50	5	100	Flash Mob		0	99	
+Unown (F)	999	Normal	30	0	55	Opportunist		0	99	
+Unown (G)	999	Normal	30	0	55	Opportunist		0	99	
+Unown (H)	999	Normal	30	0	55	Opportunist		0	99	
+Unown (I)	537	Psychic	50	5	100	Swap+		0	99	
+Unown (J)	999	Normal	30	0	55	Opportunist		0	99	
+Unown (K)	999	Normal	30	0	55	Opportunist		0	99	
+Unown (L)	999	Normal	30	0	55	Opportunist		0	99	
+Unown (M)	999	Normal	30	0	55	Opportunist		0	99	
+Unown (N)	537	Psychic	50	5	100	Calm Down		0	99	
+Unown (O)	999	Normal	30	0	55	Opportunist		0	99	
+Unown (P)	999	Normal	30	0	55	Opportunist		0	99	
+Unown (Q)	999	Normal	30	0	55	Opportunist		0	99	
+Unown (R)	999	Normal	30	0	55	Opportunist		0	99	
+Unown (S)	999	Normal	30	0	55	Opportunist		0	99	
+Unown (T)	999	Normal	30	0	55	Opportunist		0	99	
+Unown (U)	999	Normal	30	0	55	Opportunist		0	99	
+Unown (V)	999	Normal	30	0	55	Opportunist		0	99	
+Unown (W)	999	Normal	30	0	55	Opportunist		0	99	
+Unown (X)	999	Normal	30	0	55	Opportunist		0	99	
+Unown (Y)	999	Normal	30	0	55	Opportunist		0	99	
+Unown (Z)	999	Normal	30	0	55	Opportunist		0	99	
+Unown (Exclamation)	537	Psychic	50	10	115	Mega Boost+		0	99	
+Unown (Question)	537	Psychic	50	5	100	Mind Zap		0	99	
+Wobbuffet (Male)	268	Psychic	60	5	105	Counterattack	Rock Break+	0	99	
+Girafarig	239	Psychic	60	5	105	Swat		0	99	
+Pineco	491	Bug	40	5	90	Counterattack		0	99	
+Forretress	492	Bug	60	5	105	Rock Break+		0	99	
+Dunsparce	335	Normal	40	5	90	Mega Boost+		0	99	
+Gligar	418	Ground	60	5	105	Cloud Clear	Block Shot	0	99	
+Steelix	181	Steel	70	5	110	Steely Resolve	Flash Mob	0	99	
+Snubbull	217	Fairy	50	10	115	Crowd Control	Block Smash+	0	99	
+Granbull	218	Fairy	60	10	120	Heavy Hitter	Non Stop+	0	99	
+Qwilfish	336	Water	50	5	100	Paralyze		0	99	
+Scizor	139	Bug	70	20	140	Swarm	Swap++	0	99	
+Shuckle	242	Bug	60	5	105	Risk-Taker		0	99	
+Heracross	47	Bug	70	5	110	Crowd Control	Mega Boost+	0	99	
+Sneasel	234	Dark	60	5	105	Prank	Flash Mob	0	99	
+Teddiursa	456	Normal	50	5	100	Swap		0	99	
+Ursaring	457	Normal	70	10	125	Risk-Taker		0	99	
+Slugma	550	Fire	30	5	85	Sleep Charm		0	99	
+Magcargo	551	Fire	60	5	105	Swap+		0	99	
+Swinub	413	Ice	30	5	85	Rock Break		0	99	
+Piloswine	414	Ice	60	5	105	Stabilize		0	99	
+Corsola	86	Water	50	10	115	Eject	Non Stop+	0	99	
+Remoraid	752	Water	50	5	100	Daunt		0	99	
+Octillery	753	Water	60	5	105	Big Wave		0	99	
+Delibird	144	Ice	50	5	100	Chill		0	99	
+Mantine	563	Flying	60	5	105	Risk-Taker	Flash Mob	0	99	
+Skarmory	143	Steel	60	5	105	Steely Resolve	Nosedive	0	99	
+Houndour	489	Fire	50	5	100	Mega Boost		0	99	
+Houndoom	490	Fire	70	5	110	Risk-Taker		0	99	
+Kingdra	549	Water	70	5	110	Whirlpool	Cross Attack+	0	99	
+Phanpy	45	Ground	50	5	100	Opportunist	Power of 4+	0	99	
+Donphan	46	Ground	60	15	125	Quake	Ground Forces	0	99	
+Porygon2	399	Normal	70	10	125	Crowd Power	Cross Attack+	0	99	
+Stantler	253	Normal	60	5	105	Sleep Charm		0	99	
+Smeargle	182	Normal	30	20	120	Block Smash	Nap Time/Super Cheer/Double Normal/Transform	0	99	
+Tyrogue	564	Fighting	30	10	100	Paralyze		0	99	
+Hitmontop	567	Fighting	60	5	105	Rock Break+	Block Shot	0	99	
+Smoochum	471	Ice	50	5	100	Quirky		0	99	
+Elekid	517	Electric	50	5	100	Eject		0	99	
+Magby	520	Fire	50	5	100	Quirky		0	99	
+Miltank	129	Normal	60	5	105	Opportunist		0	99	
+Blissey	42	Normal	70	10	125	Power of 5	Block Smash++	0	99	
+Raikou	152	Electric	70	5	110	Power of 5	Barrier Bash+/Astonish	0	99	
+Entei	153	Fire	70	5	110	Power of 5	Rock Break+/Mind Zap	0	99	
+Suicune	154	Water	70	5	110	Power of 5	Block Smash+/Chill/Freeze+	0	99	
+Larvitar	208	Rock	50	5	100	Risk-Taker		0	99	
+Pupitar	209	Rock	60	5	105	Mega Boost		0	99	
+Tyranitar	210	Rock	80	5	115	Eject	Crushing Step	0	99	
+Lugia	305	Flying	80	10	130	Eject+	Cross Attack+	0	99	
+Ho-Oh	306	Fire	80	5	115	Power of 5+	Pyre/Nosedive	0	99	
+Celebi	232	Psychic	50	5	100	Stabilize	Cheer	0	99	
+Treecko	89	Grass	50	10	115	Sleep Charm	Flash Mob	0	99	
+Grovyle	90	Grass	60	5	105	Sleep Charm	Quirky++	0	99	
+Sceptile	91	Grass	70	5	110	Vitality Drain	Swap++	0	99	
+Torchic	92	Fire	50	10	115	Pyre	Flash Mob	0	99	
+Combusken	93	Fire	60	5	105	Pyre	Quirky++	0	99	
+Blaziken	94	Fire	70	5	110	Hitting Streak	Swap++	0	99	
+Mudkip	95	Water	50	10	115	Stabilize	Big Wave	0	99	
+Marshtomp	96	Water	60	5	105	Eject	Quirky++	0	99	
+Swampert	97	Water	70	5	110	Hitting Streak	Swap++	0	99	
+Poochyena	187	Dark	30	5	85	Counterattack		0	99	
+Mightyena	188	Dark	60	5	105	Sinister Power		0	99	
+Zigzagoon	678	Normal	30	5	85	Cloud Clear++		0	99	
+Linoone	679	Normal	60	5	105	L-Boost		0	99	
+Wurmple	699	Bug	30	10	100	Paralysis Combo	Bug Combo	0	99	
+Silcoon	700	Bug	40	5	90	Mega Boost+		0	99	
+Beautifly	701	Bug	50	5	100	Eject+		0	99	
+Cascoon	702	Bug	40	5	90	Swarm		0	99	
+Dustox	703	Poison	50	5	100	Cross Attack+		0	99	
+Lotad	508	Grass	30	5	85	Block Smash		0	99	
+Lombre	509	Grass	50	5	100	Last-Ditch Effort		0	99	
+Ludicolo	510	Grass	70	15	130	Mind Zap		0	99	
+Seedot	636	Grass	30	5	85	Final Effort		0	99	
+Nuzleaf	637	Grass	50	5	100	Prank		0	99	
+Shiftry	638	Grass	60	5	105	T-Boost	Super Cheer	0	99	
+Taillow	79	Flying	40	10	105	Rock Break	Rock Shot	0	99	
+Swellow	80	Flying	60	5	105	Cloud Clear	Barrier Shot	0	99	
+Wingull	327	Flying	40	5	90	Cloud Clear		0	99	
+Pelipper	328	Flying	60	5	105	Power of 4		0	99	
+Ralts	296	Fairy	30	5	85	Prank		0	99	
+Kirlia	297	Fairy	40	10	105	Eject	Shot Out	0	99	
+Gardevoir	298	Fairy	70	5	110	Swap	Mind Zap	0	99	
+Surskit	75	Bug	40	10	105	Opportunist	Power of 4+	0	99	
+Masquerain	76	Bug	60	5	105	Opportunist	Nosedive	0	99	
+Shroomish	614	Grass	40	5	90	Paralysis Combo		0	99	
+Breloom	615	Grass	60	5	105	Rock Break++	Rock Shot	0	99	
+Slakoth	595	Normal	40	5	90	Mind Zap		0	99	
+Vigoroth	596	Normal	60	5	105	Relentless		0	99	
+Slaking	597	Normal	80	5	115	Risk-Taker		0	99	
+Nincada	633	Bug	30	5	85	Barrier Bash		0	99	
+Ninjask	634	Bug	60	10	120	Paralysis Combo		0	99	
+Shedinja	635	Bug	30	5	85	Stabilize++		0	99	
+Whismur	349	Normal	30	5	85	Paralyze		0	99	
+Loudred	350	Normal	50	5	100	Spookify		0	99	
+Exploud	351	Normal	60	5	105	Eject+		0	99	
+Makuhita	408	Fighting	30	5	85	Barrier Bash		0	99	
+Hariyama	409	Fighting	60	5	105	Stabilize+		0	99	
+Azurill	58	Fairy	30	5	85	Opportunist		0	99	
+Nosepass	406	Rock	50	5	100	Block Smash		0	99	
+Skitty	308	Normal	30	5	85	Mega Boost+		0	99	
+Delcatty	309	Normal	50	5	100	Prank		0	99	
+Sableye	74	Dark	50	20	130	Risk-Taker	Swap+	0	99	
+Mawile	111	Steel	50	10	115	Steely Resolve	Risk-Taker	0	99	
+Aron	391	Steel	50	5	100	Rock Break		0	99	
+Lairon	392	Steel	60	5	105	Mega Boost		0	99	
+Aggron	393	Steel	70	10	125	Eject	Crushing Step	0	99	
+Meditite	313	Fighting	40	5	90	Astonish		0	99	
+Medicham	314	Fighting	60	20	135	Mega Boost		0	99	
+Electrike	251	Electric	40	5	90	Hitting Streak		0	99	
+Manectric	252	Electric	60	5	105	Hitting Streak		0	99	
+Plusle	685	Electric	60	5	105	Flash Mob		0	99	
+Minun	686	Electric	60	5	105	Flash Mob		0	99	
+Volbeat	72	Bug	50	5	100	Crowd Control		0	99	
+Illumise	73	Bug	50	5	100	Swap		0	99	
+Roselia	341	Grass	60	15	125	Rock Break	Hyper Drain	0	99	
+Gulpin	127	Poison	50	5	100	Opportunist	Poison	0	99	
+Swalot	128	Poison	60	15	125	Opportunist	Relentless	0	99	
+Carvanha	227	Dark	50	5	100	Mega Boost		0	99	
+Sharpedo	228	Dark	60	10	120	Eject	Mega Boost	0	99	
+Wailmer	620	Water	60	5	105	Whirlpool		0	99	
+Wailord	621	Water	70	5	110	Flash Mob		0	99	
+Numel	374	Ground	50	5	100	Burn		0	99	
+Camerupt	375	Ground	70	5	110	Power of 4		0	99	
+Torkoal	269	Fire	60	5	105	Quake		0	99	
+Spoink	458	Psychic	50	5	100	Paralyze		0	99	
+Grumpig	459	Psychic	60	5	105	Stabilize+		0	99	
+Spinda	229	Normal	50	5	100	Counterattack		0	99	
+Trapinch	525	Ground	40	5	90	Barrier Bash		0	99	
+Vibrava	526	Ground	50	5	100	Hitting Streak		0	99	
+Flygon	527	Ground	70	7	116	Rock Break+	Shot Out	0	99	
+Cacnea	552	Grass	50	5	100	Swap+		0	99	
+Cacturne	553	Grass	60	5	105	Hyper Punch		0	99	
+Swablu	43	Flying	50	10	115	Opportunist	Mega Boost+	0	99	
+Altaria	44	Dragon	60	10	120	Eject	Nosedive	0	99	
+Zangoose	270	Normal	60	5	105	Hitting Streak		0	99	
+Seviper	271	Poison	60	5	105	Eject	Toxic Stress	0	99	
+Lunatone	559	Rock	60	7	111	Swap+	Barrier Shot	0	99	
+Solrock	560	Rock	60	7	111	Swap+	Barrier Shot	0	99	
+Barboach	682	Ground	40	20	125	Mega Boost+		0	99	
+Whiscash	683	Ground	60	15	125	Rock Break+	Full Power	0	99	
+Corphish	664	Water	50	5	100	Final Effort		0	99	
+Crawdaunt	665	Water	60	5	105	Block Smash+		0	99	
+Baltoy	629	Ground	50	5	100	Eject		0	99	
+Claydol	630	Ground	70	5	110	Power of 4+		0	99	
+Lileep	658	Rock	50	5	100	Mind Zap		0	99	
+Cradily	659	Rock	60	5	105	Eject+		0	99	
+Anorith	660	Rock	50	5	100	Mega Boost+		0	99	
+Armaldo	661	Rock	60	5	105	Damage Streak		0	99	
+Feebas	185	Water	30	5	85	Opportunist	Barrier Bash++	0	99	
+Milotic	186	Water	70	5	110	Stabilize+		0	99	
+Castform	561	Normal	60	5	105	Cloud Clear+		0	99	
+Kecleon	240	Normal	60	5	105	Mind Zap		0	99	
+Shuppet	211	Ghost	40	5	90	Mind Zap		0	99	
+Banette	212	Ghost	60	10	120	Mega Boost	Mega Boost++	0	99	
+Duskull	322	Ghost	40	15	115	Block Smash	Block Shot	0	99	
+Dusclops	323	Ghost	60	5	105	Sleep Charm		0	99	
+Tropius	164	Grass	60	5	105	Eject	Mega Boost++	0	99	
+Chimecho	69	Psychic	60	5	105	Barrier Bash		0	99	
+Absol	33	Dark	60	20	135	Mind Zap		0	99	
+Wynaut	267	Psychic	30	5	85	Stabilize		0	99	
+Snorunt	124	Ice	40	10	105	Freeze	Rock Shot	0	99	
+Glalie	125	Ice	60	5	105	Chill		0	99	
+Spheal	445	Ice	40	5	90	Crowd Control		0	99	
+Sealeo	446	Ice	60	5	105	Eject		0	99	
+Walrein	447	Ice	70	5	110	Rock Break+	Last-Ditch Effort	0	99	
+Clamperl	538	Water	50	5	100	Mega Boost+		0	99	
+Huntail	539	Water	60	5	105	Astonish		0	99	
+Gorebyss	540	Water	70	5	110	Mind Zap		0	99	
+Relicanth	241	Rock	60	5	105	Mega Boost		0	99	
+Luvdisc	272	Water	50	5	100	Mega Boost		0	99	
+Bagon	193	Dragon	50	5	100	Power of 4	Flash Mob	0	99	
+Shelgon	194	Dragon	60	5	105	Damage Streak	Rock Break++	0	99	
+Salamence	195	Flying	80	5	115	Hitting Streak	Mega Boost	0	99	
+Beldum	639	Steel	50	5	100	Blockify		0	99	
+Metang	640	Steel	60	5	105	Mega Boost		0	99	
+Metagross	641	Steel	80	10	130	Cross Attack	Cross Attack+	0	99	
+Regirock	236	Rock	70	5	110	Last-Ditch Effort	Rock Break+	0	99	
+Regice	237	Ice	70	5	110	Hitting Streak	Swap++	0	99	
+Registeel	238	Steel	70	5	110	Paralyze	Block Smash++	0	99	
+Latias	315	Dragon	80	5	115	Swap	Hitting Streak+	0	99	
+Latios	316	Dragon	80	5	115	Counterattack	Hitting Streak+	0	99	
+Kyogre	160	Water	70	20	140	Rock Break	Rock Shot	0	99	
+Primal Kyogre	160	Water	90	20	150	Rock Shot α		0	99	
+Groudon	161	Ground	70	20	140	Quake	Barrier Shot	0	99	
+Primal Groudon	161	Ground	90	20	150	Barrier Shot Ω		0	99	
+Rayquaza	162	Dragon	70	5	110	Dragon Talon	Shot Out	0	99	
+Jirachi	273	Steel	70	5	110	Mega Boost+		0	99	
+Deoxys (Normal Forme)	355	Psychic	80	5	115	Swap+	Shot Out	0	99	
+Turtwig	356	Grass	50	5	100	Leaf Combo		0	99	
+Grotle	357	Grass	60	5	105	Shot Out		0	99	
+Torterra	358	Grass	70	5	110	Cross Attack+		0	99	
+Chimchar	359	Fire	50	5	100	Prank		0	99	
+Monferno	360	Fire	60	5	105	Swap		0	99	
+Infernape	361	Fire	70	10	125	Hitting Streak	Shock Attack/Final Effort	0	99	
+Piplup	362	Water	50	5	100	Counterattack+		0	99	
+Prinplup	363	Water	60	5	105	Three Force		0	99	
+Empoleon	364	Water	70	5	110	Up, Up, Up		0	99	
+Starly	285	Flying	30	5	85	Crowd Control		0	99	
+Staravia	286	Flying	50	5	100	Mind Zap		0	99	
+Staraptor	287	Flying	60	10	120	Stabilize+		0	99	
+Bidoof	625	Normal	30	5	85	Sleep Combo		0	99	
+Bibarel	626	Water	60	5	105	Risk-Taker		0	99	
+Kricketot	761	Bug	30	5	85	Daunt		0	99	
+Kricketune	762	Bug	50	5	100	Calm Down		0	99	
+Shinx	346	Electric	30	5	85	Counterattack		0	99	
+Luxio	347	Electric	50	10	115	Block Smash	Mega Boost++	0	99	
+Luxray	348	Electric	70	10	125	Cloud Clear+	Cross Attack+	0	99	
+Budew	340	Grass	40	5	90	Mega Boost+		0	99	
+Roserade	342	Grass	70	10	125	Stabilize+	Flash Mob	0	99	
+Cranidos	541	Rock	50	5	100	Barrier Bash		0	99	
+Rampardos	542	Rock	60	5	105	Block Smash+		0	99	
+Shieldon	543	Rock	50	5	100	Counterattack		0	99	
+Bastiodon	544	Rock	60	5	105	Last-Ditch Effort		0	99	
+Burmy (Plant Cloak)	622	Bug	30	5	85	Mind Zap		0	99	
+Burmy (Sandy Cloak)	622	Bug	30	5	85	Rockify+		0	99	
+Burmy (Trash Cloak)	622	Bug	30	5	85	Quirky+		0	99	
+Wormadam (Plant Cloak)	623	Bug	60	5	105	Stabilize		0	99	
+Wormadam (Sandy Cloak)	623	Ground	60	5	105	Eject+		0	99	
+Wormadam (Trash Cloak)	623	Steel	60	5	105	Barrier Bash+		0	99	
+Mothim	624	Bug	60	5	105	Cross Attack		0	99	
+Combee	554	Bug	30	10	100	Mega Boost+		0	99	
+Vespiquen	555	Bug	60	5	105	Stabilize+		0	99	
+Pachirisu	163	Electric	50	5	100	Mega Boost	Cheer	0	99	
+Buizel	109	Water	50	5	100	Barrier Bash		0	99	
+Floatzel	110	Water	60	5	105	Stabilize		0	99	
+Cherubi	230	Grass	40	5	90	Quirky		0	99	
+Cherrim	231	Grass	60	5	105	Quirky+		0	99	
+Shellos (West Sea)	528	Water	50	5	100	Cloud Clear		0	99	
+Shellos (East Sea)	528	Water	50	5	100	Cross Attack		0	99	
+Gastrodon (West Sea)	529	Water	60	5	105	Power of 5		0	99	
+Gastrodon (East Sea)	529	Ground	60	5	105	Swap+		0	99	
+Ambipom	610	Normal	60	5	105	Shock Attack		0	99	
+Drifloon	642	Ghost	50	5	100	Rock Break		0	99	
+Drifblim	643	Ghost	60	5	105	Cross Attack	Barrier Shot	0	99	
+Buneary	54	Normal	40	20	125	Opportunist	Sleep Charm	0	99	
+Lopunny	55	Normal	50	10	115	Opportunist	Swap++	0	99	
+Mismagius	147	Ghost	60	5	105	Astonish	Rock Shot	0	99	
+Honchkrow	444	Dark	70	10	125	Power of 5+	Nosedive	0	99	
+Glameow	511	Normal	50	5	100	Quirky		0	99	
+Purugly	512	Normal	60	5	105	Power of 4		0	99	
+Chingling	68	Psychic	40	5	90	Opportunist		0	99	
+Stunky	416	Poison	50	5	100	Rock Break		0	99	
+Skuntank	417	Poison	60	5	105	Last-Ditch Effort		0	99	
+Bronzor	135	Steel	50	5	100	Block Smash		0	99	
+Bronzong	136	Steel	70	5	110	Block Smash	Block Shot	0	99	
+Bonsly	21	Rock	40	5	90	Opportunist		0	99	
+Mime Jr.	294	Psychic	50	5	100	Quirky		0	99	
+Happiny	40	Normal	30	5	85	Opportunist		0	99	
+Chatot	104	Flying	60	5	105	Flap		0	99	
+Spiritomb	243	Ghost	60	5	105	Spookify		0	99	
+Gible	279	Ground	50	5	100	Mega Boost		0	99	
+Gabite	280	Ground	60	5	105	Block Smash		0	99	
+Garchomp	281	Ground	80	20	145	Dragon Talon	Mega Boost+	0	99	
+Munchlax	178	Normal	50	15	120	Risk-Taker	Rock Break++	0	99	
+Riolu	77	Fighting	40	20	125	Heavy Hitter	Mega Boost+	0	99	
+Lucario	78	Fighting	70	20	140	Pummel		0	99	
+Hippopotas (Male)	191	Ground	50	10	115	Quake	Flash Mob	0	99	
+Hippowdon (Male)	192	Ground	60	5	105	Last-Ditch Effort	Non Stop+	0	99	
+Skorupi	448	Poison	50	5	100	Counterattack		0	99	
+Drapion	449	Poison	70	5	110	Power of 5+		0	99	
+Croagunk	87	Poison	50	5	100	Prank	Poison Pact	0	99	
+Toxicroak	88	Poison	60	5	105	Prank	Poison	0	99	
+Carnivine	304	Grass	60	5	105	Risk-Taker	Flash Mob	0	99	
+Finneon	430	Water	50	5	100	Quirky		0	99	
+Lumineon	431	Water	60	5	105	Quirky+		0	99	
+Mantyke	562	Water	50	5	100	Crowd Control		0	99	
+Snover	381	Ice	50	5	100	Block Smash		0	99	
+Abomasnow	382	Ice	60	5	105	Heavy Hitter	Mind Zap	0	99	
+Weavile	235	Dark	70	10	125	Astonish	Sleep Combo	0	99	
+Magnezone	442	Electric	70	15	130	Power of 4+	Barrier Shot	0	99	
+Lickilicky	220	Normal	70	15	130	Damage Streak	Hyper Drain	0	99	
+Rhyperior	536	Ground	70	5	110	Hyper Punch		0	99	
+Tangrowth	225	Grass	70	5	110	Cloud Clear	Sleep Combo	0	99	
+Electivire	519	Electric	70	5	110	T-Boost		0	99	
+Magmortar	522	Fire	70	5	110	Cross Attack		0	99	
+Togekiss	20	Fairy	60	15	125	Pixie Power		0	99	
+Yanmega	507	Bug	70	10	125	Risk-Taker	Mega Boost+	0	99	
+Leafeon	29	Grass	50	5	100	Mega Boost	Eject+/Hammering Streak	0	99	
+Glaceon	30	Ice	50	5	100	Mega Boost	Eject+/Hammering Streak	0	99	
+Gliscor	419	Ground	70	5	110	Rock Break+	Nosedive	0	99	
+Mamoswine	415	Ice	70	5	110	Barrier Bash+	Risk-Taker	0	99	
+Porygon-Z	400	Normal	70	15	130	Shock Attack	Hitting Streak+	0	99	
+Gallade	299	Fighting	70	15	130	Block Smash+		0	99	
+Probopass	407	Rock	70	5	110	Stabilize+		0	99	
+Dusknoir	324	Ghost	70	5	110	Last-Ditch Effort	Sleep Combo	0	99	
+Froslass	126	Ice	60	5	105	Mega Boost	Block Smash+	0	99	
+Rotom	39	Electric	60	5	105	Paralyze	Mega Boost+	0	99	
+Rotom (Heat Rotom)	39	Fire	50	5	100	Mega Boost		0	99	
+Rotom (Wash Rotom)	39	Water	50	5	100	Mega Boost		0	99	
+Rotom (Frost Rotom)	39	Ice	50	5	100	Mega Boost		0	99	
+Rotom (Fan Rotom)	39	Flying	50	5	100	Mega Boost		0	99	
+Rotom (Mow Rotom)	39	Grass	50	5	100	Mega Boost		0	99	
+Uxie	495	Psychic	70	10	125	Mind Zap	Flash Mob	0	99	
+Mesprit	496	Psychic	70	10	125	Sleep Charm	Flash Mob	0	99	
+Azelf	497	Psychic	70	10	125	Paralyze	Flash Mob	0	99	
+Dialga	249	Steel	80	20	145	Block Smash+	Crushing Step	0	99	
+Palkia	250	Water	80	20	145	Barrier Bash+	Whirlpool	0	99	
+Heatran	155	Fire	80	5	115	Last-Ditch Effort		0	99	
+Regigigas	354	Normal	90	20	150	Hyper Punch	Shot Out	0	99	
+Giratina (Altered Forme)	248	Ghost	80	10	130	Power of 4+	Blindside	0	99	
+Giratina (Origin Forme)	248	Ghost	80	10	130	Sinister Power	Cross Attack+	0	99	
+Cresselia	275	Psychic	80	20	145	Barrier Bash+	Eject++	0	99	
+Phione	256	Water	60	5	105	Crowd Control		0	99	
+Manaphy	257	Water	70	5	110	Swap+	Eject++	0	99	
+Darkrai	303	Dark	80	20	145	Sleep Charm	Spookify+	0	99	
+Shaymin (Land Forme)	244	Grass	70	5	110	Sleep Charm		0	99	
+Shaymin (Sky Forme)	244	Flying	70	5	110	Power of 4+	Block Shot	0	99	
+Arceus	274	Normal	90	20	150	Double Normal		0	99	
+Victini	245	Psychic	80	20	145	Hitting Streak	Last-Ditch Effort	0	99	
+Snivy	258	Grass	50	15	120	Absorb		0	99	
+Servine	259	Grass	60	5	105	Counterattack+		0	99	
+Serperior	260	Grass	70	15	130	Relentless		0	99	
+Tepig	261	Fire	50	15	120	Rock Break	Daunt	0	99	
+Pignite	262	Fire	60	5	105	Heavy Hitter		0	99	
+Emboar	263	Fire	70	5	110	Barrier Bash	Risk-Taker	0	99	
+Oshawott	264	Water	50	15	120	Whirlpool	Final Effort	0	99	
+Dewott	265	Water	60	5	105	Shock Attack		0	99	
+Samurott	266	Water	70	15	130	Quake		0	99	
+Patrat	530	Normal	30	5	85	Eject		0	99	
+Watchog	531	Normal	60	5	105	Rock Break+		0	99	
+Lillipup	647	Normal	40	5	90	Eject		0	99	
+Herdier	648	Normal	50	5	100	Rock Break+		0	99	
+Stoutland	649	Normal	70	15	130	Power of 4+	Rock Shot	0	99	
+Purrloin	34	Dark	40	15	115	Opportunist	Flash Mob	0	99	
+Liepard	35	Dark	60	5	105	Counterattack	Swap++	0	99	
+Pansage	432	Grass	50	5	100	Counterattack		0	99	
+Simisage	433	Grass	60	5	105	Astonish		0	99	
+Pansear	434	Fire	50	5	100	Counterattack		0	99	
+Simisear	435	Fire	60	5	105	Paralyze		0	99	
+Panpour	436	Water	50	5	100	Counterattack		0	99	
+Simipour	437	Water	60	5	105	Quake		0	99	
+Munna	386	Psychic	40	5	90	Block Smash		0	99	
+Musharna	387	Psychic	60	5	105	Mind Zap		0	99	
+Pidove	576	Flying	30	5	85	Quirky		0	99	
+Tranquill	577	Flying	50	5	100	Flap		0	99	
+Unfezant (Male)	578	Flying	60	5	105	Nosedive		0	99	
+Blitzle	246	Electric	40	5	90	Rock Break		0	99	
+Zebstrika	247	Electric	60	5	105	Block Smash		0	99	
+Roggenrola	376	Rock	40	5	90	Last-Ditch Effort		0	99	
+Boldore	377	Rock	50	5	100	Heavy Hitter		0	99	
+Gigalith	378	Rock	70	5	110	Block Smash+		0	99	
+Woobat	670	Psychic	50	5	100	Eject		0	99	
+Swoobat	671	Psychic	60	5	105	Flap		0	99	
+Drilbur	206	Ground	50	5	100	Damage Streak	Quirky++	0	99	
+Excadrill	207	Ground	70	10	125	Power of 5	Cross Attack	0	99	
+Audino	32	Normal	50	15	120	Opportunist	Mega Boost+	0	99	
+Timburr	221	Fighting	50	5	100	Block Smash		0	99	
+Gurdurr	222	Fighting	60	5	105	Cloud Clear		0	99	
+Conkeldurr	223	Fighting	70	5	110	Last-Ditch Effort		0	99	
+Tympole	403	Water	40	10	105	Astonish	Spookify	0	99	
+Palpitoad	404	Water	50	5	100	Damage Streak		0	99	
+Seismitoad	405	Water	70	5	110	Last-Ditch Effort		0	99	
+Throh	141	Fighting	60	10	120	Power of 5	Barrier Bash+	0	99	
+Sawk	142	Fighting	60	10	120	Power of 4	Rock Break+	0	99	
+Sewaddle	611	Bug	50	5	100	Counterattack		0	99	
+Swadloon	612	Bug	60	5	105	Power of 4+		0	99	
+Leavanny	613	Bug	70	5	110	Block Smash+		0	99	
+Venipede	598	Bug	30	5	85	Counterattack		0	99	
+Whirlipede	599	Bug	50	5	100	Damage Streak		0	99	
+Scolipede	600	Bug	60	5	105	Power of 4+		0	99	
+Cottonee	131	Grass	40	5	90	Swap		0	99	
+Whimsicott	132	Grass	60	5	105	Swap		0	99	
+Petilil	133	Grass	40	5	90	Swap		0	99	
+Lilligant	134	Grass	60	5	105	Sleep Charm		0	99	
+Basculin (Red-Striped Form)	756	Water	60	15	125	Hitting Streak+		0	99	
+Basculin (Blue-Striped Form)	756	Water	60	15	125	Hitting Streak+		0	99	
+Sandile	462	Ground	40	5	90	Prank		0	99	
+Krokorok	463	Ground	50	5	100	Astonish		0	99	
+Krookodile	464	Ground	70	5	110	Risk-Taker		0	99	
+Darumaka	254	Fire	50	5	100	Stabilize		0	99	
+Darmanitan	255	Fire	60	5	105	Burn		0	99	
+Maractus	334	Grass	60	5	105	Barrier Bash		0	99	
+Dwebble	754	Rock	50	5	100	Swap		0	99	
+Crustle	755	Rock	60	8	114	Rock Shot		0	99	
+Scraggy	513	Dark	50	5	100	Hyper Punch		0	99	
+Scrafty	514	Dark	60	5	105	Last-Ditch Effort		0	99	
+Sigilyph	165	Psychic	60	5	105	Barrier Bash		0	99	
+Yamask	198	Ghost	50	10	115	Quirky	Flash Mob	0	99	
+Cofagrigus	199	Ghost	60	5	105	Prank		0	99	
+Tirtouga	616	Water	50	5	100	L-Boost		0	99	
+Carracosta	617	Water	60	5	105	Paralysis Combo		0	99	
+Archen	618	Rock	60	5	105	Paralyze		0	99	
+Archeops	619	Rock	70	5	110	Power of 4+		0	99	
+Trubbish	189	Poison	50	5	100	Mega Boost	Mind Zap	0	99	
+Garbodor	190	Poison	60	5	105	Risk-Taker		0	99	
+Zorua	63	Dark	50	10	115	Sinister Power	Super Cheer	0	99	
+Zoroark	64	Dark	70	20	140	Sinister Power	Hitting Streak	0	99	
+Minccino	99	Normal	50	5	100	Opportunist		0	99	
+Cinccino	100	Normal	60	10	120	Opportunist	Mega Boost++	0	99	
+Gothita	291	Psychic	40	10	105	Cloud Clear	Block Shot	0	99	
+Gothorita	292	Psychic	50	5	100	Sleep Charm		0	99	
+Gothitelle	293	Psychic	60	5	105	Quirky+		0	99	
+Solosis	200	Psychic	40	5	90	Barrier Bash		0	99	
+Duosion	201	Psychic	50	5	100	Swap	Psychic Combo	0	99	
+Reuniclus	202	Psychic	60	5	105	Swat		0	99	
+Ducklett	695	Flying	50	5	100	Prank		0	99	
+Swanna	696	Flying	60	5	105	T-Boost		0	99	
+Vanillite	101	Ice	40	5	90	Opportunist	Barrier Bash++	0	99	
+Vanillish	102	Ice	50	10	115	Opportunist	Ice Dance	0	99	
+Vanilluxe	103	Ice	60	5	105	Freeze	Shot Out	0	99	
+Deerling (Spring Form)	501	Grass	50	5	100	Eject		0	99	
+Deerling (Summer Form)	501	Grass	50	5	100	Cross Attack		0	99	
+Deerling (Autumn Form)	501	Grass	50	5	100	Cheer		0	99	
+Deerling (Winter Form)	501	Grass	50	5	100	Calm Down		0	99	
+Sawsbuck (Spring Form)	502	Grass	60	5	105	Block Smash		0	99	
+Sawsbuck (Summer Form)	502	Grass	60	5	105	Barrier Shot		0	99	
+Sawsbuck (Autumn Form)	502	Grass	60	5	105	Nap Time		0	99	
+Sawsbuck (Winter Form)	502	Grass	60	5	105	Crowd Control+		0	99	
+Emolga	137	Electric	60	5	105	Risk-Taker		0	99	
+Karrablast	666	Bug	50	5	100	Final Effort		0	99	
+Escavalier	667	Bug	60	5	105	Barrier Bash++		0	99	
+Foongus	672	Grass	40	5	90	Mind Zap		0	99	
+Amoonguss	673	Grass	60	5	105	Paralysis Combo		0	99	
+Frillish (Male)	568	Ghost	50	5	100	Barrier Bash		0	99	
+Frillish (Female)	568	Ghost	50	5	100	Vitality Drain		0	99	
+Jellicent (Male)	569	Ghost	60	10	120	Prank		0	99	
+Jellicent (Female)	569	Ghost	60	10	120	Mind Zap		0	99	
+Alomomola	390	Water	60	5	105	Swap		0	99	
+Joltik	369	Bug	50	5	100	Mega Boost		0	99	
+Galvantula	370	Bug	60	5	105	Paralyze		0	99	
+Ferroseed	627	Grass	50	5	100	Barrier Bash		0	99	
+Ferrothorn	628	Grass	60	15	125	Block Smash+	Hitting Streak+	0	99	
+Klink	310	Steel	50	5	100	Damage Streak		0	99	
+Klang	311	Steel	60	5	105	Power of 5		0	99	
+Klinklang	312	Steel	70	5	110	Damage Streak		0	99	
+Tynamo	605	Electric	40	5	90	Stabilize		0	99	
+Eelektrik	606	Electric	60	5	105	Paralysis Combo		0	99	
+Eelektross	607	Electric	70	5	110	Hyper Punch		0	99	
+Elgyem	572	Psychic	50	15	120	Block Smash	Paralysis Combo	0	99	
+Beheeyem	573	Psychic	60	10	120	Rock Break	Rock Shot	0	99	
+Litwick	65	Ghost	40	20	125	Astonish	Final Effort	0	99	
+Lampent	66	Ghost	50	5	100	Mega Boost		0	99	
+Chandelure	67	Ghost	60	5	105	Mega Boost	Power of 4+	0	99	
+Axew	105	Dragon	50	5	100	Dragon Talon		0	99	
+Fraxure	106	Dragon	60	5	105	Dragon Talon		0	99	
+Haxorus	107	Dragon	70	5	110	Dragon Talon		0	99	
+Cubchoo	650	Ice	50	5	100	Mega Boost+		0	99	
+Beartic	651	Ice	60	10	120	Ice Dance	Relentless	0	99	
+Cryogonal	763	Ice	70	5	110	Barrier Shot		0	99	
+Shelmet	668	Bug	50	5	100	T-Boost		0	99	
+Accelgor	669	Bug	60	5	105	Eject++		0	99	
+Stunfisk	145	Ground	60	5	105	Damage Streak	Sleep Combo	0	99	
+Mienfoo	122	Fighting	50	5	100	Hitting Streak		0	99	
+Mienshao	123	Fighting	60	5	105	Hitting Streak		0	99	
+Druddigon	167	Dragon	60	10	120	Power of 4	Risk-Taker	0	99	
+Golett	450	Ground	50	5	100	Heavy Hitter	Rock Shot	0	99	
+Golurk	451	Ground	60	5	105	Block Smash+		0	99	
+Pawniard	330	Dark	50	5	100	Block Smash		0	99	
+Bisharp	331	Dark	70	15	130	Rock Break+	Cross Attack+	0	99	
+Bouffalant	329	Normal	60	5	105	Rock Break		0	99	
+Rufflet	213	Flying	50	15	120	Flap	Final Effort	0	99	
+Braviary	214	Flying	70	15	130	Sky Blast	Nosedive	0	99	
+Vullaby	396	Dark	50	5	100	Barrier Bash		0	99	
+Mandibuzz	397	Dark	70	5	110	Hitting Streak	Rock Shot	0	99	
+Heatmor	332	Fire	60	5	105	Eject		0	99	
+Durant	333	Bug	60	5	105	Block Smash	Risk-Taker	0	99	
+Deino	556	Dark	50	5	100	Power of 4		0	99	
+Zweilous	557	Dark	60	5	105	Dancing Dragons		0	99	
+Hydreigon	558	Dark	80	20	145	Swap+		0	99	
+Larvesta	183	Bug	50	5	100	Cloud Clear		0	99	
+Volcarona	184	Bug	70	5	110	Mega Boost	Barrier Shot	0	99	
+Cobalion	300	Steel	70	20	140	Power of 4+		0	99	
+Terrakion	301	Rock	70	20	140	Power of 4+		0	99	
+Virizion	302	Grass	70	20	140	Power of 4+		0	99	
+Tornadus (Incarnate Forme)	337	Flying	70	15	130	Power of 5+	Paralysis Combo	0	99	
+Tornadus (Therian Forme)	337	Flying	70	10	125	Risk-Taker		0	99	
+Thundurus (Incarnate Forme)	338	Electric	70	15	130	Power of 5+	Relentless	0	99	
+Thundurus (Therian Forme)	338	Electric	70	10	125	Risk-Taker		0	99	
+Reshiram	420	Fire	80	20	145	Barrier Bash+	Barrier Bash++	0	99	
+Zekrom	421	Electric	80	20	145	Block Smash+	Block Smash++	0	99	
+Landorus (Incarnate Forme)	339	Ground	80	15	135	Power of 5+	Ground Forces	0	99	
+Landorus (Therian Forme)	339	Ground	80	10	130	Risk-Taker		0	99	
+Kyurem	422	Ice	80	5	115	Power of 5+		0	99	
+Kyurem (White Kyurem)	422	Dragon	90	20	150	Eject++	Barrier Shot	0	99	
+Kyurem (Black Kyurem)	422	Dragon	90	20	150	Swap++	Block Shot	0	99	
+Keldeo (Ordinary Form)	168	Water	60	5	105	Block Smash	Flash Mob	0	99	
+Keldeo (Resolute Form)	168	Fighting	60	20	135	Power of 4+	Cross Attack+	0	99	
+Meloetta (Aria Forme)	646	Psychic	80	10	130	Mega Boost++	Quirky++	0	99	
+Genesect	226	Bug	80	20	145	Crowd Control	4 Up/Vitality Drain	0	99	
+Genesect (Shiny)	226	Bug	80	5	115	Last-Ditch Effort		0	99	
+Chespin	169	Grass	50	5	100	Damage Streak	Rock Break+	0	99	
+Quilladin	170	Grass	60	5	105	Paralyze		0	99	
+Chesnaught	171	Grass	70	10	125	Hitting Streak		0	99	
+Fennekin	172	Fire	50	5	100	Burn		0	99	
+Braixen	173	Fire	60	5	105	Stabilize+		0	99	
+Delphox	174	Fire	70	15	130	Pyre		0	99	
+Froakie	175	Water	50	5	100	Rock Break		0	99	
+Frogadier	176	Water	60	5	105	Power of 5		0	99	
+Greninja	177	Water	70	10	125	Mind Zap		0	99	
+Bunnelby	545	Normal	30	5	85	Cloud Clear		0	99	
+Diggersby	546	Ground	60	5	105	Stabilize		0	99	
+Fletchling	371	Flying	40	5	90	Counterattack		0	99	
+Fletchinder	372	Fire	50	5	100	Swap+		0	99	
+Talonflame	373	Fire	60	5	105	Block Smash+		0	99	
+Scatterbug	282	Bug	30	5	85	Mega Boost		0	99	
+Spewpa	283	Bug	40	15	115	Eject	Shot Out	0	99	
+Vivillon (Meadow Pattern)	284	Bug	60	5	105	Astonish		0	99	
+Litleo	662	Fire	50	5	100	Astonish		0	99	
+Pyroar (Male)	663	Fire	70	5	110	Relentless		0	99	
+Pyroar (Female)	663	Fire	70	5	110	Crowd Control		0	99	
+Flabébé	383	Fairy	50	5	100	Quirky		0	99	
+Floette	384	Fairy	50	5	100	Cloud Clear		0	99	
+Florges	385	Fairy	70	10	125	Swap+	Rock Shot	0	99	
+Skiddo	367	Grass	50	5	100	Barrier Bash		0	99	
+Gogoat	368	Grass	70	5	110	Quirky+		0	99	
+Pancham	196	Fighting	50	5	100	Mega Boost		0	99	
+Pangoro	197	Fighting	60	5	105	Pummel		0	99	
+Furfrou	276	Normal	60	5	105	Quirky+		0	99	
+Espurr	13	Psychic	40	5	90	Opportunist	Sleep Charm	0	99	
+Meowstic (Male)	14	Psychic	50	5	100	Mega Boost	Hitting Streak	0	99	
+Meowstic (Female)	14	Psychic	50	5	100	Mega Boost	Hitting Streak	0	99	
+Honedge	203	Steel	50	15	120	Steely Resolve	Risk-Taker	0	99	
+Doublade	204	Steel	60	10	120	Hitting Streak	Power of 4+/Barrier Shot	0	99	
+Aegislash	205	Steel	70	20	140	Counterattack	Blindside	0	99	
+Spritzee	352	Fairy	50	15	120	Mega Boost+		0	99	
+Aromatisse	353	Fairy	60	5	105	Power of 4		0	99	
+Swirlix	70	Fairy	50	10	115	Opportunist	Flash Mob	0	99	
+Slurpuff	71	Fairy	60	10	120	Opportunist	Cheer	0	99	
+Inkay	365	Dark	40	5	90	Mega Boost+		0	99	
+Malamar	366	Dark	70	5	110	Quirky+	Block Shot	0	99	
+Binacle	515	Rock	50	5	100	Hitting Streak		0	99	
+Barbaracle	516	Rock	70	5	110	Crowd Control		0	99	
+Skrelp	532	Poison	50	5	100	Block Smash		0	99	
+Dragalge	533	Poison	60	5	105	Dragon Talon		0	99	
+Clauncher	697	Water	50	5	100	Block Smash		0	99	
+Clawitzer	698	Water	70	5	110	Rock Break+		0	99	
+Helioptile	631	Electric	40	5	90	Swap		0	99	
+Heliolisk	632	Electric	60	5	105	T-Boost		0	99	
+Tyrunt	452	Rock	50	5	100	Rock Break	Super Cheer	0	99	
+Tyrantrum	453	Rock	70	10	125	Dragon Talon	Block Shot	0	99	
+Amaura	120	Rock	50	5	100	Risk-Taker		0	99	
+Aurorus	121	Rock	70	5	110	Damage Streak		0	99	
+Sylveon	31	Fairy	50	5	100	Mega Boost	Eject+/Hammering Streak	0	99	
+Hawlucha	108	Fighting	50	5	100	Rock Break	Cloud Clear+	0	99	
+Dedenne	130	Electric	60	5	105	Mega Boost	Shock Attack	0	99	
+Carbink	140	Rock	60	5	105	Damage Streak	Rock Combo	0	99	
+Goomy	288	Dragon	50	5	100	Mega Boost	Flash Mob	0	99	
+Sliggoo	289	Dragon	60	5	105	Barrier Bash		0	99	
+Goodra	290	Dragon	80	5	115	Eject+	Unity Power	0	99	
+Klefki	56	Steel	60	5	105	Block Smash	Mega Boost+	0	99	
+Phantump	465	Ghost	50	10	115	Stabilize	Rock Break++	0	99	
+Trevenant	466	Ghost	60	5	105	Swap+	Shot Out	0	99	
+Pumpkaboo	320	Ghost	50	5	100	Risk-Taker		0	99	
+Gourgeist	321	Ghost	60	5	105	Eject		0	99	
+Bergmite	215	Ice	50	5	100	Freeze		0	99	
+Avalugg	216	Ice	70	5	110	Barrier Bash	Flash Mob	0	99	
+Noibat	487	Flying	30	5	85	Mega Boost		0	99	
+Noivern	488	Flying	70	10	125	Cloud Clear++	Shot Out	0	99	
+Xerneas	156	Fairy	80	20	145	Quirky+	Power of 4	0	99	
+Yveltal	157	Dark	80	20	145	Power of 5	Block Smash+	0	99	
+Zygarde (50% Forme)	503	Dragon	80	10	130	Barrier Bash+	Typeless Combo	0	99	
+Diancie	307	Fairy	70	15	130	Barrier Bash+	Mega Boost+	0	99	
+Hoopa (Hoopa Confined)	608	Ghost	70	20	140	Barrier Bash+	Shadow Shock	0	99	
+Hoopa (Hoopa Unbound)	608	Dark	90	5	120	Risk-Taker	Typeless Combo	0	99	
+Volcanion	684	Water	80	10	130	Risk-Taker		0	99	
+Bulbasaur (Winking)	1	Grass	40	5	90	Block Smash+		0	99	
+Charmander (Winking)	4	Fire	40	5	90	Barrier Bash+		0	99	
+Squirtle (Winking)	7	Water	40	5	90	Rock Break+		0	99	
+Pikachu (Angry)	16	Electric	50	10	115	Super Bolt		0	99	
+Pikachu (Winking)	16	Electric	50	10	115	Swap++		0	99	
+Pikachu (Sleeping)	16	Electric	50	10	115	Sleep Charm		0	99	
+Pikachu (Disappointed)	999	Normal	30	5	85	Opportunist		0	99	
+Pikachu (Fired Up)	16	Electric	50	5	100	Cross Attack+		0	99	
+Pikachu (Surprised)	16	Electric	50	5	100	Last-Ditch Effort		0	99	
+Pikachu (Enamored)	16	Electric	50	10	115	Mind Zap		0	99	
+Pikachu (Teary)	999	Normal	30	5	85	Opportunist		0	99	
+Pikachu (Dejected)	999	Normal	30	5	85	Opportunist		0	99	
+Pikachu (Smiling)	16	Electric	50	10	115	Flash Mob		0	99	
+Pikachu (Dizzy)	16	Electric	50	5	100	Barrier Bash++		0	99	
+Pikachu (Happy)	16	Electric	50	10	115	Power of 4+		0	99	
+Pikachu (Spooky)	16	Electric	50	10	115	Block Smash+		0	99	
+Pikachu (Holiday)	16	Electric	50	10	115	Mega Boost+		0	99	
+Raichu (Winking)	17	Electric	60	5	105	Rock Break+		0	99	
+Clefairy (Winking)	499	Fairy	50	5	100	Block Smash+		0	99	
+Clefable (Winking)	999	Normal	30	0	55	Opportunist		0	99	
+Jigglypuff (Winking)	411	Fairy	40	5	90	Eject+		0	99	
+Wigglytuff (Winking)	412	Fairy	60	5	105	Rock Break++		0	99	
+Gengar (Spooky)	114	Poison	70	5	110	Vitality Drain	Poison	0	99	
+Chansey (Winking)	41	Normal	60	5	105	Up, Up, Up		0	99	
+Magikarp (Shiny)	477	Water	30	10	100	Cheer	Dragon Shriek	0	99	
+Gyarados (Shiny)	478	Water	70	5	110	L-Boost		0	99	
+Chikorita (Winking)	579	Grass	50	5	100	Barrier Bash+		0	99	
+Cyndaquil (Winking)	582	Fire	50	5	100	Eject+		0	99	
+Totodile (Winking)	585	Water	50	5	100	Swap+		0	99	
+Togetic (Winking)	19	Fairy	50	5	100	Mega Boost+		0	99	
+Marill (Winking)	999	Normal	30	0	55	Opportunist		0	99	
+Azumarill (Winking)	60	Fairy	60	10	120	Full Power		0	99	
+Hoppip (Winking)	655	Grass	30	5	85	Stabilize++		0	99	
+Skiploom (Winking)	656	Grass	50	5	100	Paralyze+		0	99	
+Jumpluff (Winking)	657	Grass	60	5	105	Vitality Drain		0	99	
+Snubbull (Winking)	217	Fairy	50	5	100	Spookify+		0	99	
+Granbull (Winking)	218	Fairy	60	5	105	Up, Up, Up		0	99	
+Delibird (Holiday)	144	Ice	50	5	100	Stabilize++		0	99	
+Blissey (Winking)	42	Normal	70	10	125	Hammering Streak		0	99	
+Treecko (Winking)	89	Grass	50	5	100	Power of 4+		0	99	
+Torchic (Winking)	92	Fire	50	5	100	Power of 4+		0	99	
+Mudkip (Winking)	95	Water	50	5	100	Power of 4+		0	99	
+Shroomish (Winking)	999	Normal	30	0	55	Opportunist		0	99	
+Delcatty (Winking)	309	Normal	50	10	115	Shot Out		0	99	
+Sableye (Spooky)	74	Ghost	50	10	115	Prank	Swap++	0	99	
+Plusle (Winking)	999	Normal	30	0	55	Opportunist		0	99	
+Minun (Winking)	999	Normal	30	0	55	Opportunist		0	99	
+Castform (Winking)	561	Normal	60	5	105	Block Smash+		0	99	
+Snorunt (Winking)	124	Ice	40	5	90	Block Smash+		0	99	
+Glalie (Winking)	125	Ice	60	5	105	Cross Attack		0	99	
+Rayquaza (Shiny)	162	Flying	80	5	115	Dragon Talon		0	99	
+Turtwig (Winking)	356	Grass	50	5	100	Hammering Streak	Three Force	0	99	
+Chimchar (Winking)	359	Fire	50	5	100	Hammering Streak	Three Force	0	99	
+Piplup (Winking)	362	Water	50	5	100	Hammering Streak	Three Force	0	99	
+Roserade (Winking)	342	Grass	70	10	125	Hammering Streak		0	99	
+Pachirisu (Winking)	999	Normal	30	0	55	Opportunist		0	99	
+Cherubi (Winking)	230	Grass	40	5	90	Crowd Control+		0	99	
+Cherrim (Winking)	231	Grass	60	5	105	Three Force		0	99	
+Snover (Holiday)	381	Ice	50	5	100	Mega Boost+		0	99	
+Togekiss (Winking)	20	Fairy	60	5	105	Power of 4+		0	99	
+Phione (Winking)	256	Water	60	5	105	Mega Boost++		0	99	
+Manaphy (Winking)	257	Water	70	5	110	Rock Break++		0	99	
+Snivy (Winking)	258	Grass	50	5	100	Flash Mob	Hammering Streak	0	99	
+Tepig (Winking)	261	Fire	50	5	100	Flash Mob	Hammering Streak	0	99	
+Oshawott (Winking)	264	Water	50	5	100	Flash Mob	Hammering Streak	0	99	
+Audino (Winking)	32	Normal	50	15	120	Mind Zap		0	99	
+Cottonee (Winking)	131	Grass	40	5	90	Crowd Control		0	99	
+Whimsicott (Winking)	132	Grass	60	5	105	Eject+		0	99	
+Vanillite (Holiday)	101	Ice	40	5	90	Crowd Control		0	99	
+Cubchoo (Holiday)	650	Ice	50	5	100	Power of 4+		0	99	
+Chespin (Winking)	169	Grass	50	5	100	Leaf Combo		0	99	
+Fennekin (Winking)	172	Fire	50	5	100	Pyre		0	99	
+Froakie (Winking)	175	Water	50	5	100	Big Wave		0	99	
+Greninja (Ash-Greninja)	177	Water	70	5	110	Power of 4+	Unity Power	0	99	
+Flabébé (Winking)	383	Fairy	50	5	100	Mega Boost++		0	99	
+Floette (Winking)	384	Fairy	50	5	100	Quirky++		0	99	
+Aromatisse (Winking)	999	Normal	30	0	55	Opportunist		0	99	
+Swirlix (Winking)	70	Fairy	50	5	100	Block Smash+		0	99	
+Slurpuff (Winking)	71	Fairy	60	5	105	Cross Attack		0	99	
+Dedenne (Winking)	999	Normal	30	5	85	Opportunist		0	99	
+Carbink (Winking)	140	Rock	60	5	105	Mega Boost+		0	99	
+Pumpkaboo (Spooky)	320	Ghost	50	5	100	Swap+		0	99	
+Gourgeist (Spooky)	321	Ghost	60	5	105	Spookify		0	99	
+Zygarde (10% Forme)	503	Dragon	50	5	100	Mega Boost+		0	99	
+Zygarde (Complete Forme)	503	Dragon	90	5	120	Power of 5+	Block Smash+/Last-Ditch Effort	0	99	
+Charizard (Shiny)	6	Flying	60	5	105	Nosedive		0	99	
+Pikachu (Charizard Costume)	16	Electric	50	5	100	Burn		0	99	
+Pikachu (Magikarp Costume)	16	Electric	50	5	100	Swap++		0	99	
+Pikachu (Gyarados Costume)	16	Electric	50	5	100	Power of 5+		0	99	
+Pikachu (Shiny Gyarados Costume)	16	Electric	50	5	100	L-Boost		0	99	
+Pikachu (Ho-Oh Costume)	16	Electric	50	5	100	Power of 5+	Pyre	0	99	
+Pikachu (Lugia Costume)	16	Electric	50	5	100	Eject+		0	99	
+Pikachu (Kimono Boy)	16	Electric	50	5	100	Sleep Combo		0	99	
+Pikachu (Kimono Girl)	16	Electric	50	5	100	Paralysis Combo		0	99	
+Pikachu (Rayquaza Costume)	16	Electric	50	5	100	Dragon Talon		0	99	
+Pikachu (Shiny Rayquaza Costume)	16	Electric	60	5	105	Dragon Talon		0	99	
+Pikachu (Intern)	16	Electric	50	5	100	Vitality Drain		0	99	
+Pikachu (Children's Day)	16	Electric	50	5	100	Prank		0	99	
+Pikachu (Rainy Season)	16	Electric	50	5	100	Downpour		0	99	
+Pikachu (Summer Festival)	16	Electric	50	5	100	T-Boost		0	99	
+Pikachu (Beach Walk)	16	Electric	50	5	100	Three Force		0	99	
+Pikachu (Pastry Chef)	16	Electric	50	5	100	Quirky+		0	99	
+Pikachu (Artist)	16	Electric	50	5	100	Damage Streak		0	99	
+Pikachu (Mushroom Harvest)	16	Electric	50	5	100	Counterattack+		0	99	
+Pikachu (Year's End)	16	Electric	50	5	100	Calm Down		0	99	
+Pikachu (Lion Dancer)	16	Electric	50	5	100	Hitting Streak+		0	99	
+Pikachu (Kotatsu)	16	Electric	50	5	100	Nap Time		0	99	
+Pikachu (Graduate)	16	Electric	50	5	100	Final Effort		0	99	
+Gengar (Shiny)	114	Ghost	70	5	110	Blindside		0	99	
+Mewtwo (Shiny)	158	Psychic	80	5	115	Mega Boost		0	99	
+Wobbuffet (Female)	268	Psychic	60	5	105	Swap+		0	99	
+Tyranitar (Shiny)	210	Dark	80	5	115	Barrier Shot		0	99	
+Ho-Oh (Shiny)	306	Fire	80	5	115	Cross Attack+		0	99	
+Gardevoir (Shiny)	298	Fairy	70	5	110	Stabilize++		0	99	
+Castform (Sunny Form)	561	Fire	60	5	105	Burn+		0	99	
+Castform (Rainy Form)	561	Water	60	5	105	Downpour		0	99	
+Castform (Snowy Form)	561	Ice	60	5	105	Chill		0	99	
+Metagross (Shiny)	641	Steel	80	10	130	Hammering Streak		0	99	
+Deoxys (Attack Forme)	355	Psychic	80	5	115	Psychic Combo	Typeless Combo	0	99	
+Deoxys (Defense Forme)	355	Psychic	80	15	135	Counterattack+	Barrier Shot	0	99	
+Deoxys (Speed Forme)	355	Psychic	80	5	115	Three Force	Lightning	0	99	
+Hippopotas (Female)	191	Ground	50	5	100	T-Boost		0	99	
+Hippowdon (Female)	192	Ground	60	5	105	Final Effort		0	99	
+Unfezant (Female)	578	Flying	60	5	105	Crowd Control+		0	99	
+Meloetta (Pirouette Forme)	646	Fighting	80	10	130	Nosedive		0	99	
+Vivillon (Poké Ball Pattern)	284	Bug	60	5	105	Flash Mob		0	99	
+Hawlucha (Shiny)	108	Fighting	50	10	115	Hammering Streak		0	99	
+Xerneas (Shiny)	156	Fairy	80	5	115	Hyper Drain		0	99	
+Yveltal (Shiny)	157	Dark	80	5	115	Hyper Drain		0	99	
+Zygarde (Core)	999	Normal	30	0	55	Opportunist		0	99	
+Zygarde (Cell)	999	Normal	30	0	55	Opportunist		0	99	
+Diancie (Shiny)	307	Fairy	70	15	130	Block Shot		0	99	
+Rattata (Alola Form)	379	Dark	30	5	85	Crowd Control		0	99	
+Raticate (Alola Form)	380	Dark	60	5	105	Barrier Bash+		0	99	
+Pikachu (Original Cap)	16	Electric	60	5	105	Stabilize+	Hyper Bolt	0	99	
+Pikachu (Hoenn Cap)	16	Electric	60	5	105	Rock Shot	Hyper Bolt	0	99	
+Pikachu (Sinnoh Cap)	16	Electric	60	5	105	Block Shot	Hyper Bolt	0	99	
+Pikachu (Unova Cap)	16	Electric	60	5	105	Barrier Shot	Hyper Bolt	0	99	
+Pikachu (Kalos Cap)	16	Electric	60	5	105	Cloud Shot	Hyper Bolt	0	99	
+Pikachu (Alola Cap)	16	Electric	60	5	105	Shot Out	Hyper Bolt	0	99	
+Raichu (Alola Form)	17	Psychic	60	5	105	Risk-Taker		0	99	
+Sandshrew (Alola Form)	680	Ice	50	5	100	Rock Break+		0	99	
+Sandslash (Alola Form)	681	Ice	60	5	105	Ice Dance		0	99	
+Vulpix (Alola Form)	61	Ice	40	10	105	Flash Mob		0	99	
+Ninetales (Alola Form)	62	Ice	70	5	110	Freeze+		0	99	
+Diglett (Alola Form)	704	Steel	30	5	85	Rock Break+		0	99	
+Dugtrio (Alola Form)	705	Steel	60	5	105	Three Force		0	99	
+Meowth (Alola Form)	84	Dark	40	10	105	Shot Out		0	99	
+Persian (Alola Form)	85	Dark	60	5	105	Blindside		0	99	
+Geodude (Alola Form)	588	Electric	50	5	100	Rockify		0	99	
+Graveler (Alola Form)	589	Electric	60	5	105	Blockify		0	99	
+Golem (Alola Form)	590	Electric	70	5	110	Non Stop+		0	99	
+Grimer (Alola Form)	325	Dark	50	5	100	Last-Ditch Effort		0	99	
+Muk (Alola Form)	326	Dark	70	5	110	Counterattack+		0	99	
+Exeggutor (Alola Form)	429	Grass	70	5	110	Full Power		0	99	
+Marowak (Alola Form)	116	Ghost	60	5	105	Shadow Dance		0	99	
+Rowlet	707	Grass	50	5	100	Rock Shot	Unity Power	0	99	
+Dartrix	708	Grass	60	5	105	Last-Ditch Effort		0	99	
+Decidueye	709	Grass	70	10	125	Super Arrow		0	99	
+Litten	710	Fire	50	10	115	Barrier Shot		0	99	
+Torracat	711	Fire	60	5	105	Last-Ditch Effort		0	99	
+Incineroar	712	Fire	70	10	125	Super Tackle		0	99	
+Popplio	713	Water	50	10	115	Block Shot		0	99	
+Brionne	714	Water	60	5	105	Last-Ditch Effort		0	99	
+Primarina	715	Water	70	10	125	Super Voice		0	99	
+Pikipek	764	Flying	40	5	90	Hitting Streak+		0	99	
+Trumbeak	765	Flying	50	5	100	Block Smash+		0	99	
+Toucannon	766	Flying	60	5	105	Block Smash++		0	99	
+Yungoos	799	Normal	30	5	85	Barrier Break		0	99	
+Gumshoos	800	Normal	60	5	105	Crushing Step		0	99	
+Grubbin	739	Bug	50	5	100	Rock Break		0	99	
+Charjabug	740	Bug	60	10	120	Bug Combo		0	99	
+Vikavolt	741	Bug	70	5	110	Cross Attack+		0	99	
+Crabrawler	742	Fighting	50	5	100	Heavy Hitter		0	99	
+Crabominable	743	Fighting	60	5	105	Counterattack+		0	99	
+Oricorio (Baile Style)	716	Fire	60	5	105	Three Force		0	99	
+Oricorio (Pom-Pom Style)	716	Electric	60	5	105	Three Force		0	99	
+Oricorio (Pa'u Style)	716	Psychic	60	5	105	Three Force		0	99	
+Oricorio (Sensu Style)	716	Ghost	60	5	105	Three Force		0	99	
+Cutiefly	782	Fairy	50	5	100	Crowd Control+		0	99	
+Ribombee	783	Fairy	60	5	105	Paralyze+		0	99	
+Rockruff	729	Rock	40	15	115	Rockify	Unity Power	0	99	
+Lycanroc	730	Rock	60	20	135	Rock Combo		0	99	
+Wishiwashi	719	Water	30	20	120	Crowd Control	Crowd Control+	0	99	
+Mareanie	786	Poison	50	5	100	Constrict		0	99	
+Toxapex	787	Poison	60	10	120	Barrier Shot		0	99	
+Mudbray	736	Ground	50	5	100	Eject		0	99	
+Mudsdale	737	Ground	70	10	125	4 Up	Crushing Step	0	99	
+Dewpider	727	Water	40	5	90	Barrier Bash		0	99	
+Araquanid	728	Water	60	5	105	Shot Out		0	99	
+Fomantis	717	Grass	30	5	85	Mega Boost+		0	99	
+Lurantis	718	Grass	60	5	105	Leaf Combo		0	99	
+Morelull	784	Grass	40	5	90	Stabilize++		0	99	
+Shiinotic	785	Grass	60	5	105	Shot Out		0	99	
+Salandit	723	Poison	50	5	100	Three Force		0	99	
+Salazzle	724	Poison	60	15	125	Poison	Shot Out	0	99	
+Stufful	790	Fighting	50	5	100	Final Effort		0	99	
+Bewear	791	Fighting	70	5	110	Power Hug		0	99	
+Bounsweet	744	Grass	30	5	85	Quirky+		0	99	
+Steenee	745	Grass	40	5	90	Paralysis Combo		0	99	
+Tsareena	746	Grass	70	5	110	Crushing Step		0	99	
+Comfey	798	Fairy	60	5	105	Swap++		0	99	
+Oranguru	721	Psychic	60	5	105	T-Boost		0	99	
+Passimian	722	Fighting	60	5	105	Crowd Control		0	99	
+Wimpod	796	Bug	30	5	85	Super Cheer		0	99	
+Golisopod	797	Bug	70	20	140	Blindside		0	99	
+Sandygast	779	Ground	50	5	100	Sand Sport		0	99	
+Palossand	780	Ground	60	5	105	Eject++		0	99	
+Pyukumuku	738	Water	60	5	105	Astonish		0	99	
+Type: Null	775	Normal	70	10	125	Block Off		0	99	
+Silvally	776	Normal	80	20	145	Typeless Combo		0	99	
+Minior	792	Rock	60	10	120	Nosedive		0	99	
+Komala	720	Normal	60	10	120	Nap Time		0	99	
+Turtonator	777	Fire	60	7	111	Block Shot		0	99	
+Togedemaru	725	Electric	60	5	105	Counterattack+		0	99	
+Mimikyu	726	Ghost	60	15	125	Spookify+		0	99	
+Bruxish	801	Water	60	10	120	Mega Boost++		0	99	
+Drampa	767	Dragon	60	5	105	Block Smash+		0	99	
+Dhelmise	778	Ghost	70	5	110	Hitting Streak+	Shadow Shock	0	99	
+Jangmo-o	793	Dragon	50	5	100	Final Effort		0	99	
+Hakamo-o	794	Dragon	60	5	105	Rock Shot		0	99	
+Kommo-o	795	Dragon	80	20	145	Crowd Control+		0	99	
+Tapu Koko	757	Electric	70	6	113	Eject++	Typeless Combo	0	99	
+Tapu Lele	758	Psychic	70	6	113	Stabilize++	Typeless Combo	0	99	
+Tapu Bulu	759	Grass	70	6	113	Block Smash++	Typeless Combo	0	99	
+Tapu Fini	760	Water	70	6	113	Barrier Bash++	Typeless Combo	0	99	
+Cosmog	731	Psychic	30	5	85	Quirky++		0	99	
+Cosmoem	732	Psychic	40	5	90	Quirky++		0	99	
+Solgaleo	733	Steel	80	20	145	Metal Combo		0	99	
+Lunala	734	Ghost	80	20	145	Phantom Combo		0	99	
+Nihilego	768	Poison	70	7	116	Possession	Beast Power	0	99	
+Buzzwole	769	Fighting	70	7	116	Demolish	Beast Power	0	99	
+Pheromosa	770	Bug	70	7	116	Fascinate	Beast Power	0	99	
+Xurkitree	771	Electric	70	7	116	Conduction	Beast Power	0	99	
+Celesteela	772	Steel	70	7	116	Eliminate	Beast Power	0	99	
+Kartana	773	Grass	70	7	116	Extinction	Beast Power	0	99	
+Guzzlord	774	Dark	70	7	116	Big Eater	Beast Power	0	99	
+Necrozma	781	Psychic	80	20	145	Destruction		0	99	
+Magearna	735	Fairy	80	10	130	Calm Down		0	99	
+Marshadow	802	Ghost	80	20	145	Hide and Seek		0	99	
+Mega Venusaur	3	Grass	60	20	135	Vitality Drain		12	3	Erases all icons horizontally from the match.
+Mega Charizard X	6	Dragon	60	20	135	Burn	Unity Power	16	13	Erases icons in an X-shaped pattern.
+Mega Charizard Y	6	Fire	60	20	135	Burn	Unity Power	13	3	Erases icons in a Y-shaped pattern.
+Mega Blastoise	9	Water	60	20	135	Stabilize+		12	4	Erases icons within two spaces of the match.
+Mega Beedrill	425	Poison	60	5	105	Block Smash	Swap++	15	12	Erases icons in a 3x3 area at a spot you tap.
+Mega Pidgeot	12	Flying	60	20	135	Flap		18	12	Erases icons in a horizontal V-shaped pattern.
+Mega Alakazam	486	Psychic	70	5	110	Risk-Taker		18	9	Erases up to 10 Rocks, Blocks, or Coins, dealing 50 extra damage for each erased.
+Mega Slowbro	82	Psychic	60	20	135	Barrier Bash		16	6	Adds a Mega Slowbro above every other Mega Slowbro.
+Mega Gengar	114	Ghost	70	5	110	Power of 5	Spookify	11	1	Erases all Mega Gengar.
+Mega Kangaskhan	57	Normal	50	10	115	Power of 4	Rock Break++	11	8	Erases all icons horizontally from the match.
+Mega Pinsir	233	Bug	70	10	125	Power of 4	Bug Combo	26	20	Erases icons in + shapes at two spots you tap.
+Mega Gyarados	478	Water	70	20	140	Power of 5+	Mega Boost	18	12	Erases icons with two random lightning streaks from top to bottom.
+Mega Aerodactyl	148	Rock	60	5	105	Cloud Clear	Swap++	23	14	Erases up to 10 Rocks, Blocks, or Coins, dealing 50 extra damage for each erased.
+Mega Mewtwo X	158	Fighting	80	20	145	Swap	Power of 4/Psyburst	15	9	Replaces up to three Fighting-type Pokémon (excluding Mega Mewtwo X) with Mega Mewtwo X.
+Mega Mewtwo Y	158	Psychic	80	20	145	Swap	Power of 4/Psyburst	23	14	Erases up to 10 of a Psychic-type Pokémon (except Mega Mewtwo Y).
+Mega Ampharos	38	Electric	70	5	110	Dancing Dragons	Mega Boost/Paralysis Combo	18	9	Erases icons with two random lightning streaks from top to bottom.
+Mega Steelix	181	Steel	70	5	110	Steely Resolve	Flash Mob	21	11	Erases up to 10 Blocks, dealing 100 damage for each erased.
+Mega Scizor	139	Bug	70	20	140	Swarm	Swap++	18	12	Erases icons with two zigzag lightning streaks from left to right.
+Mega Heracross	47	Bug	70	5	110	Crowd Control	Mega Boost+	16	8	Adds a Mega Heracross to the left of every other Mega Heracross.
+Mega Houndoom	490	Fire	70	5	110	Risk-Taker		16	7	Erases up to 10 icons in Barriers, dealing 100 extra damage for each erased.
+Mega Tyranitar	210	Rock	80	5	115	Eject	Crushing Step	30	15	Erases icons in + shapes at three spots you tap.
+Mega Sceptile	91	Grass	70	5	110	Vitality Drain	Swap++	12	6	Replaces up to three Grass-type Pokémon (excluding Mega Sceptile) with Mega Sceptile.
+Mega Blaziken	94	Fire	70	5	110	Hitting Streak	Swap++	12	6	Replaces up to three Fire-type Pokémon (excluding Mega Blaziken) with Mega Blaziken.
+Mega Swampert	97	Water	70	5	110	Hitting Streak	Swap++	12	6	Replaces up to three Water-type Pokémon (excluding Mega Swampert) with Mega Swampert.
+Mega Gardevoir	298	Fairy	70	5	110	Swap	Mind Zap	15	9	Erases all icons horizontally from the match.
+Mega Sableye	74	Dark	50	20	130	Risk-Taker	Swap+	16	10	Erases icons in an O-shaped pattern.
+Mega Mawile	111	Steel	50	10	115	Steely Resolve	Risk-Taker	18	8	Erases icons with three lines from upper right to lower left.
+Mega Aggron	393	Steel	70	10	125	Eject	Crushing Step	18	5	Erases icons in + shapes at three spots you tap.
+Mega Medicham	314	Fighting	60	20	135	Mega Boost		21	12	Erases icons in a group at the center.
+Mega Manectric	252	Electric	60	5	105	Hitting Streak		20	14	Erases icons with two zigzag lightning streaks from top to bottom.
+Mega Sharpedo	228	Dark	60	10	120	Eject	Mega Boost	22	13	Adds a Mega Sharpedo above every other Mega Sharpedo.
+Mega Camerupt	375	Ground	70	5	110	Power of 4		18	7	Erases icons in + shapes at two spots you tap.
+Mega Altaria	44	Dragon	60	10	120	Eject	Nosedive	16	10	Erases icons within two spaces of the match.
+Mega Banette	212	Ghost	60	10	120	Mega Boost	Mega Boost++	27	15	Erases up to 10 of a Ghost-type Pokémon (except Mega Banette).
+Mega Absol	33	Dark	60	20	135	Mind Zap		18	8	Erases icons with three lines from upper right to lower left.
+Mega Glalie	125	Ice	60	5	105	Chill		16	6	Erases icons in a V-shaped pattern.
+Mega Salamence	195	Flying	80	5	115	Hitting Streak	Mega Boost	22	10	Erases up to 10 of a Flying-type Pokémon (except Mega Salamence).
+Mega Metagross	641	Steel	80	10	130	Cross Attack	Cross Attack+	17	8	Erases icons in an X-shaped pattern.
+Mega Latias	315	Dragon	80	5	115	Swap	Hitting Streak+	22	13	Erases icons with two random lightning streaks from left to right.
+Mega Latios	316	Dragon	80	5	115	Counterattack	Hitting Streak+	19	13	Erases icons with two zigzag lightning streaks from left to right.
+Mega Rayquaza	162	Dragon	70	5	110	Dragon Talon	Shot Out	33	20	Erases up to 10 of a non-Dragon-type Pokémon.
+Mega Lopunny	55	Normal	50	10	115	Opportunist	Swap++	11	8	Erases all icons vertically from the match.
+Mega Garchomp	281	Ground	80	20	145	Dragon Talon	Mega Boost+	24	14	Erases icons with three lines from upper left to lower right.
+Mega Lucario	78	Fighting	70	20	140	Pummel		14	4	Erases all icons vertically from the match.
+Mega Abomasnow	382	Ice	60	5	105	Heavy Hitter	Mind Zap	13	7	Erases all icons vertically from the match.
+Mega Gallade	299	Fighting	70	15	130	Block Smash+		16	10	Erases icons with two zigzag lightning streaks from top to bottom.
+Mega Audino	32	Normal	50	15	120	Opportunist	Mega Boost+	12	3	Erases icons within one space of the match.
+Mega Diancie	307	Fairy	70	15	130	Barrier Bash+	Mega Boost+	19	10	Erases up to 10 icons in Barriers, dealing 100 extra damage for each erased.
+Mega Gengar (Spooky)	114	Poison	70	5	110	Vitality Drain	Poison	14	7	Replaces up to 3 Poison-type Pokémon (excluding Mega Gengar (Spooky)) with Mega Gengar (Spooky).
+Mega Gyarados (Shiny)	478	Water	70	5	110	L-Boost		19	10	Erases all Mega Gyarados (Shiny).
+Mega Sableye (Spooky)	74	Ghost	50	10	115	Prank	Swap++	14	7	Replaces up to three Ghost-type Pokémon (excluding Mega Sableye (Spooky)) with Mega Sableye (Spooky).
+Mega Glalie (Winking)	125	Ice	60	5	105	Cross Attack		29	20	Erases up to 10 Blocks, dealing 100 damage for each erased.
+Mega Rayquaza (Shiny)	162	Flying	80	5	115	Dragon Talon		24	15	Erases icons in + shapes at two spots you tap.
+Mega Audino (Winking)	32	Normal	50	15	120	Mind Zap		22	15	Erases up to 10 of a Normal-type Pokémon (except Mega Audino (Winking)).
+Mega Charizard X (Shiny)	6	Dragon	60	5	105	Nosedive		20	15	Erases icons in + shapes at two spots you tap.
+Mega Charizard Y (Shiny)	6	Flying	60	5	105	Nosedive		11	5	Erases icons with two zigzag lightning streaks from top to bottom.
+Mega Gengar (Shiny)	114	Ghost	70	5	110	Blindside		11	3	Erases icons in a group at the center.
+Mega Mewtwo X (Shiny)	158	Fighting	80	5	115	Mega Boost		12	3	Erases all Mega Mewtwo X (Shiny).
+Mega Mewtwo Y (Shiny)	158	Psychic	80	5	115	Mega Boost		17	10	Erases icons in a Y-shaped pattern.
+Mega Tyranitar (Shiny)	210	Dark	80	5	115	Barrier Shot		12	4	Erases up to 10 icons in Barriers, dealing 100 extra damage for each erased.
+Mega Gardevoir (Shiny)	298	Fairy	70	5	110	Stabilize++		10	4	Erases icons in an O-shaped pattern.
+Mega Metagross (Shiny)	641	Steel	80	10	130	Hammering Streak		24	18	Erases up to 10 of a Steel-type Pokémon (except Mega Metagross (Shiny)).
+Mega Diancie (Shiny)	307	Fairy	70	15	130	Block Shot		14	5	Erases up to 10 Rocks, Blocks, or Coins, dealing 50 extra damage for each erased.

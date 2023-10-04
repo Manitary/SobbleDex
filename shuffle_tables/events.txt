@@ -1,0 +1,280 @@
+0	Monthly	Espurr/Bulbasaur/Charmander/Squirtle/Audino	1/2/3/4/5	Monthly	1	0	20XX/XX/01/06/00	20XX/XX/04/06/00	3 days	Costs [Jewel] x1 to unlock 1 time	Stage is available to attempt 5 times before it disappears	20.00/20.00/20.00/20.00/20.00
+1	Monthly	Espurr/Bulbasaur/Charmander/Squirtle/Audino	6/7/8/9/10	Monthly	15	0	20XX/XX/15/06/00	20XX/XX/18/06/00	3 days	Costs [Jewel] x2 to unlock 1 time	Stage is available to attempt 5 times before it disappears	20.00/20.00/20.00/20.00/20.00
+2	Daily	Jirachi/Jirachi/Jirachi/Jirachi/Jirachi/Jirachi/Jirachi	12/12/12/12/12/12/12	Yearly	1	6	20XX/01/06/06/00	20XX/01/09/06/00	3 days	Nothing	Stage is available to attempt 1 time before it disappears	Nothing
+3	Daily	Pikachu (Enamored)/Pikachu (Enamored)/Pikachu (Enamored)/Pikachu (Enamored)/Pikachu (Enamored)/Pikachu (Enamored)/Pikachu (Enamored)	0/0/0/0/0/0/0	Yearly	2	13	20XX/02/13/06/00	20XX/02/16/06/00	3 days	Nothing	Stage is available to attempt 1 time before it disappears	Nothing
+4	Daily	Shaymin (Land Forme)/Shaymin (Land Forme)/Shaymin (Land Forme)/Shaymin (Land Forme)/Shaymin (Land Forme)/Shaymin (Land Forme)/Shaymin (Land Forme)	11/11/11/11/11/11/11	Yearly	2	18	20XX/02/18/06/00	20XX/02/21/06/00	3 days	Nothing	Stage is available to attempt 1 time before it disappears	Nothing
+5	Daily	Jirachi/Jirachi/Jirachi/Jirachi/Jirachi/Jirachi/Jirachi	12/12/12/12/12/12/12	Yearly	7	6	20XX/07/06/06/00	20XX/07/09/06/00	3 days	Nothing	Stage is available to attempt 1 time before it disappears	Nothing
+6	Daily	Sableye (Spooky)/Pikachu (Spooky)/Pumpkaboo (Spooky)/Gourgeist (Spooky)/Gengar (Spooky)	17/13/14/15/16	Yearly	10	17	20XX/10/17/06/00	20XX/10/31/06/00	14 days	Nothing	Nothing	Nothing
+7	Daily	Delibird (Holiday)/Pikachu (Holiday)/Vanillite (Holiday)/Snover (Holiday)/Cubchoo (Holiday)	22/18/19/20/21	Yearly	12	11	20XX/12/11/06/00	20XX/12/25/06/00	14 days	Nothing	Nothing	Nothing
+8	Meowth	Meowth	23	Weekly	5	0	Friday	Sunday	3 days	Costs [Jewel] x1 to unlock 3 times	Stage is available to attempt 4 times before it disappears	Nothing
+9	Challenge	Eevee	25	Weekly	2	4	Tuesday	Thursday	3 days	Costs [Jewel] x1 to unlock 1 time	Stage is available to attempt 15 times before it disappears	Nothing
+10	Challenge	Victini	24	Weekly	5	1	Friday	Monday	4 days	Costs [Jewel] x1 to unlock 1 time	Stage is available to attempt 15 times before it disappears	Nothing
+11	Daily	Rotom (Fan Rotom)/Rotom (Frost Rotom)/Rotom (Heat Rotom)/Rotom (Wash Rotom)/Rotom (Mow Rotom)	30/26/27/28/29	Rotation	0	0	2018/02/13/06/00	2018/02/20/06/00	7 days	Nothing	Nothing	Nothing
+12	Daily	Druddigon/Pachirisu/Sigilyph/Tropius/Farfetch'd	35/31/32/33/34	Rotation	1	0	2018/02/20/06/00	2018/02/27/06/00	7 days	Nothing	Nothing	Nothing
+13	Daily	Spiritomb/Girafarig/Kecleon/Shuckle/Relicanth	40/36/37/38/39	Rotation	2	0	2018/02/27/06/00	2018/03/06/06/00	7 days	Nothing	Nothing	Nothing
+14	Daily	Clefairy (Winking)/Charmander (Winking)/Squirtle (Winking)/Bulbasaur (Winking)/Jigglypuff (Winking)	45/41/42/43/44	Rotation	3	0	2018/03/06/06/00	2018/03/13/06/00	7 days	Nothing	Nothing	Nothing
+15	Daily	Seviper/Wynaut/Torkoal/Zangoose/Luvdisc	50/46/47/48/49	Rotation	4	0	2018/03/13/06/00	2018/03/20/06/00	7 days	Nothing	Nothing	Nothing
+16	Daily	Maractus/Dunsparce/Qwilfish/Durant/Heatmor	55/51/52/53/54	Rotation	5	0	2018/03/20/06/00	2018/03/27/06/00	7 days	Nothing	Nothing	Nothing
+17	Daily	Lunatone/Tyrogue/Castform/Mantyke/Solrock	60/58/59/56/57	Rotation	6	0	2018/03/27/06/00	2018/04/03/06/00	7 days	Nothing	Nothing	Nothing
+18	Daily	Pikachu (Sleeping)/Torchic (Winking)/Treecko (Winking)/Mudkip (Winking)/Castform (Winking)	65/61/62/63/64	Rotation	7	0	2018/04/03/06/00	2018/04/10/06/00	7 days	Nothing	Nothing	Nothing
+19	Daily	Oricorio (Pom-Pom Style)/Wishiwashi/Komala/Fomantis/Torracat	70/66/67/68/69	Rotation	8	0	2018/04/10/06/00	2018/04/17/06/00	7 days	Nothing	Nothing	Nothing
+20	Daily	Oricorio (Pa'u Style)/Grimer (Alola Form)/Dewpider/Sandshrew (Alola Form)/Brionne	75/71/72/73/74	Rotation	9	0	2018/04/17/06/00	2018/04/24/06/00	7 days	Nothing	Nothing	Nothing
+21	Daily	Oricorio (Baile Style)/Pyukumuku/Oricorio (Sensu Style)/Mudbray/Dartrix	80/76/77/78/79	Rotation	10	0	2018/04/24/06/00	2018/05/01/06/00	7 days	Nothing	Nothing	Nothing
+22	Daily	Slurpuff (Winking)/Audino (Winking)/Togetic (Winking)/Carbink (Winking)/Swirlix (Winking)	85/81/82/83/84	Rotation	11	0	2018/05/01/06/00	2018/05/08/06/00	7 days	Nothing	Nothing	Nothing
+23	Daily	Rotom (Fan Rotom)/Rotom (Frost Rotom)/Rotom (Heat Rotom)/Rotom (Wash Rotom)/Rotom (Mow Rotom)	30/26/27/28/29	Rotation	12	0	2018/05/08/06/00	2018/05/15/06/00	7 days	Nothing	Nothing	Nothing
+24	Daily	Druddigon/Pachirisu/Sigilyph/Tropius/Farfetch'd	35/31/32/33/34	Rotation	13	0	2018/05/15/06/00	2018/05/22/06/00	7 days	Nothing	Nothing	Nothing
+25	Daily	Spiritomb/Girafarig/Kecleon/Shuckle/Relicanth	40/36/37/38/39	Rotation	14	0	2018/05/22/06/00	2018/05/29/06/00	7 days	Nothing	Nothing	Nothing
+26	Daily	Clefairy (Winking)/Charmander (Winking)/Squirtle (Winking)/Bulbasaur (Winking)/Jigglypuff (Winking)	45/41/42/43/44	Rotation	15	0	2018/05/29/06/00	2018/06/05/06/00	7 days	Nothing	Nothing	Nothing
+27	Daily	Seviper/Wynaut/Torkoal/Zangoose/Luvdisc	50/46/47/48/49	Rotation	16	0	2018/06/05/06/00	2018/06/12/06/00	7 days	Nothing	Nothing	Nothing
+28	Daily	Maractus/Dunsparce/Qwilfish/Durant/Heatmor	55/51/52/53/54	Rotation	17	0	2018/06/12/06/00	2018/06/19/06/00	7 days	Nothing	Nothing	Nothing
+29	Daily	Lunatone/Tyrogue/Castform/Mantyke/Solrock	60/58/59/56/57	Rotation	18	0	2018/06/19/06/00	2018/06/26/06/00	7 days	Nothing	Nothing	Nothing
+30	Daily	Pikachu (Sleeping)/Torchic (Winking)/Treecko (Winking)/Mudkip (Winking)/Castform (Winking)	65/61/62/63/64	Rotation	19	0	2018/06/26/06/00	2018/07/03/06/00	7 days	Nothing	Nothing	Nothing
+31	Daily	Oricorio (Pom-Pom Style)/Wishiwashi/Komala/Fomantis/Torracat	70/66/67/68/69	Rotation	20	0	2018/07/03/06/00	2018/07/10/06/00	7 days	Nothing	Nothing	Nothing
+32	Daily	Oricorio (Pa'u Style)/Grimer (Alola Form)/Dewpider/Sandshrew (Alola Form)/Brionne	75/71/72/73/74	Rotation	21	0	2018/07/10/06/00	2018/07/17/06/00	7 days	Nothing	Nothing	Nothing
+33	Daily	Oricorio (Baile Style)/Pyukumuku/Oricorio (Sensu Style)/Mudbray/Dartrix	80/76/77/78/79	Rotation	22	0	2018/07/17/06/00	2018/07/24/06/00	7 days	Nothing	Nothing	Nothing
+34	Daily	Slurpuff (Winking)/Audino (Winking)/Togetic (Winking)/Carbink (Winking)/Swirlix (Winking)	85/81/82/83/84	Rotation	23	0	2018/07/24/06/00	2018/07/31/06/00	7 days	Nothing	Nothing	Nothing
+35	Competitive	Mega Banette	86	Rotation	0	0	2018/02/13/06/00	2018/02/20/05/00	6 days, 23 hours	Nothing	Nothing	Nothing
+36	Competitive	Mega Banette	86	Rotation	0	0	2018/02/13/06/00	2018/02/20/05/00	6 days, 23 hours	Nothing	Nothing	Nothing
+37	Competitive	Mega Banette	86	Rotation	0	0	2018/02/13/06/00	2018/02/20/05/00	6 days, 23 hours	Nothing	Nothing	Nothing
+38	Competitive	Mega Garchomp	87	Rotation	2	0	2018/02/27/06/00	2018/03/06/05/00	6 days, 23 hours	Nothing	Nothing	Nothing
+39	Competitive	Mega Garchomp	87	Rotation	2	0	2018/02/27/06/00	2018/03/06/05/00	6 days, 23 hours	Nothing	Nothing	Nothing
+40	Competitive	Mega Garchomp	87	Rotation	2	0	2018/02/27/06/00	2018/03/06/05/00	6 days, 23 hours	Nothing	Nothing	Nothing
+41	Competitive	Mega Steelix	88	Rotation	4	0	2018/03/13/06/00	2018/03/20/05/00	6 days, 23 hours	Nothing	Nothing	Nothing
+42	Competitive	Mega Steelix	88	Rotation	4	0	2018/03/13/06/00	2018/03/20/05/00	6 days, 23 hours	Nothing	Nothing	Nothing
+43	Competitive	Mega Steelix	88	Rotation	4	0	2018/03/13/06/00	2018/03/20/05/00	6 days, 23 hours	Nothing	Nothing	Nothing
+44	Competitive	Mega Manectric	89	Rotation	6	0	2018/03/27/06/00	2018/04/03/05/00	6 days, 23 hours	Nothing	Nothing	Nothing
+45	Competitive	Mega Manectric	89	Rotation	6	0	2018/03/27/06/00	2018/04/03/05/00	6 days, 23 hours	Nothing	Nothing	Nothing
+46	Competitive	Mega Manectric	89	Rotation	6	0	2018/03/27/06/00	2018/04/03/05/00	6 days, 23 hours	Nothing	Nothing	Nothing
+47	Competitive	Mega Gyarados	90	Rotation	8	0	2018/04/10/06/00	2018/04/17/05/00	6 days, 23 hours	Nothing	Nothing	Nothing
+48	Competitive	Mega Gyarados	90	Rotation	8	0	2018/04/10/06/00	2018/04/17/05/00	6 days, 23 hours	Nothing	Nothing	Nothing
+49	Competitive	Mega Gyarados	90	Rotation	8	0	2018/04/10/06/00	2018/04/17/05/00	6 days, 23 hours	Nothing	Nothing	Nothing
+50	Competitive	Mega Alakazam	91	Rotation	10	0	2018/04/24/06/00	2018/05/01/05/00	6 days, 23 hours	Nothing	Nothing	Nothing
+51	Competitive	Mega Alakazam	91	Rotation	10	0	2018/04/24/06/00	2018/05/01/05/00	6 days, 23 hours	Nothing	Nothing	Nothing
+52	Competitive	Mega Alakazam	91	Rotation	10	0	2018/04/24/06/00	2018/05/01/05/00	6 days, 23 hours	Nothing	Nothing	Nothing
+53	Competitive	Mega Pinsir	97	Rotation	12	0	2018/05/08/06/00	2018/05/15/05/00	6 days, 23 hours	Nothing	Nothing	Nothing
+54	Competitive	Mega Pinsir	97	Rotation	12	0	2018/05/08/06/00	2018/05/15/05/00	6 days, 23 hours	Nothing	Nothing	Nothing
+55	Competitive	Mega Pinsir	97	Rotation	12	0	2018/05/08/06/00	2018/05/15/05/00	6 days, 23 hours	Nothing	Nothing	Nothing
+56	Competitive	Mega Camerupt	92	Rotation	14	0	2018/05/22/06/00	2018/05/29/05/00	6 days, 23 hours	Nothing	Nothing	Nothing
+57	Competitive	Mega Camerupt	92	Rotation	14	0	2018/05/22/06/00	2018/05/29/05/00	6 days, 23 hours	Nothing	Nothing	Nothing
+58	Competitive	Mega Camerupt	92	Rotation	14	0	2018/05/22/06/00	2018/05/29/05/00	6 days, 23 hours	Nothing	Nothing	Nothing
+59	Competitive	Mega Beedrill	93	Rotation	16	0	2018/06/05/06/00	2018/06/12/05/00	6 days, 23 hours	Nothing	Nothing	Nothing
+60	Competitive	Mega Beedrill	93	Rotation	16	0	2018/06/05/06/00	2018/06/12/05/00	6 days, 23 hours	Nothing	Nothing	Nothing
+61	Competitive	Mega Beedrill	93	Rotation	16	0	2018/06/05/06/00	2018/06/12/05/00	6 days, 23 hours	Nothing	Nothing	Nothing
+62	Competitive	Mega Houndoom	94	Rotation	18	0	2018/06/19/06/00	2018/06/26/05/00	6 days, 23 hours	Nothing	Nothing	Nothing
+63	Competitive	Mega Houndoom	94	Rotation	18	0	2018/06/19/06/00	2018/06/26/05/00	6 days, 23 hours	Nothing	Nothing	Nothing
+64	Competitive	Mega Houndoom	94	Rotation	18	0	2018/06/19/06/00	2018/06/26/05/00	6 days, 23 hours	Nothing	Nothing	Nothing
+65	Competitive	Mega Gardevoir	95	Rotation	20	0	2018/07/03/06/00	2018/07/10/05/00	6 days, 23 hours	Nothing	Nothing	Nothing
+66	Competitive	Mega Gardevoir	95	Rotation	20	0	2018/07/03/06/00	2018/07/10/05/00	6 days, 23 hours	Nothing	Nothing	Nothing
+67	Competitive	Mega Gardevoir	95	Rotation	20	0	2018/07/03/06/00	2018/07/10/05/00	6 days, 23 hours	Nothing	Nothing	Nothing
+68	Competitive	Mega Charizard X	96	Rotation	22	0	2018/07/17/06/00	2018/07/24/05/00	6 days, 23 hours	Nothing	Nothing	Nothing
+69	Competitive	Mega Charizard X	96	Rotation	22	0	2018/07/17/06/00	2018/07/24/05/00	6 days, 23 hours	Nothing	Nothing	Nothing
+70	Competitive	Mega Charizard X	96	Rotation	22	0	2018/07/17/06/00	2018/07/24/05/00	6 days, 23 hours	Nothing	Nothing	Nothing
+71	Challenge	Xerneas	253	Rotation	1	0	2018/02/20/06/00	2018/02/27/06/00	7 days	Nothing	Nothing	Nothing
+72	Challenge	Yveltal	254	Rotation	3	0	2018/03/06/06/00	2018/03/13/06/00	7 days	Nothing	Nothing	Nothing
+73	Challenge	Genesect	255	Rotation	5	0	2018/03/20/06/00	2018/03/27/06/00	7 days	Nothing	Nothing	Nothing
+74	Challenge	Mewtwo (Shiny)	256	Rotation	7	0	2018/04/03/06/00	2018/04/10/06/00	7 days	Nothing	Nothing	Nothing
+75	Challenge	Tyranitar (Shiny)	257	Rotation	9	0	2018/04/17/06/00	2018/04/24/06/00	7 days	Nothing	Nothing	Nothing
+76	Challenge	Salamence	258	Rotation	11	0	2018/05/01/06/00	2018/05/08/06/00	7 days	Nothing	Nothing	Nothing
+77	Challenge	Rayquaza	259	Rotation	13	0	2018/05/15/06/00	2018/05/22/06/00	7 days	Nothing	Nothing	Nothing
+78	Challenge	Luxray	260	Rotation	15	0	2018/05/29/06/00	2018/06/05/06/00	7 days	Nothing	Nothing	Nothing
+79	Challenge	Hydreigon	261	Rotation	17	0	2018/06/12/06/00	2018/06/19/06/00	7 days	Nothing	Nothing	Nothing
+80	Challenge	Porygon-Z	262	Rotation	19	0	2018/06/26/06/00	2018/07/03/06/00	7 days	Nothing	Nothing	Nothing
+81	Challenge	Goodra	263	Rotation	21	0	2018/07/10/06/00	2018/07/17/06/00	7 days	Nothing	Nothing	Nothing
+82	Challenge	Hoopa (Hoopa Unbound)	264	Rotation	23	0	2018/07/24/06/00	2018/07/31/06/00	7 days	Nothing	Nothing	Nothing
+83	Daily	Pinsir/Pinsir/Pinsir/Pinsir/Pinsir/Pinsir/Pinsir	98/98/98/98/98/98/98	Rotation	0	0	2018/02/13/06/00	2018/02/20/06/00	7 days	Nothing	Stage is available to attempt 1 time before it disappears	Nothing
+84	Daily	Tornadus (Incarnate Forme)/Tornadus (Incarnate Forme)/Tornadus (Incarnate Forme)/Tornadus (Incarnate Forme)/Tornadus (Incarnate Forme)/Tornadus (Incarnate Forme)/Tornadus (Incarnate Forme)	99/99/99/99/99/99/99	Rotation	1	0	2018/02/20/06/00	2018/02/27/06/00	7 days	Nothing	Stage is available to attempt 1 time before it disappears	Nothing
+85	Daily	Frillish (Female)/Frillish (Female)/Frillish (Female)/Frillish (Female)/Frillish (Female)/Frillish (Female)/Frillish (Female)	714/714/714/714/714/714/714	Rotation	2	0	2018/02/27/06/00	2018/03/06/06/00	7 days	Nothing	Stage is available to attempt 1 time before it disappears	Nothing
+86	Daily	Thundurus (Incarnate Forme)/Thundurus (Incarnate Forme)/Thundurus (Incarnate Forme)/Thundurus (Incarnate Forme)/Thundurus (Incarnate Forme)/Thundurus (Incarnate Forme)/Thundurus (Incarnate Forme)	100/100/100/100/100/100/100	Rotation	3	0	2018/03/06/06/00	2018/03/13/06/00	7 days	Nothing	Stage is available to attempt 1 time before it disappears	Nothing
+87	Daily	Jellicent (Female)/Jellicent (Female)/Jellicent (Female)/Jellicent (Female)/Jellicent (Female)/Jellicent (Female)/Jellicent (Female)	715/715/715/715/715/715/715	Rotation	4	0	2018/03/13/06/00	2018/03/20/06/00	7 days	Nothing	Stage is available to attempt 1 time before it disappears	Nothing
+88	Daily	Landorus (Incarnate Forme)/Landorus (Incarnate Forme)/Landorus (Incarnate Forme)/Landorus (Incarnate Forme)/Landorus (Incarnate Forme)/Landorus (Incarnate Forme)/Landorus (Incarnate Forme)	101/101/101/101/101/101/101	Rotation	5	0	2018/03/20/06/00	2018/03/27/06/00	7 days	Nothing	Stage is available to attempt 1 time before it disappears	Nothing
+89	Daily	Cosmog/Cosmog/Cosmog/Cosmog/Cosmog/Cosmog/Cosmog	102/102/102/102/102/102/102	Rotation	6	0	2018/03/27/06/00	2018/04/03/06/00	7 days	Nothing	Stage is available to attempt 1 time before it disappears	Nothing
+90	Daily	Cosmoem/Cosmoem/Cosmoem/Cosmoem/Cosmoem/Cosmoem/Cosmoem	103/103/103/103/103/103/103	Rotation	7	0	2018/04/03/06/00	2018/04/10/06/00	7 days	Nothing	Stage is available to attempt 1 time before it disappears	Nothing
+91	Daily	Pinsir/Pinsir/Pinsir/Pinsir/Pinsir/Pinsir/Pinsir	98/98/98/98/98/98/98	Rotation	8	0	2018/04/10/06/00	2018/04/17/06/00	7 days	Nothing	Stage is available to attempt 1 time before it disappears	Nothing
+92	Daily	Tornadus (Incarnate Forme)/Tornadus (Incarnate Forme)/Tornadus (Incarnate Forme)/Tornadus (Incarnate Forme)/Tornadus (Incarnate Forme)/Tornadus (Incarnate Forme)/Tornadus (Incarnate Forme)	99/99/99/99/99/99/99	Rotation	9	0	2018/04/17/06/00	2018/04/24/06/00	7 days	Nothing	Stage is available to attempt 1 time before it disappears	Nothing
+93	Daily	Frillish (Female)/Frillish (Female)/Frillish (Female)/Frillish (Female)/Frillish (Female)/Frillish (Female)/Frillish (Female)	714/714/714/714/714/714/714	Rotation	10	0	2018/04/24/06/00	2018/05/01/06/00	7 days	Nothing	Stage is available to attempt 1 time before it disappears	Nothing
+94	Daily	Thundurus (Incarnate Forme)/Thundurus (Incarnate Forme)/Thundurus (Incarnate Forme)/Thundurus (Incarnate Forme)/Thundurus (Incarnate Forme)/Thundurus (Incarnate Forme)/Thundurus (Incarnate Forme)	100/100/100/100/100/100/100	Rotation	11	0	2018/05/01/06/00	2018/05/08/06/00	7 days	Nothing	Stage is available to attempt 1 time before it disappears	Nothing
+95	Daily	Jellicent (Female)/Jellicent (Female)/Jellicent (Female)/Jellicent (Female)/Jellicent (Female)/Jellicent (Female)/Jellicent (Female)	715/715/715/715/715/715/715	Rotation	12	0	2018/05/08/06/00	2018/05/15/06/00	7 days	Nothing	Stage is available to attempt 1 time before it disappears	Nothing
+96	Daily	Landorus (Incarnate Forme)/Landorus (Incarnate Forme)/Landorus (Incarnate Forme)/Landorus (Incarnate Forme)/Landorus (Incarnate Forme)/Landorus (Incarnate Forme)/Landorus (Incarnate Forme)	101/101/101/101/101/101/101	Rotation	13	0	2018/05/15/06/00	2018/05/22/06/00	7 days	Nothing	Stage is available to attempt 1 time before it disappears	Nothing
+97	Daily	Cosmog/Cosmog/Cosmog/Cosmog/Cosmog/Cosmog/Cosmog	102/102/102/102/102/102/102	Rotation	14	0	2018/05/22/06/00	2018/05/29/06/00	7 days	Nothing	Stage is available to attempt 1 time before it disappears	Nothing
+98	Daily	Cosmoem/Cosmoem/Cosmoem/Cosmoem/Cosmoem/Cosmoem/Cosmoem	103/103/103/103/103/103/103	Rotation	15	0	2018/05/29/06/00	2018/06/05/06/00	7 days	Nothing	Stage is available to attempt 1 time before it disappears	Nothing
+99	Daily	Pinsir/Pinsir/Pinsir/Pinsir/Pinsir/Pinsir/Pinsir	98/98/98/98/98/98/98	Rotation	16	0	2018/06/05/06/00	2018/06/12/06/00	7 days	Nothing	Stage is available to attempt 1 time before it disappears	Nothing
+100	Daily	Tornadus (Incarnate Forme)/Tornadus (Incarnate Forme)/Tornadus (Incarnate Forme)/Tornadus (Incarnate Forme)/Tornadus (Incarnate Forme)/Tornadus (Incarnate Forme)/Tornadus (Incarnate Forme)	99/99/99/99/99/99/99	Rotation	17	0	2018/06/12/06/00	2018/06/19/06/00	7 days	Nothing	Stage is available to attempt 1 time before it disappears	Nothing
+101	Daily	Frillish (Female)/Frillish (Female)/Frillish (Female)/Frillish (Female)/Frillish (Female)/Frillish (Female)/Frillish (Female)	714/714/714/714/714/714/714	Rotation	18	0	2018/06/19/06/00	2018/06/26/06/00	7 days	Nothing	Stage is available to attempt 1 time before it disappears	Nothing
+102	Daily	Thundurus (Incarnate Forme)/Thundurus (Incarnate Forme)/Thundurus (Incarnate Forme)/Thundurus (Incarnate Forme)/Thundurus (Incarnate Forme)/Thundurus (Incarnate Forme)/Thundurus (Incarnate Forme)	100/100/100/100/100/100/100	Rotation	19	0	2018/06/26/06/00	2018/07/03/06/00	7 days	Nothing	Stage is available to attempt 1 time before it disappears	Nothing
+103	Daily	Jellicent (Female)/Jellicent (Female)/Jellicent (Female)/Jellicent (Female)/Jellicent (Female)/Jellicent (Female)/Jellicent (Female)	715/715/715/715/715/715/715	Rotation	20	0	2018/07/03/06/00	2018/07/10/06/00	7 days	Nothing	Stage is available to attempt 1 time before it disappears	Nothing
+104	Daily	Landorus (Incarnate Forme)/Landorus (Incarnate Forme)/Landorus (Incarnate Forme)/Landorus (Incarnate Forme)/Landorus (Incarnate Forme)/Landorus (Incarnate Forme)/Landorus (Incarnate Forme)	101/101/101/101/101/101/101	Rotation	21	0	2018/07/10/06/00	2018/07/17/06/00	7 days	Nothing	Stage is available to attempt 1 time before it disappears	Nothing
+105	Daily	Cosmog/Cosmog/Cosmog/Cosmog/Cosmog/Cosmog/Cosmog	102/102/102/102/102/102/102	Rotation	22	0	2018/07/17/06/00	2018/07/24/06/00	7 days	Nothing	Stage is available to attempt 1 time before it disappears	Nothing
+106	Daily	Cosmoem/Cosmoem/Cosmoem/Cosmoem/Cosmoem/Cosmoem/Cosmoem	103/103/103/103/103/103/103	Rotation	23	0	2018/07/24/06/00	2018/07/31/06/00	7 days	Nothing	Stage is available to attempt 1 time before it disappears	Nothing
+107	Challenge	Mew	265	Rotation	0	0	2018/02/13/06/00	2018/02/20/06/00	7 days	Nothing	Nothing	Nothing
+108	Challenge	Ho-Oh	266	Rotation	1	0	2018/02/20/06/00	2018/02/27/06/00	7 days	Nothing	Nothing	Nothing
+109	Challenge	Lugia	267	Rotation	2	0	2018/02/27/06/00	2018/03/06/06/00	7 days	Nothing	Nothing	Nothing
+110	Challenge	Celebi	268	Rotation	3	0	2018/03/06/06/00	2018/03/13/06/00	7 days	Nothing	Nothing	Nothing
+111	Challenge	Kyogre	269	Rotation	4	0	2018/03/13/06/00	2018/03/20/06/00	7 days	Nothing	Nothing	Nothing
+112	Challenge	Groudon	270	Rotation	5	0	2018/03/20/06/00	2018/03/27/06/00	7 days	Nothing	Nothing	Nothing
+113	Challenge	Dialga	271	Rotation	6	0	2018/03/27/06/00	2018/04/03/06/00	7 days	Nothing	Nothing	Nothing
+114	Challenge	Palkia	272	Rotation	7	0	2018/04/03/06/00	2018/04/10/06/00	7 days	Nothing	Nothing	Nothing
+115	Challenge	Gyarados	273	Rotation	8	0	2018/04/10/06/00	2018/04/17/06/00	7 days	Nothing	Nothing	Nothing
+116	Challenge	Shaymin (Sky Forme)	274	Rotation	9	0	2018/04/17/06/00	2018/04/24/06/00	7 days	Nothing	Nothing	Nothing
+117	Challenge	Manaphy	275	Rotation	10	0	2018/04/24/06/00	2018/05/01/06/00	7 days	Nothing	Nothing	Nothing
+118	Challenge	Reshiram	276	Rotation	11	0	2018/05/01/06/00	2018/05/08/06/00	7 days	Nothing	Nothing	Nothing
+119	Challenge	Zekrom	277	Rotation	12	0	2018/05/08/06/00	2018/05/15/06/00	7 days	Nothing	Nothing	Nothing
+120	Challenge	Keldeo (Ordinary Form)	278	Rotation	13	0	2018/05/15/06/00	2018/05/22/06/00	7 days	Nothing	Nothing	Nothing
+121	Challenge	Cresselia	279	Rotation	14	0	2018/05/22/06/00	2018/05/29/06/00	7 days	Nothing	Nothing	Nothing
+122	Challenge	Zygarde (10% Forme)	280	Rotation	15	0	2018/05/29/06/00	2018/06/05/06/00	7 days	Nothing	Nothing	Nothing
+123	Challenge	Diancie (Shiny)	281	Rotation	16	0	2018/06/05/06/00	2018/06/12/06/00	7 days	Nothing	Nothing	Nothing
+124	Challenge	Hoopa (Hoopa Confined)	282	Rotation	17	0	2018/06/12/06/00	2018/06/19/06/00	7 days	Nothing	Nothing	Nothing
+125	Challenge	Tornadus (Therian Forme)	283	Rotation	18	0	2018/06/19/06/00	2018/06/26/06/00	7 days	Nothing	Nothing	Nothing
+126	Challenge	Thundurus (Therian Forme)	284	Rotation	19	0	2018/06/26/06/00	2018/07/03/06/00	7 days	Nothing	Nothing	Nothing
+127	Challenge	Landorus (Therian Forme)	285	Rotation	20	0	2018/07/03/06/00	2018/07/10/06/00	7 days	Nothing	Nothing	Nothing
+128	Challenge	Uxie	286	Rotation	21	0	2018/07/10/06/00	2018/07/17/06/00	7 days	Nothing	Nothing	Nothing
+129	Challenge	Mesprit	287	Rotation	22	0	2018/07/17/06/00	2018/07/24/06/00	7 days	Nothing	Nothing	Nothing
+130	Challenge	Azelf	288	Rotation	23	0	2018/07/24/06/00	2018/07/31/06/00	7 days	Nothing	Nothing	Nothing
+131	Challenge	Litten	289	Rotation	0	0	2018/02/13/06/00	2018/02/20/06/00	7 days	Nothing	Nothing	Nothing
+132	Challenge	Rowlet	290	Rotation	1	0	2018/02/20/06/00	2018/02/27/06/00	7 days	Nothing	Nothing	Nothing
+133	Challenge	Popplio	291	Rotation	2	0	2018/02/27/06/00	2018/03/06/06/00	7 days	Nothing	Nothing	Nothing
+134	Challenge	Wobbuffet (Male)	292	Rotation	3	0	2018/03/06/06/00	2018/03/13/06/00	7 days	Nothing	Nothing	Nothing
+135	Challenge	Drifloon	293	Rotation	4	0	2018/03/13/06/00	2018/03/20/06/00	7 days	Nothing	Nothing	Nothing
+136	Challenge	Cyndaquil (Winking)	294	Rotation	5	0	2018/03/20/06/00	2018/03/27/06/00	7 days	Nothing	Nothing	Nothing
+137	Challenge	Chikorita (Winking)	295	Rotation	6	0	2018/03/27/06/00	2018/04/03/06/00	7 days	Nothing	Nothing	Nothing
+138	Challenge	Totodile (Winking)	296	Rotation	7	0	2018/04/03/06/00	2018/04/10/06/00	7 days	Nothing	Nothing	Nothing
+139	Challenge	Passimian	297	Rotation	8	0	2018/04/10/06/00	2018/04/17/06/00	7 days	Nothing	Nothing	Nothing
+140	Challenge	Oranguru	298	Rotation	9	0	2018/04/17/06/00	2018/04/24/06/00	7 days	Nothing	Nothing	Nothing
+141	Challenge	Chimchar (Winking)	299	Rotation	10	0	2018/04/24/06/00	2018/05/01/06/00	7 days	Nothing	Nothing	Nothing
+142	Challenge	Turtwig (Winking)	300	Rotation	11	0	2018/05/01/06/00	2018/05/08/06/00	7 days	Nothing	Nothing	Nothing
+143	Challenge	Piplup (Winking)	301	Rotation	12	0	2018/05/08/06/00	2018/05/15/06/00	7 days	Nothing	Nothing	Nothing
+144	Challenge	Wobbuffet (Female)	302	Rotation	13	0	2018/05/15/06/00	2018/05/22/06/00	7 days	Nothing	Nothing	Nothing
+145	Challenge	Comfey	303	Rotation	14	0	2018/05/22/06/00	2018/05/29/06/00	7 days	Nothing	Nothing	Nothing
+146	Challenge	Tepig (Winking)	304	Rotation	15	0	2018/05/29/06/00	2018/06/05/06/00	7 days	Nothing	Nothing	Nothing
+147	Challenge	Snivy (Winking)	305	Rotation	16	0	2018/06/05/06/00	2018/06/12/06/00	7 days	Nothing	Nothing	Nothing
+148	Challenge	Oshawott (Winking)	306	Rotation	17	0	2018/06/12/06/00	2018/06/19/06/00	7 days	Nothing	Nothing	Nothing
+149	Challenge	Delcatty (Winking)	307	Rotation	18	0	2018/06/19/06/00	2018/06/26/06/00	7 days	Nothing	Nothing	Nothing
+150	Challenge	Stufful	308	Rotation	19	0	2018/06/26/06/00	2018/07/03/06/00	7 days	Nothing	Nothing	Nothing
+151	Challenge	Fennekin (Winking)	309	Rotation	20	0	2018/07/03/06/00	2018/07/10/06/00	7 days	Nothing	Nothing	Nothing
+152	Challenge	Chespin (Winking)	310	Rotation	21	0	2018/07/10/06/00	2018/07/17/06/00	7 days	Nothing	Nothing	Nothing
+153	Challenge	Froakie (Winking)	311	Rotation	22	0	2018/07/17/06/00	2018/07/24/06/00	7 days	Nothing	Nothing	Nothing
+154	Challenge	Carnivine	312	Rotation	23	0	2018/07/24/06/00	2018/07/31/06/00	7 days	Nothing	Nothing	Nothing
+155	Challenge	Typhlosion	313	Rotation	0	0	2018/02/13/06/00	2018/02/20/06/00	7 days	Nothing	Nothing	Nothing
+156	Challenge	Meganium	314	Rotation	1	0	2018/02/20/06/00	2018/02/27/06/00	7 days	Nothing	Nothing	Nothing
+157	Challenge	Feraligatr	315	Rotation	2	0	2018/02/27/06/00	2018/03/06/06/00	7 days	Nothing	Nothing	Nothing
+158	Challenge	Regirock	316	Rotation	3	0	2018/03/06/06/00	2018/03/13/06/00	7 days	Nothing	Nothing	Nothing
+159	Challenge	Regice	317	Rotation	4	0	2018/03/13/06/00	2018/03/20/06/00	7 days	Nothing	Nothing	Nothing
+160	Challenge	Registeel	318	Rotation	5	0	2018/03/20/06/00	2018/03/27/06/00	7 days	Nothing	Nothing	Nothing
+161	Challenge	Lycanroc	319	Rotation	6	0	2018/03/27/06/00	2018/04/03/06/00	7 days	Nothing	Nothing	Nothing
+162	Challenge	Wailord	320	Rotation	7	0	2018/04/03/06/00	2018/04/10/06/00	7 days	Nothing	Nothing	Nothing
+163	Challenge	Minior	321	Rotation	8	0	2018/04/10/06/00	2018/04/17/06/00	7 days	Nothing	Nothing	Nothing
+164	Challenge	Raichu (Alola Form)	322	Rotation	9	0	2018/04/17/06/00	2018/04/24/06/00	7 days	Nothing	Nothing	Nothing
+165	Challenge	Talonflame	323	Rotation	10	0	2018/04/24/06/00	2018/05/01/06/00	7 days	Nothing	Nothing	Nothing
+166	Challenge	Rhyperior	324	Rotation	11	0	2018/05/01/06/00	2018/05/08/06/00	7 days	Nothing	Nothing	Nothing
+167	Challenge	Omastar	325	Rotation	12	0	2018/05/08/06/00	2018/05/15/06/00	7 days	Nothing	Nothing	Nothing
+168	Challenge	Kabutops	326	Rotation	13	0	2018/05/15/06/00	2018/05/22/06/00	7 days	Nothing	Nothing	Nothing
+169	Challenge	Bellossom	327	Rotation	14	0	2018/05/22/06/00	2018/05/29/06/00	7 days	Nothing	Nothing	Nothing
+170	Challenge	Politoed	328	Rotation	15	0	2018/05/29/06/00	2018/06/05/06/00	7 days	Nothing	Nothing	Nothing
+171	Challenge	Electivire	329	Rotation	16	0	2018/06/05/06/00	2018/06/12/06/00	7 days	Nothing	Nothing	Nothing
+172	Challenge	Magmortar	330	Rotation	17	0	2018/06/12/06/00	2018/06/19/06/00	7 days	Nothing	Nothing	Nothing
+173	Challenge	Ninetales (Alola Form)	331	Rotation	18	0	2018/06/19/06/00	2018/06/26/06/00	7 days	Nothing	Nothing	Nothing
+174	Challenge	Hitmonlee	332	Rotation	19	0	2018/06/26/06/00	2018/07/03/06/00	7 days	Nothing	Nothing	Nothing
+175	Challenge	Hitmonchan	333	Rotation	20	0	2018/07/03/06/00	2018/07/10/06/00	7 days	Nothing	Nothing	Nothing
+176	Challenge	Type: Null	334	Rotation	21	0	2018/07/10/06/00	2018/07/17/06/00	7 days	Nothing	Nothing	Nothing
+177	Challenge	Infernape	335	Rotation	22	0	2018/07/17/06/00	2018/07/24/06/00	7 days	Nothing	Nothing	Nothing
+178	Challenge	Archeops	336	Rotation	23	0	2018/07/24/06/00	2018/07/31/06/00	7 days	Nothing	Nothing	Nothing
+179	Challenge	Accelgor	337	Rotation	0	0	2018/02/13/06/00	2018/02/20/06/00	7 days	Nothing	Nothing	Nothing
+180	Challenge	Amoonguss	338	Rotation	1	0	2018/02/20/06/00	2018/02/27/06/00	7 days	Nothing	Nothing	Nothing
+181	Challenge	Escavalier	339	Rotation	2	0	2018/02/27/06/00	2018/03/06/06/00	7 days	Nothing	Nothing	Nothing
+182	Challenge	Golem	340	Rotation	3	0	2018/03/06/06/00	2018/03/13/06/00	7 days	Nothing	Nothing	Nothing
+183	Challenge	Drifblim	341	Rotation	4	0	2018/03/13/06/00	2018/03/20/06/00	7 days	Nothing	Nothing	Nothing
+184	Challenge	Mimikyu	342	Rotation	5	0	2018/03/20/06/00	2018/03/27/06/00	7 days	Nothing	Nothing	Nothing
+185	Challenge	Salazzle	343	Rotation	6	0	2018/03/27/06/00	2018/04/03/06/00	7 days	Nothing	Nothing	Nothing
+186	Challenge	Toucannon	344	Rotation	7	0	2018/04/03/06/00	2018/04/10/06/00	7 days	Nothing	Nothing	Nothing
+187	Challenge	Noivern	345	Rotation	8	0	2018/04/10/06/00	2018/04/17/06/00	7 days	Nothing	Nothing	Nothing
+188	Challenge	Armaldo	346	Rotation	9	0	2018/04/17/06/00	2018/04/24/06/00	7 days	Nothing	Nothing	Nothing
+189	Challenge	Cradily	347	Rotation	10	0	2018/04/24/06/00	2018/05/01/06/00	7 days	Nothing	Nothing	Nothing
+190	Challenge	Kingdra	348	Rotation	11	0	2018/05/01/06/00	2018/05/08/06/00	7 days	Nothing	Nothing	Nothing
+191	Challenge	Breloom	349	Rotation	12	0	2018/05/08/06/00	2018/05/15/06/00	7 days	Nothing	Nothing	Nothing
+192	Challenge	Slaking	350	Rotation	13	0	2018/05/15/06/00	2018/05/22/06/00	7 days	Nothing	Nothing	Nothing
+193	Challenge	Exeggutor (Alola Form)	351	Rotation	14	0	2018/05/22/06/00	2018/05/29/06/00	7 days	Nothing	Nothing	Nothing
+194	Challenge	Machamp	352	Rotation	15	0	2018/05/29/06/00	2018/06/05/06/00	7 days	Nothing	Nothing	Nothing
+195	Challenge	Beedrill	353	Rotation	16	0	2018/06/05/06/00	2018/06/12/06/00	7 days	Nothing	Nothing	Nothing
+196	Challenge	Dusknoir	354	Rotation	17	0	2018/06/12/06/00	2018/06/19/06/00	7 days	Nothing	Nothing	Nothing
+197	Challenge	Golisopod	355	Rotation	18	0	2018/06/19/06/00	2018/06/26/06/00	7 days	Nothing	Nothing	Nothing
+198	Challenge	Greninja (Ash-Greninja)	356	Rotation	19	0	2018/06/26/06/00	2018/07/03/06/00	7 days	Nothing	Nothing	Nothing
+199	Challenge	Araquanid	357	Rotation	20	0	2018/07/03/06/00	2018/07/10/06/00	7 days	Nothing	Nothing	Nothing
+200	Challenge	Turtonator	358	Rotation	21	0	2018/07/10/06/00	2018/07/17/06/00	7 days	Nothing	Nothing	Nothing
+201	Challenge	Hitmontop	359	Rotation	22	0	2018/07/17/06/00	2018/07/24/06/00	7 days	Nothing	Nothing	Nothing
+202	Challenge	Sandslash (Alola Form)	360	Rotation	23	0	2018/07/24/06/00	2018/07/31/06/00	7 days	Nothing	Nothing	Nothing
+203	Challenge	Roserade (Winking)	361	Rotation	0	0	2018/02/13/06/00	2018/02/20/06/00	7 days	Nothing	Nothing	Nothing
+204	Challenge	Emboar	362	Rotation	1	0	2018/02/20/06/00	2018/02/27/06/00	7 days	Nothing	Nothing	Nothing
+205	Challenge	Hawlucha (Shiny)	363	Rotation	2	0	2018/02/27/06/00	2018/03/06/06/00	7 days	Nothing	Nothing	Nothing
+206	Challenge	Marowak (Alola Form)	364	Rotation	3	0	2018/03/06/06/00	2018/03/13/06/00	7 days	Nothing	Nothing	Nothing
+207	Challenge	Muk (Alola Form)	365	Rotation	4	0	2018/03/13/06/00	2018/03/20/06/00	7 days	Nothing	Nothing	Nothing
+208	Challenge	Dhelmise	366	Rotation	5	0	2018/03/20/06/00	2018/03/27/06/00	7 days	Nothing	Nothing	Nothing
+209	Challenge	Toxapex	367	Rotation	6	0	2018/03/27/06/00	2018/04/03/06/00	7 days	Nothing	Nothing	Nothing
+210	Challenge	Wigglytuff (Winking)	368	Rotation	7	0	2018/04/03/06/00	2018/04/10/06/00	7 days	Nothing	Nothing	Nothing
+211	Challenge	Metagross (Shiny)	369	Rotation	8	0	2018/04/10/06/00	2018/04/17/06/00	7 days	Nothing	Nothing	Nothing
+212	Challenge	Mudsdale	370	Rotation	9	0	2018/04/17/06/00	2018/04/24/06/00	7 days	Nothing	Nothing	Nothing
+213	Challenge	Blissey (Winking)	371	Rotation	10	0	2018/04/24/06/00	2018/05/01/06/00	7 days	Nothing	Nothing	Nothing
+214	Challenge	Togekiss (Winking)	372	Rotation	11	0	2018/05/01/06/00	2018/05/08/06/00	7 days	Nothing	Nothing	Nothing
+215	Challenge	Charizard (Shiny)	373	Rotation	12	0	2018/05/08/06/00	2018/05/15/06/00	7 days	Nothing	Nothing	Nothing
+216	Challenge	Azumarill (Winking)	374	Rotation	13	0	2018/05/15/06/00	2018/05/22/06/00	7 days	Nothing	Nothing	Nothing
+217	Challenge	Kommo-o	375	Rotation	14	0	2018/05/22/06/00	2018/05/29/06/00	7 days	Nothing	Nothing	Nothing
+218	Challenge	Keldeo (Resolute Form)	376	Rotation	15	0	2018/05/29/06/00	2018/06/05/06/00	7 days	Nothing	Nothing	Nothing
+219	Challenge	Bruxish	377	Rotation	16	0	2018/06/05/06/00	2018/06/12/06/00	7 days	Nothing	Nothing	Nothing
+220	Challenge	Gengar (Shiny)	378	Rotation	17	0	2018/06/12/06/00	2018/06/19/06/00	7 days	Nothing	Nothing	Nothing
+221	Challenge	Ribombee	379	Rotation	18	0	2018/06/19/06/00	2018/06/26/06/00	7 days	Nothing	Nothing	Nothing
+222	Challenge	Bewear	380	Rotation	19	0	2018/06/26/06/00	2018/07/03/06/00	7 days	Nothing	Nothing	Nothing
+223	Challenge	Gardevoir (Shiny)	381	Rotation	20	0	2018/07/03/06/00	2018/07/10/06/00	7 days	Nothing	Nothing	Nothing
+224	Challenge	Carracosta	382	Rotation	21	0	2018/07/10/06/00	2018/07/17/06/00	7 days	Nothing	Nothing	Nothing
+225	Challenge	Granbull (Winking)	383	Rotation	22	0	2018/07/17/06/00	2018/07/24/06/00	7 days	Nothing	Nothing	Nothing
+226	Challenge	Palossand	384	Rotation	23	0	2018/07/24/06/00	2018/07/31/06/00	7 days	Nothing	Nothing	Nothing
+227	Safari	Grubbin/Grubbin/Charjabug/Vikavolt/Crabrawler/Crabominable/Caterpie/Metapod/Butterfree/Yungoos/Gumshoos	154/155/156/157/158/159/160/161/162/163	Rotation	0	0	2018/02/13/06/00	2018/02/27/06/00	14 days	Nothing	Nothing	16.67/10.00/3.33/16.67/6.67/16.67/10.00/3.33/13.33/3.33
+228	Safari	Gible/Gible/Gabite/Garchomp/Staryu/Starmie/Furfrou/Manaphy (Winking)/Phione/Phione (Winking)/Sandygast	104/105/106/107/108/109/110/111/112/113	Rotation	2	0	2018/02/27/06/00	2018/03/13/06/00	14 days	Nothing	Nothing	13.33/10.00/3.33/13.33/6.67/10.00/6.67/6.67/3.33/26.67
+229	Safari	Krabby/Krabby/Kingler/Shellder/Cloyster/Magikarp (Shiny)/Gyarados (Shiny)/Goldeen/Seaking/Aipom/Ambipom	164/165/166/167/168/169/170/171/172/173	Rotation	4	0	2018/03/13/06/00	2018/03/27/06/00	14 days	Nothing	Nothing	16.67/6.67/16.67/6.67/3.33/3.33/16.67/10.00/13.33/6.67
+230	Safari	Electrike/Electrike/Manectric/Darumaka/Darmanitan/Pikachu (Winking)/Raichu (Winking)/Plusle/Minun/Diglett (Alola Form)/Dugtrio (Alola Form)	114/115/116/117/118/119/120/121/122/123	Rotation	6	0	2018/03/27/06/00	2018/04/10/06/00	14 days	Nothing	Nothing	13.33/6.67/16.67/10.00/6.67/6.67/13.33/13.33/10.00/3.33
+231	Safari	Salandit/Salandit/Togedemaru/Roggenrola/Boldore/Gigalith/Rockruff/Geodude (Alola Form)/Graveler (Alola Form)/Golem (Alola Form)/Mareanie	174/175/176/177/178/179/180/181/182/183	Rotation	8	0	2018/04/10/06/00	2018/04/17/06/00	7 days	Nothing	Nothing	20.00/6.67/16.67/10.00/3.33/6.67/16.67/10.00/3.33/6.67
+232	Safari	Pikachu (Charizard Costume)/Pikachu (Charizard Costume)/Pikachu (Magikarp Costume)/Pikachu (Gyarados Costume)/Pikachu (Shiny Gyarados Costume)/Pikachu (Lugia Costume)/Pikachu (Ho-Oh Costume)/Pikachu (Rayquaza Costume)/Pikachu (Shiny Rayquaza Costume)/Pikachu (Kimono Boy)/Pikachu (Kimono Girl)	233/234/235/236/237/238/239/240/241/242	Rotation	9	0	2018/04/17/06/00	2018/04/24/06/00	7 days	Nothing	Nothing	16.67/16.67/16.67/10.00/3.33/3.33/3.33/3.33/13.33/13.33
+233	Safari	Abra/Abra/Kadabra/Alakazam/Tauros/Oddish/Gloom/Vileplume/Bounsweet/Steenee/Tsareena	124/125/126/127/128/129/130/131/132/133	Rotation	10	0	2018/04/24/06/00	2018/05/08/06/00	14 days	Nothing	Nothing	13.33/10.00/3.33/13.33/20.00/10.00/3.33/13.33/10.00/3.33
+234	Safari	Burmy (Trash Cloak)/Burmy (Trash Cloak)/Wormadam (Trash Cloak)/Pikachu (Angry)/Deerling (Spring Form)/Sawsbuck (Spring Form)/Morelull/Shiinotic/Wimpod/Venonat/Venomoth	214/215/216/217/218/219/220/221/222/223	Rotation	12	0	2018/05/08/06/00	2018/05/15/06/00	7 days	Nothing	Nothing	20.00/3.33/3.33/20.00/10.00/16.67/6.67/3.33/13.33/3.33
+235	Safari	Sunkern/Sunkern/Sunflora/Pikipek/Trumbeak/Lurantis/Drampa/Deerling (Summer Form)/Sawsbuck (Summer Form)/Stantler/Pikachu (Dizzy)	224/225/226/227/228/229/230/231/232/713	Rotation	13	0	2018/05/15/06/00	2018/05/22/06/00	7 days	Nothing	Nothing	20.00/3.33/20.00/10.00/3.33/3.33/20.00/6.67/10.00/3.33
+236	Safari	Numel/Numel/Camerupt/Hippopotas (Female)/Hippowdon (Female)/Pidove/Tranquill/Unfezant (Male)/Unfezant (Female)/Jangmo-o/Hakamo-o	134/135/136/137/138/139/140/141/142/143	Rotation	14	0	2018/05/22/06/00	2018/06/05/06/00	14 days	Nothing	Nothing	16.67/3.33/16.67/3.33/20.00/10.00/6.67/3.33/13.33/6.67
+237	Safari	Pikachu (Original Cap)/Pikachu (Original Cap)/Pikachu (Hoenn Cap)/Pikachu (Sinnoh Cap)/Pikachu (Unova Cap)/Pikachu (Kalos Cap)/Pikachu (Alola Cap)/Pikachu (Smiling)/Pikachu (Happy)/Pikachu (Fired Up)/Pikachu (Surprised)	243/244/245/246/247/248/249/250/251/252	Rotation	16	0	2018/06/05/06/00	2018/06/12/06/00	7 days	Nothing	Nothing	10.00/10.00/10.00/10.00/10.00/10.00/13.33/3.33/20.00/3.33
+238	Safari	Meowth (Alola Form)/Meowth (Alola Form)/Persian (Alola Form)/Rattata (Alola Form)/Raticate (Alola Form)/Unown (N)/Unown (I)/Unown (C)/Unown (E)/Cherubi (Winking)/Cherrim (Winking)	184/185/186/187/188/189/190/191/192/193	Rotation	17	0	2018/06/12/06/00	2018/06/19/06/00	7 days	Nothing	Nothing	16.67/6.67/16.67/6.67/10.00/10.00/10.00/10.00/10.00/3.33
+239	Safari	Pineco/Pineco/Forretress/Ledyba/Ledian/Houndour/Houndoom/Noibat/Hoothoot/Noctowl/Vivillon (Poké Ball Pattern)	144/145/146/147/148/149/150/151/152/153	Rotation	18	0	2018/06/19/06/00	2018/07/03/06/00	14 days	Nothing	Nothing	16.67/6.67/13.33/6.67/13.33/3.33/13.33/16.67/6.67/3.33
+240	Safari	Sewaddle/Sewaddle/Swadloon/Leavanny/Cottonee (Winking)/Whimsicott (Winking)/Flabébé (Winking)/Floette (Winking)/Snubbull (Winking)/Chansey (Winking)/Cutiefly	194/195/196/197/198/199/200/201/202/203	Rotation	20	0	2018/07/03/06/00	2018/07/17/06/00	14 days	Nothing	Nothing	16.67/10.00/3.33/16.67/6.67/13.33/6.67/6.67/3.33/16.67
+241	Safari	Fletchling/Fletchling/Fletchinder/Zigzagoon/Linoone/Hoppip (Winking)/Skiploom (Winking)/Jumpluff (Winking)/Vulpix (Alola Form)/Snorunt (Winking)/Glalie (Winking)	204/205/206/207/208/209/210/211/212/213	Rotation	22	0	2018/07/17/06/00	2018/07/31/06/00	14 days	Nothing	Nothing	20.00/10.00/16.67/6.67/16.67/10.00/3.33/3.33/10.00/3.33
+242	Escalation	Decidueye	385/386/387/388/389/390/391/392/393/394/395/396/397/398/399/400/401/402/403/404	Rotation	0	0	2018/02/13/06/00	2018/02/20/06/00	7 days	Nothing	Nothing	0.05/0.88/1.37/1.42/2.74/2.79/4.11/4.16/5.48/5.53/6.02/6.08/6.57/6.63/7.12/7.17/7.67/7.72/8.21/8.27
+243	Escalation	Volcanion	405/406/407/408/409/410/411/412/413/414/415/416/417/418/419/420/421/422/423/424/425/426/427/428/429	Rotation	1	0	2018/02/20/06/00	2018/03/06/06/00	14 days	Nothing	Nothing	0.02/0.26/0.28/0.86/0.88/1.73/1.74/2.16/2.18/2.59/2.61/3.45/3.47/4.32/4.33/5.18/5.20/6.04/6.06/6.90/6.92/7.77/7.79/8.63/8.65
+244	Escalation	Latios	430/431/432/433/434/435/436/437/438/439/440/441/442/443/444/445/446/447/448/449/450/451/452/453/454/454	Rotation	3	0	2018/03/06/06/00	2018/03/20/06/00	14 days	Nothing	Nothing	0.04/0.65/0.70/1.09/1.13/1.74/1.78/2.17/2.22/2.61/2.65/3.04/3.48/3.52/3.91/3.95/4.35/4.39/5.43/5.48/6.52/6.56/7.61/7.65/8.60/8.74
+245	Escalation	Giratina (Altered Forme)	455/456/457/458/459/460/462/463/464/465/461/466/467/468/469/470/471/472/473/474/474	Rotation	5	0	2018/03/20/06/00	2018/04/03/06/00	14 days	Nothing	Nothing	0.04/0.20/0.39/1.18/1.57/1.97/2.01/2.40/2.99/3.38/3.94/3.97/4.96/5.90/5.94/7.87/7.91/9.84/9.88/11.81/11.85
+246	Escalation	Latias	475/476/477/478/479/480/481/482/483/484/485/486/487/488/489/490/491/492/493/494/495/496/497/497	Rotation	7	0	2018/04/03/06/00	2018/04/17/06/00	14 days	Nothing	Nothing	0.04/0.45/1.02/1.06/2.03/2.07/2.48/2.84/2.88/3.29/3.70/4.06/4.10/4.51/5.08/5.12/5.52/6.09/6.13/6.54/7.15/7.55/8.12/8.16
+247	Escalation	Diancie	498/499/500/501/502/503/504/505/506/507/508/509/510/511/512/513/514/515/516/517/518/519/520/520	Rotation	9	0	2018/04/17/06/00	2018/05/01/06/00	14 days	Nothing	Nothing	0.03/0.34/0.64/0.92/0.95/1.25/1.53/1.56/2.17/2.78/3.05/3.08/4.31/4.58/4.61/5.83/6.11/6.14/7.48/7.63/7.66/9.01/9.16/9.19
+248	Escalation	Darkrai	521/522/542/523/535/524/542/525/536/526/537/527/542/528/538/529/542/530/539/531/540/532/542/533/541/534	Rotation	11	0	2018/05/01/06/00	2018/05/15/06/00	14 days	Nothing	Nothing	0.04/0.36/1.08/1.12/1.80/1.84/1.98/2.02/2.70/2.74/3.61/3.64/3.79/3.82/4.51/4.54/4.69/4.72/5.41/5.45/6.31/6.35/6.49/6.53/7.21/7.25
+249	Escalation	Kyurem	543/544/545/546/547/548/549/550/551/552/553/554/555/556/557/558/559/560/561/562/563/564/565/566/567/568/569/570	Rotation	13	0	2018/05/15/06/00	2018/05/29/06/00	14 days	Nothing	Nothing	0.03/0.30/0.57/0.84/1.11/1.35/1.37/1.64/1.89/1.91/2.18/2.45/2.70/2.72/3.40/3.80/4.04/4.07/4.74/5.15/5.39/5.42/6.50/6.74/6.77/7.41/7.44/8.09
+250	Escalation	Zygarde (50% Forme)	571/572/573/574/575/576/577/578/579/580/581/582/583/584/585/586/587/588/589/589	Rotation	15	0	2018/05/29/06/00	2018/06/12/06/00	14 days	Nothing	Nothing	0.03/0.66/1.57/1.60/2.38/3.13/3.16/3.95/4.70/4.73/5.64/5.67/6.26/6.30/7.08/7.83/7.86/8.64/9.40/9.43
+251	Escalation	Meloetta (Aria Forme)	590/591/592/593/594/595/596/597/598/599/600/601/602/603/604/605/606	Rotation	17	0	2018/06/12/06/00	2018/06/26/06/00	14 days	Nothing	Nothing	0.06/1.38/1.44/2.76/2.82/4.15/4.20/5.53/5.58/6.91/6.97/8.29/8.35/9.67/9.73/11.06/11.11
+252	Escalation	Giratina (Origin Forme)	607/608/609/610/611/612/613/614/615/616/617/618/619/620/621/622/623/624/625/626/627/628/629/630	Rotation	19	0	2018/06/26/06/00	2018/07/10/06/00	14 days	Nothing	Nothing	0.03/0.26/0.28/1.03/1.06/1.81/1.83/2.58/2.61/3.36/3.38/3.87/3.90/5.17/5.19/6.20/6.46/6.48/6.97/7.23/7.26/7.49/7.75/7.78
+253	Escalation	Magearna	631/632/633/634/635/636/637/638/639/640/641/642/643/644/645/646/647/648/649	Rotation	21	0	2018/07/10/06/00	2018/07/17/06/00	7 days	Nothing	Nothing	0.07/2.21/2.28/3.68/3.76/4.42/4.49/5.15/5.23/5.89/5.96/6.63/6.70/7.07/7.14/7.22/7.29/7.36/7.44
+254	Escalation	Incineroar	650/651/652/653/654/655/656/657/658/659/660/661/662/663/664/665/666/667/668	Rotation	22	0	2018/07/17/06/00	2018/07/24/06/00	7 days	Nothing	Nothing	0.06/1.38/1.44/2.76/2.82/4.14/4.20/5.52/5.58/6.08/6.13/6.63/6.69/7.18/7.24/7.73/7.79/8.29/8.34
+255	Escalation	Primarina	669/670/671/672/673/674/675/676/677/678/679/680/681/682/683/684/685/686/687/688/43	Rotation	23	0	2018/07/24/06/00	2018/07/31/06/00	7 days	Nothing	Nothing	0.05/0.83/1.30/1.35/2.60/2.65/3.90/3.96/5.21/5.26/5.73/5.78/6.25/6.30/6.77/6.82/7.29/7.34/7.81/7.86/4.95
+256	Challenge	Deoxys (Attack Forme)	689	Rotation	0	0	2018/02/13/06/00	2018/02/20/06/00	7 days	Nothing	Nothing	Nothing
+257	Challenge	Regigigas	690	Rotation	1	0	2018/02/20/06/00	2018/02/27/06/00	7 days	Nothing	Nothing	Nothing
+258	Challenge	Nihilego	691	Rotation	2	0	2018/02/27/06/00	2018/03/06/06/00	7 days	Costs [Coin] x20000 to unlock 10 times	Stage is available to attempt 10 times before it disappears	Nothing
+259	Challenge	Meloetta (Pirouette Forme)	692	Rotation	3	0	2018/03/06/06/00	2018/03/13/06/00	7 days	Nothing	Nothing	Nothing
+260	Challenge	Arceus	693	Rotation	4	0	2018/03/13/06/00	2018/03/20/06/00	7 days	Nothing	Nothing	Nothing
+261	Challenge	Buzzwole	694	Rotation	5	0	2018/03/20/06/00	2018/03/27/06/00	7 days	Costs [Coin] x20000 to unlock 10 times	Stage is available to attempt 10 times before it disappears	Nothing
+262	Challenge	Kyurem (White Kyurem)	695	Rotation	6	0	2018/03/27/06/00	2018/04/03/06/00	7 days	Nothing	Nothing	Nothing
+263	Challenge	Kyurem (Black Kyurem)	696	Rotation	7	0	2018/04/03/06/00	2018/04/10/06/00	7 days	Nothing	Nothing	Nothing
+264	Challenge	Pheromosa	697	Rotation	8	0	2018/04/10/06/00	2018/04/17/06/00	7 days	Costs [Coin] x20000 to unlock 10 times	Stage is available to attempt 10 times before it disappears	Nothing
+265	Challenge	Ho-Oh (Shiny)	698	Rotation	9	0	2018/04/17/06/00	2018/04/24/06/00	7 days	Nothing	Nothing	Nothing
+266	Challenge	Zygarde (Complete Forme)	699	Rotation	10	0	2018/04/24/06/00	2018/05/01/06/00	7 days	Nothing	Nothing	Nothing
+267	Challenge	Xurkitree	700	Rotation	11	0	2018/05/01/06/00	2018/05/08/06/00	7 days	Costs [Coin] x20000 to unlock 10 times	Stage is available to attempt 10 times before it disappears	Nothing
+268	Challenge	Tapu Koko	701	Rotation	12	0	2018/05/08/06/00	2018/05/15/06/00	7 days	Nothing	Nothing	Nothing
+269	Challenge	Tapu Fini	702	Rotation	13	0	2018/05/15/06/00	2018/05/22/06/00	7 days	Nothing	Nothing	Nothing
+270	Challenge	Celesteela	703	Rotation	14	0	2018/05/22/06/00	2018/05/29/06/00	7 days	Costs [Coin] x20000 to unlock 10 times	Stage is available to attempt 10 times before it disappears	Nothing
+271	Challenge	Solgaleo	704	Rotation	15	0	2018/05/29/06/00	2018/06/05/06/00	7 days	Nothing	Nothing	Nothing
+272	Challenge	Lunala	705	Rotation	16	0	2018/06/05/06/00	2018/06/12/06/00	7 days	Nothing	Nothing	Nothing
+273	Challenge	Kartana	706	Rotation	17	0	2018/06/12/06/00	2018/06/19/06/00	7 days	Costs [Coin] x20000 to unlock 10 times	Stage is available to attempt 10 times before it disappears	Nothing
+274	Challenge	Tapu Bulu	707	Rotation	18	0	2018/06/19/06/00	2018/06/26/06/00	7 days	Nothing	Nothing	Nothing
+275	Challenge	Tapu Lele	708	Rotation	19	0	2018/06/26/06/00	2018/07/03/06/00	7 days	Nothing	Nothing	Nothing
+276	Challenge	Guzzlord	709	Rotation	20	0	2018/07/03/06/00	2018/07/10/06/00	7 days	Costs [Coin] x20000 to unlock 10 times	Stage is available to attempt 10 times before it disappears	Nothing
+277	Challenge	Silvally	710	Rotation	21	0	2018/07/10/06/00	2018/07/17/06/00	7 days	Nothing	Nothing	Nothing
+278	Challenge	Marshadow	711	Rotation	22	0	2018/07/17/06/00	2018/07/24/06/00	7 days	Nothing	Nothing	Nothing
+279	Challenge	Necrozma	712	Rotation	23	0	2018/07/24/06/00	2018/07/31/06/00	7 days	Nothing	Nothing	Nothing
