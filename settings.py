@@ -1,11 +1,11 @@
-#BOT FILES
+# BOT FILES
 commands_table_name = "tables/commands"
 settings_table_name = "tables/settings"
 user_levels_table_name = "tables/user_levels"
 log_file = "log.txt"
 debug_log_file_name = "discord.log"
 
-#BOT SETTINGS
+# BOT SETTINGS
 token = ""
 command_prefix = "/"
 param_delim = " "
@@ -25,7 +25,7 @@ run_command_name = "run"
 run_command_description = "Run a prefix command"
 run_command_default_response = "Command ran successfully"
 
-#MESSAGES
+# MESSAGES
 message_something_broke = "Something broke"
 message_unknown_command = "Command not recognized"
 message_unhandled_error = "Unhandled error ({})"
