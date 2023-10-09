@@ -1,1 +1,3612 @@
-﻿
+﻿Alias	Original Name
+4up	4 Up
+four up	4 Up
+fourup	4 Up
+5up	5 Up
+five up	5 Up
+fiveup	5 Up
+Aboma	Abomasnow
+Obama	Abomasnow
+Aero	Aerodactyl
+zam	Alakazam
+Amphy	Ampharos
+rmldo	Armaldo
+waromatisse	Aromatisse (Winking)
+w aromatisse	Aromatisse (Winking)
+winking aromatisse	Aromatisse (Winking)
+winkingaromatisse	Aromatisse (Winking)
+aromatissew	Aromatisse (Winking)
+aromatisse w	Aromatisse (Winking)
+aromatisse winking	Aromatisse (Winking)
+aromatissewinking	Aromatisse (Winking)
+cuno	Articuno
+waudino	Audino (Winking)
+audinow	Audino (Winking)
+w audino	Audino (Winking)
+winking audino	Audino (Winking)
+winkingaudino	Audino (Winking)
+audino winking	Audino (Winking)
+audinowinking	Audino (Winking)
+audino w	Audino (Winking)
+azu	Azumarill
+wazumarill	Azumarill (Winking)
+w azumarill	Azumarill (Winking)
+azumarillw	Azumarill (Winking)
+winking azumarill	Azumarill (Winking)
+winkingazumarill	Azumarill (Winking)
+azumarill winking	Azumarill (Winking)
+azumarillwinking	Azumarill (Winking)
+wazu	Azumarill (Winking)
+azumarill w	Azumarill (Winking)
+BB	Barrier Bash
+barrierbash	Barrier Bash
+BB+	Barrier Bash+
+barrierbash+	Barrier Bash+
+BB++	Barrier Bash++
+barrierbash++	Barrier Bash++
+barrierbreak	Barrier Break
+barrier bash+++	Barrier Break
+barriershot	Barrier Shot
+bas	Barrier Shot
+Barrier Shot Omega	Barrier Shot Ω
+BSO	Barrier Shot Ω
+barriershotomega	Barrier Shot Ω
+barriershoto	Barrier Shot Ω
+barrier shot o	Barrier Shot Ω
+basculinb	Basculin (Blue-Striped Form)
+basculin b	Basculin (Blue-Striped Form)
+basculin blue	Basculin (Blue-Striped Form)
+basculinblue	Basculin (Blue-Striped Form)
+basculin blue striped form	Basculin (Blue-Striped Form)
+basculinbluestripedform	Basculin (Blue-Striped Form)
+basculin blue stripe	Basculin (Blue-Striped Form)
+basculinbluestripe	Basculin (Blue-Striped Form)
+bbasculin	Basculin (Blue-Striped Form)
+b basculin	Basculin (Blue-Striped Form)
+blue basculin	Basculin (Blue-Striped Form)
+bluebasculin	Basculin (Blue-Striped Form)
+basculinr	Basculin (Red-Striped Form)
+basculin r	Basculin (Red-Striped Form)
+basculin red	Basculin (Red-Striped Form)
+basculinred	Basculin (Red-Striped Form)
+basculin red striped form	Basculin (Red-Striped Form)
+basculinredstripedform	Basculin (Red-Striped Form)
+basculin red stripe	Basculin (Red-Striped Form)
+basculinredstripe	Basculin (Red-Striped Form)
+rbasculin	Basculin (Red-Striped Form)
+r basculin	Basculin (Red-Striped Form)
+red basculin	Basculin (Red-Striped Form)
+redbasculin	Basculin (Red-Striped Form)
+bearticc	Beartic
+beastpower	Beast Power
+bee	Beedrill
+<:SadBee:296130470142279683>	Beedrill
+<:GladBee:466135717937152001>	Beedrill
+bem	Beheeyem
+bello	Bellossom
+bigeater	Big Eater
+be	Big Eater
+bw	Big Wave
+bigwave	Big Wave
+quirky shot	Blindside
+wblissey	Blissey (Winking)
+w blissey	Blissey (Winking)
+blisseyw	Blissey (Winking)
+winking blissey	Blissey (Winking)
+winkingblissey	Blissey (Winking)
+blissey winking	Blissey (Winking)
+blisseywinking	Blissey (Winking)
+blissey w	Blissey (Winking)
+blockoff	Block Off
+block smash+++	Block Off
+blockshot	Block Shot
+bls	Block Shot
+bs	Block Smash
+blocksmash	Block Smash
+BS+	Block Smash+
+blocksmash+	Block Smash+
+BS++	Block Smash++
+blocksmash++	Block Smash++
+bruteforce	Brute Force
+bugcombo	Bug Combo
+bc	Bug Combo
+bulba	Bulbasaur
+wbulba	Bulbasaur (Winking)
+wbulbasaur	Bulbasaur (Winking)
+w bulbasaur	Bulbasaur (Winking)
+bulbasaurw	Bulbasaur (Winking)
+bulbasaur w	Bulbasaur (Winking)
+winking bulbasaur	Bulbasaur (Winking)
+winkingbulbasaur	Bulbasaur (Winking)
+bulbasaur winking	Bulbasaur (Winking)
+bulbasaurwinking	Bulbasaur (Winking)
+burmy p	Burmy (Plant Cloak)
+burmy plant cloak	Burmy (Plant Cloak)
+burmy plant	Burmy (Plant Cloak)
+burmyplant	Burmy (Plant Cloak)
+plant burmy	Burmy (Plant Cloak)
+plantburmy	Burmy (Plant Cloak)
+burmyp	Burmy (Plant Cloak)
+pburmy	Burmy (Plant Cloak)
+p burmy	Burmy (Plant Cloak)
+burmy sandy	Burmy (Sandy Cloak)
+burmy sand	Burmy (Sandy Cloak)
+burmysandy	Burmy (Sandy Cloak)
+burmysand	Burmy (Sandy Cloak)
+burmy sandy cloak	Burmy (Sandy Cloak)
+burmy s	Burmy (Sandy Cloak)
+sandyburmy	Burmy (Sandy Cloak)
+sandy burmy	Burmy (Sandy Cloak)
+sand burmy	Burmy (Sandy Cloak)
+sandburmy	Burmy (Sandy Cloak)
+burmys	Burmy (Sandy Cloak)
+sburmy	Burmy (Sandy Cloak)
+s burmy	Burmy (Sandy Cloak)
+burmy t	Burmy (Trash Cloak)
+burmy trash cloak	Burmy (Trash Cloak)
+burmy trash	Burmy (Trash Cloak)
+burmytrash	Burmy (Trash Cloak)
+trash burmy	Burmy (Trash Cloak)
+trashburmy	Burmy (Trash Cloak)
+burmyt	Burmy (Trash Cloak)
+tburmy	Burmy (Trash Cloak)
+t burmy	Burmy (Trash Cloak)
+calmdown	Calm Down
+wcarbink	Carbink (Winking)
+w carbink	Carbink (Winking)
+carbinkw	Carbink (Winking)
+carbink w	Carbink (Winking)
+winking carbink	Carbink (Winking)
+winkingcarbink	Carbink (Winking)
+carbink winking	Carbink (Winking)
+carbinkwinking	Carbink (Winking)
+carwink	Carbink (Winking)
+castform rainy form	Castform (Rainy Form)
+castform rainy	Castform (Rainy Form)
+castform r	Castform (Rainy Form)
+castformrainy	Castform (Rainy Form)
+rainy castform	Castform (Rainy Form)
+rainycastform	Castform (Rainy Form)
+castformr	Castform (Rainy Form)
+rcastform	Castform (Rainy Form)
+r castform	Castform (Rainy Form)
+castform snowy form	Castform (Snowy Form)
+castform snowy	Castform (Snowy Form)
+castformsnowy	Castform (Snowy Form)
+snowy castform	Castform (Snowy Form)
+snowycastform	Castform (Snowy Form)
+castformsunny	Castform (Sunny Form)
+castform sunny	Castform (Sunny Form)
+castform sunny form	Castform (Sunny Form)
+sunnycastform	Castform (Sunny Form)
+sunny castform	Castform (Sunny Form)
+wcastform	Castform (Winking)
+castformw	Castform (Winking)
+w castform	Castform (Winking)
+winking castform	Castform (Winking)
+winkingcastform	Castform (Winking)
+castform winking	Castform (Winking)
+castformwinking	Castform (Winking)
+castform w	Castform (Winking)
+wchansey	Chansey (Winking)
+w chansey	Chansey (Winking)
+chanseyw	Chansey (Winking)
+winking chansey	Chansey (Winking)
+winkingchansey	Chansey (Winking)
+chansey winking	Chansey (Winking)
+chanseywinking	Chansey (Winking)
+chansey w	Chansey (Winking)
+zard	Charizard
+char	Charizard
+szard	Charizard (Shiny)
+schar	Charizard (Shiny)
+shiny charizard	Charizard (Shiny)
+shinycharizard	Charizard (Shiny)
+scharizard	Charizard (Shiny)
+s charizard	Charizard (Shiny)
+charizards	Charizard (Shiny)
+charizard shiny	Charizard (Shiny)
+charizardshiny	Charizard (Shiny)
+charizard s	Charizard (Shiny)
+wcharmander	Charmander (Winking)
+w charmander	Charmander (Winking)
+charmanderw	Charmander (Winking)
+charmander w	Charmander (Winking)
+winking charmander	Charmander (Winking)
+winkingcharmander	Charmander (Winking)
+charmander winking	Charmander (Winking)
+charmanderwinking	Charmander (Winking)
+wcherrim	Cherrim (Winking)
+w cherrim	Cherrim (Winking)
+cherrimw	Cherrim (Winking)
+cherrim w	Cherrim (Winking)
+winking cherrim	Cherrim (Winking)
+winkingcherrim	Cherrim (Winking)
+cherrim winking	Cherrim (Winking)
+cherrimwinking	Cherrim (Winking)
+wcherubi	Cherubi (Winking)
+w cherubi	Cherubi (Winking)
+cherubiw	Cherubi (Winking)
+cherubi w	Cherubi (Winking)
+winking cherubi	Cherubi (Winking)
+winkingcherubi	Cherubi (Winking)
+cherubi winking	Cherubi (Winking)
+cherubiwinking	Cherubi (Winking)
+wchespin	Chespin (Winking)
+w chespin	Chespin (Winking)
+chespinw	Chespin (Winking)
+winking chespin	Chespin (Winking)
+winkingchespin	Chespin (Winking)
+chespin winking	Chespin (Winking)
+chespinwinking	Chespin (Winking)
+chespin w	Chespin (Winking)
+wchikorita	Chikorita (Winking)
+w chikorita	Chikorita (Winking)
+chikoritaw	Chikorita (Winking)
+chikorita w	Chikorita (Winking)
+winking chikorita	Chikorita (Winking)
+winkingchikorita	Chikorita (Winking)
+chikorita winking	Chikorita (Winking)
+chikoritawinking	Chikorita (Winking)
+wchimchar	Chimchar (Winking)
+w chimchar	Chimchar (Winking)
+chimcharw	Chimchar (Winking)
+winking chimchar	Chimchar (Winking)
+winkingchimchar	Chimchar (Winking)
+chimchar winking	Chimchar (Winking)
+chimcharwinking	Chimchar (Winking)
+wchim	Chimchar (Winking)
+wchimp	Chimchar (Winking)
+chimchar w	Chimchar (Winking)
+wclefable	Clefable (Winking)
+w clefable	Clefable (Winking)
+winking clefable	Clefable (Winking)
+winkingclefable	Clefable (Winking)
+clefablew	Clefable (Winking)
+clefable w	Clefable (Winking)
+clefable winking	Clefable (Winking)
+clefablewinking	Clefable (Winking)
+wclefairy	Clefairy (Winking)
+w clefairy	Clefairy (Winking)
+clefairyw	Clefairy (Winking)
+clefairy w	Clefairy (Winking)
+winking clefairy	Clefairy (Winking)
+winkingclefairy	Clefairy (Winking)
+clefairy winking	Clefairy (Winking)
+clefairywinking	Clefairy (Winking)
+CC	Cloud Clear
+cloudclear	Cloud Clear
+CC++	Cloud Clear++
+cloudclear++	Cloud Clear++
+cloudshot	Cloud Shot
+electric combo	Conduction
+electriccombo	Conduction
+Conk	Conkeldurr
+nebby	Cosmog
+wcottonee	Cottonee (Winking)
+w cottonee	Cottonee (Winking)
+cottoneew	Cottonee (Winking)
+winking cottonee	Cottonee (Winking)
+winkingcottonee	Cottonee (Winking)
+cottonee winking	Cottonee (Winking)
+cottoneewinking	Cottonee (Winking)
+cottonee w	Cottonee (Winking)
+Cress	Cresselia
+ca	Cross Attack
+crossattack	Cross Attack
+CA+	Cross Attack+
+crossattack+	Cross Attack+
+crowdcontrol	Crowd Control
+crowdcontrol+	Crowd Control+
+crowdpower	Crowd Power
+crushingstep	Crushing Step
+cs	Crushing Step
+holiday cubchoo	Cubchoo (Holiday)
+holidaycubchoo	Cubchoo (Holiday)
+cubchoo holiday	Cubchoo (Holiday)
+cubchooholiday	Cubchoo (Holiday)
+hcubchoo	Cubchoo (Holiday)
+cubchooh	Cubchoo (Holiday)
+h cubchoo	Cubchoo (Holiday)
+cubchoo h	Cubchoo (Holiday)
+wcyndaquil	Cyndaquil (Winking)
+w cyndaquil	Cyndaquil (Winking)
+cyndaquilw	Cyndaquil (Winking)
+cyndaquil w	Cyndaquil (Winking)
+winking cyndaquil	Cyndaquil (Winking)
+winkingcyndaquil	Cyndaquil (Winking)
+cyndaquil winking	Cyndaquil (Winking)
+cyndaquilwinking	Cyndaquil (Winking)
+damagestreak	Damage Streak
+dragon dance	Dancing Dragons
+dragondance	Dancing Dragons
+dancingdragons	Dancing Dragons
+dadra	Dancing Dragons
+deci	Decidueye
+dec	Decidueye
+wdedenne	Dedenne (Winking)
+w dedenne	Dedenne (Winking)
+winking dedenne	Dedenne (Winking)
+winkingdedenne	Dedenne (Winking)
+dedbywinking	Dedenne (Winking)
+dedennew	Dedenne (Winking)
+dedenne w	Dedenne (Winking)
+dedenne winking	Dedenne (Winking)
+dedennewinking	Dedenne (Winking)
+deerling autumn form	Deerling (Autumn Form)
+deerling a	Deerling (Autumn Form)
+deerling autumn	Deerling (Autumn Form)
+deerlingautumn	Deerling (Autumn Form)
+autumndeerling	Deerling (Autumn Form)
+autumn deerling	Deerling (Autumn Form)
+deerlinga	Deerling (Autumn Form)
+deerlingspring	Deerling (Spring Form)
+deerling spring form	Deerling (Spring Form)
+deerling spring	Deerling (Spring Form)
+springdeerling	Deerling (Spring Form)
+spring deerling	Deerling (Spring Form)
+deerling summer form	Deerling (Summer Form)
+deerling summer	Deerling (Summer Form)
+deerlingsummer	Deerling (Summer Form)
+summerdeerling	Deerling (Summer Form)
+summer deerling	Deerling (Summer Form)
+deerling w	Deerling (Winter Form)
+deerling winter form	Deerling (Winter Form)
+deerling winter	Deerling (Winter Form)
+deerlingwinter	Deerling (Winter Form)
+winter deerling	Deerling (Winter Form)
+winterdeerling	Deerling (Winter Form)
+deerlingw	Deerling (Winter Form)
+delcatty winking	Delcatty (Winking)
+wdelcatty	Delcatty (Winking)
+w delcatty	Delcatty (Winking)
+delcattyw	Delcatty (Winking)
+winking delcatty	Delcatty (Winking)
+winkingdelcatty	Delcatty (Winking)
+delcattywinking	Delcatty (Winking)
+delcatty w	Delcatty (Winking)
+holiday delibird	Delibird (Holiday)
+holidaydelibird	Delibird (Holiday)
+delibird holiday	Delibird (Holiday)
+delibirdholiday	Delibird (Holiday)
+hdelibird	Delibird (Holiday)
+delibirdh	Delibird (Holiday)
+h delibird	Delibird (Holiday)
+delibird h	Delibird (Holiday)
+delph	Delphox
+delphy	Delphox
+Deoxys-A	Deoxys (Attack Forme)
+DeoxysA	Deoxys (Attack Forme)
+DeoA	Deoxys (Attack Forme)
+deoxys attack	Deoxys (Attack Forme)
+deoxys attack forme	Deoxys (Attack Forme)
+deoxys attacc	Deoxys (Attack Forme)
+deo a	Deoxys (Attack Forme)
+deoxys a	Deoxys (Attack Forme)
+deoxysattackform	Deoxys (Attack Forme)
+deoxys attack form	Deoxys (Attack Forme)
+deoxysattack	Deoxys (Attack Forme)
+Deoxys-D	Deoxys (Defense Forme)
+DeoxysD	Deoxys (Defense Forme)
+DeoD	Deoxys (Defense Forme)
+deoxys defense	Deoxys (Defense Forme)
+deoxys defense forme	Deoxys (Defense Forme)
+deoxys defence	Deoxys (Defense Forme)
+Deoxthicc	Deoxys (Defense Forme)
+deo d	Deoxys (Defense Forme)
+deoxys d	Deoxys (Defense Forme)
+deoxys	Deoxys (Normal Forme)
+deo	Deoxys (Normal Forme)
+deon	Deoxys (Normal Forme)
+deoxys normal form	Deoxys (Normal Forme)
+deoxysnormal	Deoxys (Normal Forme)
+deoxys normal	Deoxys (Normal Forme)
+deoxysnormalform	Deoxys (Normal Forme)
+deo n	Deoxys (Normal Forme)
+deoxys n	Deoxys (Normal Forme)
+Deoxys-S	Deoxys (Speed Forme)
+DeoxysS	Deoxys (Speed Forme)
+DeoS	Deoxys (Speed Forme)
+deoxys speed	Deoxys (Speed Forme)
+deoxys speed forme	Deoxys (Speed Forme)
+deoxysspeed	Deoxys (Speed Forme)
+deoxysspeedform	Deoxys (Speed Forme)
+deoxys speed form	Deoxys (Speed Forme)
+deo s	Deoxys (Speed Forme)
+deoxys s	Deoxys (Speed Forme)
+dia	Diancie
+SDiancie	Diancie (Shiny)
+s diancie	Diancie (Shiny)
+diancie shiny	Diancie (Shiny)
+shiny diancie	Diancie (Shiny)
+shinydiancie	Diancie (Shiny)
+diancieshiny	Diancie (Shiny)
+diancies	Diancie (Shiny)
+diancie s	Diancie (Shiny)
+sdia	Diancie (Shiny)
+adiglett	Diglett (Alola Form)
+a diglett	Diglett (Alola Form)
+digletta	Diglett (Alola Form)
+diglett a	Diglett (Alola Form)
+diglett alola form	Diglett (Alola Form)
+diglettalolaform	Diglett (Alola Form)
+diglett alola	Diglett (Alola Form)
+diglettalola	Diglett (Alola Form)
+alolan diglett	Diglett (Alola Form)
+alolandiglett	Diglett (Alola Form)
+dn	Double Normal
+doublenormal	Double Normal
+dragontalon	Dragon Talon
+DNite	Dragonite
+balloon	Drifblim
+crimgan	Druddigon
+:v	Ducklett
+dug	Dugtrio
+adug	Dugtrio (Alola Form)
+adugtrio	Dugtrio (Alola Form)
+a dugtrio	Dugtrio (Alola Form)
+dugtrioa	Dugtrio (Alola Form)
+dugtrio a	Dugtrio (Alola Form)
+dugtrio alola form	Dugtrio (Alola Form)
+dugtrioalolaform	Dugtrio (Alola Form)
+dugtrio alola	Dugtrio (Alola Form)
+dugtrioalola	Dugtrio (Alola Form)
+alolan dugtrio	Dugtrio (Alola Form)
+alolandugtrio	Dugtrio (Alola Form)
+dusk	Dusknoir
+eject+++	Eliminate
+aexeggutor	Exeggutor (Alola Form)
+a exeggutor	Exeggutor (Alola Form)
+exeggutora	Exeggutor (Alola Form)
+exeggutor a	Exeggutor (Alola Form)
+alolan exeggutor	Exeggutor (Alola Form)
+alolanexeggutor	Exeggutor (Alola Form)
+exeggutor alola	Exeggutor (Alola Form)
+exeggutoralola	Exeggutor (Alola Form)
+exeggutor alola form	Exeggutor (Alola Form)
+exeggutoralolaform	Exeggutor (Alola Form)
+wfennekin	Fennekin (Winking)
+w fennekin	Fennekin (Winking)
+fennekinw	Fennekin (Winking)
+winking fennekin	Fennekin (Winking)
+winkingfennekin	Fennekin (Winking)
+fennekin winking	Fennekin (Winking)
+fennekinwinking	Fennekin (Winking)
+fennekin w	Fennekin (Winking)
+fera	Feraligatr
+FE	Final Effort
+finaleffort	Final Effort
+flabebe	Flabébé
+wflabebe	Flabébé (Winking)
+w flabebe	Flabébé (Winking)
+flabebew	Flabébé (Winking)
+flabebe w	Flabébé (Winking)
+winking flabebe	Flabébé (Winking)
+winkingflabebe	Flabébé (Winking)
+flabebe winking	Flabébé (Winking)
+flabebewinking	Flabébé (Winking)
+fm	Flash Mob
+fml	Flash Mob
+hasn't aged well	Flash Mob
+flashmob	Flash Mob
+wfloette	Floette (Winking)
+w floette	Floette (Winking)
+floettew	Floette (Winking)
+floette w	Floette (Winking)
+winking floette	Floette (Winking)
+winkingfloette	Floette (Winking)
+floette winking	Floette (Winking)
+floettewinking	Floette (Winking)
+flygod	Flygon
+frillishf	Frillish (Female)
+frillish f	Frillish (Female)
+frillish female	Frillish (Female)
+frillishfemale	Frillish (Female)
+frillishm	Frillish (Male)
+frillish m	Frillish (Male)
+frillish male	Frillish (Male)
+frillishmale	Frillish (Male)
+wfroakie	Froakie (Winking)
+winking froakie	Froakie (Winking)
+winkingfroakie	Froakie (Winking)
+froakiew	Froakie (Winking)
+froakie winking	Froakie (Winking)
+froakiewinking	Froakie (Winking)
+w froakie	Froakie (Winking)
+froakie w	Froakie (Winking)
+fullpower	Full Power
+furyof5	Fury of 5
+galv	Galvantula
+The one fucker that kills your SM run	Galvantula
+SM Killer	Galvantula
+Chomp	Garchomp
+Garde	Gardevoir
+gard	Gardevoir
+sgard	Gardevoir (Shiny)
+sgarde	Gardevoir (Shiny)
+shiny gardevoir	Gardevoir (Shiny)
+shinygardevoir	Gardevoir (Shiny)
+gardevoir shiny	Gardevoir (Shiny)
+gardevoirshiny	Gardevoir (Shiny)
+sgardevoir	Gardevoir (Shiny)
+s gardevoir	Gardevoir (Shiny)
+gardevoirs	Gardevoir (Shiny)
+gardevoir s	Gardevoir (Shiny)
+gastrodon e	Gastrodon (East Sea)
+gastrodon east sea	Gastrodon (East Sea)
+gastrodon east	Gastrodon (East Sea)
+gastrodoneast	Gastrodon (East Sea)
+east gastrodon	Gastrodon (East Sea)
+eastgastrodon	Gastrodon (East Sea)
+gastrodone	Gastrodon (East Sea)
+egastrodon	Gastrodon (East Sea)
+e gastrodon	Gastrodon (East Sea)
+gastrodon w	Gastrodon (West Sea)
+gastrodon west sea	Gastrodon (West Sea)
+gastrodon west	Gastrodon (West Sea)
+gastrodonwest	Gastrodon (West Sea)
+west gastrodon	Gastrodon (West Sea)
+westgastrodon	Gastrodon (West Sea)
+gastrodonw	Gastrodon (West Sea)
+wgastrodon	Gastrodon (West Sea)
+w gastrodon	Gastrodon (West Sea)
+best pokemon for UX	Genesect
+gene	Genesect
+genesect shiny	Genesect (Shiny)
+shiny genesect	Genesect (Shiny)
+shinygenesect	Genesect (Shiny)
+genesectshiny	Genesect (Shiny)
+sgenesect	Genesect (Shiny)
+s genesect	Genesect (Shiny)
+genesects	Genesect (Shiny)
+sgene	Genesect (Shiny)
+genesect s	Genesect (Shiny)
+shiny gengar	Gengar (Shiny)
+gengar shiny	Gengar (Shiny)
+gengarshiny	Gengar (Shiny)
+shinygengar	Gengar (Shiny)
+gengars	Gengar (Shiny)
+s gengar	Gengar (Shiny)
+gengar s	Gengar (Shiny)
+Spookygengar	Gengar (Spooky)
+spooky gengar	Gengar (Spooky)
+sp gengar	Gengar (Spooky)
+spgengar	Gengar (Spooky)
+gengar spooky	Gengar (Spooky)
+gengar sp	Gengar (Spooky)
+gengarsp	Gengar (Spooky)
+spoopy gengar	Gengar (Spooky)
+spoopygengar	Gengar (Spooky)
+ageodude	Geodude (Alola Form)
+a geodude	Geodude (Alola Form)
+geodudea	Geodude (Alola Form)
+geodude a	Geodude (Alola Form)
+alolan geodude	Geodude (Alola Form)
+alolangeodude	Geodude (Alola Form)
+geodude alola	Geodude (Alola Form)
+geodudealola	Geodude (Alola Form)
+geodude alola form	Geodude (Alola Form)
+geodudealolaform	Geodude (Alola Form)
+GiratinaA	Giratina (Altered Forme)
+Giratina-A	Giratina (Altered Forme)
+Altered Giratina	Giratina (Altered Forme)
+giratinaaltered	Giratina (Altered Forme)
+giraa	Giratina (Altered Forme)
+gira a	Giratina (Altered Forme)
+giratina altered form	Giratina (Altered Forme)
+giratinaalteredform	Giratina (Altered Forme)
+giratina altered	Giratina (Altered Forme)
+giratina a	Giratina (Altered Forme)
+Giratina-O	Giratina (Origin Forme)
+GiratinaO	Giratina (Origin Forme)
+Giratina Origin	Giratina (Origin Forme)
+Origin Giratina	Giratina (Origin Forme)
+giratinaorigin	Giratina (Origin Forme)
+girao	Giratina (Origin Forme)
+gira o	Giratina (Origin Forme)
+giratinaoriginform	Giratina (Origin Forme)
+giratina origin form	Giratina (Origin Forme)
+giratina o	Giratina (Origin Forme)
+wglalie	Glalie (Winking)
+glaliew	Glalie (Winking)
+winking glalie	Glalie (Winking)
+winkingglalie	Glalie (Winking)
+w glalie	Glalie (Winking)
+glalie winking	Glalie (Winking)
+glaliewinking	Glalie (Winking)
+glalie w	Glalie (Winking)
+agolem	Golem (Alola Form)
+a golem	Golem (Alola Form)
+golema	Golem (Alola Form)
+golem a	Golem (Alola Form)
+alolan golem	Golem (Alola Form)
+alolangolem	Golem (Alola Form)
+golem alola	Golem (Alola Form)
+golemalola	Golem (Alola Form)
+golem alola form	Golem (Alola Form)
+golemalolaform	Golem (Alola Form)
+golisirpod	Golisopod
+goli	Golisopod
+goodluck	Good Luck
+spooky gourgeist	Gourgeist (Spooky)
+spookygourgeist	Gourgeist (Spooky)
+gourgeist spooky	Gourgeist (Spooky)
+s gourgeist	Gourgeist (Spooky)
+gourgeist s	Gourgeist (Spooky)
+sp gourgeist	Gourgeist (Spooky)
+spgourgeist	Gourgeist (Spooky)
+gourgeist sp	Gourgeist (Spooky)
+gourgeistsp	Gourgeist (Spooky)
+sgourgeist	Gourgeist (Spooky)
+gourgeists	Gourgeist (Spooky)
+gourgeistspooky	Gourgeist (Spooky)
+wgranbull	Granbull (Winking)
+w granbull	Granbull (Winking)
+granbullw	Granbull (Winking)
+winking granbull	Granbull (Winking)
+winkinggranbull	Granbull (Winking)
+granbull winking	Granbull (Winking)
+granbullwinking	Granbull (Winking)
+granbull w	Granbull (Winking)
+agraveler	Graveler (Alola Form)
+a graveler	Graveler (Alola Form)
+gravelera	Graveler (Alola Form)
+graveler a	Graveler (Alola Form)
+alolan graveler	Graveler (Alola Form)
+alolangraveler	Graveler (Alola Form)
+graveler alola	Graveler (Alola Form)
+graveleralola	Graveler (Alola Form)
+graveler alola form	Graveler (Alola Form)
+graveleralolaform	Graveler (Alola Form)
+Ashninja	Greninja (Ash-Greninja)
+A-Greninja	Greninja (Ash-Greninja)
+ashgreninja	Greninja (Ash-Greninja)
+ag	Greninja (Ash-Greninja)
+ash-greninja	Greninja (Ash-Greninja)
+assninja	Greninja (Ash-Greninja)
+ash greninja	Greninja (Ash-Greninja)
+agrimer	Grimer (Alola Form)
+a grimer	Grimer (Alola Form)
+grimera	Grimer (Alola Form)
+grimer a	Grimer (Alola Form)
+alolan grimer	Grimer (Alola Form)
+alolangrimer	Grimer (Alola Form)
+grimer alola	Grimer (Alola Form)
+grimeralola	Grimer (Alola Form)
+grimer alola form	Grimer (Alola Form)
+grimeralolaform	Grimer (Alola Form)
+GF	Ground Forces
+groundforces	Ground Forces
+Surfer Trump	Gumshoos
+gyara	Gyarados
+sgyarados	Gyarados (Shiny)
+s gyarados	Gyarados (Shiny)
+gyaradoss	Gyarados (Shiny)
+shiny gyarados	Gyarados (Shiny)
+shinygyarados	Gyarados (Shiny)
+gyarados shiny	Gyarados (Shiny)
+gyaradosshiny	Gyarados (Shiny)
+sgyara	Gyarados (Shiny)
+sdos	Gyarados (Shiny)
+gyarados s	Gyarados (Shiny)
+red gyarados	Gyarados (Shiny)
+hs	Hammering Streak
+hammeringstreak	Hammering Streak
+s-hawlucha	Hawlucha (Shiny)
+slucha	Hawlucha (Shiny)
+s hawlucha	Hawlucha (Shiny)
+shawlucha	Hawlucha (Shiny)
+hawluchas	Hawlucha (Shiny)
+shiny hawlucha	Hawlucha (Shiny)
+shinyhawlucha	Hawlucha (Shiny)
+hawlucha shiny	Hawlucha (Shiny)
+hawluchashiny	Hawlucha (Shiny)
+hawlucha s	Hawlucha (Shiny)
+SHaw	Hawlucha (Shiny)
+shawl	Hawlucha (Shiny)
+heavyhitter	Heavy Hitter
+Hera	Heracross
+itemgod	Heracross
+succ	Heracross
+hideandseek	Hide and Seek
+quirky+++	Hide and Seek
+hippopotasf	Hippopotas (Female)
+hippopotas f	Hippopotas (Female)
+hippopotas female	Hippopotas (Female)
+hippopotasfemale	Hippopotas (Female)
+hippopotasm	Hippopotas (Male)
+hippopotas m	Hippopotas (Male)
+hippopotas male	Hippopotas (Male)
+hippopotasmale	Hippopotas (Male)
+hippof	Hippowdon (Female)
+hippo f	Hippowdon (Female)
+hippowdonf	Hippowdon (Female)
+hippowdon f	Hippowdon (Female)
+hippowdon female	Hippowdon (Female)
+hippowdonfemale	Hippowdon (Female)
+Hippo	Hippowdon (Male)
+hippom	Hippowdon (Male)
+hippowdonm	Hippowdon (Male)
+hippowdon m	Hippowdon (Male)
+hippowdon male	Hippowdon (Male)
+hippowdonmale	Hippowdon (Male)
+hippo m	Hippowdon (Male)
+Shitmonchan	Hitmonchan
+Lee	Hitmonlee
+hittingstreak	Hitting Streak
+HS+	Hitting Streak+
+hittingstreak+	Hitting Streak+
+Hooh	Ho-Oh
+ho oh	Ho-Oh
+sho-oh	Ho-Oh (Shiny)
+shinyhooh	Ho-Oh (Shiny)
+shooh	Ho-Oh (Shiny)
+shiny ho-oh	Ho-Oh (Shiny)
+ho-oh shiny	Ho-Oh (Shiny)
+ho-ohshiny	Ho-Oh (Shiny)
+hoohs	Ho-Oh (Shiny)
+ho-ohs	Ho-Oh (Shiny)
+hoohshiny	Ho-Oh (Shiny)
+shinyho-oh	Ho-Oh (Shiny)
+ho-oh s	Ho-Oh (Shiny)
+hooh s	Ho-Oh (Shiny)
+ho oh s	Ho-Oh (Shiny)
+s ho oh	Ho-Oh (Shiny)
+s ho-oh	Ho-Oh (Shiny)
+shiny ho oh	Ho-Oh (Shiny)
+ho oh shiny	Ho-Oh (Shiny)
+s hooh	Ho-Oh (Shiny)
+Hoopa-C	Hoopa (Hoopa Confined)
+Hoopa-Confined	Hoopa (Hoopa Confined)
+HoopaC	Hoopa (Hoopa Confined)
+hoopa confined	Hoopa (Hoopa Confined)
+hoopaconfined	Hoopa (Hoopa Confined)
+hoopa c	Hoopa (Hoopa Confined)
+choopa	Hoopa (Hoopa Confined)
+c hoopa	Hoopa (Hoopa Confined)
+confinedhoopa	Hoopa (Hoopa Confined)
+confined hoopa	Hoopa (Hoopa Confined)
+Hoopa-U	Hoopa (Hoopa Unbound)
+HoopaU	Hoopa (Hoopa Unbound)
+Hoopa-Unbound	Hoopa (Hoopa Unbound)
+hoopa unbound	Hoopa (Hoopa Unbound)
+hoopaunbound	Hoopa (Hoopa Unbound)
+hoopa u	Hoopa (Hoopa Unbound)
+uhoopa	Hoopa (Hoopa Unbound)
+unboundhoopa	Hoopa (Hoopa Unbound)
+u hoopa	Hoopa (Hoopa Unbound)
+unbound hoopa	Hoopa (Hoopa Unbound)
+whoppip	Hoppip (Winking)
+w hoppip	Hoppip (Winking)
+hoppipw	Hoppip (Winking)
+winking hoppip	Hoppip (Winking)
+winkinghoppip	Hoppip (Winking)
+hoppip winking	Hoppip (Winking)
+hoppipwinking	Hoppip (Winking)
+hoppip w	Hoppip (Winking)
+hyperbolt	Hyper Bolt
+hd	Hyper Drain
+hyperdrain	Hyper Drain
+hyperpunch	Hyper Punch
+icedance	Ice Dance
+inc	Incineroar
+ape	Infernape
+jellicent female	Jellicent (Female)
+jellicentf	Jellicent (Female)
+jellicent f	Jellicent (Female)
+jellicentfemale	Jellicent (Female)
+jellif	Jellicent (Female)
+jelli f	Jellicent (Female)
+jellicent male	Jellicent (Male)
+pringles	Jellicent (Male)
+jelli m	Jellicent (Male)
+jellicentm	Jellicent (Male)
+jellicent m	Jellicent (Male)
+jellicentmale	Jellicent (Male)
+jellim	Jellicent (Male)
+wjigglypuff	Jigglypuff (Winking)
+w jigglypuff	Jigglypuff (Winking)
+jigglypuffw	Jigglypuff (Winking)
+jigglypuff w	Jigglypuff (Winking)
+winking jigglypuff	Jigglypuff (Winking)
+winkingjigglypuff	Jigglypuff (Winking)
+jigglypuff winking	Jigglypuff (Winking)
+jigglypuffwinking	Jigglypuff (Winking)
+wjumpluff	Jumpluff (Winking)
+w jumpluff	Jumpluff (Winking)
+jumpluffw	Jumpluff (Winking)
+winking jumpluff	Jumpluff (Winking)
+winkingjumpluff	Jumpluff (Winking)
+jumpluff winking	Jumpluff (Winking)
+jumpluffwinking	Jumpluff (Winking)
+jumpluff w	Jumpluff (Winking)
+Keldeo	Keldeo (Ordinary Form)
+Keldeo-O	Keldeo (Ordinary Form)
+KeldeoO	Keldeo (Ordinary Form)
+keldeoordinary	Keldeo (Ordinary Form)
+ordinarykeldeo	Keldeo (Ordinary Form)
+keldeo o	Keldeo (Ordinary Form)
+keldeo ordinary	Keldeo (Ordinary Form)
+keldeo ordinary form	Keldeo (Ordinary Form)
+ordinary keldeo	Keldeo (Ordinary Form)
+Keldeo-R	Keldeo (Resolute Form)
+KeldeoR	Keldeo (Resolute Form)
+keldeoresolute	Keldeo (Resolute Form)
+keldeo r	Keldeo (Resolute Form)
+keldeo resolute	Keldeo (Resolute Form)
+keldeo resolute form	Keldeo (Resolute Form)
+resolutekeldeo	Keldeo (Resolute Form)
+resolute keldeo	Keldeo (Resolute Form)
+kyo	Kyogre
+orca	Kyogre
+Kyurem-Black	Kyurem (Black Kyurem)
+Kyurem-B	Kyurem (Black Kyurem)
+KyuB	Kyurem (Black Kyurem)
+QB	Kyurem (Black Kyurem)
+KyuremB	Kyurem (Black Kyurem)
+Black Kyurem	Kyurem (Black Kyurem)
+kyuremblack	Kyurem (Black Kyurem)
+blackkyurem	Kyurem (Black Kyurem)
+kyurem black	Kyurem (Black Kyurem)
+kyurem b	Kyurem (Black Kyurem)
+b kyurem	Kyurem (Black Kyurem)
+bkyurem	Kyurem (Black Kyurem)
+kyu-b	Kyurem (Black Kyurem)
+Kyurem-White	Kyurem (White Kyurem)
+Kyurem-W	Kyurem (White Kyurem)
+KyuW	Kyurem (White Kyurem)
+QW	Kyurem (White Kyurem)
+KyuremW	Kyurem (White Kyurem)
+White Kyurem	Kyurem (White Kyurem)
+whitekyurem	Kyurem (White Kyurem)
+kyuremwhite	Kyurem (White Kyurem)
+kyurem white	Kyurem (White Kyurem)
+kyurem w	Kyurem (White Kyurem)
+wkyurem	Kyurem (White Kyurem)
+w kyurem	Kyurem (White Kyurem)
+kyu-w	Kyurem (White Kyurem)
+lboost	L-boost
+l boost	L-boost
+Lando	Landorus (Incarnate Forme)
+Landorus-I	Landorus (Incarnate Forme)
+LandorusI	Landorus (Incarnate Forme)
+LandoI	Landorus (Incarnate Forme)
+landorus	Landorus (Incarnate Forme)
+landorus i	Landorus (Incarnate Forme)
+lando-i	Landorus (Incarnate Forme)
+lando i	Landorus (Incarnate Forme)
+landorus incarnate	Landorus (Incarnate Forme)
+landorusincarnate	Landorus (Incarnate Forme)
+landorusincarnateform	Landorus (Incarnate Forme)
+landorus incarnate form	Landorus (Incarnate Forme)
+Lando-T	Landorus (Therian Forme)
+Landorus-T	Landorus (Therian Forme)
+LandorusT	Landorus (Therian Forme)
+landot	Landorus (Therian Forme)
+lando t	Landorus (Therian Forme)
+landorus therian	Landorus (Therian Forme)
+landorustherian	Landorus (Therian Forme)
+landorus t	Landorus (Therian Forme)
+landorustherianform	Landorus (Therian Forme)
+landorus therian form	Landorus (Therian Forme)
+LDE	Last-Ditch Effort
+last ditch effort	Last-Ditch Effort
+lastditcheffort	Last-Ditch Effort
+leafcombo	Leaf Combo
+lc	Leaf Combo
+grass combo	Leaf Combo
+grasscombo	Leaf Combo
+luke	Lucario
+King of Pokemon	Luxray
+Dante	Luxray
+Danté	Luxray
+lycanrocc	Lycanroc
+cog	Magearna
+mag	Magearna
+mage	Magearna
+smagikarp	Magikarp (Shiny)
+s magikarp	Magikarp (Shiny)
+magikarps	Magikarp (Shiny)
+shiny magikarp	Magikarp (Shiny)
+shinymagikarp	Magikarp (Shiny)
+magikarp shiny	Magikarp (Shiny)
+magikarpshiny	Magikarp (Shiny)
+gold fish	Magikarp (Shiny)
+magikarp s	Magikarp (Shiny)
+SKarp	Magikarp (Shiny)
+golden magikarp	Magikarp (Shiny)
+goldfish	Magikarp (Shiny)
+Mamo	Mamoswine
+wmanaphy	Manaphy (Winking)
+w manaphy	Manaphy (Winking)
+manaphyw	Manaphy (Winking)
+manaphy w	Manaphy (Winking)
+winking manaphy	Manaphy (Winking)
+winkingmanaphy	Manaphy (Winking)
+manaphy winking	Manaphy (Winking)
+manaphywinking	Manaphy (Winking)
+Manitary	Mantine
+wmarill	Marill (Winking)
+w marill	Marill (Winking)
+winking marill	Marill (Winking)
+winkingmarill	Marill (Winking)
+marillw	Marill (Winking)
+marill w	Marill (Winking)
+marill winking	Marill (Winking)
+marillwinking	Marill (Winking)
+alolan marowak	Marowak (Alola Form)
+amarowak	Marowak (Alola Form)
+a marowak	Marowak (Alola Form)
+marowaka	Marowak (Alola Form)
+marowak a	Marowak (Alola Form)
+alolanmarowak	Marowak (Alola Form)
+marowak alola	Marowak (Alola Form)
+marowakalola	Marowak (Alola Form)
+marowak alola form	Marowak (Alola Form)
+marowakalolaform	Marowak (Alola Form)
+Medi	Medicham
+MAboma	Mega Abomasnow
+megaabomasnow	Mega Abomasnow
+mabomasnow	Mega Abomasnow
+m abomasnow	Mega Abomasnow
+mobama	Mega Abomasnow
+megaabsol	Mega Absol
+mabsol	Mega Absol
+m absol	Mega Absol
+MAero	Mega Aerodactyl
+megaaerodactyl	Mega Aerodactyl
+maerodactyl	Mega Aerodactyl
+m aerodactyl	Mega Aerodactyl
+megaaggron	Mega Aggron
+maggron	Mega Aggron
+m aggron	Mega Aggron
+magg	Mega Aggron
+mzam	Mega Alakazam
+mala	Mega Alakazam
+megaalakazam	Mega Alakazam
+malakazam	Mega Alakazam
+m alakazam	Mega Alakazam
+megaaltaria	Mega Altaria
+maltaria	Mega Altaria
+m altaria	Mega Altaria
+mamphy	Mega Ampharos
+megaampharos	Mega Ampharos
+mampharos	Mega Ampharos
+m ampharos	Mega Ampharos
+m amphy	Mega Ampharos
+megaaudino	Mega Audino
+maudino	Mega Audino
+m audino	Mega Audino
+mwaudino	Mega Audino (Winking)
+wmaudino	Mega Audino (Winking)
+maudinow	Mega Audino (Winking)
+winking mega audino	Mega Audino (Winking)
+mega winking audino	Mega Audino (Winking)
+winkingmegaaudino	Mega Audino (Winking)
+megawinkingaudino	Mega Audino (Winking)
+mega audino winking	Mega Audino (Winking)
+megaaudinowinking	Mega Audino (Winking)
+m w audino	Mega Audino (Winking)
+w m audino	Mega Audino (Winking)
+m audino w	Mega Audino (Winking)
+megabanette	Mega Banette
+mbanette	Mega Banette
+m banette	Mega Banette
+mbee	Mega Beedrill
+megabeedrill	Mega Beedrill
+mbeedrill	Mega Beedrill
+m beedrill	Mega Beedrill
+m bee	Mega Beedrill
+mega bee	Mega Beedrill
+megabee	Mega Beedrill
+megablastoise	Mega Blastoise
+mblastoise	Mega Blastoise
+m blastoise	Mega Blastoise
+mblaze	Mega Blaziken
+megablaziken	Mega Blaziken
+mblaziken	Mega Blaziken
+m blaziken	Mega Blaziken
+MB	Mega Boost
+megaboost	Mega Boost
+MB+	Mega Boost+
+megaboost+	Mega Boost+
+MB++	Mega Boost++
+megaboost++	Mega Boost++
+MCamel	Mega Camerupt
+megacamerupt	Mega Camerupt
+mcamerupt	Mega Camerupt
+m camerupt	Mega Camerupt
+MCX	Mega Charizard X
+megacharizardx	Mega Charizard X
+mcharizardx	Mega Charizard X
+m charizard x	Mega Charizard X
+SMCX	Mega Charizard X (Shiny)
+shiny mega charizard x	Mega Charizard X (Shiny)
+mega shiny charizard x	Mega Charizard X (Shiny)
+shinymegacharizardx	Mega Charizard X (Shiny)
+megashinycharizardx	Mega Charizard X (Shiny)
+mscharizardx	Mega Charizard X (Shiny)
+smcharizardx	Mega Charizard X (Shiny)
+mega charizard x shiny	Mega Charizard X (Shiny)
+megacharizardxshiny	Mega Charizard X (Shiny)
+m s charizard x	Mega Charizard X (Shiny)
+s m charizard x	Mega Charizard X (Shiny)
+mcy	Mega Charizard Y
+megacharizardy	Mega Charizard Y
+mcharizardy	Mega Charizard Y
+m charizard y	Mega Charizard Y
+smcy	Mega Charizard Y (Shiny)
+shiny mega charizard y	Mega Charizard Y (Shiny)
+mega shiny charizard y	Mega Charizard Y (Shiny)
+shinymegacharizardy	Mega Charizard Y (Shiny)
+megashinycharizardy	Mega Charizard Y (Shiny)
+smcharizardy	Mega Charizard Y (Shiny)
+mscharizardy	Mega Charizard Y (Shiny)
+mega charizard y shiny	Mega Charizard Y (Shiny)
+megacharizardyshiny	Mega Charizard Y (Shiny)
+s m charizard y	Mega Charizard Y (Shiny)
+m s charizard y	Mega Charizard Y (Shiny)
+mdiancie	Mega Diancie
+m diancie	Mega Diancie
+megadiancie	Mega Diancie
+MDian	Mega Diancie
+mdia	Mega Diancie
+mdiancies	Mega Diancie (Shiny)
+m diancie s	Mega Diancie (Shiny)
+megadiancieshiny	Mega Diancie (Shiny)
+mega diancie shiny	Mega Diancie (Shiny)
+smdiancie	Mega Diancie (Shiny)
+msdiancie	Mega Diancie (Shiny)
+shiny mega diancie	Mega Diancie (Shiny)
+mega shiny diancie	Mega Diancie (Shiny)
+shinymegadiancie	Mega Diancie (Shiny)
+megashinydiancie	Mega Diancie (Shiny)
+m s diancie	Mega Diancie (Shiny)
+s m diancie	Mega Diancie (Shiny)
+smdia	Mega Diancie (Shiny)
+msdia	Mega Diancie (Shiny)
+megagallade	Mega Gallade
+mgallade	Mega Gallade
+m gallade	Mega Gallade
+MChomp	Mega Garchomp
+megagarchomp	Mega Garchomp
+mgarchomp	Mega Garchomp
+m garchomp	Mega Garchomp
+MGarde	Mega Gardevoir
+mgardevoir	Mega Gardevoir
+mgard	Mega Gardevoir
+m gardevoir	Mega Gardevoir
+megagardevoir	Mega Gardevoir
+msgardevoir	Mega Gardevoir (Shiny)
+smgardevoir	Mega Gardevoir (Shiny)
+smgarde	Mega Gardevoir (Shiny)
+msgarde	Mega Gardevoir (Shiny)
+msgard	Mega Gardevoir (Shiny)
+smgard	Mega Gardevoir (Shiny)
+shiny mega gardevoir	Mega Gardevoir (Shiny)
+shinymegagardevoir	Mega Gardevoir (Shiny)
+mega shiny gardevoir	Mega Gardevoir (Shiny)
+megashinygardevoir	Mega Gardevoir (Shiny)
+mega gardevoir shiny	Mega Gardevoir (Shiny)
+megagardevoirshiny	Mega Gardevoir (Shiny)
+mgardevoirs	Mega Gardevoir (Shiny)
+m s gardevoir	Mega Gardevoir (Shiny)
+s m gardevoir	Mega Gardevoir (Shiny)
+m gardevoir s	Mega Gardevoir (Shiny)
+megagengar	Mega Gengar
+mgengar	Mega Gengar
+m gengar	Mega Gengar
+megashinygengar	Mega Gengar (Shiny)
+shinymegagengar	Mega Gengar (Shiny)
+mega shiny gengar	Mega Gengar (Shiny)
+shiny mega gengar	Mega Gengar (Shiny)
+msgengar	Mega Gengar (Shiny)
+smgengar	Mega Gengar (Shiny)
+mega gengar shiny	Mega Gengar (Shiny)
+megagengarshiny	Mega Gengar (Shiny)
+mgengars	Mega Gengar (Shiny)
+m s gengar	Mega Gengar (Shiny)
+s m gengar	Mega Gengar (Shiny)
+m gengar s	Mega Gengar (Shiny)
+megaspookygengar	Mega Gengar (Spooky)
+spookymegagengar	Mega Gengar (Spooky)
+mega spooky gengar	Mega Gengar (Spooky)
+spooky mega gengar	Mega Gengar (Spooky)
+mega gengar spooky	Mega Gengar (Spooky)
+megagengarspooky	Mega Gengar (Spooky)
+spmgengar	Mega Gengar (Spooky)
+mspgengar	Mega Gengar (Spooky)
+m sp gengar	Mega Gengar (Spooky)
+mgengarsp	Mega Gengar (Spooky)
+sp m gengar	Mega Gengar (Spooky)
+m gengar sp	Mega Gengar (Spooky)
+megaglalie	Mega Glalie
+mglalie	Mega Glalie
+m glalie	Mega Glalie
+mwglalie	Mega Glalie (Winking)
+wmglalie	Mega Glalie (Winking)
+mega glalie winking	Mega Glalie (Winking)
+megaglaliewinking	Mega Glalie (Winking)
+winking mega glalie	Mega Glalie (Winking)
+winkingmegaglalie	Mega Glalie (Winking)
+mega winking glalie	Mega Glalie (Winking)
+megawinkingglalie	Mega Glalie (Winking)
+mglaliew	Mega Glalie (Winking)
+m w glalie	Mega Glalie (Winking)
+w m glalie	Mega Glalie (Winking)
+m glalie w	Mega Glalie (Winking)
+mgyarados	Mega Gyarados
+megagyarados	Mega Gyarados
+m gyarados	Mega Gyarados
+mgyara	Mega Gyarados
+megashinygyarados	Mega Gyarados (Shiny)
+shinymegagyarados	Mega Gyarados (Shiny)
+mega shiny gyarados	Mega Gyarados (Shiny)
+shiny mega gyarados	Mega Gyarados (Shiny)
+smgyarados	Mega Gyarados (Shiny)
+msgyarados	Mega Gyarados (Shiny)
+mgyaradoss	Mega Gyarados (Shiny)
+smgyara	Mega Gyarados (Shiny)
+msgyara	Mega Gyarados (Shiny)
+mega gyarados shiny	Mega Gyarados (Shiny)
+megagyaradosshiny	Mega Gyarados (Shiny)
+m gyarados s	Mega Gyarados (Shiny)
+s m gyarados	Mega Gyarados (Shiny)
+m s gyarados	Mega Gyarados (Shiny)
+MHera	Mega Heracross
+m-itemgod	Mega Heracross
+mitemgod	Mega Heracross
+mega itemgod	Mega Heracross
+megaitemgod	Mega Heracross
+megaheracross	Mega Heracross
+mheracross	Mega Heracross
+m heracross	Mega Heracross
+mhound	Mega Houndoom
+mdoom	Mega Houndoom
+mhoundoom	Mega Houndoom
+m houndoom	Mega Houndoom
+megahoundoom	Mega Houndoom
+mkanga	Mega Kangaskhan
+mkangaskhan	Mega Kangaskhan
+m kangaskhan	Mega Kangaskhan
+megakangaskhan	Mega Kangaskhan
+megalatias	Mega Latias
+mlatias	Mega Latias
+m latias	Mega Latias
+megalatios	Mega Latios
+mlatios	Mega Latios
+m latios	Mega Latios
+mlop	Mega Lopunny
+mlopunny	Mega Lopunny
+m lopunny	Mega Lopunny
+megalopunny	Mega Lopunny
+Lucario (mega)	Mega Lucario
+mlucario	Mega Lucario
+m lucario	Mega Lucario
+megalucario	Mega Lucario
+mluke	Mega Lucario
+megamanectric	Mega Manectric
+mmanectric	Mega Manectric
+m manectric	Mega Manectric
+MMane	Mega Manectric
+megamawile	Mega Mawile
+mmawile	Mega Mawile
+m mawile	Mega Mawile
+MMedi	Mega Medicham
+megamedicham	Mega Medicham
+mmedicham	Mega Medicham
+m medicham	Mega Medicham
+MMeta	Mega Metagross
+megametagross	Mega Metagross
+mmetagross	Mega Metagross
+m metagross	Mega Metagross
+msmeta	Mega Metagross (Shiny)
+smmeta	Mega Metagross (Shiny)
+mmetagrosss	Mega Metagross (Shiny)
+m metagross s	Mega Metagross (Shiny)
+megametagrossshiny	Mega Metagross (Shiny)
+mega metagross shiny	Mega Metagross (Shiny)
+shiny mega metagross	Mega Metagross (Shiny)
+mega shiny metagross	Mega Metagross (Shiny)
+shinymegametagross	Mega Metagross (Shiny)
+megashinymetagross	Mega Metagross (Shiny)
+s m meta	Mega Metagross (Shiny)
+m s meta	Mega Metagross (Shiny)
+s m metagross	Mega Metagross (Shiny)
+m s metagross	Mega Metagross (Shiny)
+MMX	Mega Mewtwo X
+megamewtwox	Mega Mewtwo X
+mmewtwox	Mega Mewtwo X
+m mewtwo x	Mega Mewtwo X
+SMMX	Mega Mewtwo X (Shiny)
+shiny mega mewtwo x	Mega Mewtwo X (Shiny)
+shinymegamewtwox	Mega Mewtwo X (Shiny)
+mega shiny mewtwo x	Mega Mewtwo X (Shiny)
+megashinymewtwox	Mega Mewtwo X (Shiny)
+mega mewtwo x shiny	Mega Mewtwo X (Shiny)
+megamewtwoxshiny	Mega Mewtwo X (Shiny)
+smmewtwox	Mega Mewtwo X (Shiny)
+msmewtwox	Mega Mewtwo X (Shiny)
+s m mewtwo x	Mega Mewtwo X (Shiny)
+m s mewtwo x	Mega Mewtwo X (Shiny)
+MMY	Mega Mewtwo Y
+megamewtwoy	Mega Mewtwo Y
+mmewtwoy	Mega Mewtwo Y
+m mewtwo y	Mega Mewtwo Y
+SMMY	Mega Mewtwo Y (Shiny)
+shiny mega mewtwo y	Mega Mewtwo Y (Shiny)
+shinymegamewtwoy	Mega Mewtwo Y (Shiny)
+mega shiny mewtwo y	Mega Mewtwo Y (Shiny)
+megashinymewtwoy	Mega Mewtwo Y (Shiny)
+mega mewtwo y shiny	Mega Mewtwo Y (Shiny)
+megamewtwoyshiny	Mega Mewtwo Y (Shiny)
+smmewtwoy	Mega Mewtwo Y (Shiny)
+msmewtwoy	Mega Mewtwo Y (Shiny)
+s m mewtwo y	Mega Mewtwo Y (Shiny)
+m s mewtwo y	Mega Mewtwo Y (Shiny)
+megapidgeot	Mega Pidgeot
+mpidgeot	Mega Pidgeot
+m pidgeot	Mega Pidgeot
+mpinsir	Mega Pinsir
+m pinsir	Mega Pinsir
+megapinsir	Mega Pinsir
+mpin	Mega Pinsir
+mray	Mega Rayquaza
+mega ray	Mega Rayquaza
+megaray	Mega Rayquaza
+m rayquaza	Mega Rayquaza
+m ray	Mega Rayquaza
+mrayquaza	Mega Rayquaza
+megarayquaza	Mega Rayquaza
+smray	Mega Rayquaza (Shiny)
+msray	Mega Rayquaza (Shiny)
+smrayquaza	Mega Rayquaza (Shiny)
+msrayquaza	Mega Rayquaza (Shiny)
+shiny mega rayquaza	Mega Rayquaza (Shiny)
+mega shiny rayquaza	Mega Rayquaza (Shiny)
+shinymegarayquaza	Mega Rayquaza (Shiny)
+megashinyrayquaza	Mega Rayquaza (Shiny)
+shiny mega ray	Mega Rayquaza (Shiny)
+mega shiny ray	Mega Rayquaza (Shiny)
+shinymegaray	Mega Rayquaza (Shiny)
+megashinyray	Mega Rayquaza (Shiny)
+mrayquazas	Mega Rayquaza (Shiny)
+m s ray	Mega Rayquaza (Shiny)
+s m ray	Mega Rayquaza (Shiny)
+m s rayquaza	Mega Rayquaza (Shiny)
+s m rayquaza	Mega Rayquaza (Shiny)
+m rayquaza s	Mega Rayquaza (Shiny)
+megasableye	Mega Sableye
+msableye	Mega Sableye
+m sableye	Mega Sableye
+mssableye	Mega Sableye (Spooky)
+smsableye	Mega Sableye (Spooky)
+spmsableye	Mega Sableye (Spooky)
+mspsableye	Mega Sableye (Spooky)
+mega sableye spooky	Mega Sableye (Spooky)
+megasableyespooky	Mega Sableye (Spooky)
+spooky mega sableye	Mega Sableye (Spooky)
+spookymegasableye	Mega Sableye (Spooky)
+mega spooky sableye	Mega Sableye (Spooky)
+megaspookysableye	Mega Sableye (Spooky)
+msableyes	Mega Sableye (Spooky)
+msableyesp	Mega Sableye (Spooky)
+m sp sableye	Mega Sableye (Spooky)
+m sableye sp	Mega Sableye (Spooky)
+sp m sableye	Mega Sableye (Spooky)
+m s sableye	Mega Sableye (Spooky)
+s m sableye	Mega Sableye (Spooky)
+m sableye s	Mega Sableye (Spooky)
+MSala	Mega Salamence
+mmence	Mega Salamence
+megasalamence	Mega Salamence
+msalamence	Mega Salamence
+m salamence	Mega Salamence
+megasceptile	Mega Sceptile
+msceptile	Mega Sceptile
+m sceptile	Mega Sceptile
+megascizor	Mega Scizor
+mscizor	Mega Scizor
+m scizor	Mega Scizor
+mshark	Mega Sharpedo
+megasharpedo	Mega Sharpedo
+msharpedo	Mega Sharpedo
+m sharpedo	Mega Sharpedo
+megaslowbro	Mega Slowbro
+mslowbro	Mega Slowbro
+m slowbro	Mega Slowbro
+mbro	Mega Slowbro
+msteelix	Mega Steelix
+m steelix	Mega Steelix
+megasteelix	Mega Steelix
+megaswampert	Mega Swampert
+mswampert	Mega Swampert
+m swampert	Mega Swampert
+mswamp	Mega Swampert
+MTTar	Mega Tyranitar
+MTar	Mega Tyranitar
+megatyranitar	Mega Tyranitar
+mtyranitar	Mega Tyranitar
+m tyranitar	Mega Tyranitar
+mega ttar	Mega Tyranitar
+megattar	Mega Tyranitar
+msttar	Mega Tyranitar (Shiny)
+mega shiny ttar	Mega Tyranitar (Shiny)
+smttar	Mega Tyranitar (Shiny)
+mtyranitars	Mega Tyranitar (Shiny)
+m tyranitar s	Mega Tyranitar (Shiny)
+megatyranitarshiny	Mega Tyranitar (Shiny)
+mega tyranitar shiny	Mega Tyranitar (Shiny)
+mstyranitar	Mega Tyranitar (Shiny)
+smtyranitar	Mega Tyranitar (Shiny)
+shiny mega tyranitar	Mega Tyranitar (Shiny)
+mega shiny tyranitar	Mega Tyranitar (Shiny)
+shinymegatyranitar	Mega Tyranitar (Shiny)
+megashinytyranitar	Mega Tyranitar (Shiny)
+shiny mega ttar	Mega Tyranitar (Shiny)
+mega brownietar	Mega Tyranitar (Shiny)
+megabrownietar	Mega Tyranitar (Shiny)
+m s ttar	Mega Tyranitar (Shiny)
+s m ttar	Mega Tyranitar (Shiny)
+m s tyranitar	Mega Tyranitar (Shiny)
+s m tyranitar	Mega Tyranitar (Shiny)
+megavenusaur	Mega Venusaur
+mvenusaur	Mega Venusaur
+m venusaur	Mega Venusaur
+meloettaaria	Meloetta (Aria Forme)
+meloa	Meloetta (Aria Forme)
+meloetta aria	Meloetta (Aria Forme)
+meloetta a	Meloetta (Aria Forme)
+meloetta	Meloetta (Aria Forme)
+mela	Meloetta (Aria Forme)
+melo	Meloetta (Aria Forme)
+meloettaa	Meloetta (Aria Forme)
+meloetta aria form	Meloetta (Aria Forme)
+meloetta aria forme	Meloetta (Aria Forme)
+meloettaariaform	Meloetta (Aria Forme)
+melo a	Meloetta (Aria Forme)
+melop	Meloetta (Pirouette Forme)
+meloettapirouette	Meloetta (Pirouette Forme)
+meloetta pirouette	Meloetta (Pirouette Forme)
+melo p	Meloetta (Pirouette Forme)
+melp	Meloetta (Pirouette Forme)
+meloettap	Meloetta (Pirouette Forme)
+meloetta p	Meloetta (Pirouette Forme)
+meloetta pirouette form	Meloetta (Pirouette Forme)
+meloettapirouetteform	Meloetta (Pirouette Forme)
+meloetta pirouette forme	Meloetta (Pirouette Forme)
+meowtha	Meowth (Alola Form)
+ameowth	Meowth (Alola Form)
+alolan meowth	Meowth (Alola Form)
+alolanmeowth	Meowth (Alola Form)
+meowth a	Meowth (Alola Form)
+a meowth	Meowth (Alola Form)
+meowth alola	Meowth (Alola Form)
+meowthalola	Meowth (Alola Form)
+meowth alola form	Meowth (Alola Form)
+meowthalolaform	Meowth (Alola Form)
+Meta	Metagross
+smeta	Metagross (Shiny)
+metagross shiny	Metagross (Shiny)
+smetagross	Metagross (Shiny)
+s metagross	Metagross (Shiny)
+metagrosss	Metagross (Shiny)
+shiny metagross	Metagross (Shiny)
+shinymetagross	Metagross (Shiny)
+metagrossshiny	Metagross (Shiny)
+metagross s	Metagross (Shiny)
+metalcombo	Metal Combo
+M2	Mewtwo
+smewtwo	Mewtwo (Shiny)
+shiny mewtwo	Mewtwo (Shiny)
+shinymewtwo	Mewtwo (Shiny)
+mewtwoshiny	Mewtwo (Shiny)
+mewtwo shiny	Mewtwo (Shiny)
+s mewtwo	Mewtwo (Shiny)
+mewtwos	Mewtwo (Shiny)
+mewtwo s	Mewtwo (Shiny)
+smew	Mewtwo (Shiny)
+mime jr	Mime Jr.
+mimejr	Mime Jr.
+mimi	Mimikyu
+Mimikyuun	Mimikyu
+MZ	Mind Zap
+mindzap	Mind Zap
+wminun	Minun (Winking)
+w minun	Minun (Winking)
+winking minun	Minun (Winking)
+winkingminun	Minun (Winking)
+minunw	Minun (Winking)
+minun w	Minun (Winking)
+minun winking	Minun (Winking)
+minunwinking	Minun (Winking)
+mr mime	Mr. Mime
+mrmime	Mr. Mime
+wmudkip	Mudkip (Winking)
+w mudkip	Mudkip (Winking)
+mudkipw	Mudkip (Winking)
+mudkip w	Mudkip (Winking)
+winking mudkip	Mudkip (Winking)
+winkingmudkip	Mudkip (Winking)
+mudkip winking	Mudkip (Winking)
+mudkipwinking	Mudkip (Winking)
+Fuk	Muk
+amuk	Muk (Alola Form)
+a muk	Muk (Alola Form)
+muka	Muk (Alola Form)
+muk a	Muk (Alola Form)
+alolan muk	Muk (Alola Form)
+alolanmuk	Muk (Alola Form)
+muk alola	Muk (Alola Form)
+mukalola	Muk (Alola Form)
+muk alola form	Muk (Alola Form)
+mukalolaform	Muk (Alola Form)
+naptime	Nap Time
+9T	Ninetales
+A9	Ninetales (Alola Form)
+aninetales	Ninetales (Alola Form)
+a ninetales	Ninetales (Alola Form)
+ninetales alola	Ninetales (Alola Form)
+ninetalesalola	Ninetales (Alola Form)
+ninetales alola form	Ninetales (Alola Form)
+ninetalesalolaform	Ninetales (Alola Form)
+ninetalesa	Ninetales (Alola Form)
+alolan ninetales	Ninetales (Alola Form)
+alolanninetales	Ninetales (Alola Form)
+ninetales a	Ninetales (Alola Form)
+NS+	Non Stop+
+nonstop+	Non Stop+
+damage streak+	Non Stop+
+nd	Nosedive
+lordhelix	Omanyte
+helix	Omanyte
+lord helix	Omanyte
+oricorio baile style	Oricorio (Baile Style)
+oricoriobailestyle	Oricorio (Baile Style)
+oricorio baile	Oricorio (Baile Style)
+oricoriobaile	Oricorio (Baile Style)
+oricoriob	Oricorio (Baile Style)
+oricorio b	Oricorio (Baile Style)
+oricorio fire	Oricorio (Baile Style)
+fire oricorio	Oricorio (Baile Style)
+oricorio pau style	Oricorio (Pa'u Style)
+oricoriopaustyle	Oricorio (Pa'u Style)
+oricorio pau	Oricorio (Pa'u Style)
+oricoriopau	Oricorio (Pa'u Style)
+oricoriop	Oricorio (Pa'u Style)
+oricorio p	Oricorio (Pa'u Style)
+oricorio psychic	Oricorio (Pa'u Style)
+psychic oricorio	Oricorio (Pa'u Style)
+oricorio pa'u	Oricorio (Pa'u Style)
+oricoriopa'u	Oricorio (Pa'u Style)
+oricorio pompom style	Oricorio (Pom-Pom Style)
+oricoriopompomstyle	Oricorio (Pom-Pom Style)
+oricorio pompom	Oricorio (Pom-Pom Style)
+oricoriopompom	Oricorio (Pom-Pom Style)
+oricoriopp	Oricorio (Pom-Pom Style)
+oricorio pp	Oricorio (Pom-Pom Style)
+oricorio electric	Oricorio (Pom-Pom Style)
+electric oricorio	Oricorio (Pom-Pom Style)
+oricorio pom pom	Oricorio (Pom-Pom Style)
+oricorio pom-pom	Oricorio (Pom-Pom Style)
+oricoriopom-pom	Oricorio (Pom-Pom Style)
+oricorio sensu style	Oricorio (Sensu Style)
+oricoriosensustyle	Oricorio (Sensu Style)
+oricorio sensu	Oricorio (Sensu Style)
+oricoriosensu	Oricorio (Sensu Style)
+oricorios	Oricorio (Sensu Style)
+oricorio s	Oricorio (Sensu Style)
+oricorio ghost	Oricorio (Sensu Style)
+ghost oricorio	Oricorio (Sensu Style)
+woshawott	Oshawott (Winking)
+w oshawott	Oshawott (Winking)
+oshawottw	Oshawott (Winking)
+oshawott w	Oshawott (Winking)
+winking oshawott	Oshawott (Winking)
+winkingoshawott	Oshawott (Winking)
+oshawott winking	Oshawott (Winking)
+oshawottwinking	Oshawott (Winking)
+wpachirisu	Pachirisu (Winking)
+w pachirisu	Pachirisu (Winking)
+winking pachirisu	Pachirisu (Winking)
+winkingpachirisu	Pachirisu (Winking)
+pachirisuw	Pachirisu (Winking)
+pachirisu w	Pachirisu (Winking)
+pachirisu winking	Pachirisu (Winking)
+pachirisuwinking	Pachirisu (Winking)
+paralysiscombo	Paralysis Combo
+apersian	Persian (Alola Form)
+a persian	Persian (Alola Form)
+persiana	Persian (Alola Form)
+persian a	Persian (Alola Form)
+alolan persian	Persian (Alola Form)
+alolanpersian	Persian (Alola Form)
+persian alola	Persian (Alola Form)
+persianalola	Persian (Alola Form)
+persian alola form	Persian (Alola Form)
+persianalolaform	Persian (Alola Form)
+phantomcombo	Phantom Combo
+pc	Phantom Combo
+ghost combo	Phantom Combo
+ghostcombo	Phantom Combo
+wphione	Phione (Winking)
+w phione	Phione (Winking)
+phionew	Phione (Winking)
+phione w	Phione (Winking)
+winking phione	Phione (Winking)
+winkingphione	Phione (Winking)
+phione winking	Phione (Winking)
+phionewinking	Phione (Winking)
+pika	Pikachu
+Alolachu	Pikachu (Alola Cap)
+alolacappikachu	Pikachu (Alola Cap)
+alola cap pikachu	Pikachu (Alola Cap)
+alolacapchu	Pikachu (Alola Cap)
+pikachu alola cap	Pikachu (Alola Cap)
+alola capchu	Pikachu (Alola Cap)
+pikachualolacap	Pikachu (Alola Cap)
+angrychu	Pikachu (Angry)
+angrypikachu	Pikachu (Angry)
+angry pikachu	Pikachu (Angry)
+pikachu angry	Pikachu (Angry)
+angry chu	Pikachu (Angry)
+pikachuangry	Pikachu (Angry)
+pikachu artist	Pikachu (Artist)
+pikachuartist	Pikachu (Artist)
+artist pikachu	Pikachu (Artist)
+artistpikachu	Pikachu (Artist)
+artistchu	Pikachu (Artist)
+pikachu beach walk	Pikachu (Beach Walk)
+pikachubeachwalk	Pikachu (Beach Walk)
+beach walk pikachu	Pikachu (Beach Walk)
+beachwalkpikachu	Pikachu (Beach Walk)
+threeforcechu	Pikachu (Beach Walk)
+beachpikachu	Pikachu (Beach Walk)
+beach pikachu	Pikachu (Beach Walk)
+beachwalkchu	Pikachu (Beach Walk)
+pikachu charizard costume	Pikachu (Charizard Costume)
+pikachucharizardcostume	Pikachu (Charizard Costume)
+charizardpikachu	Pikachu (Charizard Costume)
+charizardchu	Pikachu (Charizard Costume)
+charizard pikachu	Pikachu (Charizard Costume)
+pikachu charizard	Pikachu (Charizard Costume)
+pikachucharizard	Pikachu (Charizard Costume)
+zardchu	Pikachu (Charizard Costume)
+charchu	Pikachu (Charizard Costume)
+pikachu childrens day	Pikachu (Children's Day)
+pikachuchildrensday	Pikachu (Children's Day)
+childrens day pikachu	Pikachu (Children's Day)
+childrensdaypikachu	Pikachu (Children's Day)
+prankchu	Pikachu (Children's Day)
+children pikachu	Pikachu (Children's Day)
+childrenpikachu	Pikachu (Children's Day)
+childrenchu	Pikachu (Children's Day)
+pikachu dejected	Pikachu (Dejected)
+dejected pikachu	Pikachu (Dejected)
+dejectedchu	Pikachu (Dejected)
+pikachu disappointed	Pikachu (Disappointed)
+disappointed pikachu	Pikachu (Disappointed)
+disappointedchu	Pikachu (Disappointed)
+dizzychu	Pikachu (Dizzy)
+dizzy pikachu	Pikachu (Dizzy)
+dizzypikachu	Pikachu (Dizzy)
+pikachu dizzy	Pikachu (Dizzy)
+pikachudizzy	Pikachu (Dizzy)
+heartchu	Pikachu (Enamored)
+lovechu	Pikachu (Enamored)
+pikachu enamored	Pikachu (Enamored)
+pikachuenamored	Pikachu (Enamored)
+enamored pikachu	Pikachu (Enamored)
+enamoredpikachu	Pikachu (Enamored)
+enamoredchu	Pikachu (Enamored)
+valentinechu	Pikachu (Enamored)
+pikachu fired up	Pikachu (Fired Up)
+pikachufiredup	Pikachu (Fired Up)
+fired up pikachu	Pikachu (Fired Up)
+fireduppikachu	Pikachu (Fired Up)
+firedchu	Pikachu (Fired Up)
+fired pikachu	Pikachu (Fired Up)
+firedpikachu	Pikachu (Fired Up)
+firedupchu	Pikachu (Fired Up)
+graduatepikachu	Pikachu (Graduate)
+graduate pikachu	Pikachu (Graduate)
+pikachu graduate	Pikachu (Graduate)
+graduatechu	Pikachu (Graduate)
+pikachugraduate	Pikachu (Graduate)
+fechu	Pikachu (Graduate)
+gyaradospikachu	Pikachu (Gyarados Costume)
+gyaradoschu	Pikachu (Gyarados Costume)
+pikachu gyarados costume	Pikachu (Gyarados Costume)
+pikachugyaradoscostume	Pikachu (Gyarados Costume)
+gyarados pikachu	Pikachu (Gyarados Costume)
+pikachu gyarados	Pikachu (Gyarados Costume)
+pikachugyarados	Pikachu (Gyarados Costume)
+gyarachu	Pikachu (Gyarados Costume)
+happychu	Pikachu (Happy)
+happy pikachu	Pikachu (Happy)
+happypikachu	Pikachu (Happy)
+pikachu happy	Pikachu (Happy)
+pikachuhappy	Pikachu (Happy)
+hoohchu	Pikachu (Ho-Oh Costume)
+pikachu ho-oh costume	Pikachu (Ho-Oh Costume)
+pikachuhoohcostume	Pikachu (Ho-Oh Costume)
+ho-oh pikachu	Pikachu (Ho-Oh Costume)
+hoohpikachu	Pikachu (Ho-Oh Costume)
+pikachu ho-oh	Pikachu (Ho-Oh Costume)
+pikachuhooh	Pikachu (Ho-Oh Costume)
+ho-ohpikachu	Pikachu (Ho-Oh Costume)
+pikachuho-oh	Pikachu (Ho-Oh Costume)
+ho-ohchu	Pikachu (Ho-Oh Costume)
+pikachu ho oh	Pikachu (Ho-Oh Costume)
+ho oh pikachu	Pikachu (Ho-Oh Costume)
+Hoennchu	Pikachu (Hoenn Cap)
+hoenncappikachu	Pikachu (Hoenn Cap)
+hoenn cap pikachu	Pikachu (Hoenn Cap)
+pikachu hoenn cap	Pikachu (Hoenn Cap)
+hoenn capchu	Pikachu (Hoenn Cap)
+hoenncapchu	Pikachu (Hoenn Cap)
+pikachuhoenncap	Pikachu (Hoenn Cap)
+holidaychu	Pikachu (Holiday)
+holiday pikachu	Pikachu (Holiday)
+holidaypikachu	Pikachu (Holiday)
+pikachu holiday	Pikachu (Holiday)
+pikachuholiday	Pikachu (Holiday)
+pikachu intern	Pikachu (Intern)
+intern pikachu	Pikachu (Intern)
+internpikachu	Pikachu (Intern)
+internchu	Pikachu (Intern)
+pikachuintern	Pikachu (Intern)
+vdchu	Pikachu (Intern)
+kaloschu	Pikachu (Kalos Cap)
+kaloscappikachu	Pikachu (Kalos Cap)
+kalos cap pikachu	Pikachu (Kalos Cap)
+pikachu kalos cap	Pikachu (Kalos Cap)
+kaloscapchu	Pikachu (Kalos Cap)
+kalos capchu	Pikachu (Kalos Cap)
+pikachukaloscap	Pikachu (Kalos Cap)
+kimonoboychu	Pikachu (Kimono Boy)
+pikachu kimono boy	Pikachu (Kimono Boy)
+pikachukimonoboy	Pikachu (Kimono Boy)
+kimono boy pikachu	Pikachu (Kimono Boy)
+kimonoboypikachu	Pikachu (Kimono Boy)
+kimonogirlchu	Pikachu (Kimono Girl)
+pikachu kimono girl	Pikachu (Kimono Girl)
+pikachukimonogirl	Pikachu (Kimono Girl)
+kimono girl pikachu	Pikachu (Kimono Girl)
+kimonogirlpikachu	Pikachu (Kimono Girl)
+kotatsuchu	Pikachu (Kotatsu)
+pikachu kotatsu	Pikachu (Kotatsu)
+kotatsu pikachu	Pikachu (Kotatsu)
+pikachukotatsu	Pikachu (Kotatsu)
+kotatsupikachu	Pikachu (Kotatsu)
+napchu	Pikachu (Kotatsu)
+nappingchu	Pikachu (Kotatsu)
+napping pikachu	Pikachu (Kotatsu)
+pikachu napping	Pikachu (Kotatsu)
+pikachu lion dancer	Pikachu (Lion Dancer)
+pikachuliondancer	Pikachu (Lion Dancer)
+lion dancer pikachu	Pikachu (Lion Dancer)
+liondancerpikachu	Pikachu (Lion Dancer)
+enteichu	Pikachu (Lion Dancer)
+liondancechu	Pikachu (Lion Dancer)
+lugiachu	Pikachu (Lugia Costume)
+pikachu lugia costume	Pikachu (Lugia Costume)
+pikachulugiacostume	Pikachu (Lugia Costume)
+lugia pikachu	Pikachu (Lugia Costume)
+lugiapikachu	Pikachu (Lugia Costume)
+pikachu lugia	Pikachu (Lugia Costume)
+pikachulugia	Pikachu (Lugia Costume)
+magikarppikachu	Pikachu (Magikarp Costume)
+karpchu	Pikachu (Magikarp Costume)
+magikarpchu	Pikachu (Magikarp Costume)
+magikarp pikachu	Pikachu (Magikarp Costume)
+pikachu magikarp costume	Pikachu (Magikarp Costume)
+pikachumagikarpcostume	Pikachu (Magikarp Costume)
+pikachu magikarp	Pikachu (Magikarp Costume)
+pikachumagikarp	Pikachu (Magikarp Costume)
+pikachu mushroom harvest	Pikachu (Mushroom Harvest)
+pikachumushroomharvest	Pikachu (Mushroom Harvest)
+mushroom harvest pikachu	Pikachu (Mushroom Harvest)
+mushroomharvestpikachu	Pikachu (Mushroom Harvest)
+harvestchu	Pikachu (Mushroom Harvest)
+harvest pikachu	Pikachu (Mushroom Harvest)
+harvestpikachu	Pikachu (Mushroom Harvest)
+originalchu	Pikachu (Original Cap)
+originalcappikachu	Pikachu (Original Cap)
+original cap pikachu	Pikachu (Original Cap)
+pikachu original cap	Pikachu (Original Cap)
+originalcapchu	Pikachu (Original Cap)
+original capchu	Pikachu (Original Cap)
+pikachuoriginalcap	Pikachu (Original Cap)
+pikachu pastry chef	Pikachu (Pastry Chef)
+pikachupastrychef	Pikachu (Pastry Chef)
+pastrychefpikachu	Pikachu (Pastry Chef)
+pastry chef pikachu	Pikachu (Pastry Chef)
+chefchu	Pikachu (Pastry Chef)
+pastrychefchu	Pikachu (Pastry Chef)
+raincoatpikachu	Pikachu (Rainy Season)
+raincoatchu	Pikachu (Rainy Season)
+raincoat pikachu	Pikachu (Rainy Season)
+pikachu rainy season	Pikachu (Rainy Season)
+pikachuraincoat	Pikachu (Rainy Season)
+pikachurainyseason	Pikachu (Rainy Season)
+pikachu raincoat	Pikachu (Rainy Season)
+raychu	Pikachu (Rayquaza Costume)
+rayquazachu	Pikachu (Rayquaza Costume)
+pikachu rayquaza costume	Pikachu (Rayquaza Costume)
+pikachurayquazacostume	Pikachu (Rayquaza Costume)
+raypikachu	Pikachu (Rayquaza Costume)
+ray pikachu	Pikachu (Rayquaza Costume)
+rayquaza pikachu	Pikachu (Rayquaza Costume)
+rayquazapikachu	Pikachu (Rayquaza Costume)
+pikachu rayquaza	Pikachu (Rayquaza Costume)
+pikachurayquaza	Pikachu (Rayquaza Costume)
+pikachuray	Pikachu (Rayquaza Costume)
+pikachu ray	Pikachu (Rayquaza Costume)
+sgyarachu	Pikachu (Shiny Gyarados Costume)
+sgyaradoschu	Pikachu (Shiny Gyarados Costume)
+shinygyaradoschu	Pikachu (Shiny Gyarados Costume)
+pikachu shiny gyarados costume	Pikachu (Shiny Gyarados Costume)
+pikachushinygyaradoscostume	Pikachu (Shiny Gyarados Costume)
+sgyaradospikachu	Pikachu (Shiny Gyarados Costume)
+s gyarados pikachu	Pikachu (Shiny Gyarados Costume)
+pikachu shiny gyarados	Pikachu (Shiny Gyarados Costume)
+shiny gyarados pikachu	Pikachu (Shiny Gyarados Costume)
+pikachushinygyarados	Pikachu (Shiny Gyarados Costume)
+shinygyaradospikachu	Pikachu (Shiny Gyarados Costume)
+pikachu s gyarados	Pikachu (Shiny Gyarados Costume)
+pikachusgyarados	Pikachu (Shiny Gyarados Costume)
+sraychu	Pikachu (Shiny Rayquaza Costume)
+srayquazachu	Pikachu (Shiny Rayquaza Costume)
+shinyrayquazachu	Pikachu (Shiny Rayquaza Costume)
+shinyraychu	Pikachu (Shiny Rayquaza Costume)
+pikachu shiny rayquaza costume	Pikachu (Shiny Rayquaza Costume)
+pikachushinyrayquazacostume	Pikachu (Shiny Rayquaza Costume)
+shiny rayquaza pikachu	Pikachu (Shiny Rayquaza Costume)
+shinyrayquazapikachu	Pikachu (Shiny Rayquaza Costume)
+pikachu shiny rayquaza	Pikachu (Shiny Rayquaza Costume)
+pikachushinyrayquaza	Pikachu (Shiny Rayquaza Costume)
+sraypikachu	Pikachu (Shiny Rayquaza Costume)
+s ray pikachu	Pikachu (Shiny Rayquaza Costume)
+srayquazapikachu	Pikachu (Shiny Rayquaza Costume)
+s rayquaza pikachu	Pikachu (Shiny Rayquaza Costume)
+pikachu s rayquaza	Pikachu (Shiny Rayquaza Costume)
+pikachusrayquaza	Pikachu (Shiny Rayquaza Costume)
+pikachu s ray	Pikachu (Shiny Rayquaza Costume)
+pikachusray	Pikachu (Shiny Rayquaza Costume)
+shiny ray pikachu	Pikachu (Shiny Rayquaza Costume)
+shinyraypikachu	Pikachu (Shiny Rayquaza Costume)
+pikachu shiny ray	Pikachu (Shiny Rayquaza Costume)
+pikachushinyray	Pikachu (Shiny Rayquaza Costume)
+Sinnohchu	Pikachu (Sinnoh Cap)
+pikachu sinnoh cap	Pikachu (Sinnoh Cap)
+sinnohcappikachu	Pikachu (Sinnoh Cap)
+sinnoh cap pikachu	Pikachu (Sinnoh Cap)
+sinnohcapchu	Pikachu (Sinnoh Cap)
+sinnoh capchu	Pikachu (Sinnoh Cap)
+pikachusinnohcap	Pikachu (Sinnoh Cap)
+sleepychu	Pikachu (Sleeping)
+sleepchu	Pikachu (Sleeping)
+sleepingpikachu	Pikachu (Sleeping)
+sleeping pikachu	Pikachu (Sleeping)
+pikachu sleeping	Pikachu (Sleeping)
+sleepypikachu	Pikachu (Sleeping)
+sleepy pikachu	Pikachu (Sleeping)
+pikachusleepy	Pikachu (Sleeping)
+pikachu sleepy	Pikachu (Sleeping)
+pikachusleeping	Pikachu (Sleeping)
+smilingchu	Pikachu (Smiling)
+smiling pikachu	Pikachu (Smiling)
+smilingpikachu	Pikachu (Smiling)
+pikachu smiling	Pikachu (Smiling)
+pikachusmiling	Pikachu (Smiling)
+spooky pikachu	Pikachu (Spooky)
+spookypikachu	Pikachu (Spooky)
+pikachu spooky	Pikachu (Spooky)
+spookychu	Pikachu (Spooky)
+sp pikachu	Pikachu (Spooky)
+sppikachu	Pikachu (Spooky)
+pikachu sp	Pikachu (Spooky)
+pikachusp	Pikachu (Spooky)
+pikachuspooky	Pikachu (Spooky)
+pikachu summer festival	Pikachu (Summer Festival)
+pikachusummerfestival	Pikachu (Summer Festival)
+summer festival pikachu	Pikachu (Summer Festival)
+summerfestivalpikachu	Pikachu (Summer Festival)
+summerfestivalchu	Pikachu (Summer Festival)
+pikachu surprised	Pikachu (Surprised)
+surprised pikachu	Pikachu (Surprised)
+surprisedpikachu	Pikachu (Surprised)
+surprisedchu	Pikachu (Surprised)
+surprisechu	Pikachu (Surprised)
+ldechu	Pikachu (Surprised)
+pikachusurprised	Pikachu (Surprised)
+<:SurprisedPikachu:513867852948832266>	Pikachu (Surprised)
+pikachu teary	Pikachu (Teary)
+teary pikachu	Pikachu (Teary)
+tearychu	Pikachu (Teary)
+unovachu	Pikachu (Unova Cap)
+unovacappikachu	Pikachu (Unova Cap)
+unova cap pikachu	Pikachu (Unova Cap)
+pikachu unova cap	Pikachu (Unova Cap)
+unovacapchu	Pikachu (Unova Cap)
+unova capchu	Pikachu (Unova Cap)
+pikachuunovacap	Pikachu (Unova Cap)
+winking pikachu	Pikachu (Winking)
+winkingpikachu	Pikachu (Winking)
+pikachu winking	Pikachu (Winking)
+pikachuwinking	Pikachu (Winking)
+wpikachu	Pikachu (Winking)
+w pikachu	Pikachu (Winking)
+pikachuw	Pikachu (Winking)
+pikachu w	Pikachu (Winking)
+winkingchu	Pikachu (Winking)
+years end pikachu	Pikachu (Year's End)
+yearsendpikachu	Pikachu (Year's End)
+pikachu years end	Pikachu (Year's End)
+pikachuyearsend	Pikachu (Year's End)
+yearendchu	Pikachu (Year's End)
+yearsendchu	Pikachu (Year's End)
+year end pikachu	Pikachu (Year's End)
+yearendpikachu	Pikachu (Year's End)
+wpiplup	Piplup (Winking)
+w piplup	Piplup (Winking)
+piplupw	Piplup (Winking)
+winking piplup	Piplup (Winking)
+winkingpiplup	Piplup (Winking)
+piplup winking	Piplup (Winking)
+piplupwinking	Piplup (Winking)
+piplup w	Piplup (Winking)
+pixiepower	Pixie Power
+wplusle	Plusle (Winking)
+w plusle	Plusle (Winking)
+winking plusle	Plusle (Winking)
+winkingplusle	Plusle (Winking)
+pluslew	Plusle (Winking)
+plusle w	Plusle (Winking)
+plusle winking	Plusle (Winking)
+pluslewinking	Plusle (Winking)
+ppact	Poison Pact
+poisonpact	Poison Pact
+poisonrush	Poison Rush
+pm	Poisonous Mist
+poison mist	Poisonous Mist
+poisonmist	Poisonous Mist
+poisonousmist	Poisonous Mist
+poryz	Porygon-Z
+pz	Porygon-Z
+porygon z	Porygon-Z
+porygonz	Porygon-Z
+powerhug	Power Hug
+ph	Power Hug
+Po4	Power of 4
+powerof4	Power of 4
+power of four	Power of 4
+poweroffour	Power of 4
+Po4+	Power of 4+
+powerof4+	Power of 4+
+power of four+	Power of 4+
+poweroffour+	Power of 4+
+Po5	Power of 5
+powerof5	Power of 5
+power of five	Power of 5
+poweroffive	Power of 5
+Po5+	Power of 5+
+powerof5+	Power of 5+
+power of five+	Power of 5+
+poweroffive+	Power of 5+
+PGroudon	Primal Groudon
+pdon	Primal Groudon
+groudon (primal)	Primal Groudon
+pd	Primal Groudon
+primalgroudon	Primal Groudon
+p groudon	Primal Groudon
+p-groudon	Primal Groudon
+groudonprimal	Primal Groudon
+groudon primal	Primal Groudon
+PG	Primal Groudon
+PKyogre	Primal Kyogre
+kyogre (primal)	Primal Kyogre
+PK	Primal Kyogre
+p kyogre	Primal Kyogre
+p-kyogre	Primal Kyogre
+pri	Primarina
+prima	Primarina
+psychiccombo	Psychic Combo
+koduck	Psyduck
+spooky pumpkaboo	Pumpkaboo (Spooky)
+spookypumpkaboo	Pumpkaboo (Spooky)
+pumpkaboo spooky	Pumpkaboo (Spooky)
+s pumpkaboo	Pumpkaboo (Spooky)
+pumpkaboo s	Pumpkaboo (Spooky)
+sp pumpkaboo	Pumpkaboo (Spooky)
+sppumpkaboo	Pumpkaboo (Spooky)
+pumpkaboo sp	Pumpkaboo (Spooky)
+pumpkaboosp	Pumpkaboo (Spooky)
+pumpkaboospooky	Pumpkaboo (Spooky)
+spumpkaboo	Pumpkaboo (Spooky)
+pumpkaboos	Pumpkaboo (Spooky)
+pyroarf	Pyroar (Female)
+pyroar f	Pyroar (Female)
+pyroar female	Pyroar (Female)
+pyroarfemale	Pyroar (Female)
+pyroarm	Pyroar (Male)
+pyroar m	Pyroar (Male)
+pyroar male	Pyroar (Male)
+pyroarmale	Pyroar (Male)
+araichu	Raichu (Alola Form)
+raichua	Raichu (Alola Form)
+a raichu	Raichu (Alola Form)
+raichu a	Raichu (Alola Form)
+alolan raichu	Raichu (Alola Form)
+alolanraichu	Raichu (Alola Form)
+raichu alola	Raichu (Alola Form)
+raichualola	Raichu (Alola Form)
+raichu alola form	Raichu (Alola Form)
+raichualolaform	Raichu (Alola Form)
+wraichu	Raichu (Winking)
+w raichu	Raichu (Winking)
+raichuw	Raichu (Winking)
+raichu w	Raichu (Winking)
+winking raichu	Raichu (Winking)
+winkingraichu	Raichu (Winking)
+raichu winking	Raichu (Winking)
+raichuwinking	Raichu (Winking)
+araticate	Raticate (Alola Form)
+a raticate	Raticate (Alola Form)
+raticatea	Raticate (Alola Form)
+raticate a	Raticate (Alola Form)
+alolan raticate	Raticate (Alola Form)
+alolanraticate	Raticate (Alola Form)
+raticate alola	Raticate (Alola Form)
+raticatealola	Raticate (Alola Form)
+raticate alola form	Raticate (Alola Form)
+raticatealolaform	Raticate (Alola Form)
+arattata	Rattata (Alola Form)
+a rattata	Rattata (Alola Form)
+rattataa	Rattata (Alola Form)
+rattata a	Rattata (Alola Form)
+alolan rattata	Rattata (Alola Form)
+alolanrattata	Rattata (Alola Form)
+rattata alola	Rattata (Alola Form)
+rattataalola	Rattata (Alola Form)
+rattata alola form	Rattata (Alola Form)
+rattataalolaform	Rattata (Alola Form)
+Ray	Rayquaza
+SRay	Rayquaza (Shiny)
+s-ray	Rayquaza (Shiny)
+shiny rayquaza	Rayquaza (Shiny)
+shinyrayquaza	Rayquaza (Shiny)
+rayquaza shiny	Rayquaza (Shiny)
+rayquazashiny	Rayquaza (Shiny)
+shiny ray	Rayquaza (Shiny)
+shinyray	Rayquaza (Shiny)
+srayquaza	Rayquaza (Shiny)
+s rayquaza	Rayquaza (Shiny)
+rayquazas	Rayquaza (Shiny)
+s ray	Rayquaza (Shiny)
+rayquaza s	Rayquaza (Shiny)
+<:Implying:305908034708963336>	Rayquaza (Shiny)
+RT	Risk-Taker
+risk taker	Risk-Taker
+fucking garbage	Risk-Taker
+shit taker	Risk-Taker
+risktaker	Risk-Taker
+RB	Rock Break
+rockbreak	Rock Break
+RB+	Rock Break+
+rockbreak+	Rock Break+
+RB++	Rock Break++
+rockbreak++	Rock Break++
+rockcombo	Rock Combo
+rc	Rock Combo
+rockshot	Rock Shot
+rs	Rock Shot
+Rock Shot Alpha	Rock Shot α
+RSA	Rock Shot α
+rockshotalpha	Rock Shot α
+rockshota	Rock Shot α
+rock shot a	Rock Shot α
+wrose	Roserade (Winking)
+roseradewinking	Roserade (Winking)
+roserade winking	Roserade (Winking)
+w roserade	Roserade (Winking)
+roseradew	Roserade (Winking)
+roserade w	Roserade (Winking)
+winking roserade	Roserade (Winking)
+wroserade	Roserade (Winking)
+winkingroserade	Roserade (Winking)
+rotom fan	Rotom (Fan Rotom)
+rotomfan	Rotom (Fan Rotom)
+fan rotom	Rotom (Fan Rotom)
+fanrotom	Rotom (Fan Rotom)
+rotom spin	Rotom (Fan Rotom)
+rotomspin	Rotom (Fan Rotom)
+spin rotom	Rotom (Fan Rotom)
+spinrotom	Rotom (Fan Rotom)
+rotoms	Rotom (Fan Rotom)
+rotom s	Rotom (Fan Rotom)
+srotom	Rotom (Fan Rotom)
+s rotom	Rotom (Fan Rotom)
+rotom frost	Rotom (Frost Rotom)
+rotomfrost	Rotom (Frost Rotom)
+frostrotom	Rotom (Frost Rotom)
+frost rotom	Rotom (Frost Rotom)
+rotom freeze	Rotom (Frost Rotom)
+rotomfreeze	Rotom (Frost Rotom)
+freeze rotom	Rotom (Frost Rotom)
+freezerotom	Rotom (Frost Rotom)
+rotomf	Rotom (Frost Rotom)
+rotom f	Rotom (Frost Rotom)
+frotom	Rotom (Frost Rotom)
+f rotom	Rotom (Frost Rotom)
+rotom h	Rotom (Heat Rotom)
+rotom heat	Rotom (Heat Rotom)
+rotomheat	Rotom (Heat Rotom)
+heat rotom	Rotom (Heat Rotom)
+heatrotom	Rotom (Heat Rotom)
+rotomh	Rotom (Heat Rotom)
+hrotom	Rotom (Heat Rotom)
+h rotom	Rotom (Heat Rotom)
+rotom m	Rotom (Mow Rotom)
+rotom mow	Rotom (Mow Rotom)
+rotommow	Rotom (Mow Rotom)
+mow rotom	Rotom (Mow Rotom)
+mowrotom	Rotom (Mow Rotom)
+rotomm	Rotom (Mow Rotom)
+mrotom	Rotom (Mow Rotom)
+m rotom	Rotom (Mow Rotom)
+rotom cut	Rotom (Mow Rotom)
+rotomcut	Rotom (Mow Rotom)
+cut rotom	Rotom (Mow Rotom)
+cutrotom	Rotom (Mow Rotom)
+rotomc	Rotom (Mow Rotom)
+rotom c	Rotom (Mow Rotom)
+crotom	Rotom (Mow Rotom)
+c rotom	Rotom (Mow Rotom)
+rotomwash	Rotom (Wash Rotom)
+rotom w	Rotom (Wash Rotom)
+rotom wash	Rotom (Wash Rotom)
+washrotom	Rotom (Wash Rotom)
+wash rotom	Rotom (Wash Rotom)
+rotomw	Rotom (Wash Rotom)
+wrotom	Rotom (Wash Rotom)
+w rotom	Rotom (Wash Rotom)
+spookysableye	Sableye (Spooky)
+spooky sableye	Sableye (Spooky)
+sableye spooky	Sableye (Spooky)
+sp sableye	Sableye (Spooky)
+spsableye	Sableye (Spooky)
+sableye sp	Sableye (Spooky)
+sableyesp	Sableye (Spooky)
+s sableye	Sableye (Spooky)
+sableye s	Sableye (Spooky)
+ssableye	Sableye (Spooky)
+sableyes	Sableye (Spooky)
+sableyespooky	Sableye (Spooky)
+Sala	Salamence
+mence	Salamence
+sandsport	Sand Sport
+asandshrew	Sandshrew (Alola Form)
+a sandshrew	Sandshrew (Alola Form)
+sandshrew a	Sandshrew (Alola Form)
+sandshrewa	Sandshrew (Alola Form)
+sandshrew alola	Sandshrew (Alola Form)
+sandshrewalola	Sandshrew (Alola Form)
+alolan sandshrew	Sandshrew (Alola Form)
+alolansandshrew	Sandshrew (Alola Form)
+sandshrew alola form	Sandshrew (Alola Form)
+sandshrewalolaform	Sandshrew (Alola Form)
+aslash	Sandslash (Alola Form)
+mint	Sandslash (Alola Form)
+sandslash alola form	Sandslash (Alola Form)
+sandslashalolaform	Sandslash (Alola Form)
+sandslash alola	Sandslash (Alola Form)
+sandslashalola	Sandslash (Alola Form)
+asandslash	Sandslash (Alola Form)
+a sandslash	Sandslash (Alola Form)
+sandslasha	Sandslash (Alola Form)
+sandslash a	Sandslash (Alola Form)
+alolan sandslash	Sandslash (Alola Form)
+alolansandslash	Sandslash (Alola Form)
+sawsbuck autumn form	Sawsbuck (Autumn Form)
+sawsbuck autumn	Sawsbuck (Autumn Form)
+sawsbuck a	Sawsbuck (Autumn Form)
+sawsbuckautumn	Sawsbuck (Autumn Form)
+autumn sawsbuck	Sawsbuck (Autumn Form)
+autumnsawsbuck	Sawsbuck (Autumn Form)
+sawsbucka	Sawsbuck (Autumn Form)
+sawsbuckspring	Sawsbuck (Spring Form)
+sawsbuck spring	Sawsbuck (Spring Form)
+sawsbuck spring form	Sawsbuck (Spring Form)
+spring sawsbuck	Sawsbuck (Spring Form)
+springsawsbuck	Sawsbuck (Spring Form)
+sawsbuck summer form	Sawsbuck (Summer Form)
+sawsbuck summer	Sawsbuck (Summer Form)
+sawsbucksummer	Sawsbuck (Summer Form)
+summer sawsbuck	Sawsbuck (Summer Form)
+summersawsbuck	Sawsbuck (Summer Form)
+sawsbuck w	Sawsbuck (Winter Form)
+sawsbuck winter form	Sawsbuck (Winter Form)
+sawsbuck winter	Sawsbuck (Winter Form)
+sawsbuckwinter	Sawsbuck (Winter Form)
+winter sawsbuck	Sawsbuck (Winter Form)
+wintersawsbuck	Sawsbuck (Winter Form)
+sawsbuckw	Sawsbuck (Winter Form)
+andy	Scyther
+Serp	Serperior
+shadowdance	Shadow Dance
+shadowshook	Shadow Shock
+shadowshock	Shadow Shock
+shayminland	Shaymin (Land Forme)
+shaymin land	Shaymin (Land Forme)
+shaymin	Shaymin (Land Forme)
+landmin	Shaymin (Land Forme)
+shayminl	Shaymin (Land Forme)
+shaymin l	Shaymin (Land Forme)
+Skymin	Shaymin (Sky Forme)
+shayminsky	Shaymin (Sky Forme)
+shaymin sky	Shaymin (Sky Forme)
+shaymins	Shaymin (Sky Forme)
+shaymin s	Shaymin (Sky Forme)
+shellos east sea	Shellos (East Sea)
+shellos east	Shellos (East Sea)
+shelloseast	Shellos (East Sea)
+shellos e	Shellos (East Sea)
+eastshellos	Shellos (East Sea)
+east shellos	Shellos (East Sea)
+shellose	Shellos (East Sea)
+eshellos	Shellos (East Sea)
+e shellos	Shellos (East Sea)
+shellos west sea	Shellos (West Sea)
+shelloswest	Shellos (West Sea)
+shellos west	Shellos (West Sea)
+shellos w	Shellos (West Sea)
+west shellos	Shellos (West Sea)
+westshellos	Shellos (West Sea)
+shellosw	Shellos (West Sea)
+wshellos	Shellos (West Sea)
+w shellos	Shellos (West Sea)
+shockattack	Shock Attack
+SO	Shot Out
+60%	Shot Out
+shotout	Shot Out
+wshroomish	Shroomish (Winking)
+w shroomish	Shroomish (Winking)
+winking shroomish	Shroomish (Winking)
+winkingshroomish	Shroomish (Winking)
+shroomishw	Shroomish (Winking)
+shroomish w	Shroomish (Winking)
+shroomish winking	Shroomish (Winking)
+shroomishwinking	Shroomish (Winking)
+sil	Silvally
+shitvally	Silvally
+sp	Sinister Power
+sinisterpower	Sinister Power
+wskiploom	Skiploom (Winking)
+w skiploom	Skiploom (Winking)
+skiploomw	Skiploom (Winking)
+winking skiploom	Skiploom (Winking)
+winkingskiploom	Skiploom (Winking)
+skiploom winking	Skiploom (Winking)
+skiploomwinking	Skiploom (Winking)
+skiploom w	Skiploom (Winking)
+skyblast	Sky Blast
+SC	Sleep Charm
+sleepcharm	Sleep Charm
+rip tangrowth	Sleep Combo
+sleepcombo	Sleep Combo
+wslurpuff	Slurpuff (Winking)
+w slurpuff	Slurpuff (Winking)
+slurpuffw	Slurpuff (Winking)
+slurpuff w	Slurpuff (Winking)
+winking slurpuff	Slurpuff (Winking)
+winkingslurpuff	Slurpuff (Winking)
+slurpuff winking	Slurpuff (Winking)
+slurpuffwinking	Slurpuff (Winking)
+wsnivy	Snivy (Winking)
+w snivy	Snivy (Winking)
+snivyw	Snivy (Winking)
+snivy w	Snivy (Winking)
+winking snivy	Snivy (Winking)
+winkingsnivy	Snivy (Winking)
+snivy winking	Snivy (Winking)
+snivywinking	Snivy (Winking)
+Kabigon	Snorlax
+wsnorunt	Snorunt (Winking)
+w snorunt	Snorunt (Winking)
+snoruntw	Snorunt (Winking)
+winking snorunt	Snorunt (Winking)
+winkingsnorunt	Snorunt (Winking)
+snorunt winking	Snorunt (Winking)
+snoruntwinking	Snorunt (Winking)
+snorunt w	Snorunt (Winking)
+Lord Snover	Snover (Holiday)
+holidaysnover	Snover (Holiday)
+holiday snover	Snover (Holiday)
+snover holiday	Snover (Holiday)
+hsnover	Snover (Holiday)
+snoverh	Snover (Holiday)
+snoverholiday	Snover (Holiday)
+h snover	Snover (Holiday)
+snover h	Snover (Holiday)
+wsnubbull	Snubbull (Winking)
+w snubbull	Snubbull (Winking)
+snubbullw	Snubbull (Winking)
+winking snubbull	Snubbull (Winking)
+winkingsnubbull	Snubbull (Winking)
+snubbull winking	Snubbull (Winking)
+snubbullwinking	Snubbull (Winking)
+snubbull w	Snubbull (Winking)
+spook+	Spookify+
+wsquirtle	Squirtle (Winking)
+w squirtle	Squirtle (Winking)
+squirtlew	Squirtle (Winking)
+squirtle w	Squirtle (Winking)
+winking squirtle	Squirtle (Winking)
+winkingsquirtle	Squirtle (Winking)
+squirtle winking	Squirtle (Winking)
+squirtlewinking	Squirtle (Winking)
+steelyresolve	Steely Resolve
+sr	Steely Resolve
+superarrow	Super Arrow
+superbolt	Super Bolt
+supercheer	Super Cheer
+supertackle	Super Tackle
+supervoice	Super Voice
+wswirlix	Swirlix (Winking)
+w swirlix	Swirlix (Winking)
+swirlixw	Swirlix (Winking)
+swirlix w	Swirlix (Winking)
+winking swirlix	Swirlix (Winking)
+winkingswirlix	Swirlix (Winking)
+swirlix winking	Swirlix (Winking)
+swirlixwinking	Swirlix (Winking)
+evelyn	Sylveon
+tboost	T-Boost
+t boost	T-Boost
+bulu	Tapu Bulu
+tapubulu	Tapu Bulu
+fini	Tapu Fini
+tapufini	Tapu Fini
+koko	Tapu Koko
+tapukoko	Tapu Koko
+lele	Tapu Lele
+tapulele	Tapu Lele
+wtepig	Tepig (Winking)
+w tepig	Tepig (Winking)
+tepigw	Tepig (Winking)
+tepig w	Tepig (Winking)
+winking tepig	Tepig (Winking)
+winkingtepig	Tepig (Winking)
+tepig winking	Tepig (Winking)
+tepigwinking	Tepig (Winking)
+threeforce	Three Force
+Thundurus	Thundurus (Incarnate Forme)
+Thundurus-I	Thundurus (Incarnate Forme)
+thundurusincarnate	Thundurus (Incarnate Forme)
+thundurus incarnate	Thundurus (Incarnate Forme)
+thundurus i	Thundurus (Incarnate Forme)
+thundurus incarnate form	Thundurus (Incarnate Forme)
+thundurusincarnateform	Thundurus (Incarnate Forme)
+thundurusi	Thundurus (Incarnate Forme)
+Thundurus-T	Thundurus (Therian Forme)
+ThundurusT	Thundurus (Therian Forme)
+thundurus t	Thundurus (Therian Forme)
+thundurus therian	Thundurus (Therian Forme)
+thundurustherian	Thundurus (Therian Forme)
+thundurustherianform	Thundurus (Therian Forme)
+thundurus therian form	Thundurus (Therian Forme)
+wtogekiss	Togekiss (Winking)
+w togekiss	Togekiss (Winking)
+togekissw	Togekiss (Winking)
+togekiss w	Togekiss (Winking)
+winking togekiss	Togekiss (Winking)
+winkingtogekiss	Togekiss (Winking)
+togekiss winking	Togekiss (Winking)
+togekisswinking	Togekiss (Winking)
+wtogetic	Togetic (Winking)
+w togetic	Togetic (Winking)
+togeticw	Togetic (Winking)
+togetic w	Togetic (Winking)
+winking togetic	Togetic (Winking)
+winkingtogetic	Togetic (Winking)
+togetic winking	Togetic (Winking)
+togeticwinking	Togetic (Winking)
+torchicc	Torchic
+wtorchic	Torchic (Winking)
+w torchic	Torchic (Winking)
+torchicw	Torchic (Winking)
+torchic w	Torchic (Winking)
+winking torchic	Torchic (Winking)
+winkingtorchic	Torchic (Winking)
+torchic winking	Torchic (Winking)
+torchicwinking	Torchic (Winking)
+Tornadus	Tornadus (Incarnate Forme)
+Tornadus-I	Tornadus (Incarnate Forme)
+TornadusI	Tornadus (Incarnate Forme)
+tornadusincarnate	Tornadus (Incarnate Forme)
+tornadus incarnate	Tornadus (Incarnate Forme)
+tornadus i	Tornadus (Incarnate Forme)
+tornadusincarnateform	Tornadus (Incarnate Forme)
+tornadus incarnate form	Tornadus (Incarnate Forme)
+Tornadus-T	Tornadus (Therian Forme)
+TornadusT	Tornadus (Therian Forme)
+tornadus t	Tornadus (Therian Forme)
+tornadus therian	Tornadus (Therian Forme)
+tornadustherian	Tornadus (Therian Forme)
+tornadus therian form	Tornadus (Therian Forme)
+tornadustherianform	Tornadus (Therian Forme)
+wtotodile	Totodile (Winking)
+w totodile	Totodile (Winking)
+totodilew	Totodile (Winking)
+totodile w	Totodile (Winking)
+winking totodile	Totodile (Winking)
+winkingtotodile	Totodile (Winking)
+totodile winking	Totodile (Winking)
+totodilewinking	Totodile (Winking)
+toxicstress	Toxic Stress
+wtreecko	Treecko (Winking)
+w treecko	Treecko (Winking)
+treeckow	Treecko (Winking)
+treecko w	Treecko (Winking)
+winking treecko	Treecko (Winking)
+winkingtreecko	Treecko (Winking)
+treecko winking	Treecko (Winking)
+treeckowinking	Treecko (Winking)
+trev	Trevenant
+th	Try Hard
+tryhard	Try Hard
+turt	Turtonator
+wtwig	Turtwig (Winking)
+turtwig w	Turtwig (Winking)
+wturtwig	Turtwig (Winking)
+w turtwig	Turtwig (Winking)
+turtwigw	Turtwig (Winking)
+wturt	Turtwig (Winking)
+winking turtwig	Turtwig (Winking)
+winkingturtwig	Turtwig (Winking)
+turtwig winking	Turtwig (Winking)
+turtwigwinking	Turtwig (Winking)
+type null	Type: Null
+type:null	Type: Null
+typenull	Type: Null
+TC	Typeless Combo
+SL5 or bust	Typeless Combo
+procless combo	Typeless Combo
+I will ruin your run	Typeless Combo
+typelesscombo	Typeless Combo
+typh	Typhlosion
+TTar	Tyranitar
+s-ttar	Tyranitar (Shiny)
+shiny ttar	Tyranitar (Shiny)
+sttar	Tyranitar (Shiny)
+brownietar	Tyranitar (Shiny)
+tyranitar shiny	Tyranitar (Shiny)
+ttar shiny	Tyranitar (Shiny)
+ttarshiny	Tyranitar (Shiny)
+s ttar	Tyranitar (Shiny)
+shiny tyranitar	Tyranitar (Shiny)
+shinytyranitar	Tyranitar (Shiny)
+tyranitarshiny	Tyranitar (Shiny)
+shinyttar	Tyranitar (Shiny)
+tyranitar s	Tyranitar (Shiny)
+unfezantf	Unfezant (Female)
+unfezant f	Unfezant (Female)
+unfezant female	Unfezant (Female)
+unfezantfemale	Unfezant (Female)
+unfezantm	Unfezant (Male)
+unfezant m	Unfezant (Male)
+unfezant male	Unfezant (Male)
+unfezantmale	Unfezant (Male)
+UP	Unity Power
+U miss	Unity Power
+sintonia fatale	Unity Power
+unity miss	Unity Power
+unitypower	Unity Power
+unown a	Unown (A)
+unowna	Unown (A)
+a unown	Unown (A)
+aunown	Unown (A)
+unown b	Unown (B)
+unownb	Unown (B)
+b unown	Unown (B)
+bunown	Unown (B)
+unown c	Unown (C)
+c unown	Unown (C)
+unownc	Unown (C)
+cunown	Unown (C)
+unown d	Unown (D)
+unownd	Unown (D)
+d unown	Unown (D)
+dunown	Unown (D)
+unown e	Unown (E)
+e unown	Unown (E)
+unowne	Unown (E)
+eunown	Unown (E)
+unown!	Unown (Exclamation)
+unown !	Unown (Exclamation)
+!unown	Unown (Exclamation)
+! unown	Unown (Exclamation)
+unown f	Unown (F)
+unownf	Unown (F)
+f unown	Unown (F)
+funown	Unown (F)
+unown g	Unown (G)
+unowng	Unown (G)
+g unown	Unown (G)
+gunown	Unown (G)
+unown h	Unown (H)
+unownh	Unown (H)
+h unown	Unown (H)
+hunown	Unown (H)
+unown i	Unown (I)
+i unown	Unown (I)
+unowni	Unown (I)
+iunown	Unown (I)
+unown j	Unown (J)
+unownj	Unown (J)
+j unown	Unown (J)
+junown	Unown (J)
+unown k	Unown (K)
+unownk	Unown (K)
+k unown	Unown (K)
+kunown	Unown (K)
+unown l	Unown (L)
+unownl	Unown (L)
+l unown	Unown (L)
+lunown	Unown (L)
+unown m	Unown (M)
+unownm	Unown (M)
+m unown	Unown (M)
+munown	Unown (M)
+unown n	Unown (N)
+n unown	Unown (N)
+unownn	Unown (N)
+nunown	Unown (N)
+unown o	Unown (O)
+unowno	Unown (O)
+o unown	Unown (O)
+ounown	Unown (O)
+unown p	Unown (P)
+unownp	Unown (P)
+p unown	Unown (P)
+punown	Unown (P)
+unown q	Unown (Q)
+unownq	Unown (Q)
+q unown	Unown (Q)
+qunown	Unown (Q)
+unown?	Unown (Question)
+unown ?	Unown (Question)
+?unown	Unown (Question)
+? unown	Unown (Question)
+unown r	Unown (R)
+unownr	Unown (R)
+r unown	Unown (R)
+runown	Unown (R)
+unown s	Unown (S)
+unowns	Unown (S)
+s unown	Unown (S)
+sunown	Unown (S)
+unown t	Unown (T)
+unownt	Unown (T)
+t unown	Unown (T)
+tunown	Unown (T)
+unown u	Unown (U)
+unownu	Unown (U)
+u unown	Unown (U)
+uunown	Unown (U)
+unown v	Unown (V)
+unownv	Unown (V)
+v unown	Unown (V)
+vunown	Unown (V)
+unown w	Unown (W)
+unownw	Unown (W)
+w unown	Unown (W)
+wunown	Unown (W)
+unown x	Unown (X)
+unownx	Unown (X)
+x unown	Unown (X)
+xunown	Unown (X)
+unown y	Unown (Y)
+unowny	Unown (Y)
+y unown	Unown (Y)
+yunown	Unown (Y)
+unown z	Unown (Z)
+unownz	Unown (Z)
+z unown	Unown (Z)
+zunown	Unown (Z)
+up up up	Up, Up, Up
+upupup	Up, Up, Up
+ice cream	Vanillish
+vanilla cupcake	Vanillite
+holiday vanillite	Vanillite (Holiday)
+holidayvanillite	Vanillite (Holiday)
+vanillite holiday	Vanillite (Holiday)
+vanilliteholiday	Vanillite (Holiday)
+hvanillite	Vanillite (Holiday)
+vanilliteh	Vanillite (Holiday)
+h vanillite	Vanillite (Holiday)
+vanillite h	Vanillite (Holiday)
+ice cream deluxe	Vanilluxe
+vd	Vitality Drain
+vitalitydrain	Vitality Drain
+vol	Volcanion
+volc	Volcanion
+vulpixa	Vulpix (Alola Form)
+avulpix	Vulpix (Alola Form)
+vulpix alola form	Vulpix (Alola Form)
+vulpixalolaform	Vulpix (Alola Form)
+vulpix alola	Vulpix (Alola Form)
+vulpixalola	Vulpix (Alola Form)
+alolan vulpix	Vulpix (Alola Form)
+alolanvulpix	Vulpix (Alola Form)
+vulpix a	Vulpix (Alola Form)
+a vulpix	Vulpix (Alola Form)
+LesserRichAssPtps	Wailmer
+miniwhale	Wailmer
+mini whale	Wailmer
+RichassPtPs	Wailord
+🐳	Wailord
+whale	Wailord
+p2w	Wailord
+wwhimsicott	Whimsicott (Winking)
+whimsicottw	Whimsicott (Winking)
+winking whimsicott	Whimsicott (Winking)
+winkingwhimsicott	Whimsicott (Winking)
+w whimsicott	Whimsicott (Winking)
+whimsicott winking	Whimsicott (Winking)
+whimsicottwinking	Whimsicott (Winking)
+whimsicott w	Whimsicott (Winking)
+wishcash	Whiscash
+wwigglytuff	Wigglytuff (Winking)
+w wigglytuff	Wigglytuff (Winking)
+wigglytuffw	Wigglytuff (Winking)
+wigglytuff w	Wigglytuff (Winking)
+winking wigglytuff	Wigglytuff (Winking)
+winkingwigglytuff	Wigglytuff (Winking)
+wigglytuff winking	Wigglytuff (Winking)
+wigglytuffwinking	Wigglytuff (Winking)
+f2p whale	Wishiwashi
+f2pw	Wishiwashi
+wobbuffetf	Wobbuffet (Female)
+wobbuffet f	Wobbuffet (Female)
+wobbuffet female	Wobbuffet (Female)
+wobbuffetfemale	Wobbuffet (Female)
+Sonansu	Wobbuffet (Male)
+wobbuffetm	Wobbuffet (Male)
+wobbuffet m	Wobbuffet (Male)
+wobbuffet male	Wobbuffet (Male)
+wobbuffetmale	Wobbuffet (Male)
+wormadamplant	Wormadam (Plant Cloak)
+wormadam plant cloak	Wormadam (Plant Cloak)
+wormadam p	Wormadam (Plant Cloak)
+wormadam plant	Wormadam (Plant Cloak)
+plant wormadam	Wormadam (Plant Cloak)
+plantwormadam	Wormadam (Plant Cloak)
+wormadamp	Wormadam (Plant Cloak)
+pwormadam	Wormadam (Plant Cloak)
+p wormadam	Wormadam (Plant Cloak)
+wormadamsandy	Wormadam (Sandy Cloak)
+wormadam sandy cloak	Wormadam (Sandy Cloak)
+wormadam sandy	Wormadam (Sandy Cloak)
+wormadamsand	Wormadam (Sandy Cloak)
+wormadam sand	Wormadam (Sandy Cloak)
+sandywormadam	Wormadam (Sandy Cloak)
+sandy wormadam	Wormadam (Sandy Cloak)
+sandwormadam	Wormadam (Sandy Cloak)
+sand wormadam	Wormadam (Sandy Cloak)
+swormadam	Wormadam (Sandy Cloak)
+wormadams	Wormadam (Sandy Cloak)
+s wormadam	Wormadam (Sandy Cloak)
+wormadam s	Wormadam (Sandy Cloak)
+wormadamtrash	Wormadam (Trash Cloak)
+wormadam t	Wormadam (Trash Cloak)
+wormadam trash	Wormadam (Trash Cloak)
+wormadam trash cloak	Wormadam (Trash Cloak)
+trash wormadam	Wormadam (Trash Cloak)
+trashwormadam	Wormadam (Trash Cloak)
+wormadamt	Wormadam (Trash Cloak)
+twormadam	Wormadam (Trash Cloak)
+t wormadam	Wormadam (Trash Cloak)
+sxern	Xerneas (Shiny)
+xerneas shiny	Xerneas (Shiny)
+shinyxern	Xerneas (Shiny)
+shiny xern	Xerneas (Shiny)
+shiny xerneas	Xerneas (Shiny)
+shinyxerneas	Xerneas (Shiny)
+sxerneas	Xerneas (Shiny)
+s xerneas	Xerneas (Shiny)
+xerneasshiny	Xerneas (Shiny)
+xerneass	Xerneas (Shiny)
+xerneas s	Xerneas (Shiny)
+yveltal shiny	Yveltal (Shiny)
+shiny yveltal	Yveltal (Shiny)
+shinyyveltal	Yveltal (Shiny)
+s yveltal	Yveltal (Shiny)
+syveltal	Yveltal (Shiny)
+yveltalshiny	Yveltal (Shiny)
+yveltals	Yveltal (Shiny)
+yveltal s	Yveltal (Shiny)
+Z10	Zygarde (10% Forme)
+Zygarde10	Zygarde (10% Forme)
+zyg10	Zygarde (10% Forme)
+zy10	Zygarde (10% Forme)
+zydog	Zygarde (10% Forme)
+zygarde 10	Zygarde (10% Forme)
+zygarde10%	Zygarde (10% Forme)
+zygarde 10%	Zygarde (10% Forme)
+Z50	Zygarde (50% Forme)
+Zygarde50	Zygarde (50% Forme)
+zygarde50%	Zygarde (50% Forme)
+zygarde 50	Zygarde (50% Forme)
+zyg50	Zygarde (50% Forme)
+zygarde 50%	Zygarde (50% Forme)
+zy50	Zygarde (50% Forme)
+zygarde cell	Zygarde (Cell)
+zygardecell	Zygarde (Cell)
+zcell	Zygarde (Cell)
+zygcell	Zygarde (Cell)
+Z100	Zygarde (Complete Forme)
+Zygarde100	Zygarde (Complete Forme)
+zyg100	Zygarde (Complete Forme)
+zygarde 100	Zygarde (Complete Forme)
+zygarde100%	Zygarde (Complete Forme)
+zygarde 100%	Zygarde (Complete Forme)
+zygarde complete	Zygarde (Complete Forme)
+zygardecomplete	Zygarde (Complete Forme)
+zygarde complete form	Zygarde (Complete Forme)
+zygardecompleteform	Zygarde (Complete Forme)
+zy100	Zygarde (Complete Forme)
+zygardec	Zygarde (Complete Forme)
+zygarde c	Zygarde (Complete Forme)
+zygc	Zygarde (Complete Forme)
+zcomplete	Zygarde (Complete Forme)
+Zygarde 💯	Zygarde (Complete Forme)
+zygcomplete	Zygarde (Complete Forme)
+zycomplete	Zygarde (Complete Forme)
+zyg complete	Zygarde (Complete Forme)
+zc	Zygarde (Complete Forme)
+zygarde core	Zygarde (Core)
+zygardecore	Zygarde (Core)
+zcore	Zygarde (Core)
+zygcore	Zygarde (Core)
+meg	Meganium
+xern	Xerneas
+jangmoo	Jangmo-o
+hakamoo	Hakamo-o
+kommoo	Kommo-o
+disruptbuster	Disrupt Buster
+gatr	Feraligatr
+ytreza	Sentret
+dian	Diancie
+sdian	Diancie (Shiny)
+smdian	Mega Diancie (Shiny)
+msdian	Mega Diancie (Shiny)
+mane	Manectric
+dragonsweep	Dragon Sweep
+dragonshriek	Dragon Shriek
+<:sunkern:300708136623538186>	Sunkern
+Power of 4++	Demolish
+po4++	Demolish
+shark	Sharpedo
+🦈	Sharpedo
+pokeball vivillon	Vivillon (Poké Ball Pattern)
+pokeballvivillon	Vivillon (Poké Ball Pattern)
+poke ball vivillon	Vivillon (Poké Ball Pattern)
+vivillon poke ball pattern	Vivillon (Poké Ball Pattern)
+vivillonpokeballpattern	Vivillon (Poké Ball Pattern)
+vivillon pokeball	Vivillon (Poké Ball Pattern)
+vivillon poke ball	Vivillon (Poké Ball Pattern)
+vivillonpokeball	Vivillon (Poké Ball Pattern)
+vivillon	Vivillon (Meadow Pattern)
+vivillon meadow	Vivillon (Meadow Pattern)
+vivillonmeadow	Vivillon (Meadow Pattern)
+meadow vivillon	Vivillon (Meadow Pattern)
+meadowvivillon	Vivillon (Meadow Pattern)
+vivillon meadow pattern	Vivillon (Meadow Pattern)
+vivillonmeadowpattern	Vivillon (Meadow Pattern)
+lgm	Elgyem
+mc	Metal Combo
+steel combo	Metal Combo
+steelcombo	Metal Combo
+meowsticm	Meowstic (Male)
+meowstic m	Meowstic (Male)
+meowstic male	Meowstic (Male)
+meowsticmale	Meowstic (Male)
+Natsuki	Meowstic (Male)
+meowsticf	Meowstic (Female)
+meowstic f	Meowstic (Female)
+meowstic female	Meowstic (Female)
+meowsticfemale	Meowstic (Female)
+kyu	Kyurem
+🥗	Salazzle
+nidoranm	Nidoran-M
+nidoran m	Nidoran-M
+nidoran male	Nidoran-M
+nidoranmale	Nidoran-M
+nidoranf	Nidoran-F
+nidoran f	Nidoran-F
+nidoran female	Nidoran-F
+nidoranfemale	Nidoran-F
+<:wishiwashi:298602665531801632>	Wishiwashi
+🦅	Braviary
+murica bird	Braviary
+murica	Braviary
+porygon 2	Porygon2
+dar	Darkrai
+moves+5	M+5
+moves +5	M+5
++5	M+5
+m5	M+5
+i will rock ur coin	Meowth
+🔪+	Stabilize+
+🐮	Miltank
+🔪	Stabilize
+🔪++	Stabilize++
+sa	Shock Attack
+guzz	Guzzlord
+hound	Houndoom
+null	Type: Null
+licky	Lickilicky
+farfetchd	Farfetch'd
+buzztard	Buzzwole
+prim	Primarina
+buzz	Buzzwole
+mban	Mega Banette
+alolawak	Marowak (Alola Form)
+nihi	Nihilego
+onion	Celebi
+mdos	Mega Gyarados
+msdos	Mega Gyarados (Shiny)
+smdos	Mega Gyarados (Shiny)
+dp	Downpour
+karp	Magikarp
+shiny hooh	Ho-Oh (Shiny)
+hooh shiny	Ho-Oh (Shiny)
+<:mimed:586121904398663680>	Mr. Mime
+<:sentret:606882325527265280>	Sentret
+<:slowpoke:607362970997096489>	Slowpoke
+<:gengaraww:586129744656072725>	Gengar
+<:happywifehappylife:300712483633496065>	Diancie
+<:Nebby:466066325228224522>	Cosmog
+<:pkyogre:588351201708605460>	Primal Kyogre
+<:torchicc:586130614277767179>	Torchic
+<:LitwickThumbsUp:586133230609104896>	Litwick
+<:Ditto:613388898458009636>	Ditto
+<:bigsunkern:597006040822710292>	Sunkern
+<:snorelax:586118474200514560>	Snorlax
+<:pulverizingpancake:379324481606254603>	Try Hard
+<:victory:300782887232339968>	Victini
+<:psweatduck:586129744102162433>	Psyduck
+<:What:305906244936400898>	Dialga
+rock trex	Tyrantrum
+<:NotLikeRowlet:619472732366569482>	Rowlet
+<:ThinkUnown:466066811432075295>	Unown (Q)
+<:traps:300782381059538944>	Wobbuffet (Female)
+<:Pepesaur:466066451631964193>	Bulbasaur
+<:mantine:620628297084174369>	Mantine
+zoro	Zoroark
+xurk	Xurkitree
+xtree	Xurkitree
+🌳	Decidueye
+🌴	Exeggutor (Alola Form)
+🎄	Snover (Holiday)
+mowtom	Rotom (Mow Rotom)
+AAAAAAAAAAAAAA	Guzzlord
+mega succ	Mega Heracross
+🐲	Druddigon
+AA	Guzzlord
+AAA	Guzzlord
+AAAA	Guzzlord
+AAAAA	Guzzlord
+AAAAAA	Guzzlord
+AAAAAAA	Guzzlord
+AAAAAAAA	Guzzlord
+AAAAAAAAA	Guzzlord
+AAAAAAAAAA	Guzzlord
+AAAAAAAAAAA	Guzzlord
+AAAAAAAAAAAA	Guzzlord
+AAAAAAAAAAAAA	Guzzlord
+⚓	Dhelmise
+Flip	Lanturn
+mr.mime	Mr. Mime
+mimejr.	Mime Jr.
+🐻	Stufful
+agreninja	Greninja (Ash-Greninja)
+greninjaa	Greninja (Ash-Greninja)
+a greninja	Greninja (Ash-Greninja)
+greninja a	Greninja (Ash-Greninja)
+kron	Squirtle
+up3	Up, Up, Up
+up 3	Up, Up, Up
+up3x	Up, Up, Up
+upx3	Up, Up, Up
+up 3x	Up, Up, Up
+up x3	Up, Up, Up
+3up	Up, Up, Up
+3 up	Up, Up, Up
+triple up	Up, Up, Up
+tripleup	Up, Up, Up
+dabchu	Pikachu (Dabbing)
+9tales	Ninetales
+gradchu	Pikachu (Graduate)
+qs	Blindside
+sadness	Mega Swampert
+paralyse	Paralyze
+mushroomchu	Pikachu (Mushroom Harvest)
+pikashroom	Pikachu (Mushroom Harvest)
+azula	Mega Gardevoir (Shiny)
+businesschu	Pikachu (Intern)
+smvoir	Mega Gardevoir (Shiny)
+stabilise+	Stabilize+
+stabilise	Stabilize
+stabilise++	Stabilize++
+svoir	Gardevoir (Shiny)
+msvoir	Mega Gardevoir (Shiny)
+fatfuck	Snorlax
+fatcat	Snorlax
+fatass	Snorlax
+nut succy	Meowstic (Male)
+nut sucky	Meowstic (Female)
+paralyse+	Paralyze+
+para+	Paralyze+
+wmgla	Mega Glalie (Winking)
+mes	Mesprit
+mesp	Mesprit
+inci	Incineroar
+swaifu	Gardevoir (Shiny)
+waifu	Gardevoir
+salami	salamence
+hns	Hide and Seek
+h&s	Hide and Seek
+hide	Hide and Seek
+hidenseek	Hide and Seek
+sd	Shadow Dance
+msd	Marshadow
+mars	Marshadow
+mar	Marshadow
+q++	Quirky++
+q+	Quirky+
+owo	Maractus
+incin	Incineroar
+mblast	Mega Blastoise
+pixie	Pixie Power
+pixiep	Pixie Power
+poisonm	Poisonous Mist
+pmist	Poisonous Mist
+sm2	Mewtwo (Shiny)
+james	Torchic
+pyuku	Pyukumuku
+<:okpyukumuku:293532066858008576>	Pyukumuku
+<:pyukumukugun:296109528741576704>	Pyukumuku
+mbane	Mega Banette
+ban	Banette
+bane	Banette
+<:HappyPichu:645743441661263872>	Pichu
+charmie	Charmander
+<:fliplup:586129745939398656>	Piplup
+chm	Charmander
+mgall	Mega Gallade
+mgal	Mega Gallade
+best skill	Typeless Combo
+power of 5++	Extinction
+po5++	Extinction
+zycore	Zygarde (Core)
+squishy	Zygarde (Core)
+zycell	Zygarde (Cell)
+Snowslash	Sandslash (Alola Form)
+🅱️	Mega Beedrill
+para	Paralyze
+rotom ice	Rotom (Frost Rotom)
+ice rotom	Rotom (Frost Rotom)
+rotom grass	Rotom (Mow Rotom)
+grass rotom	Rotom (Mow Rotom)
+rotomice	Rotom (Frost Rotom)
+icerotom	Rotom (Frost Rotom)
+grassrotom	Rotom (Mow Rotom)
+rotomgrass	Rotom (Mow Rotom)
+rotom water	Rotom (Wash Rotom)
+water rotom	Rotom (Wash Rotom)
+waterrotom	Rotom (Wash Rotom)
+rotomwater	Rotom (Wash Rotom)
+fire rotom	Rotom (Heat Rotom)
+rotom fire	Rotom (Heat Rotom)
+firerotom	Rotom (Heat Rotom)
+rotomfire	Rotom (Heat Rotom)
+flying rotom	Rotom (Fan Rotom)
+rotom flying	Rotom (Fan Rotom)
+flyingrotom	Rotom (Fan Rotom)
+rotomflying	Rotom (Fan Rotom)
+ktales	Ninetales
+81k	Final Effort
+🐉	Druddigon
+yvel	Yveltal
+kanga	Kangaskhan
+Disruption Cancel	Mind Zap
+Worse MZ	Prank
+blue shellos	Shellos (East Sea)
+blueshellos	Shellos (East Sea)
+blue gastrodon	Gastrodon (East Sea)
+bluegastrodon	Gastrodon (East Sea)
+pink shellos	Shellos (West Sea)
+pinkshellos	Shellos (West Sea)
+pink gastrodon	Gastrodon (West Sea)
+pinkgastrodon	Gastrodon (West Sea)
+cheer+	Super Cheer
+<:fukumuku:296109031259635712>	Pyukumuku
+para combo	Paralysis Combo
+paracombo	Paralysis Combo
+paralyze combo	Paralysis Combo
+paralyse combo	Paralysis Combo
+paralyzecombo	Paralysis Combo
+paralysecombo	Paralysis Combo
+Meloetta-Fighting	Meloetta (Pirouette Forme)
+meloetta fighting	Meloetta (Pirouette Forme)
+meloettafighting	Meloetta (Pirouette Forme)
+mwaudi	Mega Audino (Winking)
+syvel	Yveltal (Shiny)
+miku	Mimikyu
+wcynda	Cyndaquil (Winking)
+opp	Opportunist
+why is this a thing	Cloud Shot
+wkyu	Kyurem (White Kyurem)
+w kyu	Kyurem (White Kyurem)
+kyu w	Kyurem (White Kyurem)
+kyu b	Kyurem (Black Kyurem)
+b kyu	Kyurem (Black Kyurem)
+bkyu	Kyurem (Black Kyurem)
+po3	Three Force
+<:TtarLul:729030864033546310>	Tyranitar
+<:FurretNoU:642172677947392020>	Furret
+eric	Dratini
+shon	Tynamo
+dt	Dragon Talon
+3 force	Three Force
+3force	Three Force
+<:woop:740661026563031140>	Wooper
+<:GlaceonSip:740667560558854165>	Glaceon
+<:Weedcash:621884144393256973>	Whiscash
+<:HelloSire:742940228330979361>	Quagsire
+<:PingLord:740726383613050884>	Guzzlord
+<:SurprisedPichu:716449072864821248>	Pichu
+<:SableyeThink:498904130342092800>	Mega Sableye
+<:regif:597006037698215956>	Regirock
+<:mewtwostare:686030980032626688>	Mewtwo
+<:Unamewsed:684468542888083514>	Mew
+<:panic:536546701872201728>	Marshtomp
+Weekend Meowth	Meowth
+weekendmeowth	Meowth
+WM	Meowth
+heatom	Rotom (Heat Rotom)
+washtom	Rotom (Wash Rotom)
+fantom	Rotom (Fan Rotom)
+frostom	Rotom (Frost Rotom)
+wpip	Piplup (Winking)
+mcam	Mega Camerupt
+vape nation	Vaporeon
+8RML	Crustle
+wobbm	Wobbuffet (Male)
+wobbf	Wobbuffet (Female)
+Non Stop	Damage Streak
+Nonstop	Damage Streak
+🦛m	Hippowdon (Male)
+🦛F	Hippowdon (Female)
+🐐	Gogoat
+runs ded	Galvantula
+giratina looking to left	Giratina (Altered Forme)
+giratina looking to right	Giratina (Origin Forme)
+ddra	Dancing Dragons
+ddragons	Dancing Dragons
+Not Disruption Delay	Dancing Dragons
+ppo	Pixie Power
+ppa	Poison Pact
+disruption delay	DD
+disruptiondelay	DD
+megastart	MS
+mega start	MS
+attack power up	APU
+attackpowerup	APU
+attack up	APU
+ap+	APU
+attack power+	APU
+attack+	APU
+attackpower+	APU
+attackup	APU
+complexity-1	C-1
+complexity -1	C-1
+time+10	T+10
+time +10	T+10
++10	T+10
+t10	T+10
+no hearts needed	NHN
+noheartsneeded	NHN
+drop rate increase	DRI
+droprateincrease	DRI
+superior super catch time	SSCT
+superiorsupercatchtime	SSCT
+heart regen	HR
+heart regenerate	HR
+heartregenerate	HR
+heart recovery	HR
+heartrecovery	HR
+exp x1.5	EXP
+expx1.5	EXP
+exp points x1.5	EXP
+experience x1.5	EXP
+exppointsx1.5	EXP
+experiencex1.5	EXP
+giraleft	Giratina (Altered Forme)
+giraright	Giratina (Origin Forme)
+eternal floette	Floette (Eternal)
+eternalfloette	Floette (Eternal)
+efloette	Floette (Eternal)
+dabbing pikachu	Pikachu (Dabbing)
+dabbingpikachu	Pikachu (Dabbing)
+shitfish	Bruxish
+scheer	Super Cheer
+azula what skill should I get	Rock Shot α
+Block Shot Γ	Destruction
+Block Shot Gamma	Destruction
+water combo	Big Wave
+watercombo	Big Wave
+normal combo	Double Normal
+normalcombo	Double Normal
+dragon combo	Dancing Dragons
+dragoncombo	Dancing Dragons
+fire combo	Pyre
+firecombo	Pyre
+flying combo	Sky Blast
+flyingcombo	Sky Blast
+ghost combo 2	Shadow Dance
+ghostcombo2	Shadow Dance
+Dark Combo	Sinister Power
+DarkCombo	Sinister Power
+Fighting Combo	Pummel
+FightingCombo	Pummel
+Poison Combo	Poison Pact
+PoisonCombo	Poison Pact
+Fairy Combo	Pixie Power
+FairyCombo	Pixie Power
+Ice Combo	Ice Dance
+IceCombo	Ice Dance
+ground combo	Ground Forces
+groundcombo	Ground Forces
+kantochu	Pikachu (Original Cap)
+johtochu	Pikachu (Original Cap)
+kanto pikachu	Pikachu (Original Cap)
+kantopikachu	Pikachu (Original Cap)
+johto pikachu	Pikachu (Original Cap)
+johtopikachu	Pikachu (Original Cap)
+hoenn pikachu	Pikachu (Hoenn Cap)
+hoennpikachu	Pikachu (Hoenn Cap)
+sinnoh pikachu	Pikachu (Sinnoh Cap)
+sinnohpikachu	Pikachu (Sinnoh Cap)
+unova pikachu	Pikachu (Unova Cap)
+unovapikachu	Pikachu (Unova Cap)
+kalos pikachu	Pikachu (Kalos Cap)
+kalospikachu	Pikachu (Kalos Cap)
+alola pikachu	Pikachu (Alola Cap)
+alolapikachu	Pikachu (Alola Cap)
+delelewoop	Kricketune
+januarychu	Pikachu (Lion Dancer)
+januarypikachu	Pikachu (Lion Dancer)
+january pikachu	Pikachu (Lion Dancer)
+janchu	Pikachu (Lion Dancer)
+janpikachu	Pikachu (Lion Dancer)
+jan pikachu	Pikachu (Lion Dancer)
+februarychu	Pikachu (Kotatsu)
+februarypikachu	Pikachu (Kotatsu)
+february pikachu	Pikachu (Kotatsu)
+febchu	Pikachu (Kotatsu)
+febpikachu	Pikachu (Kotatsu)
+feb pikachu	Pikachu (Kotatsu)
+marchchu	Pikachu (Graduate)
+marchpikachu	Pikachu (Graduate)
+march pikachu	Pikachu (Graduate)
+marchu	Pikachu (Graduate)
+marpikachu	Pikachu (Graduate)
+mar pikachu	Pikachu (Graduate)
+aprilpikachu	Pikachu (Intern)
+april pikachu	Pikachu (Intern)
+aprilchu	Pikachu (Intern)
+maychu	Pikachu (Children's Day)
+maypikachu	Pikachu (Children's Day)
+may pikachu	Pikachu (Children's Day)
+junechu	Pikachu (Rainy Season)
+junepikachu	Pikachu (Rainy Season)
+june pikachu	Pikachu (Rainy Season)
+julychu	Pikachu (Summer Festival)
+julypikachu	Pikachu (Summer Festival)
+july pikachu	Pikachu (Summer Festival)
+augustchu	Pikachu (Beach Walk)
+augustpikachu	Pikachu (Beach Walk)
+august pikachu	Pikachu (Beach Walk)
+augchu	Pikachu (Beach Walk)
+augpikachu	Pikachu (Beach Walk)
+aug pikachu	Pikachu (Beach Walk)
+septemberchu	Pikachu (Pastry Chef)
+septemberpikachu	Pikachu (Pastry Chef)
+september pikachu	Pikachu (Pastry Chef)
+sepchu	Pikachu (Pastry Chef)
+seppikachu	Pikachu (Pastry Chef)
+sep pikachu	Pikachu (Pastry Chef)
+octoberchu	Pikachu (Artist)
+octoberpikachu	Pikachu (Artist)
+october pikachu	Pikachu (Artist)
+octchu	Pikachu (Artist)
+octpikachu	Pikachu (Artist)
+oct pikachu	Pikachu (Artist)
+novemberchu	Pikachu (Mushroom Harvest)
+novemberpikachu	Pikachu (Mushroom Harvest)
+november pikachu	Pikachu (Mushroom Harvest)
+novchu	Pikachu (Mushroom Harvest)
+novpikachu	Pikachu (Mushroom Harvest)
+nov pikachu	Pikachu (Mushroom Harvest)
+decemberchu	Pikachu (Year's End)
+decemberpikachu	Pikachu (Year's End)
+december pikachu	Pikachu (Year's End)
+decchu	Pikachu (Year's End)
+decpikachu	Pikachu (Year's End)
+dec pikachu	Pikachu (Year's End)
+spc	Super Cheer
+⚔️	Doublade
+<:ohgodwhy:668841281862107146>	Mudkip
+<:mimikyuhappy:239487527528955904>	Mimikyu
+<:mimikyuwave:239487530846781442>	Mimikyu
+<:ComeAtMe:668839870277353502>	Deoxys (Defense Forme)
+<:FineWooper:744999415038607429>	Wooper
+<:SurprisedRaichu:749382369848328212>	Raichu
+<:happyday:668845580709134386>	Mantine
+<:NoStamina:744958663453573232>	Palkia
+greninja ash	Greninja (Ash-Greninja)
+greninjaash	Greninja (Ash-Greninja)
+💯	Chimecho
+Ash's Skill	Unity Power
+z💯	Zygarde (Complete Forme)
+non stop++	Up, Up, Up
+giro	Giratina (Origin Forme)
+gira	Giratina (Altered Forme)
+Barrier Off	Barrier Break
+Block Break	Block Off
+bs+++	Block Off
+bb+++	Barrier Break
+ds	Damage Streak
+q+++	Hide and Seek
+<:wtf:771783305422569532>	Timburr
+🕯️	Litwick
+mzardx	Mega Charizard X
+funnier shot out	Dragon Sweep
+malt	Mega Altaria
+ttrum	Tyrantrum
+christmas pikachu	Pikachu (Holiday)
+christmaspikachu	Pikachu (Holiday)
+pikachu christmas	Pikachu (Holiday)
+pikachuchristmas	Pikachu (Holiday)
+christmaschu	Pikachu (Holiday)
+xmaschu	Pikachu (Holiday)
+xmas pikachu	Pikachu (Holiday)
+xmaspikachu	Pikachu (Holiday)
+halloween pikachu	Pikachu (Spooky)
+halloweenpikachu	Pikachu (Spooky)
+pikachu halloween	Pikachu (Spooky)
+pikachuhalloween	Pikachu (Spooky)
+halloweenchu	Pikachu (Spooky)
+Pex	Toxapex
+k9	Ninetales
+croach	Pheromosa
+superdab	Super Dab
+bp	Beast Power
+hamstreak	Hammering Streak
+sshock	Shadow Shock
+cco	Crowd Control
+cco+	Crowd Control+
+tb	T-Boost
+lb	L-Boost
+sy	Yveltal (Shiny)
+y	Yveltal
+x	xerneas
+sx	Xerneas (Shiny)
+dio	Deoxys (Normal Forme)
+lax	Snorlax
+bliss	Blissey
+wbliss	Blissey (Winking)
+icecream 2	Vanillish
+icecream 1	Vanillite
+icecream 3	Vanilluxe
+quag	Quagsire
+carbwink	Carbink (Winking)
+cloud shit	Cloud Shot
+pin	Pinsir
+key	Klefki
+keys	Klefki
+🔑	Klefki
+🔐	Klefki
+caramel	Camerupt
+mcaramel	Mega Camerupt
+fp	Full Power
+big mime	Mr. Mime
+small mime	Mime Jr.
+Zodiac	Raichu (Alola Form)
+roxx	Snivy
+Kbitty	Solgaleo
+kstie	Drifloon
+pizz	Tapu Koko
+pringle	Jellicent (Male)
+floettee	Floette (Eternal)
+s++	Swap++
+araq	Araquanid
+hne	Turtwig (Winking)
+bbat	Lunala
+fresh	Kingdra
+dioa	Deoxys (Attack Forme)
+diod	Deoxys (Defense Forme)
+rschu	Pikachu (Hoenn Cap)
+mmq	Mimikyu
+memesteela	Celesteela
+sylv	Sylveon
+37	Meowth
+f+	Freeze+
+ghosticorio	Oricorio (Sensu Style)
+Zeraroara	Zeraora (Roar)
+zeraora roar	Zeraora (Roar)
+dark	Darkrai
+id	Ice Dance
+the destroyer of worlds	Litwick
+monke	Infernape
+grogadier	Frogadier
+Mew2	Mewtwo
+Squidward	Nihilego
+sally	Salamence
+ch+	Super Cheer
+<:yikes:866861583261892618>	Groudon
+Groudo	Groudon
+PGroudo	Primal Groudon
+DeoxysN	Deoxys (Normal Forme)
+cario	Lucario
+Horizon	Metagross (Shiny)
+Geng	Gengar
+Gengen	Gengar
+ddr	Dancing Dragons
+Type: Full	Silvally
+Emotion	Mesprit
+Will	Azelf
+Willpower	Azelf
+Know	Uxie
+Knowledge	Uxie
+Deez Nuts	Nuzleaf
+Dogshit	Deoxys (Speed Forme)
+Necro	Necrozma
+brav	Braviary
+alolapix	Vulpix (Alola Form)
+sb	Sky Blast
+charm nader	Charmander
+Pin in the butt	Florges
+kromer	Necrozma
+uhoh	Ho-Oh
+smg	Mega Gengar (Shiny)
+spmg	Mega Gengar (Spooky)
+white ho oh	Yvetal
+CC Al Gore	Accelgor
+sch	Super Cheer
+amaro	Marowak (Alola Form)
+updog	Granbull (Winking)
+parkachu	Pikachu (Rainy Season)
+don	Groudon
+z1	Zygarde (Cell)
+Big Chungus	Guzzlord
+nader	Charmander
+ceogunj	Croagunk
+hh	Heavy Hitter
+ssp	Sand Sport
+funne frog	Croagunk
+barnicle	Barbaracle
+snober	Snover (Holiday)
+puff	Jigglypuff
+mmsux	Mega Mewtwo X
+porq	Magikarp (Shiny)
+turtwink	Turtwig (Winking)
+zark	Zoroark
+has	Hide and Seek
+wdog	Granbull (Winking)
+care	Golett
+wchm	Charmander (Winking)
+bf	Brute Force
+swappp	Swap++
+wchiko	Chikorita (Winking)
+wtoto	Totodile (Winking)
+silv	Silvally
+bk	Kyurem (Black Kyurem)
+viktini	Victini
+spoogy	Gengar (Spooky)
+artchu	Pikachu (Artist)
+rainchu	Pikachu (Rainy Season)
+drainchu	Pikachu (Rainy Season)
+downpourchu	Pikachu (Rainy Season)
+january	Pikachu (Lion Dancer)
+march	Pikachu (Graduate)
+february	Pikachu (Kotatsu)
+april	Pikachu (Intern)
+may	Pikachu (Children's Day)
+june	Pikachu (Rainy Season)
+july	Pikachu (Summer Festival)
+august	Pikachu (Beach Walk)
+september	Pikachu (Pastry Chef)
+october	Pikachu (Artist)
+november	Pikachu (Mushroom Harvest)
+december	Pikachu (Year's End)
+sochu	Pikachu (Alola Cap)
+swinklix	Swirlix (Winking)
+pogger	pogre
+pogre	Primal Kyogre
+666	karrablast
+pizza worm	Wormadam (Sandy Cloak)
+resh	Reshiram
+spoopa	Spewpa
+sciz	Scizor
+msciz	Mega Scizor
+dreigon	Hydreigon
+sgross	Metagross (Shiny)
+osh	oshawott
+msab	Mega Sableye
+pizza	Wormadam (Sandy Cloak)
+mtoise	Mega Blastoise
+arbys	ribombee
+kart	kartana
+mvoir	Mega Gardevoir
+pkyo	Primal Kyogre
+pyko	Primal Kyogre
+brogler	espurr
+p+	paralyze+
+primalkyogre	Primal Kyogre
+aninja	Greninja (Ash-Greninja)
+ash gren	Greninja (Ash-Greninja)
+sable	sableye
+msable	Mega Sableye
+don't	Gligar
+duggy	dugtrio
+the don	groudon
+megagross	mega metagross
+mzor	mega scizor
+aegi	Aegislash
+tran	heatran
+Firestarr99	Mr. Mime
+attrition	primal kyogre
+yz	Raichu
+top	hitmontop
+chan	Hitmonchan
+mega doom	mega houndoom
+pango	pangoro
+goro	pangoro
+glisc	gliscor
+🍕	Wormadam (Sandy Cloak)
+SaltedNeos	Pikachu (Angry)
+saltedchu	Pikachu (Angry)
+whoa	shroomish
+bagel	whimsicott
+pompom oricorio	Oricorio (Pom-Pom Style)
+pom-pom oricorio	Oricorio (Pom-Pom Style)
+Pa'u oricorio	Oricorio (Pa'u Style)
+sensu oricorio	Oricorio (Sensu Style)
+baile oricorio	Oricorio (Baile Style)
+wpuff	Jigglypuff (Winking)
+sus	amoonguss
+amogus	amoonguss
+amongus	amoonguss
+spooky pika	Pikachu (Spooky)
+tailglow	manaphy
+walterchu	Pikachu (Angry)
+finger	Chesnaught
+ssable	Sableye (Spooky)
+shiny zard	Charizard (Shiny)
+<:Arceus:919378429760126996>	arceus
+<:MegaBrain:867115583077744691>	mega metagross
+<:EarCry:300780770706980864>	roggenrola
+<:Helix:816366007911186432>	omanyte
+<:BigPinger:740726383613050884>	guzzlord
+<:Sunkern:668839678019108884>	sunkern
+John Wick	litwick
+wmander	Charmander (Winking)
+Chris Pratt	Gurdurr
+Walter White	Pikachu (Angry)
+tailglow (winking)	manaphy (winking)
+manaphy (winking)	Manaphy (Winking)
+Jesse	Jigglypuff
+Pinkman	Jigglypuff
+smzardx	Mega Charizard X (Shiny)
+smzardy	Mega Charizard Y (Shiny)
+smy	Mega Charizard Y (Shiny)
+mszardx	Mega Charizard X (Shiny)
+mscx	Mega Charizard X (Shiny)
+awak	Marowak (Alola Form)
+castform s	Castform (Snowy Form)
+!	Unown (Exclamation)
+?	Unown (Question)
+smzx	Mega Charizard X (Shiny)
+uuu	Up, Up, Up
+arti	articuno
+spk+	Spookify+
+Merryloo	Shuppet
+block smash+	Block Smash+
+fatty	Wailord
+mega aero	Mega Aerodactyl
+garados	gyarados
+sleepachu	Pikachu (Sleeping)
+skarm	skarmory
+fr+	Freeze+
+st	super tackle
+up³	Up, Up, Up
+a mighty rich meowth	Meowth
+fatso	Snorlax
+bingus	Espeon
+bingus2	Mew
+obalie	spheal
+ghos	gastly
+salaz	salazzle
+metagurosu	metagross
+toxa	toxapex
+toxap	Toxapex
+styranitar	Tyranitar (Shiny)
+weezer	weezing
+hpika	Pikachu (Holiday)
+santachu	Pikachu (Holiday)
+toad	seismitoad
+wwiggly	Wigglytuff (Winking)
+wbink	Carbink (Winking)
+shot	Shot Out
+brshot	Barrier Shot
+bashot	Barrier Shot
+blshot	Block Shot
+bkshot	Block Shot
+pikachu entei	Pikachu (Lion Dancer)
+pikachu nerd	Pikachu (Intern)
+3f	three force
+pooch	poochyena
+hax	haxorus
+mediocre	Cresselia
+trash	Opportunist
+lucha	Hawlucha
+Kommo'o	Kommo-o
+mgen	Mega Gengar
+shout out	Shot Out
++ boost	Cross Attack
+Zee Fiddy	Zygarde (50% Forme)
+incine	incineroar
+agren	Greninja (Ash-Greninja)
+Alpha	Rock Shot α
+Omega	Barrier Shot Ω
+pb	Psyburst
+pleadchu	Pikachu (Teary)
+BeLuna	Gardevoir (Shiny)
+cd	calm down
+hell	Meganium
+salted	Pikachu (Angry)
+owooji	dodrio
+Cruel	Tentacruel
+regiG	regigigas
+lukaread	Psyduck
+mzardy	Mega Charizard Y
+b+	burn+
+sp+	Spookify+
+Conker	Conkeldurr
+p2	Porygon2
+AMRM	Meowth
+fire dance	pyre
+nt	nap time
+wcatty	Delcatty (Winking)
+Chesnaur	Chesnaught
+mchicken	Mega Blaziken
+mpedo	Mega Sharpedo
+pedo	Sharpedo
+tub	slaking
+jordinario	mudkip
+chachangas	Garchomp
+fire is an idiot	Mr. Mime
+https://tenor.com/view/sulfuric-acid-gif-25048668	Swalot
+msteel	Mega Steelix
+Toto	Totodile
+real luka	Mime Jr.
+sGengaf	Gengar (Shiny)
+sGengar	Gengar (Shiny)
+Tatum	braviary
+chim	chimchar
+🦟	buzzwole
+<:MugiStrong:801633504517423124>	Buzzwole
+bbr	barrier break
+wmaudi	Mega Audino (Winking)
+lukareal	Mime Jr.
+everyone's favorite bug 😄	galvantula
+mandi	mandibuzz
+owei	Exeggcute
+coil	Magnemite
+vik's favorite mon	torchic
+upupupup	4 Up
+Winklytuff	Wigglytuff (Winking)
+Bing Chilling	Vanilluxe
+realluka	Mime Jr.
+🥓	Bagon
+skill swapper	SS
+gya	Gyarados
+malaria	Mega Altaria
+thawed	Togekiss
+shiny char x	Mega Charizard X (Shiny)
+mega char X	mega charizard X
+:noodleapproval:	dragonair
+mvenu	mega venusaur
+wosha	Oshawott (Winking)
+bish	Bisharp
+PEDOS	sharpedo
+@whoa	mime jr.
+Luka	Gengar (Spooky)
+pikachuManiac10	Shiny Hunter
+<@1030683530428174367>	Garbodor
+pikachumanaic10	Sylveon
+tub thinks he has game?	Delcatty (Winking)
+tub has game -fire	Delcatty (Winking)
+[name u want]	[pokemon]
+diggersby	Diggersby
+sgardy	Gardevoir (Shiny)
+<@671446086585417728>	Gardevoir (Shiny)
+https://media.discordapp.net/attachments/906946892817137767/1111808386443513897/attachment.gif	Mega Rayquaza
+<@302474909274341376>	Trubbish
+junior	machop
+<@901177594249093200>	Trubbish
+Poopsire	Quagsire
+https://media.discordapp.net/attachments/988844210679611445/1114016630222110780/attachment.gif	Mega Camerupt
+Ass Dance	Ice Dance
+Aeggy	Exeggutor (Alola Form)
+osha	oshawott
+jorachi	jirachi
+candle	litwick
+bo	block off
+ssh	shadow shock
+bastardon	bastiodon
+Pikachu (Shadow Wizard Money Gang)	Pikachu (Mushroom Harvest)
+thundy	Thundurus (Incarnate Forme)
+mega gard	mega gardevoir
+spooky beast	Gengar (Spooky)
+iraq	araquanid
+poopyhead	Gengar (Shiny)
+vulgina	mandibuzz
+shitmet	shelmet
+<:boohoo:1109303038130266172>	pichu
+<:heisenchu:1135283332377227304>	Pikachu (Angry)
+Wteppy	Tepig (Winking)
+Shiturott	Samurott
+celffa	cleffa
+shitwick	Litwick
+Rock Smash+	Rock Break+
+supche	Super Cheer
+almost trash	Quake
+cynda	Cyndaquil
+Gigi	Regigigas
+regigigass	Regigigas
+polio	Poplio
+pollo	Poplio
+Trump	Gumshoos
+e++	eject++
+nerdchu	pikachu (intern)
+aria2	ariados
+ogre	kyogre
+wiggly	wigglytuff
+spower	sinister power
+zone	magnezone
+krook	krookodile
+luna	lunala
+tina	giratina
+tinao	Giratina (Origin Forme)
+ordile	Feraligatr
+phan	donphan
+gigas	regigigas
+ligma	slugma
+arc	arceus
+Midgame	Claydol
+gren	greninja
+gross	metagross
+marsh	marshadow
+mamar	malamar
+wick	litwick
+sneta	Metagross (Shiny)
+mgar	mega gengar
+zek	zekrom
+noiv	noivern

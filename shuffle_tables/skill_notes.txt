@@ -1,0 +1,75 @@
+Absorb	Damage = remaining HP x 5%, deals 0 damage in stages without an HP bar
+Astonish	Inflicts Disrupted (prevents disruptions) for 1 move
+Big Eater	Damage = remaining HP x 10%, deals 0 damage in stages without an HP bar
+Brute Force	Not Very Effective damage x2 for the entire Combo, not just the first match; SL bonuses only affects the first match
+Burn	Inflicts Burned (x1.5 damage from Fire types) for 3 moves\nImmune types: Dragon, Fire, Ghost, Ground, Poison, Rock, Water\nVulnerable types: Bug, Dark, Electric, Fairy, Fighting, Flying, Grass, Ice, Normal, Psychic, Steel
+Burn+	Inflicts Burned (x1.5 damage from Fire types) for 10 moves\nImmune types: Dragon, Fire, Ghost, Ground, Poison, Rock, Water\nVulnerable types: Bug, Dark, Electric, Fairy, Fighting, Flying, Grass, Ice, Normal, Psychic, Steel
+Calm Down	Resets disruption counter to max; Can't trigger if a status effect is already present
+Cheer	Increases activation rate of next skill by 5%; Activation rates of 0% are unaffected
+Chill	Inflicts Disrupted (prevents disruptions) for 1 move
+Constrict	Inflicts Disrupted (prevents disruptions) for 2 moves
+Counterattack	Damage + (# of Rocks, Blocks, and Coins x damage multiplier)
+Counterattack+	Damage + (# of Rocks, Blocks, and Coins x damage multiplier)
+Cross Attack	The second match in the combo will also receive the damage multiplier (not affected by SL bonuses)
+Cross Attack+	The second match in the combo will also receive the damage multiplier (not affected by SL bonuses)
+Crowd Control	Damage + (# of Pokemon excluding match x damage multiplier)
+Crowd Control+	Damage + (# of Pokemon excluding match x damage multiplier)
+Crowd Power	Damage + (# of Pokemon excluding match x damage multiplier)
+Crushing Step	Inflicts Disrupted (prevents disruptions) for 1 move
+Damage Streak	Not triggering this will reset the streak; Damage x 1.2^(streak count), caps at x2
+Daunt	Inflicts Disrupted (prevents disruptions) for 1 move
+Downpour	Damage = remaining HP x 10%, deals 0 damage in stages without an HP bar
+Dragon Shriek	Inflicts Paralyzed (prevents disruptions) for 5 moves\nImmune types: Dragon, Electric, Fairy, Flying, Ghost, Poison, Psychic, Steel\nVulnerable types: Bug, Dark, Fighting, Fire, Grass, Ground, Ice, Normal, Rock, Water
+Fascinate	Inflicts Disrupted (prevents disruptions) for 1 move
+Fearless	Description is a bit misleading. If triggered, all Normal-type damage in the Combo are boosted by x4. SL bonuses only affects the initial match.
+Final Effort	Can only activate on the last move or when there are <= 3 seconds remaining
+Flap	Inflicts Disrupted (prevents disruptions) for 1 move
+Flash Mob	Damage + (# of Pokemon excluding match x damage multiplier)
+Freeze	Inflicts Frozen (x1.2 damage from Ice types and prevents disruptions) for 3 moves\nImmune types: Electric, Fairy, Fighting, Fire, Ghost, Ice, Poison, Psychic, Steel\nVulnerable types: Bug, Dark, Dragon, Flying, Grass, Ground, Normal, Rock, Water
+Freeze+	Inflicts Frozen (x1.2 damage from Ice types and prevents disruptions) for 7 moves\nImmune types: Electric, Fairy, Fighting, Fire, Ghost, Ice, Poison, Psychic, Steel\nVulnerable types: Bug, Dark, Dragon, Flying, Grass, Ground, Normal, Rock, Water
+Good Luck	Increases drop rate by damage multiplier
+Hammering Streak	Not triggering this will reset the streak; Damage x 1.5^(streak count), caps at x3
+Hitting Streak	Not triggering this will reset the streak; Damage x 1.2^(streak count), caps at x2
+Hitting Streak+	Not triggering this will reset the streak; Damage x 1.5^(streak count), caps at x10
+Hyper Bolt	Can only activate on the last 4 moves or when there are <= 10 seconds remaining
+Hyper Drain	Damage = remaining HP x 10%, deals 0 damage in stages without an HP bar
+L-Boost	The second match in the combo will also receive the damage multiplier (not affected by SL bonuses)
+Last-Ditch Effort	Can only activate on the last 4 moves or when there are <= 10 seconds remaining
+Lightning	Inflicts Paralyzed (prevents disruptions) for 1 move\nImmune types: Dragon, Electric, Fairy, Flying, Ghost, Poison, Psychic, Steel\nVulnerable types: Bug, Dark, Fighting, Fire, Grass, Ground, Ice, Normal, Rock, Water
+Mega Boost	Fills the Mega Gauge by 3
+Mega Boost+	Fills the Mega Gauge by 6
+Mega Boost++	Fills the Mega Gauge by 9
+Mind Zap	Resets disruption counter to max; Can't trigger if a status effect is already present
+Nap Time	Inflicts Asleep (x1.2 damage from all types and prevents disruptions) for 2 moves\nImmune types: Dark, Dragon, Fighting, Ghost, Grass, Ice, Rock, Steel\nVulnerable types: Bug, Electric, Fairy, Fire, Flying, Ground, Normal, Poison, Psychic, Water
+Non Stop+	Not triggering this will reset the streak; Damage x 2 x (1, 2, 4, 5), caps at x10
+Paralyze	Inflicts Paralyzed (prevents disruptions) for 2 moves\nImmune types: Dragon, Electric, Fairy, Flying, Ghost, Poison, Psychic, Steel\nVulnerable types: Bug, Dark, Fighting, Fire, Grass, Ground, Ice, Normal, Rock, Water
+Paralyze+	Inflicts Paralyzed (prevents disruptions) for 10 moves\nImmune types: Dragon, Electric, Fairy, Flying, Ghost, Poison, Psychic, Steel\nVulnerable types: Bug, Dark, Fighting, Fire, Grass, Ground, Ice, Normal, Rock, Water
+Poison	Inflicts Poisoned (x1.5 damage from Poison types) for 7 moves\nImmune types: Ghost, Ground, Poison, Rock, Steel\nVulnerable types: Bug, Dark, Dragon, Electric, Fairy, Fighting, Fire, Flying, Grass, Ice, Normal, Psychic, Water
+Poisonous Mist	Damage = remaining HP x 10%, deals 0 damage in stages without an HP bar
+Possession	Resets disruption counter to max; Can't trigger if a status effect is already present
+Power Hug	Inflicts Disrupted (prevents disruptions) for 1 move; Stage must have disruptions to trigger
+Prank	Changes the countdown timer to a random number from 1 to current countdown timer's max; Can't trigger if a status effect is already present
+Quake	Inflicts Paralyzed (prevents disruptions) for 1 move\nImmune types: Dragon, Electric, Fairy, Flying, Ghost, Poison, Psychic, Steel\nVulnerable types: Bug, Dark, Fighting, Fire, Grass, Ground, Ice, Normal, Rock, Water
+Relentless	Can activate during Disruption Delay; SL bonuses only affects the first match
+Risk-Taker	Damage = random number from damage / 3 to damage x 3
+Sand Sport	Inflicts Disrupted (prevents disruptions) for 2 moves
+Shadow Shock	Inflicts Disrupted (prevents disruptions) for 1 move; Stage must have disruptions to trigger
+Shock Attack	Inflicts Paralyzed (prevents disruptions) for 4 moves\nImmune types: Dragon, Electric, Fairy, Flying, Ghost, Poison, Psychic, Steel\nVulnerable types: Bug, Dark, Fighting, Fire, Grass, Ground, Ice, Normal, Rock, Water
+Sleep Charm	Inflicts Asleep (x1.2 damage from all types and prevents disruptions) for 3 moves\nImmune types: Dark, Dragon, Fighting, Ghost, Grass, Ice, Rock, Steel\nVulnerable types: Bug, Electric, Fairy, Fire, Flying, Ground, Normal, Poison, Psychic, Water
+Spookify	Inflicts Spooked (x1.5 damage from Ghost types) for 3 moves\nImmune types: Bug, Dark, Dragon, Fighting, Grass, Ground, Ice, Poison, Rock, Steel\nVulnerable types: Electric, Fairy, Fire, Flying, Ghost, Normal, Psychic, Water
+Spookify+	Inflicts Spooked (x1.5 damage from Ghost types) for 7 moves\nImmune types: Bug, Dark, Dragon, Fighting, Grass, Ground, Ice, Poison, Rock, Steel\nVulnerable types: Electric, Fairy, Fire, Flying, Ghost, Normal, Psychic, Water
+Stabilize	Does not erase Non-Support; Priority: Rock/Block/Coin -> Black Cloud -> Barrier
+Stabilize+	Does not erase Non-Support; Priority: Rock/Block/Coin -> Black Cloud -> Barrier
+Stabilize++	Does not erase Non-Support; Priority: Rock/Block/Coin -> Black Cloud -> Barrier
+Steely Resolve	Can only activate on the last 4 moves or when there are <= 10 seconds remaining
+Super Cheer	Activation rates of 0% are unaffected
+Swap	Can only swap Rocks, Blocks, and Coins
+Swap+	Can only swap Rocks, Blocks, and Coins
+Swap++	Can only swap Rocks, Blocks, and Coins
+Swarm	Can only activate on the last 4 moves or when there are <= 10 seconds remaining
+Swat	Description is a bit misleading. If triggered, all Psychic-type damage in the Combo are boosted by x2. SL bonuses only affects the initial match.
+T-Boost	The second match in the combo will also receive the damage multiplier (not affected by SL bonuses)
+Toxic Stress	Not triggering this will reset the streak; Damage x 1.5^(streak count), caps at x3
+Up, Up, Up	Not triggering this will reset the streak; Damage x 2^(streak count), caps at x20
+Vitality Drain	Damage = remaining HP x 10%, deals 0 damage in stages without an HP bar
+Whirlpool	Inflicts Disrupted (prevents disruptions) for 1 move

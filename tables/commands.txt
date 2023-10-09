@@ -61,12 +61,23 @@ drain	shuffle_commands	drain_list	prefix	1
 dl	shuffle_commands	drain_list	prefix	1
 remindme	shuffle_commands	remind_me	prefix	1
 unremindme	shuffle_commands	unremind_me	prefix	1
+🐳	user_commands	custom_response	match	1
+🐟	user_commands	custom_response	match	1
+🐲	user_commands	custom_response	match	1
+succ	user_commands	custom_response	match	1
+unity miss	user_commands	custom_response	match	1
+marin 330 damage karin	user_commands	custom_response	match	1
+<:pkyogre:588351201708605460>	user_commands	custom_response	match	1
 p	shuffle_commands	pokemon	prefix	1
 aa	shuffle_commands	pokemon	prefix	1
 st	shuffle_commands	stage	prefix	1
 stx	shuffle_commands	stage_shorthand	prefix	1
 sk	shuffle_commands	skill	prefix	1
 ebr	shuffle_commands	eb_rewards	prefix	1
+<@!421005943287840788>	user_commands	custom_response	contain	1
+<@421005943287840788>	user_commands	custom_response	contain	1
+c: rank	user_commands	custom_response	match	1
+magnezone	user_commands	custom_response	match	1
 sm	sobble_calc_functions	sm	prefix	1
 wm	sobble_calc_functions	wm	prefix	1
 explain	sobble_calc_functions	explain	prefix	1
