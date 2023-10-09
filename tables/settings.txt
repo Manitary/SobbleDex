@@ -49,7 +49,7 @@ message_request_roles_add_role_failed	Failed to add {} role
 message_request_roles_remove_role_success	Removed {} role	
 message_request_roles_remove_role_failed	Failed to remove {} role	
 message_request_roles_finished	All done	
-roll_default_max	7260	2
+roll_default_max	7260	2	
 purge_search_limit	100	
 main_server_id	main_server_id	
 message_add_alias_no_param	I need at least two parameters: original, alias(es)	
@@ -141,7 +141,7 @@ num_weeks	24
 manage_alias_limit	10	
 dym_limit	5	
 dym_threshold	0.7	
-dym_timeout	30	3
+dym_timeout	30	3	
 choice_react_limit	9	
 er_start_year	2018	
 er_start_month	2	
@@ -165,4 +165,4 @@ skill_notes_table	shuffle_tables/skill_notes
 reminders_table	shuffle_tables/reminders	
 user_cooldown_1	1000	
 comp_scores_table	shuffle_tables/comp_scores	
-current_comp_score_id	5	3
+current_comp_score_id	5	3	
