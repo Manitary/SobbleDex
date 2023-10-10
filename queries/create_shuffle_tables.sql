@@ -279,7 +279,7 @@ CREATE TABLE "types" (
 
 CREATE TABLE "events" (
 	"id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-	"type" TEXT NOT NULL,
+	"stage_type" TEXT NOT NULL,
 	"pokemon" TEXT NOT NULL,
 	"stage_ids" TEXT NOT NULL,
 	"repeat_type" TEXT NOT NULL,
