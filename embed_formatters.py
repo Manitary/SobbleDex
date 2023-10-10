@@ -7,6 +7,7 @@ import constants
 import settings
 import utils
 import yadon
+from db import get_event_stage_by_index, query_event_week
 
 
 def format_pokemon_embed(name, details):
@@ -647,169 +648,103 @@ def format_eb_details_embed(values):
     return embed
 
 
-def format_week_embed(query_week):
-    comp = ""
-    daily = ""
-    oad = ""
-    gc = ""
-    eb = ""
-    safari = ""
+def format_week_embed(query_week: int) -> discord.Embed:
+    comp: str = ""
+    daily: str = ""
+    oad: str = ""
+    gc: str = ""
+    eb: str = ""
+    safari: str = ""
 
-    events = yadon.ReadTable(settings.events_table)
-    for index, values in events.items():
-        (
-            stage_type,
-            event_pokemon,
-            stageindices,
-            repeat_type,
-            repeat_param_1,
-            repeat_param_2,
-            _,
-            _,
-            _,
-            cost_string,
-            _,
-            encounter_rates,
-        ) = values
-        if repeat_type != "Rotation" or int(repeat_param_1) + 1 != query_week:
-            continue
-
-        event_pokemon = event_pokemon.split("/")
-        stage_values = yadon.ReadRowFromTable(
-            settings.event_stages_table, stageindices.split("/")[0]
-        )
-        (
-            _,
-            _,
-            _,
-            _,
-            _,
-            _,
-            _,
-            _,
-            _,
-            _,
-            _,
-            _,
-            _,
-            _,
-            _,
-            _,
-            _,
-            _,
-            cost_type,
-            attempt_cost,
-            drop_1_item,
-            drop_1_amount,
-            drop_2_item,
-            drop_2_amount,
-            drop_3_item,
-            drop_3_amount,
-            drop_1_rate,
-            drop_2_rate,
-            drop_3_rate,
-            items,
-            _,
-            _,
-            _,
-            _,
-            _,
-        ) = stage_values
+    for event in query_event_week(query_week):
+        event_pokemon = event.pokemon.split("/")
+        stage = get_event_stage_by_index(event.stage_ids[0])
 
         drops_string = ""
         attempt_cost_string = ""
         unlock_cost_string = ""
-        if (
-            drop_1_item != "Nothing"
-            or drop_2_item != "Nothing"
-            or drop_3_item != "Nothing"
-        ):
+        if any(stage.drops):
             # need to add this because sometimes it goes over the character limit...
             if (
-                drop_1_item == drop_2_item == drop_3_item
-                and drop_1_amount == drop_2_amount == drop_3_amount
+                len({d.item for d in stage.drops}) == 1
+                and len({d.amount for d in stage.drops}) == 1
             ):
                 drops_string += " [{}{} {}% / {}% / {}%]".format(
-                    utils.emojify("[{}]".format(drop_1_item)),
-                    " x{}".format(drop_1_amount) if drop_1_amount != "1" else "",
-                    drop_1_rate,
-                    drop_2_rate,
-                    drop_3_rate,
+                    utils.emojify(f"[{stage.drops[0].item}]"),
+                    f" x{stage.drops[0].amount}" if stage.drops[0].amount != 1 else "",
+                    stage.drops[0].rate,
+                    stage.drops[1].rate,
+                    stage.drops[2].rate,
                 )
             else:
                 drops_string += " [{}{} {}% / {}{} {}% / {}{} {}%]".format(
-                    utils.emojify("[{}]".format(drop_1_item)),
-                    " x{}".format(drop_1_amount) if drop_1_amount != "1" else "",
-                    drop_1_rate,
-                    utils.emojify("[{}]".format(drop_2_item)),
-                    " x{}".format(drop_2_amount) if drop_2_amount != "1" else "",
-                    drop_2_rate,
-                    utils.emojify("[{}]".format(drop_3_item)),
-                    " x{}".format(drop_3_amount) if drop_3_amount != "1" else "",
-                    drop_3_rate,
+                    utils.emojify(f"[{stage.drops[0].item}]"),
+                    f" x{stage.drops[0].amount}" if stage.drops[0].amount != 1 else "",
+                    stage.drops[0].rate,
+                    utils.emojify(f"[{stage.drops[1].item}]"),
+                    f" x{stage.drops[1].amount}" if stage.drops[1].amount != 1 else "",
+                    stage.drops[1].rate,
+                    utils.emojify(f"[{stage.drops[2].item}]"),
+                    f" x{stage.drops[2].amount}" if stage.drops[2].amount != 1 else "",
+                    stage.drops[2].rate,
                 )
-        if attempt_cost != "1" or cost_type != "Heart":
+        if stage.cost != ("Heart", 1):
             attempt_cost_string += " ({} x{})".format(
-                utils.emojify("[{}]".format(cost_type)), attempt_cost
+                utils.emojify(f"[{stage.cost_type}]"), stage.attempt_cost
             )
-        if cost_string != "Nothing":
+        if event.cost_unlock != "Nothing":
             unlock_cost_string += " ({} {})".format(
-                utils.emojify(cost_string.split(" ")[1]), cost_string.split(" ")[2]
+                utils.emojify(event.cost_unlock.split()[1]),
+                event.cost_unlock.split()[2],
             )
 
         # Challenge
-        if stage_type == "Challenge":
+        if event.stage_type == "Challenge":
             gc += "- {}{}{}{}\n".format(
-                utils.emojify("[{}]".format(event_pokemon[0])),
+                utils.emojify(f"[{event_pokemon[0]}]"),
                 drops_string,
                 attempt_cost_string,
                 unlock_cost_string,
             )
         # Daily
-        if stage_type == "Daily":
-            event_pokemon = utils.remove_duplicates(event_pokemon)
+        elif event.stage_type == "Daily":
+            event_pokemon: list[str] = utils.remove_duplicates(event_pokemon)
             if len(event_pokemon) == 1:
                 oad += "- {}{}{}".format(
-                    utils.emojify("[{}]".format(event_pokemon[0])),
+                    utils.emojify(f"[{event_pokemon[0]}]"),
                     drops_string,
                     attempt_cost_string,
                 )
             else:
                 daily += "- "
                 for pokemon in event_pokemon:
-                    daily += utils.emojify("[{}]".format(pokemon))
+                    daily += utils.emojify(f"[{pokemon}]")
                 daily += drops_string
         # Competition
-        if stage_type == "Competitive":
+        elif event.stage_type == "Competitive":
             # There are duplicate entries... grab only one of them
-            if comp == "":
-                items_string = ""
-                for item in items.split("/"):
-                    items_string += utils.emojify("[{}]".format(item))
+            if not comp:
+                items_string = "".join(
+                    utils.emojify(f"[{item}]")
+                    for item in stage.items_available.split("/")
+                )
                 comp += "- {} ({})".format(
-                    utils.emojify("[{}]".format(event_pokemon[0])), items_string
+                    utils.emojify(f"[{event_pokemon[0]}]"), items_string
                 )
         # EB
-        if stage_type == "Escalation":
-            eb += "- {}{}".format(
-                utils.emojify("[{}]".format(event_pokemon[0])), drops_string
-            )
+        elif event.stage_type == "Escalation":
+            eb += "- {}{}".format(utils.emojify(f"[{event_pokemon[0]}]"), drops_string)
         # Safari
-        if stage_type == "Safari":
+        elif event.stage_type == "Safari":
             # For some reason the first pokemon is duplicated here
             event_pokemon = event_pokemon[1:]
-            encounter_rates = encounter_rates.split("/")
             safari += "- "
-            for j in range(len(event_pokemon)):
-                safari += "{} ({}%), ".format(
-                    utils.emojify("[{}]".format(event_pokemon[j])), encounter_rates[j]
-                )
+            for pokemon, rate in zip(event_pokemon, event.encounter_rates):
+                safari += "{} ({:.2f}%), ".format(utils.emojify(f"[{pokemon}]"), rate)
             safari = safari[:-2]
             safari += drops_string
 
-    embed = discord.Embed(
-        title="Event Rotation Week {}".format(query_week), color=0xFF0000
-    )
+    embed = discord.Embed(title=f"Event Rotation Week {query_week}", color=0xFF0000)
     if comp != "":
         embed.add_field(name="Competitive Stage", value=comp, inline=False)
     embed.add_field(name="Challenges", value=gc, inline=False)

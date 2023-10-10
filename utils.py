@@ -1,10 +1,13 @@
 import datetime
 import re
+from typing import TypeVar
 
 import pytz
 
 import settings
 import yadon
+
+T = TypeVar("T")
 
 emojis = {}
 
@@ -35,15 +38,15 @@ def strip_punctuation(string):
     )
 
 
-def remove_duplicates(list):
-    ans = []
-    for item in list:
+def remove_duplicates(l: list[T]) -> list[T]:
+    ans: list[T] = []
+    for item in l:
         if item not in ans:
             ans.append(item)
     return ans
 
 
-def emojify(the_message, check_aliases=False):
+def emojify(the_message: str, check_aliases: bool = False) -> str:
     emojified_message = the_message
 
     possible_emojis = re.findall(r"\[[^\[\]]*\]", the_message)

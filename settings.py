@@ -35,3 +35,9 @@ message_embed_empty_field = "The output embed was invalid ({} can't be empty)"
 message_cooldown_active = "Cooldown active"
 message_restricted_access = "You do not have permission to use this command"
 message_missing_params = "Missing required parameters: {}"
+
+# Miscellaneous
+# Temporarily added manually for testing purposes
+# Normally they are loaded from the settings.txt file
+events_table = "shuffle_tables/events"
+event_stages_table = "shuffle_tables/event_stages"
