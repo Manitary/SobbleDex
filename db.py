@@ -80,5 +80,15 @@ def get_commands() -> Iterator[Command]:
         yield Command(**command)
 
 
+def get_aliases() -> dict[str, str]:
+    q = shuffle_connection.execute(
+        """
+        SELECT alias, original_name
+        FROM aliases
+        """
+    )
+    return {entry["alias"].lower(): entry["original_name"] for entry in q.fetchall()}
+
+
 if __name__ == "__main__":
     ...

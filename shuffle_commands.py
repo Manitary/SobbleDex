@@ -4,6 +4,7 @@ import difflib
 import re
 from collections import OrderedDict
 from math import floor
+from typing import Any
 
 import discord
 import pytz
@@ -13,6 +14,8 @@ import embed_formatters
 import settings
 import utils
 import yadon
+from db import get_aliases
+from koduck import KoduckContext
 
 
 async def update_emojis(context, *args, **kwargs):
@@ -140,7 +143,10 @@ async def remove_alias(context, *args, **kwargs):
     )
 
 
-async def list_aliases(context, *args, **kwargs):
+async def list_aliases(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
+    assert context.koduck
     if len(args) < 1:
         return await context.koduck.send_message(
             receive_message=context.message,
@@ -148,31 +154,22 @@ async def list_aliases(context, *args, **kwargs):
         )
 
     # parse params
-    aliases = {
-        k.lower(): v[0] for k, v in yadon.ReadTable(settings.aliases_table).items()
-    }
-    try:
-        original = aliases[args[0].lower()]
-    except KeyError:
-        original = args[0]
+    aliases = get_aliases()
+    original = aliases.get(args[0].lower(), args[0])
 
     # action
-    results = []
-    for k, v in yadon.ReadTable(settings.aliases_table).items():
-        if original.lower() == v[0].lower():
-            results.append(k)
-    if len(results) == 0:
+    results = [k for k, v in aliases.items() if v.lower() == original.lower()]
+    if not results:
         return await context.koduck.send_message(
             receive_message=context.message,
             content=settings.message_list_aliases_no_result,
         )
-    else:
-        return await context.koduck.send_message(
-            receive_message=context.message,
-            content=settings.message_list_aliases_result.format(
-                original, ", ".join(results)
-            ),
-        )
+    return await context.koduck.send_message(
+        receive_message=context.message,
+        content=settings.message_list_aliases_result.format(
+            original, ", ".join(results)
+        ),
+    )
 
 
 async def pokemon(context, *args, **kwargs):

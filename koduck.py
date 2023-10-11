@@ -171,7 +171,7 @@ class Koduck:
         channel: Optional[discord.abc.Messageable] = None,
         ignore_cd: bool = False,
         **kwargs: Any
-    ):
+    ) -> discord.Message | None:
         content = kwargs["content"] if "content" in kwargs else ""
         embed = kwargs["embed"] if "embed" in kwargs else None
         send_channel = channel
@@ -525,7 +525,7 @@ class Koduck:
 class KoduckContext:
     def __init__(self) -> None:
         self.koduck: Koduck | None = None
-        self.message = None
+        self.message: discord.Message | None = None
         self.command = ""
         self.command_line = ""
         self.param_line = ""
@@ -534,7 +534,7 @@ class KoduckContext:
         self.kwargs = {}
 
     # Allows subscriptable (i.e. context["message"] and context.message both work)
-    def __getitem__(self, item):
+    def __getitem__(self, item: str) -> Any:
         return getattr(self, item)
 
 
