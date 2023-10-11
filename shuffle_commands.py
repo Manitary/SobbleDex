@@ -14,7 +14,7 @@ import embed_formatters
 import settings
 import utils
 import yadon
-from db import get_aliases
+import db
 from koduck import KoduckContext
 
 
@@ -154,7 +154,7 @@ async def list_aliases(
         )
 
     # parse params
-    aliases = get_aliases()
+    aliases = db.get_aliases()
     original = aliases.get(args[0].lower(), args[0])
 
     # action
@@ -850,7 +850,7 @@ def validate_query(subqueries):
 
 
 def pokemon_filter_results_to_string(buckets, use_emojis=False):
-    farmable_pokemon = utils.get_farmable_pokemon()
+    farmable_pokemon = db.get_farmable_pokemon()
     output_string = ""
     for bucket_key in buckets.keys():
         output_string += "\n**{}**: ".format(bucket_key)
@@ -1152,7 +1152,7 @@ def pokemon_filter(
             se_types.extend(type_details[2].split(", ") if type_details else [])
 
     if farmable != 0:
-        farmable_pokemon = utils.get_farmable_pokemon()
+        farmable_pokemon = db.get_farmable_pokemon()
 
     # check each pokemon
     pokedex = yadon.ReadTable(settings.pokemon_table, named_columns=True)

@@ -112,5 +112,24 @@ def query_eb_pokemon_by_week(week: int) -> str:
     return q["pokemon"]
 
 
+def get_farmable_pokemon() -> set[str]:
+    q = shuffle_connection.execute(
+        """
+        SELECT pokemon
+        FROM main_stages
+        WHERE (drop_1_item = "PSB" or drop_2_item = "PSB" or drop_3_item = "PSB")
+        UNION
+        SELECT pokemon
+        FROM expert_stages
+        WHERE (drop_1_item = "PSB" or drop_2_item = "PSB" or drop_3_item = "PSB")
+        UNION
+        SELECT pokemon
+        FROM event_stages
+        WHERE (drop_1_item = "PSB" or drop_2_item = "PSB" or drop_3_item = "PSB")
+        """
+    )
+    return {x["pokemon"] for x in q.fetchall()}
+
+
 if __name__ == "__main__":
     ...

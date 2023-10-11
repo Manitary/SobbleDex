@@ -159,27 +159,3 @@ def get_current_event_pokemon():
             ):
                 ans += event_pokemon.split("/")
     return ans
-
-
-def get_farmable_pokemon():
-    farmable_pokemon = []
-
-    main_stages = yadon.ReadTable(settings.main_stages_table)
-    for main_stage in main_stages.values():
-        drops = [main_stage[20], main_stage[22], main_stage[24]]
-        if "PSB" in drops:
-            farmable_pokemon.append(main_stage[0])
-
-    expert_stages = yadon.ReadTable(settings.expert_stages_table)
-    for expert_stage in expert_stages.values():
-        drops = [expert_stage[20], expert_stage[22], expert_stage[24]]
-        if "PSB" in drops:
-            farmable_pokemon.append(expert_stage[0])
-
-    event_stages = yadon.ReadTable(settings.event_stages_table)
-    for event_stage in event_stages.values():
-        drops = [event_stage[20], event_stage[22], event_stage[24]]
-        if "PSB" in drops:
-            farmable_pokemon.append(event_stage[0])
-
-    return farmable_pokemon
