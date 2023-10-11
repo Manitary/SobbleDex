@@ -62,3 +62,7 @@ message_remove_alias_too_many_params = "Please only give me up to {} aliases to 
 message_remove_alias_success = "Removed an alias: '{}' is no longer known as '{}'"
 message_remove_alias_failed = "'{}' is not currently assigned as an alias to anything"
 message_remove_alias_failed_2 = "Failed to remove '{}' as an alias, please try again"
+reminders_table = "shuffle_table/reminders"
+message_reminder_week = "Rotation week {} has started!"
+message_reminder_pokemon = "{} has appeared in an event!"
+message_reminder_header = "<@!{}> Here are your reminders:\n{}"

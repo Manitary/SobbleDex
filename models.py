@@ -1,6 +1,9 @@
 import enum
 from dataclasses import dataclass
+from datetime import datetime, timedelta
 from typing import Callable, Self
+
+import pytz
 
 
 class MyStrEnum(enum.StrEnum):
@@ -26,6 +29,13 @@ class EventType(MyStrEnum):
     COMPETITIVE = "Competitive"
     SAFARI = "Safari"
     ESCALATION = "Escalation"
+
+
+class RepeatType(MyStrEnum):
+    MONTHLY = "Monthly"
+    YEARLY = "Yearly"
+    WEEKLY = "Weekly"
+    ROTATION = "Rotation"
 
 
 @dataclass
@@ -82,6 +92,49 @@ class RotationEvent:
             emojify(self.cost_unlock.split()[1]),
             self.cost_unlock.split()[2],
         )
+
+
+class EventPokemon:
+    def __init__(
+        self,
+        stage_type: str,
+        pokemon: str,
+        repeat_type: str,
+        repeat_param_1: int,
+        repeat_param_2: int,
+        date_start: str,
+        date_end: str,
+        duration: str,
+    ) -> None:
+        self.stage_type = EventType(stage_type)
+        self.pokemon = pokemon.split("/")
+        self.repeat_type = RepeatType(repeat_type)
+        self.repeat_param_1 = repeat_param_1
+        self.repeat_param_2 = repeat_param_2
+        self.date_start = date_start.split("/")
+        self.date_end = date_end.split("/")
+        self.duration = int(duration.split()[0])
+
+    @property
+    def this_year_start_date(self) -> datetime:
+        return datetime(
+            datetime.now(tz=pytz.utc).year,
+            self.repeat_param_1,
+            self.repeat_param_2,
+            tzinfo=pytz.utc,
+        )
+
+    @property
+    def start_time(self) -> datetime:
+        return datetime(*map(int, self.date_start), tzinfo=pytz.utc)
+
+    @property
+    def end_time(self) -> datetime:
+        return datetime(*map(int, self.date_end), tzinfo=pytz.utc)
+
+    def latest_start_time_for(self, date: datetime) -> datetime:
+        num_rotations = (date - self.end_time).days // 168 + 1
+        return self.start_time + timedelta(168) * num_rotations
 
 
 class Drop:

@@ -1,7 +1,14 @@
 import sqlite3
 from typing import Any, Iterator
 
-from models import Command, Drop, EventStageRotation, RotationEvent, Setting
+from models import (
+    Command,
+    Drop,
+    EventPokemon,
+    EventStageRotation,
+    RotationEvent,
+    Setting,
+)
 
 DB_BOT_PATH = "bot.sqlite"
 DB_SHUFFLE_PATH = "shuffle.sqlite"
@@ -181,6 +188,19 @@ def remove_aliases(*aliases: str) -> tuple[list[tuple[str, str]], list[str], lis
             else:
                 not_exist.append(alias)
     return success, not_exist, failure
+
+
+def get_all_event_pokemon() -> Iterator[EventPokemon]:
+    q = shuffle_connection.execute(
+        """
+        SELECT
+            stage_type, pokemon, repeat_type, repeat_param_1,
+            repeat_param_2, date_start, date_end, duration
+        FROM events
+        """,
+    )
+    for p in q.fetchall():
+        yield EventPokemon(**p)
 
 
 if __name__ == "__main__":

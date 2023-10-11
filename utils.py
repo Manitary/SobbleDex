@@ -6,7 +6,7 @@ import pytz
 
 import db
 import settings
-import yadon
+from models import EventType, RepeatType
 
 T = TypeVar("T")
 
@@ -88,74 +88,46 @@ def current_eb_pokemon() -> str:
     return db.query_eb_pokemon_by_week(get_current_week())
 
 
-def get_current_event_pokemon():
-    date = datetime.datetime.now(tz=pytz.utc)
-    ans = []
-    for k, v in yadon.ReadTable(settings.events_table).items():
-        (
-            stage_type,
-            event_pokemon,
-            _,
-            repeat_type,
-            repeat_param_1,
-            repeat_param_2,
-            start_time,
-            end_time,
-            duration_string,
-            cost_string,
-            attempts_string,
-            encounter_rates,
-        ) = v
-        if repeat_type == "Weekly" and date.weekday() == repeat_param_1:
-            ans += event_pokemon.split("/")
-        elif repeat_type == "Monthly" and date.day == repeat_param_1:
-            ans += event_pokemon.split("/")
-        elif repeat_type == "Yearly" and date.month == repeat_param_1:
+def get_current_event_pokemon() -> list[str]:
+    date = datetime.datetime.now(tz=pytz.utc) + datetime.timedelta(6)
+    ans: list[str] = []
+    for event in db.get_all_event_pokemon():
+        if (
+            event.repeat_type == RepeatType.WEEKLY
+            and date.weekday() == event.repeat_param_1
+        ):
+            ans.extend(event.pokemon)
+        elif (
+            event.repeat_type == RepeatType.MONTHLY and date.day == event.repeat_param_1
+        ):
+            ans.extend(event.pokemon)
+        elif (
+            event.repeat_type == RepeatType.YEARLY
+            and date.month == event.repeat_param_1
+        ):
             # assuming all yearly events are daily stage type
-            event_start_date = datetime.datetime(
-                date.year, repeat_param_1, repeat_param_2
-            )
             # assuming the format "3 days"
-            duration = int(duration_string.split(" ")[0])
-            td = date - event_start_date
-            if td.days >= 0 and td.days < duration:
-                ans.append(event_pokemon.split("/")[td.days])
-        elif repeat_type == "Rotation":
-            st = start_time.split("/")
-            et = end_time.split("/")
-            start_time = datetime.datetime(
-                int(st[0]),
-                int(st[1]),
-                int(st[2]),
-                int(st[3]),
-                int(st[4]),
-                tzinfo=pytz.utc,
-            )
-            end_time = datetime.datetime(
-                int(et[0]),
-                int(et[1]),
-                int(et[2]),
-                int(et[3]),
-                int(et[4]),
-                tzinfo=pytz.utc,
-            )
-            while end_time < datetime.datetime.now(tz=pytz.utc):
-                start_time = start_time + datetime.timedelta(168)
-                end_time = end_time + datetime.timedelta(168)
+            td = date - event.this_year_start_date
+            if 0 <= td.days < event.duration:
+                ans.append(event.pokemon[td.days % len(event.pokemon)])  # maybe td+1
+        elif event.repeat_type == RepeatType.ROTATION:
+            start_time = event.latest_start_time_for(date)
 
-            if stage_type == "Daily":
-                duration = int(duration_string.split(" ")[0])
+            if event.stage_type == EventType.DAILY:
                 td = date - start_time
-                if td.days >= 0 and td.days < duration:
+                if 0 <= td.days < event.duration:
                     try:
-                        ans.append(event_pokemon.split("/")[(td.days + 1) % 7])
+                        ans.append(event.pokemon[(td.days + 1) % 7])
                     except IndexError:
                         pass
             elif (
                 date.year == start_time.year
                 and date.month == start_time.month
                 and date.day == start_time.day
-                and event_pokemon not in ans
             ):
-                ans += event_pokemon.split("/")
+                ans.extend([pokemon for pokemon in event.pokemon if pokemon not in ans])
     return ans
+
+
+if __name__ == "__main__":
+    print(get_current_event_pokemon())
