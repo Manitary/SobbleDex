@@ -156,5 +156,32 @@ def add_aliases(original: str, *aliases: str) -> tuple[list[str], list[str], lis
     return success, duplicate, failure
 
 
+def remove_aliases(*aliases: str) -> tuple[list[tuple[str, str]], list[str], list[str]]:
+    success: list[tuple[str, str]] = []
+    not_exist: list[str] = []
+    failure: list[str] = []
+    for alias in aliases:
+        try:
+            q = shuffle_connection.execute(
+                """
+                DELETE FROM aliases 
+                WHERE alias = :alias
+                COLLATE NOCASE
+                RETURNING alias, original_name
+                """,
+                {"alias": alias},
+            ).fetchone()
+            shuffle_connection.commit()
+        except sqlite3.DatabaseError as e:
+            print(f"{alias} - {e}")
+            failure.append(alias)
+        else:
+            if q:
+                success.append((q["original_name"], q["alias"]))
+            else:
+                not_exist.append(alias)
+    return success, not_exist, failure
+
+
 if __name__ == "__main__":
     ...

@@ -82,8 +82,11 @@ async def add_alias(
     )
 
 
-async def remove_alias(context, *args, **kwargs):
-    if len(args) < 1:
+async def remove_alias(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
+    assert context.koduck
+    if not args:
         return await context.koduck.send_message(
             receive_message=context.message,
             content=settings.message_remove_alias_no_param,
@@ -96,34 +99,14 @@ async def remove_alias(context, *args, **kwargs):
             ),
         )
 
-    aliases = {
-        k.lower(): v[0] for k, v in yadon.ReadTable(settings.aliases_table).items()
-    }
-    helper = {k.lower(): k for k in yadon.ReadTable(settings.aliases_table).keys()}
-
-    succeeded = []
-    failed = []
-    failed2 = []
-    for alias in args:
-        if alias.lower() not in aliases.keys():
-            failed.append(alias)
-        else:
-            original = aliases[alias.lower()]
-            try:
-                yadon.RemoveRowFromTable(settings.aliases_table, helper[alias.lower()])
-                succeeded.append((original, alias))
-            except OSError:
-                failed2.append(alias)
-
-    return_message = ""
-    for s in succeeded:
-        return_message += (
-            settings.message_remove_alias_success.format(s[0], s[1]) + "\n"
+    success, not_exist, failure = db.remove_aliases(*args)
+    return_message = "\n".join(
+        itertools.chain(
+            (settings.message_remove_alias_success.format(*s) for s in success),
+            (settings.message_remove_alias_failed.format(n) for n in not_exist),
+            (settings.message_remove_alias_failed_2.format(f) for f in failure),
         )
-    for f in failed:
-        return_message += settings.message_remove_alias_failed.format(f) + "\n"
-    for f in failed2:
-        return_message += settings.message_remove_alias_failed_2.format(f) + "\n"
+    )
 
     return await context.koduck.send_message(
         receive_message=context.message, content=return_message
