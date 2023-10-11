@@ -41,3 +41,5 @@ message_missing_params = "Missing required parameters: {}"
 # Normally they are loaded from the settings.txt file
 events_table = "shuffle_tables/events"
 event_stages_table = "shuffle_tables/event_stages"
+message_refresh_commands_success = "Commands refreshed successfully"
+message_refresh_commands_errors = "There were some errors while refreshing commands:"

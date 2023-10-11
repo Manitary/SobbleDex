@@ -1,73 +1,71 @@
 import importlib
 import logging
 import sys
+from typing import Any
 
 import settings
-import yadon
-from koduck import Koduck
+from db import get_commands
+from koduck import Koduck, KoduckContext
 
 
-# Required method to setup Koduck. Can also be run as a comamnd after startup to update any manual changes to the commands table.
-async def refresh_commands(context, *args, **kwargs):
-    errors = []
-    table_items = yadon.ReadTable(
-        settings.commands_table_name, named_columns=True
-    ).items()
-    if table_items is not None:
+# Required method to setup Koduck.
+# Can also be run as a command after startup to update any manual changes to the commands table.
+async def refresh_commands(context: KoduckContext, *args: Any, **kwargs: Any) -> None:
+    assert context.koduck
+    errors: list[str] = []
+    commands = list(get_commands())
+    if commands:
         context.koduck.clear_commands()
-        for command_name, details in table_items:
-            if details["Module Name"] != "main":
-                if details["Module Name"] not in sys.modules:
-                    try:
-                        importlib.import_module(details["Module Name"])
-                    except Exception as e:
-                        errors.append(
-                            "Failed to import module '{}': `{}`".format(
-                                details["Module Name"], str(e)
-                            )
-                        )
+        for command in commands:
+            if command.module_name == "main":
                 try:
                     context.koduck.add_command(
-                        command_name,
-                        getattr(
-                            sys.modules[details["Module Name"]], details["Method Name"]
-                        ),
-                        details["Command Type"],
-                        int(details["Command Tier"]),
-                        details["Description"],
+                        command.command_name,
+                        globals()[command.method_name],
+                        command.command_type,
+                        command.command_tier,
+                        command.description,
                     )
                 except Exception as e:
-                    errors.append(
-                        "Failed to import command '{}': `{}`".format(details, str(e))
-                    )
-            else:
+                    errors.append(f"Failed to import command '{command}': `{e}`")
+                continue
+
+            if command.module_name not in sys.modules:
                 try:
-                    context.koduck.add_command(
-                        command_name,
-                        globals()[details["Method Name"]],
-                        details["Command Type"],
-                        int(details["Command Tier"]),
-                        details["Description"],
-                    )
+                    importlib.import_module(command.module_name)
                 except Exception as e:
                     errors.append(
-                        "Failed to import command '{}': `{}`".format(details, str(e))
+                        f"Failed to import module '{command.module_name}': `{e}`"
                     )
+            try:
+                context.koduck.add_command(
+                    command.command_name,
+                    getattr(sys.modules[command.module_name], command.method_name),
+                    command.command_type,
+                    command.command_tier,
+                    command.description,
+                )
+            except Exception as e:
+                errors.append(f"Failed to import command '{command}': `{e}`")
+
     if settings.enable_run_command:
         context.koduck.add_run_slash_command()
 
-    errors = "\n".join(errors)
-    if context.message is not None:
+    if context.message:
         if errors:
             await context.koduck.send_message(
                 context.message,
-                content=settings.message_refresh_commands_errors + "\n" + errors,
+                content=settings.message_refresh_commands_errors
+                + "\n"
+                + "\n".join(errors),
             )
         else:
             await context.koduck.send_message(
                 context.message, content=settings.message_refresh_commands_success
             )
-    elif errors:
+        return
+
+    if errors:
         print(errors)
 
 

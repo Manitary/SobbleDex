@@ -36,6 +36,16 @@ class Setting:
 
 
 @dataclass
+class Command:
+    command_name: str
+    module_name: str
+    method_name: str
+    command_type: str
+    command_tier: int
+    description: str
+
+
+@dataclass
 class StageCost:
     type: CostType
     amount: int

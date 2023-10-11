@@ -15,7 +15,7 @@ import functools
 import re
 import sys
 import traceback
-from typing import Optional, Union
+from typing import Any, Callable, Optional, Union
 
 import aiohttp
 import discord
@@ -170,7 +170,7 @@ class Koduck:
         receive_message: Optional[Union[discord.Message, discord.Interaction]] = None,
         channel: Optional[discord.abc.Messageable] = None,
         ignore_cd: bool = False,
-        **kwargs
+        **kwargs: Any
     ):
         content = kwargs["content"] if "content" in kwargs else ""
         embed = kwargs["embed"] if "embed" in kwargs else None
@@ -233,13 +233,20 @@ class Koduck:
 
         return the_message
 
-    # Assciates a String to a Function.
+    # Associate a String to a Function.
     # - command_name: a string which represents the command name (will be converted to lowercase)
     # - function: the function object that the command should call
     # - type: a string that determines the trigger type of the command, should be one of (prefix, match, contain, slash)
     # - tier: an integer which represents the level of authority needed to run this command
     # - description: description to display for slash commands
-    def add_command(self, command_name, function, type, tier, description=""):
+    def add_command(
+        self,
+        command_name: str,
+        function: Callable[..., Any],
+        type: str,
+        tier: int,
+        description: str = "",
+    ) -> None:
         if type == "prefix":
             self.prefix_commands.append(command_name.lower())
         elif type == "match":
@@ -318,7 +325,7 @@ class Koduck:
 
     # Registers a "run" slash command which simulates running a prefix command
     # This is helpful if the bot doesn't have the message_content intent (for unverified bots that are in over 100 servers) and you prefer to use prefix commands
-    def add_run_slash_command(self):
+    def add_run_slash_command(self) -> None:
         async def run_command(interaction, command: str):
             message_content = settings.command_prefix + command
             message = SlashMessage(interaction, message_content)
@@ -516,8 +523,8 @@ class Koduck:
 
 # Context that is attached to callbacks
 class KoduckContext:
-    def __init__(self):
-        self.koduck = None
+    def __init__(self) -> None:
+        self.koduck: Koduck | None = None
         self.message = None
         self.command = ""
         self.command_line = ""

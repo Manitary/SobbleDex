@@ -1,7 +1,7 @@
 import sqlite3
 from typing import Any, Iterator
 
-from models import Drop, EventStageRotation, RotationEvent, Setting
+from models import Command, Drop, EventStageRotation, RotationEvent, Setting
 
 DB_BOT_PATH = "bot.sqlite"
 DB_SHUFFLE_PATH = "shuffle.sqlite"
@@ -67,6 +67,17 @@ def get_settings() -> Iterator[Setting]:
     )
     for setting in q.fetchall():
         yield Setting(**setting)
+
+
+def get_commands() -> Iterator[Command]:
+    q = bot_connection.execute(
+        """
+        SELECT command_name, module_name, method_name, command_type, command_tier, description
+        FROM commands
+        """
+    )
+    for command in q.fetchall():
+        yield Command(**command)
 
 
 if __name__ == "__main__":
