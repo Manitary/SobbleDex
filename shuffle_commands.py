@@ -1,8 +1,8 @@
 import asyncio
 import datetime
 import difflib
+import itertools
 import re
-from collections import OrderedDict
 from math import floor
 from typing import Any
 
@@ -10,12 +10,14 @@ import discord
 import pytz
 
 import constants
+import db
 import embed_formatters
 import settings
 import utils
 import yadon
-import db
 from koduck import KoduckContext
+
+RE_PING = re.compile(r"<@!?[0-9]*>")
 
 
 async def update_emojis(context, *args, **kwargs):
@@ -39,7 +41,10 @@ async def emojify_2(context, *args, **kwargs):
         )
 
 
-async def add_alias(context, *args, **kwargs):
+async def add_alias(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
+    assert context.koduck
     if len(args) < 2:
         return await context.koduck.send_message(
             receive_message=context.message, content=settings.message_add_alias_no_param
@@ -52,43 +57,25 @@ async def add_alias(context, *args, **kwargs):
             ),
         )
 
-    # parse params
-    aliases = {
-        k.lower(): v[0] for k, v in yadon.ReadTable(settings.aliases_table).items()
-    }
-    try:
-        original = aliases[args[0].lower()]
-    except KeyError:
-        original = args[0]
+    aliases = db.get_aliases()
+    original = aliases.get(args[0].lower(), args[0])
+    new_aliases = args[1:]
 
-    # action
-    succeeded = []
-    failed = []
-    failed2 = []
-    failed3 = []
-    for alias in args[1:]:
-        if alias.lower() in aliases.keys():
-            failed.append(alias)
-        elif re.findall(r"<@!?[0-9]*>", alias):
-            failed3.append(alias)
-        else:
-            try:
-                yadon.AppendRowToTable(settings.aliases_table, alias, [original])
-                succeeded.append(alias)
-            except OSError:
-                failed2.append(alias)
-
-    return_message = ""
-    for s in succeeded:
-        return_message += settings.message_add_alias_success.format(original, s) + "\n"
-    for f in failed:
-        return_message += (
-            settings.message_add_alias_failed.format(f, aliases[f.lower()]) + "\n"
+    bad_alias = list(filter(lambda x: bool(RE_PING.findall(x)), new_aliases))
+    success, duplicate, failure = db.add_aliases(
+        original, *(a for a in new_aliases if a not in bad_alias)
+    )
+    return_message = "\n".join(
+        itertools.chain(
+            (settings.message_add_alias_success.format(original, s) for s in success),
+            (
+                settings.message_add_alias_failed.format(d, aliases[d.lower()])
+                for d in duplicate
+            ),
+            (settings.message_add_alias_failed_2.format(f) for f in failure),
+            (settings.message_add_alias_failed_3.format(b) for b in bad_alias),
         )
-    for f in failed2:
-        return_message += settings.message_add_alias_failed_2.format(f) + "\n"
-    for f in failed3:
-        return_message += settings.message_add_alias_failed_3.format(f) + "\n"
+    )
 
     return await context.koduck.send_message(
         receive_message=context.message, content=return_message

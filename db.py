@@ -131,5 +131,30 @@ def get_farmable_pokemon() -> set[str]:
     return {x["pokemon"] for x in q.fetchall()}
 
 
+def add_aliases(original: str, *aliases: str) -> tuple[list[str], list[str], list[str]]:
+    success: list[str] = []
+    duplicate: list[str] = []
+    failure: list[str] = []
+    for alias in aliases:
+        try:
+            shuffle_connection.execute(
+                """
+                INSERT INTO aliases (alias, original_name)
+                VALUES (?, ?)
+                """,
+                (alias, original),
+            )
+            shuffle_connection.commit()
+        except sqlite3.IntegrityError:
+            print("Integrity:", alias)
+            duplicate.append(alias)
+        except sqlite3.DatabaseError as e:
+            print(f"{alias} - {e}")
+            failure.append(alias)
+        else:
+            success.append(alias)
+    return success, duplicate, failure
+
+
 if __name__ == "__main__":
     ...
