@@ -18,6 +18,23 @@ class CostType(MyStrEnum):
     COIN = "Coin"
 
 
+class EventType(MyStrEnum):
+    MONTHLY = "Monthly"
+    DAILY = "Daily"
+    MEOWTH = "Meowth"
+    CHALLENGE = "Challenge"
+    COMPETITIVE = "Competitive"
+    SAFARI = "Safari"
+    ESCALATION = "Escalation"
+
+
+@dataclass
+class Setting:
+    key: str
+    value: str
+    tier: int
+
+
 @dataclass
 class StageCost:
     type: CostType
@@ -27,16 +44,6 @@ class StageCost:
         if self.type == CostType.HEART and self.amount == 1:
             return ""
         return " ({} x{})".format(emojify(f"[{self.type}]"), self.amount)
-
-
-class EventType(MyStrEnum):
-    MONTHLY = "Monthly"
-    DAILY = "Daily"
-    MEOWTH = "Meowth"
-    CHALLENGE = "Challenge"
-    COMPETITIVE = "Competitive"
-    SAFARI = "Safari"
-    ESCALATION = "Escalation"
 
 
 class RotationEvent:

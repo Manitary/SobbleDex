@@ -1,7 +1,7 @@
 import sqlite3
 from typing import Any, Iterator
 
-from models import Drop, EventStageRotation, RotationEvent
+from models import Drop, EventStageRotation, RotationEvent, Setting
 
 DB_BOT_PATH = "bot.sqlite"
 DB_SHUFFLE_PATH = "shuffle.sqlite"
@@ -56,6 +56,17 @@ def get_event_stage_by_index(index: int) -> EventStageRotation:
         q["cost_type"], q["attempt_cost"], drops, q["items_available"]
     )
     return stage
+
+
+def get_settings() -> Iterator[Setting]:
+    q = bot_connection.execute(
+        """
+        SELECT key, value, tier
+        FROM settings
+        """
+    )
+    for setting in q.fetchall():
+        yield Setting(**setting)
 
 
 if __name__ == "__main__":

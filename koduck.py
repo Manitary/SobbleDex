@@ -22,6 +22,7 @@ import discord
 
 import settings
 import yadon
+from db import get_settings
 
 
 class ClientWithBackgroundTask(discord.Client):
@@ -343,22 +344,18 @@ class Koduck:
     # token can only be updated by restarting the bot
     # Note: settings is a module with attributes, so removing a setting manually from the table doesn't actually remove the attribute
     # Note: number values will be converted to int/float, and string values will convert "\n"s and "\t"s (since Yadon uses these to organize data)
-    def refresh_settings(self):
-        table = yadon.ReadTable(settings.settings_table_name, named_columns=True)
-        for key, setting in table.items():
+    def refresh_settings(self) -> None:
+        for setting in get_settings():
+            value = setting.value
+            # try to convert into float or int, otherwise treat as string
             try:
-                value = setting["Value"]
-                # try to convert into float or int, otherwise treat as string
-                try:
-                    if float(value) % 1 == 0:
-                        value = int(value)
-                    else:
-                        value = float(value)
-                except ValueError:
-                    value = value.replace("\\n", "\n").replace("\\t", "\t")
-            except IndexError:
-                value = None
-            setattr(settings, key, value)
+                if float(value) % 1 == 0:
+                    value = int(value)
+                else:
+                    value = float(value)
+            except ValueError:
+                value = value.replace("\\n", "\n").replace("\\t", "\t")
+            setattr(settings, setting.key, value)
 
     # update a setting and updates the settings file accordingly
     # returns None if setting name doesn't exist or auth level is lower than setting's level (defaults to max user level if not specified or setting is in settings.py), returns old value if it does and updating its value succeeded
