@@ -90,5 +90,27 @@ def get_aliases() -> dict[str, str]:
     return {entry["alias"].lower(): entry["original_name"] for entry in q.fetchall()}
 
 
+def query_eb_pokemon_by_week(week: int) -> str:
+    q = shuffle_connection.execute(
+        """
+        SELECT pokemon
+        FROM events
+        WHERE 
+        stage_type = "Escalation"
+        AND  (
+            repeat_param_1 + 1 = :week
+            OR (
+                repeat_param_1 + 2 = :week
+                AND duration = "14 days"
+            )
+        )
+        """,
+        {"week": week},
+    ).fetchone()
+    if not q:
+        return ""
+    return q["pokemon"]
+
+
 if __name__ == "__main__":
     ...

@@ -4,9 +4,9 @@ from typing import TypeVar
 
 import pytz
 
+import db
 import settings
 import yadon
-from db import get_aliases
 
 T = TypeVar("T")
 
@@ -14,7 +14,7 @@ emojis = {}
 
 
 def alias(query: str) -> str:
-    aliases = get_aliases()
+    aliases = db.get_aliases()
     return aliases.get(query.lower(), query)
 
 
@@ -84,34 +84,8 @@ def get_current_week():
     return query_week
 
 
-def current_eb_pokemon():
-    query_week = get_current_week()
-    events = yadon.ReadTable(settings.events_table)
-    for index, values in events.items():
-        (
-            stage_type,
-            event_pokemon,
-            _,
-            repeat_type,
-            repeat_param_1,
-            _,
-            _,
-            _,
-            duration_string,
-            _,
-            _,
-            _,
-        ) = values
-        event_week = int(repeat_param_1) + 1
-        # assumes EBs are either 1 week or 2 weeks
-        event_week_2 = event_week + 1 if duration_string == "14 days" else event_week
-        if (
-            stage_type == "Escalation"
-            and repeat_type == "Rotation"
-            and (event_week == query_week or event_week_2 == query_week)
-        ):
-            return event_pokemon
-    return None
+def current_eb_pokemon() -> str:
+    return db.query_eb_pokemon_by_week(get_current_week())
 
 
 def get_current_event_pokemon():
