@@ -6,23 +6,19 @@ import pytz
 
 import settings
 import yadon
+from db import get_aliases
 
 T = TypeVar("T")
 
 emojis = {}
 
 
-def alias(query):
-    aliases = {
-        k.lower(): v[0] for k, v in yadon.ReadTable(settings.aliases_table).items()
-    }
-    try:
-        return aliases[query.lower()]
-    except KeyError:
-        return query
+def alias(query: str) -> str:
+    aliases = get_aliases()
+    return aliases.get(query.lower(), query)
 
 
-def strip_punctuation(string):
+def strip_punctuation(string: str) -> str:
     return (
         string.replace(" ", "")
         .replace("(", "")

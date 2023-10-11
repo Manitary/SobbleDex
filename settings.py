@@ -46,3 +46,4 @@ message_refresh_commands_errors = "There were some errors while refreshing comma
 message_list_aliases_no_param = "I need a name to look for aliases for!"
 message_list_aliases_no_result = "There are currently no aliases assigned to this name"
 message_list_aliases_result = "'{}' is also known as: {}"
+aliases_table = "shuffle_tables/aliases"
