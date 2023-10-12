@@ -509,3 +509,23 @@ class Skill:
             + tuple(map(lambda x: x[0] - x[1], zip(self.sp_cost[1:], self.sp_cost)))
             + (self.sp_cost[-1],)
         )
+
+
+class TypeInfo:
+    def __init__(
+        self,
+        id: int,
+        type: str,
+        se: str,
+        nve: str,
+        weak: str,
+        resist: str,
+        status_immune: str,
+    ) -> None:
+        self.id = id
+        self.type = PokemonType(type)
+        self.se = se
+        self.nve = nve
+        self.weak = weak
+        self.resist = resist
+        self.status_immune = status_immune

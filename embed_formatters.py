@@ -19,6 +19,7 @@ from models import (
     SkillType,
     Stage,
     StageType,
+    TypeInfo,
 )
 
 DATE_FORMAT = "%Y/%m/%d %H:%M UTC"
@@ -96,14 +97,13 @@ def format_skill_embed(skill: Skill) -> discord.Embed:
     return embed
 
 
-def format_type_embed(values):
-    type, se, nve, weak, res, imm = values
-    embed = discord.Embed(title=type, color=constants.type_colors[type])
-    embed.add_field(name="Super Effective Against", value=se)
-    embed.add_field(name="Not Very Effective Against", value=nve)
-    embed.add_field(name="Weaknesses", value=weak)
-    embed.add_field(name="Resistances", value=res)
-    embed.add_field(name="Status Effect Immunities", value=imm)
+def format_type_embed(t: TypeInfo) -> discord.Embed:
+    embed = discord.Embed(title=t.type.value, color=constants.type_colors[t.type.value])
+    embed.add_field(name="Super Effective Against", value=t.se)
+    embed.add_field(name="Not Very Effective Against", value=t.nve)
+    embed.add_field(name="Weaknesses", value=t.weak)
+    embed.add_field(name="Resistances", value=t.resist)
+    embed.add_field(name="Status Effect Immunities", value=t.status_immune)
     return embed
 
 

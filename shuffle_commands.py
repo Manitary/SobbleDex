@@ -348,22 +348,26 @@ async def exp(
     )
 
 
-async def type(context, *args, **kwargs):
-    if len(args) < 1:
+async def type(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
+    assert context.koduck
+    if not args:
         return await context.koduck.send_message(
             receive_message=context.message, content=settings.message_type_no_param
         )
     query_type = args[0].lower().capitalize()
-    values = yadon.ReadRowFromTable(settings.types_table, query_type)
-    if values is None:
+
+    try:
+        type_info = db.query_type(PokemonType(query_type))
+    except ValueError:
         return await context.koduck.send_message(
             receive_message=context.message, content=settings.message_type_invalid_param
         )
-    else:
-        return await context.koduck.send_message(
-            receive_message=context.message,
-            embed=embed_formatters.format_type_embed([query_type] + values),
-        )
+    return await context.koduck.send_message(
+        receive_message=context.message,
+        embed=embed_formatters.format_type_embed(type_info),
+    )
 
 
 async def stage(
@@ -810,16 +814,16 @@ def pokemon_filter_results_to_string(buckets, use_emojis=False):
                     else:
                         output_string += "[{}]".format(item)
                     if farmable:
-                        output_string += "\*"
+                        output_string += "\\*"
                 except KeyError:
                     output_string += "{}{} ".format(
                         "**" + item if item.find("**") != -1 else item,
-                        "\*" if farmable else "",
+                        "\\*" if farmable else "",
                     )
             else:
                 output_string += "{}{}, ".format(
                     "**" + item if item.find("**") != -1 else item,
-                    "\*" if farmable else "",
+                    "\\*" if farmable else "",
                 )
         if not use_emojis:
             output_string = output_string[:-2]

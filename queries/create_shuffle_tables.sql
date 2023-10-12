@@ -275,7 +275,7 @@ CREATE TABLE "types" (
 	"se" TEXT,
 	"nve" TEXT,
 	"weak" TEXT,
-	"immune" TEXT,
+	"resist" TEXT,
 	"status_immune" TEXT
 );
 

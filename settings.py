@@ -126,3 +126,5 @@ message_exp_result = (
 message_exp_result_2 = (
     "{} ({} BP) needs {} EXP to get from Level {} (AP {}) to Level {} (AP {})"
 )
+message_type_no_param = "I need a Type to look up!"
+message_type_invalid_param = "That's not a valid type"

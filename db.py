@@ -18,6 +18,7 @@ from models import (
     SMReward,
     Stage,
     StageType,
+    TypeInfo,
 )
 
 DB_BOT_PATH = "bot.sqlite"
@@ -427,6 +428,7 @@ def query_ap(bp: int) -> list[int]:
         return []
     return sorted(q.values())
 
+
 def query_exp(bp: int) -> list[int]:
     q = shuffle_connection.execute(
         f"""
@@ -438,6 +440,18 @@ def query_exp(bp: int) -> list[int]:
     if not q:
         return []
     return sorted(q.values())
+
+
+def query_type(t: PokemonType) -> TypeInfo:
+    q = shuffle_connection.execute(
+        """
+        SELECT * FROM types
+        WHERE type = :type
+        """,
+        {"type": t.value},
+    ).fetchone()
+    return TypeInfo(**q)
+
 
 if __name__ == "__main__":
     ...
