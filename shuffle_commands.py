@@ -144,22 +144,24 @@ async def list_aliases(
     )
 
 
-async def pokemon(context, *args, **kwargs):
-    if len(args) < 1:
+async def pokemon(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
+    assert context.koduck
+    if not args:
         return await context.koduck.send_message(
             receive_message=context.message, content=settings.message_pokemon_no_param
         )
 
     # parse params
     query_pokemon = await pokemon_lookup(context, query=args[0])
-    if query_pokemon is None:
-        return "Unrecognized Pokemon"
+    if not query_pokemon:
+        print("Unrecognized Pokemon")
+        return
 
     # retrieve data
-    values = yadon.ReadRowFromTable(
-        settings.pokemon_table, query_pokemon, named_columns=True
-    )
-    if values is None:
+    pokemon_ = db.query_pokemon(query_pokemon)
+    if not pokemon_:
         return await context.koduck.send_message(
             receive_message=context.message,
             content=settings.message_pokemon_no_result.format(query_pokemon),
@@ -167,7 +169,7 @@ async def pokemon(context, *args, **kwargs):
 
     return await context.koduck.send_message(
         receive_message=context.message,
-        embed=embed_formatters.format_pokemon_embed(query_pokemon, values),
+        embed=embed_formatters.format_pokemon_embed(pokemon_),
     )
 
 

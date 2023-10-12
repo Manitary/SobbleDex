@@ -11,6 +11,7 @@ from models import (
     EBStretch,
     Event,
     EventType,
+    Pokemon,
     PuzzleStage,
     RepeatType,
     Skill,
@@ -24,40 +25,32 @@ DATE_FORMAT = "%Y/%m/%d %H:%M UTC"
 DATE_MANUAL_FORMAT = "{}/{}/{} {}:{} UTC"
 
 
-def format_pokemon_embed(name, details):
-    dex = int(details["Dex"]) if details["Dex"].isdigit() else 0
-    ss = details["SS"].split("/")
-    if details["Mega Power"]:
-        stats = "**Dex**: {:03d}\n**Type**: {}\n**Icons**: {} ({})\n**MSUs**: {}\n**Mega Effects**: {}".format(
-            dex,
-            details["Type"],
-            details["Icons"],
-            int(details["Icons"]) - int(details["MSU"]),
-            details["MSU"],
-            details["Mega Power"],
+def format_pokemon_embed(pokemon: Pokemon) -> discord.Embed:
+    if pokemon.mega_power:
+        stats = (
+            f"**Dex**: {pokemon.dex:03d}\n**Type**: {pokemon.type}\n"
+            f"**Icons**: {pokemon.icons} ({pokemon.evo_speed})\n"
+            f"**MSUs**: {pokemon.msu}\n**Mega Effects**: {pokemon.mega_power}"
         )
     else:
-        stats = "**Dex**: {:03d}\n**Type**: {}\n**BP**: {}\n**RMLs**: {}\n**Max AP**: {}\n**Skill**: {}".format(
-            dex,
-            details["Type"],
-            details["BP"],
-            details["RML"],
-            details["MaxAP"],
-            details["Skill"],
+        stats = (
+            f"**Dex**: {pokemon.dex:03d}\n**Type**: {pokemon.type}\n"
+            f"**BP**: {pokemon.bp}\n**RMLs**: {pokemon.rml}\n"
+            f"**Max AP**: {pokemon.max_ap}\n**Skill**: {pokemon.skill}"
         )
-        if len(ss) > 0 and ss[0]:
-            stats += " ({})".format(", ".join(ss))
+        if pokemon.ss_skills:
+            stats += f" ({', '.join(pokemon.ss_skills)})"
 
-    the_color = (
-        constants.type_colors[details["Type"]]
-        if details["Type"] in constants.type_colors.keys()
-        else discord.Embed.Empty
-    )
-    embed = discord.Embed(title=name, color=the_color, description=stats)
+    the_color = constants.type_colors[pokemon.type]
+    embed = discord.Embed(title=pokemon.pokemon, color=the_color, description=stats)
     embed.set_thumbnail(
-        url="https://raw.githubusercontent.com/Chupalika/Kaleo/icons/Icons/{}.png".format(
-            name.replace("%", "%25").replace(":", "").replace(" ", "%20")
+        url=(
+            "https://raw.githubusercontent.com/Chupalika/Kaleo/icons/Icons/"
+            f"{pokemon.pokemon}.png"
         )
+        .replace("%", "%25")
+        .replace(":", "")
+        .replace(" ", "%20")
     )
     return embed
 

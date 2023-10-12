@@ -362,6 +362,19 @@ def get_all_pokemon() -> Iterator[Pokemon]:
         yield Pokemon(**pokemon)
 
 
+def query_pokemon(pokemon: str) -> Pokemon | None:
+    q = shuffle_connection.execute(
+        """
+        SELECT * FROM pokemon
+        WHERE pokemon = :pokemon
+        """,
+        {"pokemon": pokemon},
+    ).fetchone()
+    if not q:
+        return None
+    return Pokemon(**q)
+
+
 def get_sm_rewards() -> list[SMReward]:
     q = shuffle_connection.execute(
         """
