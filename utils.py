@@ -129,5 +129,17 @@ def get_current_event_pokemon() -> list[str]:
     return ans
 
 
+def event_week_day(day: int) -> str:
+    return [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+    ][(day + 1) % 7]
+
+
 if __name__ == "__main__":
     print(get_current_event_pokemon())

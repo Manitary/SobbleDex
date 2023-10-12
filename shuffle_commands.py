@@ -4,7 +4,7 @@ import difflib
 import itertools
 import re
 from math import floor
-from typing import Any
+from typing import Any, Sequence
 
 import discord
 import pytz
@@ -592,8 +592,11 @@ async def disruption_pattern(context, *args, **kwargs):
     )
 
 
-async def event(context, *args, **kwargs):
-    if len(args) < 1:
+async def event(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
+    assert context.koduck
+    if not args:
         return await context.koduck.send_message(
             receive_message=context.message, content=settings.message_event_no_param
         )
@@ -602,7 +605,7 @@ async def event(context, *args, **kwargs):
     if len(args) == 1:
         temp = args[0].split(" ")
         if len(temp) > 1 and temp[-1].isdigit():
-            args = ["".join(temp[:-1]), temp[-1]]
+            args = ("".join(temp[:-1]), temp[-1])
 
     result_number = 1
 
@@ -621,59 +624,60 @@ async def event(context, *args, **kwargs):
                 content=settings.message_event_invalid_param,
             )
     query_pokemon = await pokemon_lookup(context, query=args[0])
-    if query_pokemon is None:
-        return "Unrecognized Pokemon"
+    if not query_pokemon:
+        print("Unrecognized Pokemon")
+        return
 
     # retrieve data
-    results = []
-    for k, v in yadon.ReadTable(settings.events_table).items():
-        event_pokemon = [x.lower() for x in v[1].split("/")]
-        if query_pokemon.lower() in event_pokemon:
-            results.append([k] + v)
+    events = list(db.query_event_by_pokemon(query_pokemon))
 
-    try:
-        values = results[result_number - 1]
-    except IndexError:
-        if len(results) != 0:
-            return await context.koduck.send_message(
-                receive_message=context.message,
-                content=settings.message_event_result_error.format(len(results)),
-            )
-        else:
-            return await context.koduck.send_message(
-                receive_message=context.message,
-                content=settings.message_event_no_result.format(query_pokemon),
-            )
-
-    if len(results) > 1:
-        return await paginate_embeds(
-            context,
-            [embed_formatters.format_event_embed(values) for values in results],
-            result_number,
-        )
-    else:
+    if not events:
         return await context.koduck.send_message(
             receive_message=context.message,
-            embed=embed_formatters.format_event_embed(values),
+            content=settings.message_event_result_error.format(len(events)),
         )
 
+    try:
+        selected_event = events[result_number - 1]
+    except IndexError:
+        return await context.koduck.send_message(
+            receive_message=context.message,
+            content=settings.message_event_no_result.format(query_pokemon),
+        )
 
-async def paginate_embeds(context, pages, initial_page=1):
+    if len(events) > 1:
+        return await paginate_embeds(
+            context,
+            [embed_formatters.format_event_embed(e) for e in events],
+            result_number,
+        )
+
+    return await context.koduck.send_message(
+        receive_message=context.message,
+        embed=embed_formatters.format_event_embed(selected_event),
+    )
+
+
+async def paginate_embeds(
+    context: KoduckContext, pages: Sequence[discord.Embed], initial_page: int = 1
+) -> discord.Message | None:
+    assert context.koduck
     current_page = initial_page
     the_message = await context.koduck.send_message(
         receive_message=context.message,
-        content="Showing result {} of {}".format(current_page, len(pages)),
+        content=f"Showing result {current_page} of {len(pages)}",
         embed=pages[current_page - 1],
     )
-
+    assert the_message
     await the_message.add_reaction("⬅️")
     await the_message.add_reaction("➡️")
 
     while True:
         # wait for reaction (with timeout)
-        def check(reaction, user):
+        def check(reaction: discord.Reaction, user: discord.User) -> bool:
             return (
                 reaction.message.id == the_message.id
+                and isinstance(context.message, discord.Message)
                 and user == context.message.author
                 and str(reaction.emoji) in ["⬅️", "➡️"]
             )
@@ -686,7 +690,7 @@ async def paginate_embeds(context, pages, initial_page=1):
             reaction = None
 
         # timeout
-        if reaction == None:
+        if reaction is None:
             break
 
         # adjust page
@@ -702,12 +706,13 @@ async def paginate_embeds(context, pages, initial_page=1):
             current_page = 1
 
         await the_message.edit(
-            content="Showing result {} of {}".format(current_page, len(pages)),
+            content=f"Showing result {current_page} of {len(pages)}",
             embed=pages[current_page - 1],
         )
 
     # remove reactions
     try:
+        assert context.koduck.client.user
         await the_message.remove_reaction("⬅️", context.koduck.client.user)
         await the_message.remove_reaction("➡️", context.koduck.client.user)
     except discord.errors.NotFound:

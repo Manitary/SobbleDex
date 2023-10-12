@@ -9,7 +9,18 @@ import db
 import settings
 import utils
 import yadon
-from models import EBStretch, EventType, PuzzleStage, Stage, StageType
+from models import (
+    EBStretch,
+    Event,
+    EventType,
+    PuzzleStage,
+    RepeatType,
+    Stage,
+    StageType,
+)
+
+DATE_FORMAT = "%Y/%m/%d %H:%M UTC"
+DATE_MANUAL_FORMAT = "{}/{}/{} {}:{} UTC"
 
 
 def format_pokemon_embed(name, details):
@@ -329,145 +340,73 @@ def format_starting_board_embed(stage: Stage) -> discord.Embed:
     return embed
 
 
-def format_event_embed(values):
-    (
-        index,
-        stage_type,
-        event_pokemon,
-        _,
-        repeat_type,
-        repeat_param_1,
-        repeat_param_2,
-        start_time,
-        end_time,
-        duration_string,
-        cost_string,
-        attempts_string,
-        encounter_rates,
-    ) = values
-
-    event_pokemon = event_pokemon.split("/")
-    encounter_rates = encounter_rates.split("/")
-    cost_string = "" if cost_string == "Nothing" else cost_string
-    attempts_string = "" if attempts_string == "Nothing" else attempts_string
-
+def format_event_embed(event: Event) -> discord.Embed:
     event_pokemon_string = ""
-    if stage_type == "Daily":
+    if event.event_type == EventType.DAILY:
         header = "Daily Pokémon"
-        for i in range(len(event_pokemon)):
-            event_pokemon_string += "{}: {} [{}]\n".format(
-                [
-                    "Sunday",
-                    "Monday",
-                    "Tuesday",
-                    "Wednesday",
-                    "Thursday",
-                    "Friday",
-                    "Saturday",
-                ][(i + 1) % 7],
-                event_pokemon[i],
-                event_pokemon[i],
+        for i, pokemon in enumerate(event.pokemon):
+            event_pokemon_string += (
+                f"{utils.event_week_day(i)}: {pokemon} [{pokemon}]\n"
             )
-    elif stage_type == "Escalation":
-        header = "Escalation Battles: {} [{}]".format(
-            event_pokemon[0], event_pokemon[0]
-        )
-    elif stage_type == "Safari":
+    elif event.event_type == EventType.ESCALATION:
+        header = f"Escalation Battles: {event.pokemon[0]} [{event.pokemon[0]}]"
+    elif event.event_type == EventType.SAFARI:
         header = "Pokémon Safari"
-        for i in range(len(event_pokemon) - 1):
+        for pokemon, rate in zip(event.pokemon[1:], event.encounter_rates):
             # For some reason the first pokemon is duplicated here
-            event_pokemon_string += "[{}] {} ({}%)\n".format(
-                event_pokemon[i + 1], event_pokemon[i + 1], encounter_rates[i]
-            )
-    elif stage_type == "Monthly":
+            event_pokemon_string += f"[{pokemon}] {pokemon} ({rate}%)\n"
+    elif event.event_type == EventType.MONTHLY:
         header = "Monthly Challenge"
-        for i in range(len(event_pokemon)):
-            event_pokemon_string += "[{}] {} ({}%)\n".format(
-                event_pokemon[i], event_pokemon[i], encounter_rates[i]
-            )
+        for pokemon, rate in zip(event.pokemon, event.encounter_rates):
+            event_pokemon_string += f"[{pokemon}] {pokemon} ({rate}%)\n"
     else:
-        header = "{} [{}]".format(event_pokemon[0], event_pokemon[0])
+        header = f"{event.pokemon[0]} [{event.pokemon[0]}]"
 
-    date_header = "{} Event".format(repeat_type)
-    if repeat_type == "Rotation":
-        date_header += ": Week {}/24".format(int(repeat_param_1) + 1)
+    date_header = f"{event.repeat_type} Event"
+    if event.repeat_type == RepeatType.ROTATION:
+        date_header += f": Week {event.repeat_param_1+1}/24"
 
     starts_when = None
     ends_when = None
-    if repeat_type != "Weekly":
-        st = start_time.split("/")
-        et = end_time.split("/")
-        if repeat_type == "Rotation":
-            start_time = datetime.datetime(
-                int(st[0]),
-                int(st[1]),
-                int(st[2]),
-                int(st[3]),
-                int(st[4]),
-                tzinfo=pytz.utc,
-            )
-            end_time = datetime.datetime(
-                int(et[0]),
-                int(et[1]),
-                int(et[2]),
-                int(et[3]),
-                int(et[4]),
-                tzinfo=pytz.utc,
-            )
-            while end_time < datetime.datetime.now(tz=pytz.utc):
-                start_time = start_time + datetime.timedelta(168)
-                end_time = end_time + datetime.timedelta(168)
-            starts_when = start_time - datetime.datetime.now(tz=pytz.utc)
-            ends_when = end_time - datetime.datetime.now(tz=pytz.utc)
-            start_time = start_time.strftime("%Y/%m/%d %H:%M UTC")
-            end_time = end_time.strftime("%Y/%m/%d %H:%M UTC")
+    start_time = None
+    end_time = None
+    now = datetime.datetime.now(tz=pytz.utc)
+    current_year, current_month, current_day = now.year, now.month, now.day
+    # TODO find a way to do this better
+    if event.repeat_type != RepeatType.WEEKLY:
+        st = event.date_start
+        et = event.date_end
+        if event.repeat_type == RepeatType.ROTATION:
+            start_time = event.date_start_datetime.strftime(DATE_FORMAT)
+            end_time = event.date_end_datetime.strftime(DATE_FORMAT)
+            starts_when = event.next_appearance[0] - datetime.datetime.now(tz=pytz.utc)
+            ends_when = event.next_appearance[1] - datetime.datetime.now(tz=pytz.utc)
         else:
-            start_time = "{}/{}/{} {}:{} UTC".format(st[0], st[1], st[2], st[3], st[4])
-            end_time = "{}/{}/{} {}:{} UTC".format(et[0], et[1], et[2], et[3], et[4])
-            if repeat_type == "Monthly":
-                add_one_month = (
-                    1 if datetime.datetime.now(tz=pytz.utc).day >= int(et[2]) else 0
+            start_time = DATE_MANUAL_FORMAT.format(*event.date_start)
+            end_time = DATE_MANUAL_FORMAT.format(*event.date_end)
+            if event.repeat_type == RepeatType.MONTHLY:
+                add_one_month = int(current_day >= int(event.date_end[2]))
+                add_one_year = int(
+                    current_month == 12 and current_day >= int(event.date_end[2])
                 )
-                add_one_year = (
-                    1
-                    if datetime.datetime.now(tz=pytz.utc).month == 12
-                    and datetime.datetime.now(tz=pytz.utc).day >= int(et[2])
-                    else 0
+                st[0] = current_year + add_one_year
+                et[0] = current_year + add_one_year
+                st[1] = current_month + add_one_month
+                et[1] = current_month + add_one_month
+            elif event.repeat_type == RepeatType.YEARLY:
+                add_one_year = int(
+                    current_month >= int(event.date_end[1])
+                    and current_day >= int(event.date_end[2])
                 )
-                st[0] = datetime.datetime.now(tz=pytz.utc).year + add_one_year
-                et[0] = datetime.datetime.now(tz=pytz.utc).year + add_one_year
-                st[1] = datetime.datetime.now(tz=pytz.utc).month + add_one_month
-                et[1] = datetime.datetime.now(tz=pytz.utc).month + add_one_month
-            elif repeat_type == "Yearly":
-                add_one_year = (
-                    1
-                    if datetime.datetime.now(tz=pytz.utc).month >= int(et[1])
-                    and datetime.datetime.now(tz=pytz.utc).day >= int(et[2])
-                    else 0
-                )
-                st[0] = datetime.datetime.now(tz=pytz.utc).year + add_one_year
-                et[0] = datetime.datetime.now(tz=pytz.utc).year + add_one_year
-            start_time_2 = datetime.datetime(
-                int(st[0]),
-                int(st[1]),
-                int(st[2]),
-                int(st[3]),
-                int(st[4]),
-                tzinfo=pytz.utc,
-            )
-            end_time_2 = datetime.datetime(
-                int(et[0]),
-                int(et[1]),
-                int(et[2]),
-                int(et[3]),
-                int(et[4]),
-                tzinfo=pytz.utc,
-            )
+                st[0] = current_year + add_one_year
+                et[0] = current_year + add_one_year
+            start_time_2 = datetime.datetime(*map(int, st), tzinfo=pytz.utc)
+            end_time_2 = datetime.datetime(*map(int, et), tzinfo=pytz.utc)
             starts_when = start_time_2 - datetime.datetime.now(tz=pytz.utc)
             ends_when = end_time_2 - datetime.datetime.now(tz=pytz.utc)
 
     embed = discord.Embed(
-        title=utils.emojify(header), color=constants.event_type_colors[stage_type]
+        title=utils.emojify(header), color=constants.event_type_colors[event.event_type]
     )
     if event_pokemon_string:
         embed.add_field(
@@ -479,31 +418,29 @@ def format_event_embed(values):
         event_duration_string = "{} to {} ({}) (starts in {} days {} hours)".format(
             start_time,
             end_time,
-            duration_string,
+            event.duration,
             starts_when.days,
-            int(starts_when.seconds / 3600),
+            starts_when.seconds // 3600,
         )
     elif ends_when and ends_when > datetime.timedelta():
         event_duration_string = "{} to {} ({}) (ends in {} days {} hours)".format(
             start_time,
             end_time,
-            duration_string,
+            event.duration,
             ends_when.days,
-            int(ends_when.seconds / 3600),
+            ends_when.seconds // 3600,
         )
     else:
-        event_duration_string = "{} to {} ({})".format(
-            start_time, end_time, duration_string
-        )
+        event_duration_string = f"{start_time} to {end_time} ({ event.duration})"
     embed.add_field(
         name=date_header,
-        value="Event duration: {}".format(event_duration_string),
+        value=f"Event duration: {event_duration_string}",
         inline=False,
     )
-    if cost_string != "" or attempts_string != "":
+    if event.cost_unlock or event.notes:
         embed.add_field(
             name="Misc. Details",
-            value=utils.emojify(cost_string + "\n" + attempts_string),
+            value=utils.emojify(f"{event.cost_unlock}\n{event.notes}"),
             inline=False,
         )
     return embed

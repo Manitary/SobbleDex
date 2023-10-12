@@ -6,6 +6,7 @@ from models import (
     Drop,
     EBReward,
     EBStretch,
+    Event,
     EventPokemon,
     EventStageRotation,
     PokemonType,
@@ -238,6 +239,20 @@ def query_stage_by_pokemon(pokemon: str, stage_type: StageType) -> Iterator[Stag
     for stage in q.fetchall():
         yield Stage(stage_type=stage_type, **stage)
 
+def query_event_by_pokemon(pokemon: str) -> Iterator[Event]:
+    q = shuffle_connection.execute(
+        """
+        SELECT * FROM events
+        WHERE pokemon = ':pokemon'
+        OR pokemon LIKE ':pokemon/%' 
+        OR pokemon LIKE '%/:pokemon'
+        OR pokemon LIKE '%/:pokemon/%'
+        COLLATE NOCASE
+        """,
+        {'pokemon': pokemon}
+    )
+    for event in q.fetchall():
+        yield Event(**event)
 
 def get_all_stages(stage_type: StageType) -> Iterator[Stage]:
     q = shuffle_connection.execute(f"SELECT * FROM {STAGE_TYPE_TABLE[stage_type]}")
