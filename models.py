@@ -440,3 +440,18 @@ class SMReward:
     amount: int
     reward_repeat: str
     amount_repeat: int
+
+
+@dataclass
+class Reminder:
+    user_id: int
+    _weeks: str
+    _pokemon: str
+
+    @property
+    def weeks(self) -> list[str]:
+        return self._weeks.split("/")
+
+    @property
+    def pokemon(self) -> list[str]:
+        return self._pokemon.split("/")

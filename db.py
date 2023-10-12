@@ -11,6 +11,7 @@ from models import (
     EventStageRotation,
     Pokemon,
     PokemonType,
+    Reminder,
     RotationEvent,
     Setting,
     SMReward,
@@ -371,6 +372,18 @@ def get_sm_rewards() -> list[SMReward]:
         """
     )
     return [SMReward(**reward) for reward in q.fetchall()]
+
+
+def get_reminders() -> Iterator[Reminder]:
+    q = shuffle_connection.execute(
+        """
+        SELECT user_id, weeks AS _weeks, pokemon AS _pokemon
+        FROM reminders
+        ORDER BY id
+        """
+    )
+    for reminder in q.fetchall():
+        yield Reminder(**reminder)
 
 
 if __name__ == "__main__":

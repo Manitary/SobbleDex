@@ -16,7 +16,7 @@ import embed_formatters
 import settings
 import utils
 import yadon
-from koduck import KoduckContext
+from koduck import Koduck, KoduckContext
 from models import Param, PokemonType, Stage, StageType
 
 RE_PING = re.compile(r"<@!?[0-9]*>")
@@ -1605,98 +1605,99 @@ async def pokemon_lookup(
     return choices[result][1]
 
 
-async def submit_comp_score(context, *args, **kwargs):
-    if len(args) < 3:
-        return await context.koduck.send_message(
-            receive_message=context.message,
-            content=settings.message_submit_comp_score_no_param,
-        )
+#! WIP never finished
+# async def submit_comp_score(context, *args, **kwargs):
+#     if len(args) < 3:
+#         return await context.koduck.send_message(
+#             receive_message=context.message,
+#             content=settings.message_submit_comp_score_no_param,
+#         )
 
-    # parse and check competition pokemon
-    query_pokemon = await pokemon_lookup(context, query=args[0])
-    if query_pokemon is None:
-        return "Unrecognized Pokemon"
-    comp_pokemon = set()
-    for values in yadon.ReadTable(settings.events_table).values():
-        if values[0] == "Competitive":
-            comp_pokemon.add(values[1])
-    if query_pokemon not in comp_pokemon:
-        return await context.koduck.send_message(
-            receive_message=context.message,
-            content=settings.message_submit_comp_score_no_result.format(query_pokemon),
-        )
+#     # parse and check competition pokemon
+#     query_pokemon = await pokemon_lookup(context, query=args[0])
+#     if query_pokemon is None:
+#         return "Unrecognized Pokemon"
+#     comp_pokemon = set()
+#     for values in yadon.ReadTable(settings.events_table).values():
+#         if values[0] == "Competitive":
+#             comp_pokemon.add(values[1])
+#     if query_pokemon not in comp_pokemon:
+#         return await context.koduck.send_message(
+#             receive_message=context.message,
+#             content=settings.message_submit_comp_score_no_result.format(query_pokemon),
+#         )
 
-    # verify score is an integer > 0
-    if not args[1].isdigit():
-        return await context.koduck.send_message(
-            receive_message=context.message,
-            content=settings.message_submit_comp_score_invalid_param,
-        )
-    score = int(args[1])
+#     # verify score is an integer > 0
+#     if not args[1].isdigit():
+#         return await context.koduck.send_message(
+#             receive_message=context.message,
+#             content=settings.message_submit_comp_score_invalid_param,
+#         )
+#     score = int(args[1])
 
-    # very screenshot link
-    link = args[2]
-    if not link.startswith("https://cdn.discordapp.com/attachments/"):
-        return await context.koduck.send_message(
-            receive_message=context.message,
-            content=settings.message_submit_comp_score_invalid_param_2,
-        )
+#     # very screenshot link
+#     link = args[2]
+#     if not link.startswith("https://cdn.discordapp.com/attachments/"):
+#         return await context.koduck.send_message(
+#             receive_message=context.message,
+#             content=settings.message_submit_comp_score_invalid_param_2,
+#         )
 
-    yadon.WriteRowToTable(
-        settings.comp_scores_table,
-        settings.current_comp_score_id,
-        {
-            "User ID": context.message.author.id,
-            "Competition Pokemon": query_pokemon,
-            "Score": score,
-            "URL": link,
-            "Verified": 0,
-        },
-        named_columns=True,
-    )
-    context.koduck.update_setting(
-        "current_comp_score_id",
-        settings.current_comp_score_id + 1,
-        settings.max_user_level,
-    )
-    return await context.koduck.send_message(
-        receive_message=context.message,
-        content=settings.message_submit_comp_score_success,
-    )
+#     yadon.WriteRowToTable(
+#         settings.comp_scores_table,
+#         settings.current_comp_score_id,
+#         {
+#             "User ID": context.message.author.id,
+#             "Competition Pokemon": query_pokemon,
+#             "Score": score,
+#             "URL": link,
+#             "Verified": 0,
+#         },
+#         named_columns=True,
+#     )
+#     context.koduck.update_setting(
+#         "current_comp_score_id",
+#         settings.current_comp_score_id + 1,
+#         settings.max_user_level,
+#     )
+#     return await context.koduck.send_message(
+#         receive_message=context.message,
+#         content=settings.message_submit_comp_score_success,
+#     )
 
 
-async def comp_scores(context, *args, **kwargs):
-    user_id = context.message.author.id
-    user_tag = "{}#{}".format(
-        context.message.author.name, context.message.author.discriminator
-    )
-    comp_scores = yadon.ReadTable(settings.comp_scores_table, named_columns=True)
-    user_comp_scores = [x for x in comp_scores.values() if int(x["User ID"]) == user_id]
-    if len(user_comp_scores) == 0:
-        return await context.koduck.send_message(
-            receive_message=context.message,
-            content=settings.message_comp_scores_no_result.format(user_tag),
-        )
+# async def comp_scores(context, *args, **kwargs):
+#     user_id = context.message.author.id
+#     user_tag = "{}#{}".format(
+#         context.message.author.name, context.message.author.discriminator
+#     )
+#     comp_scores = yadon.ReadTable(settings.comp_scores_table, named_columns=True)
+#     user_comp_scores = [x for x in comp_scores.values() if int(x["User ID"]) == user_id]
+#     if len(user_comp_scores) == 0:
+#         return await context.koduck.send_message(
+#             receive_message=context.message,
+#             content=settings.message_comp_scores_no_result.format(user_tag),
+#         )
 
-    user_comp_scores = sorted(
-        user_comp_scores, key=lambda comp_score: comp_score["Score"]
-    )
-    comp_scores_string = "``Competition Pokemon\tScore\tVerified\tURL``"
-    for comp_score in user_comp_scores:
-        comp_scores_string += "\n``{}\t{}\t{}\t``[link]({})".format(
-            comp_score["Competition Pokemon"],
-            comp_score["Score"],
-            "Yes" if int(comp_score["Verified"]) else "No",
-            comp_score["URL"],
-        )
-    embed = discord.Embed(
-        title=settings.message_comp_scores.format(user_tag),
-        description=comp_scores_string,
-    )
+#     user_comp_scores = sorted(
+#         user_comp_scores, key=lambda comp_score: comp_score["Score"]
+#     )
+#     comp_scores_string = "``Competition Pokemon\tScore\tVerified\tURL``"
+#     for comp_score in user_comp_scores:
+#         comp_scores_string += "\n``{}\t{}\t{}\t``[link]({})".format(
+#             comp_score["Competition Pokemon"],
+#             comp_score["Score"],
+#             "Yes" if int(comp_score["Verified"]) else "No",
+#             comp_score["URL"],
+#         )
+#     embed = discord.Embed(
+#         title=settings.message_comp_scores.format(user_tag),
+#         description=comp_scores_string,
+#     )
 
-    return await context.koduck.send_message(
-        receive_message=context.message, embed=embed
-    )
+#     return await context.koduck.send_message(
+#         receive_message=context.message, embed=embed
+#     )
 
 
 async def choice_react(
@@ -1876,7 +1877,7 @@ current_day = -1
 current_week = -1
 
 
-async def background_task(koduck_instance):
+async def background_task(koduck_instance: Koduck) -> None:
     global current_day
     global current_week
     current_time = datetime.datetime.now(tz=pytz.timezone("Etc/GMT+6"))
@@ -1884,36 +1885,31 @@ async def background_task(koduck_instance):
     if current_day == -1 or current_week == -1:
         current_day = current_time.day
         current_week = utils.get_current_week()
+        return
 
-    elif current_time.day != current_day:
-        current_day = current_time.day
-        current_week2 = utils.get_current_week()
-        week_changed = False
-        if current_week2 != current_week:
-            current_week = current_week2
-            week_changed = True
-        event_pokemon = utils.get_current_event_pokemon()
-        reminders = yadon.ReadTable(settings.reminders_table)
-        for userid, v in reminders.items():
-            reminder_strings = []
-            reminder_weeks = v[0].split("/")
-            reminder_pokemon = v[1].split("/")
-            if week_changed and str(current_week) in reminder_weeks:
-                reminder_strings.append(
-                    settings.message_reminder_week.format(current_week)
+    if current_time.day == current_day:
+        return
+
+    current_day = current_time.day
+    current_week2 = utils.get_current_week()
+    week_changed, current_week = current_week2 != current_week, current_week2
+    event_pokemon = utils.get_current_event_pokemon()
+    for reminder in db.get_reminders():
+        reminder_strings: list[str] = []
+        if week_changed and str(current_week) in reminder.weeks:
+            reminder_strings.append(settings.message_reminder_week.format(current_week))
+        reminder_strings.extend(
+            settings.message_reminder_pokemon.format(ep)
+            for ep in event_pokemon
+            if ep in reminder.pokemon
+        )
+        if reminder_strings:
+            the_user = await koduck_instance.client.fetch_user(reminder.user_id)
+            await the_user.send(
+                content=settings.message_reminder_header.format(
+                    reminder.user_id, "\n".join(reminder_strings)
                 )
-            for ep in event_pokemon:
-                if ep in reminder_pokemon:
-                    reminder_strings.append(
-                        settings.message_reminder_pokemon.format(ep)
-                    )
-            if reminder_strings:
-                the_user = await koduck_instance.client.fetch_user(userid)
-                await the_user.send(
-                    content=settings.message_reminder_header.format(
-                        userid, "\n".join(reminder_strings)
-                    )
-                )
+            )
 
 
 settings.background_task = background_task
