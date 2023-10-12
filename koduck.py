@@ -9,25 +9,28 @@
 # --- Settings read from the settings table will replace any initialized settings
 # --- If a setting is removed from the settings table and refresh_settings() is called, the setting will still be active (to be fixed)
 
+from __future__ import annotations
+
 import asyncio
 import datetime
 import functools
 import re
 import sys
 import traceback
-from typing import Any, Callable, Optional, Union
+from collections import defaultdict
+from typing import Any, Callable, Optional, Self, Union
 
 import aiohttp
 import discord
+import pytz
 
 import db
 import settings
-import yadon
 from models import Setting
 
 
 class ClientWithBackgroundTask(discord.Client):
-    async def setup_hook(self):
+    async def setup_hook(self) -> None:
         self.loop.create_task(background_task())
 
 
@@ -37,58 +40,59 @@ intents.presences = True
 intents.message_content = True
 intents.guilds = True
 client = ClientWithBackgroundTask(intents=intents)
-koduck_instance = None
+koduck_instance: Koduck | None = None
 
 
 class Koduck:
     # singleton
-    def __new__(cls):
+    def __new__(cls) -> Self:
         if koduck_instance:
             return koduck_instance
-        else:
-            return super(Koduck, cls).__new__(cls)
+        return super(Koduck, cls).__new__(cls)
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.client = client
         global koduck_instance
         koduck_instance = self
         self.command_tree = discord.app_commands.CommandTree(self.client)
-        self.aiohttp_session = None
+        self.aiohttp_session: aiohttp.ClientSession | None = None
 
         # command -> (function, type, tier)
-        # command is a string which represents the command name
-        # function is the function object to run when the command is triggered
-        # type: a string that determines the trigger type of the command, should be one of (prefix, match, contain, slash)
-        # tier is an integer which represents the user authority level required to run the command
+        # ``command`` is a string which represents the command name
+        # ``function`` is the function object to run when the command is triggered
+        # ``type`` is a string that determines the trigger type of the command,
+        # should be one of (prefix, match, contain, slash)
+        # ``tier`` is the user authority level required to run the command
         self.commands = {}
-        self.prefix_commands = []
-        self.match_commands = []
-        self.contain_commands = []
-        self.slash_commands = []
+        self.prefix_commands: list[str] = []
+        self.match_commands: list[str] = []
+        self.contain_commands: list[str] = []
+        self.slash_commands: list[str] = []
 
-        self.output_history = (
-            {}
-        )  # userid -> list of Discord Messages sent by bot in response to the user, oldest first (only keeps track since bot startup)
-        self.last_message_DT = (
-            {}
-        )  # channelid -> datetime of most recent Discord Message sent
-        self.interactions = (
-            {}
-        )  # interactionid -> boolean indicating whether the interaction received a response
+        self.output_history: dict[int, list[discord.Message]] = defaultdict(list)
+        # userid -> list of Discord Messages sent by bot in response to the user, oldest first
+        # (only keeps track since bot startup)
+        self.last_message_dt: dict[int, datetime.datetime] = {}
+        # channelid -> datetime of most recent Discord Message sent
+        self.interactions: dict[int, bool] = {}
+        # interactionid -> boolean indicating whether the interaction received a response
 
         self.refresh_settings()
 
-    # Records bot activity in the log text file, each log on one line, formatted by settings.log_format. Check log_fields below to see which fields can be formatted.
+    # Records bot activity in the log text file, each log on one line,
+    # formatted by settings.log_format.
+    # Check log_fields below to see which fields can be formatted.
     # - type: type of activity
     # - message: the Discord Message that triggered the activity
-    # - extra: an extra string that helps describes the activity (if, for example, a message is not involved)
+    # - extra: an extra string that helps describes the activity
+    #   (if, for example, a message is not involved)
     def log(
         self,
         type: str = "",
         message: Optional[discord.Message] = None,
         interaction: Optional[discord.Interaction] = None,
         extra: str = "",
-    ):
+    ) -> None:
         log_fields = {
             "timestamp": datetime.datetime.now(datetime.timezone.utc).strftime(
                 "%Y-%m-%d %H:%M:%S.%f"
@@ -158,21 +162,25 @@ class Koduck:
         with open(settings.log_file, "a", encoding="utf8") as file:
             file.write(log_string)
 
-    # Sends a Discord Message to a Discord Channel, possibly including a Discord Embed. Returns the Message object or a string if sending failed (i.e. cooldown is active)
-    # - receive_message: the Discord Message or Interaction that triggered the activity (can be None)
-    # - channel: the Discord Channel to send the message to; by default it's the channel where the triggering message was sent
-    # - content: the String to include in the outgoing Discord Message
-    # - embed: the Discord Embed to attach to the outgoing Discord Message
-    # - file: a Discord File to include in the outgoing Discord Message
-    # - view: a Discord View to include in the outgoing Discord Message
-    # - ignore_cd: set this to True to ignore cooldown checks
     async def send_message(
         self,
         receive_message: Optional[Union[discord.Message, discord.Interaction]] = None,
         channel: Optional[discord.abc.Messageable] = None,
         ignore_cd: bool = False,
-        **kwargs: Any
+        **kwargs: Any,
     ) -> discord.Message | None:
+        """Sends a Discord Message to a Discord Channel, possibly including a Discord Embed.
+
+        Returns the Message object or a string if sending failed (i.e. cooldown is active)
+        - receive_message: the Discord Message/Interaction that triggered the activity (can be None)
+        - channel: the Discord Channel to send the message to;
+          by default it's the channel where the triggering message was sent
+        - content: the String to include in the outgoing Discord Message
+        - embed: the Discord Embed to attach to the outgoing Discord Message
+        - file: a Discord File to include in the outgoing Discord Message
+        - view: a Discord View to include in the outgoing Discord Message
+        - ignore_cd: set this to True to ignore cooldown checks"""
+
         content = kwargs["content"] if "content" in kwargs else ""
         embed = kwargs["embed"] if "embed" in kwargs else None
         send_channel = channel
@@ -230,16 +238,10 @@ class Koduck:
             self.output_history[user_id] = user_last_outputs[
                 max(0, len(user_last_outputs) - settings.output_history_size) :
             ]
-        self.last_message_DT[send_channel.id] = datetime.datetime.now()
+        self.last_message_dt[send_channel.id] = datetime.datetime.now()
 
         return the_message
 
-    # Associate a String to a Function.
-    # - command_name: a string which represents the command name (will be converted to lowercase)
-    # - function: the function object that the command should call
-    # - type: a string that determines the trigger type of the command, should be one of (prefix, match, contain, slash)
-    # - tier: an integer which represents the level of authority needed to run this command
-    # - description: description to display for slash commands
     def add_command(
         self,
         command_name: str,
@@ -248,6 +250,13 @@ class Koduck:
         tier: int,
         description: str = "",
     ) -> None:
+        """Associate a String to a Function.
+
+        - command_name: a string which represents the command name (will be converted to lowercase)
+        - function: the function object that the command should call
+        - type: trigger type of the command, should be one of (prefix, match, contain, slash)
+        - tier: an integer which represents the level of authority needed to run this command
+        - description: description to display for slash commands"""
         if type == "prefix":
             self.prefix_commands.append(command_name.lower())
         elif type == "match":
@@ -258,7 +267,7 @@ class Koduck:
             self.slash_commands.append(command_name.lower())
 
             # wrap the function to log the interaction
-            async def wrapper_function(interaction, **kwargs):
+            async def wrapper_function(interaction: discord.Interaction, **kwargs: Any):
                 interaction.command.koduck.log(
                     type="interaction_user", interaction=interaction
                 )
@@ -271,19 +280,21 @@ class Koduck:
                     )
                 try:
                     return await function(interaction, **kwargs)
-                except Exception as e:
+                except Exception:
                     exc_type, exc_value, _ = sys.exc_info()
-                    error_message = "{}: {}".format(exc_type.__name__, exc_value)
+                    error_message = (
+                        f"{exc_type.__name__ if exc_type else None}: {exc_value}"
+                    )
                     traceback.print_exc()
                     if interaction.response.is_done():
                         await interaction.followup.send(
                             content=settings.message_something_broke
-                            + "\n``{}``".format(error_message)
+                            + f"\n``{error_message}``"
                         )
                     else:
                         await interaction.response.send_message(
                             content=settings.message_something_broke
-                            + "\n``{}``".format(error_message)
+                            + f"\n``{error_message}``"
                         )
                     koduck_instance.log(
                         type="command_error",
@@ -304,7 +315,7 @@ class Koduck:
         self.commands[command_name.lower()] = (function, type, tier)
 
     # Remove a command, returns 0 if successful, -1 if command not recognized
-    def remove_command(self, command):
+    def remove_command(self, command: str):
         if command not in self.commands.keys():
             return -1
         command_details = self.commands[command]
@@ -316,7 +327,7 @@ class Koduck:
         }[command_details[1]].remove(command)
         del self.commands[command]
 
-    def clear_commands(self):
+    def clear_commands(self) -> None:
         self.prefix_commands = []
         self.match_commands = []
         self.contain_commands = []
@@ -327,7 +338,7 @@ class Koduck:
     # Registers a "run" slash command which simulates running a prefix command
     # This is helpful if the bot doesn't have the message_content intent (for unverified bots that are in over 100 servers) and you prefer to use prefix commands
     def add_run_slash_command(self) -> None:
-        async def run_command(interaction, command: str):
+        async def run_command(interaction: discord.Interaction, command: str) -> None:
             message_content = settings.command_prefix + command
             message = SlashMessage(interaction, message_content)
             await on_message(message)
@@ -345,14 +356,18 @@ class Koduck:
         app_command.koduck = self
         self.command_tree.add_command(app_command)
 
-    async def refresh_app_commands(self):
+    async def refresh_app_commands(self) -> None:
         await self.command_tree.sync()
 
-    # Use this function if settings table was manually updated (it will always be run on startup)
-    # token can only be updated by restarting the bot
-    # Note: settings is a module with attributes, so removing a setting manually from the table doesn't actually remove the attribute
-    # Note: number values will be converted to int/float, and string values will convert "\n"s and "\t"s (since Yadon uses these to organize data)
     def refresh_settings(self) -> None:
+        """Refresh settings in case of manual update of the table. Always run on startup.
+
+        token can only be updated by restarting the bot
+        Note: settings is a module with attributes, so removing a setting manually
+        from the table doesn't actually remove the attribute
+        Note: number values will be converted to int/float, and string values will
+        convert "\n"s and "\t"s
+        """
         for setting in db.get_settings():
             value = setting.value
             # try to convert into float or int, otherwise treat as string
@@ -365,21 +380,24 @@ class Koduck:
                 value = value.replace("\\n", "\n").replace("\\t", "\t")
             setattr(settings, setting.key, value)
 
-    # update a setting and updates the settings file accordingly
-    # returns None if setting name doesn't exist or auth level is lower than setting's level (defaults to max user level if not specified or setting is in settings.py), returns old value if it does and updating its value succeeded
     def update_setting(
         self, variable: str, value: str, auth_level: int = settings.default_user_level
     ) -> Any | None:
+        """Update the setting variable -> value.
+
+        Return None if the setting name does not exist or the auth level is lower than the
+        setting's level (defaults to max user level if not specified or setting is in settings.py).
+        Returns old value if it does and updating its value succeeded"""
         try:
             old_value = getattr(settings, variable)
         except AttributeError:
-            return
+            return None
 
         setting = db.query_setting(variable)
         setting_level = setting.tier if setting else settings.max_user_level
 
         if setting_level > auth_level:
-            return
+            return None
 
         db.update_setting(variable, value.replace("\n", "\\n").replace("\t", "\\t"))
 
@@ -393,14 +411,15 @@ class Koduck:
         setattr(settings, variable, new_value)
         return old_value
 
-    # add a setting and updates the settings file accordingly
-    # returns None if setting already exists, returns value if it doesn't
     def add_setting(
         self, variable: str, value: str, auth_level: int = settings.default_user_level
     ) -> str | None:
+        """Add a setting and updates the database accordingly.
+
+        Return None if the setting already exists, otherwise the given value."""
         try:
             getattr(settings, variable)
-            return
+            return None
         except AttributeError:
             pass
 
@@ -420,21 +439,25 @@ class Koduck:
         setattr(settings, variable, new_value)
         return value
 
-    # remove a setting and updates the settings file accordingly
-    # returns None if setting doesn't exist or level is lower than setting's level (defaults to max user level if not specified or setting is in settings.py), returns the old value if it did
     def remove_setting(
         self, variable: str, auth_level: int = settings.default_user_level
     ) -> Any | None:
+        """Remove a setting and updates the database accordingly.
+
+        Return the old value if the setting is removed successfully.
+        Return None if the setting does not exist or the level is lower than the setting's level
+        (defaults to max user level if not specified or setting is in settings.py)."""
+
         try:
             value = getattr(settings, variable)
         except AttributeError:
-            return
+            return None
 
         setting = db.query_setting(variable)
         setting_level = setting.tier if setting else settings.max_user_level
 
         if setting_level > auth_level:
-            return
+            return None
 
         db.remove_setting(variable)
         delattr(settings, variable)
@@ -452,7 +475,13 @@ class Koduck:
         return db.query_user_level(user_id) or settings.default_user_level
 
     # Run a command as if it was triggered by a Discord message
-    async def run_command(self, command, context=None, *args, **kwargs):
+    async def run_command(
+        self,
+        command: str,
+        context: KoduckContext | None = None,
+        *args: str,
+        **kwargs: Any,
+    ):
         if context is None:
             context = KoduckContext()
             context.koduck = koduck_instance
@@ -462,44 +491,33 @@ class Koduck:
         except (KeyError, IndexError):
             return
 
-    def check_channel_cooldown(self, channel_id):
+    def check_channel_cooldown(self, channel_id: int) -> bool:
         # calculate time since the last bot output on the given channel
         try:
-            TD = datetime.datetime.now() - self.last_message_DT[channel_id]
-            return (TD.microseconds / 1000) + (
-                TD.seconds * 1000
+            td = datetime.datetime.now() - self.last_message_dt[channel_id]
+            return (td.microseconds / 1000) + (
+                td.seconds * 1000
             ) < settings.channel_cooldown
         except KeyError:
             return False
 
-    def check_user_cooldown(self, user_id):
+    def check_user_cooldown(self, user_id: int) -> bool:
         user_level = self.get_user_level(user_id)
         user_last_outputs = self.get_user_last_outputs(user_id)
-        if len(user_last_outputs) > 0:
-            # calculate time since the last bot output from the user
-            TD = (
-                datetime.datetime.now(datetime.timezone.utc)
-                - user_last_outputs[-1].created_at
-            )
-            user_cooldown = 0
-            while user_cooldown == 0 and user_level >= 0:
-                try:
-                    user_cooldown = getattr(
-                        settings, "user_cooldown_{}".format(user_level)
-                    )
-                except AttributeError:
-                    user_level -= 1
-            return (TD.microseconds / 1000) + (TD.seconds * 1000) < user_cooldown
-        else:
+        if not user_last_outputs:
             return False
+        # calculate time since the last bot output from the user
+        td = datetime.datetime.now(pytz.utc) - user_last_outputs[-1].created_at
+        user_cooldown: int = 0
+        while user_cooldown == 0 and user_level >= 0:
+            try:
+                user_cooldown = getattr(settings, f"user_cooldown_{user_level}")
+            except AttributeError:
+                user_level -= 1
+        return (td.microseconds / 1000) + (td.seconds * 1000) < user_cooldown
 
-    def get_user_last_outputs(self, user_id):
-        try:
-            user_last_outputs = self.output_history[user_id]
-        except KeyError:
-            self.output_history[user_id] = []
-            user_last_outputs = self.output_history[user_id]
-        return user_last_outputs
+    def get_user_last_outputs(self, user_id: int) -> list[discord.Message]:
+        return self.output_history[user_id]
 
 
 # Context that is attached to callbacks
@@ -521,7 +539,7 @@ class KoduckContext:
 
 # Message-like object used in the "run" slash command
 class SlashMessage:
-    def __init__(self, interaction, message_content):
+    def __init__(self, interaction: discord.Interaction, message_content: str) -> None:
         self.interaction = interaction
         self.author = interaction.user
         self.channel = interaction.channel
@@ -538,32 +556,33 @@ class SlashMessage:
         self.mentions = []
         self.channel_mentions = []
         self.role_mentions = []
-        if "resolved" in interaction.data:
-            if "users" in interaction.data["resolved"]:
-                self.mentions = list(interaction.data["resolved"]["users"].values())
-            if "channels" in interaction.data["resolved"]:
-                self.channel_mentions = list(
-                    interaction.data["resolved"]["channels"].values()
-                )
-            if "roles" in interaction.data["resolved"]:
-                self.role_mentions = list(
-                    interaction.data["resolved"]["roles"].values()
-                )
+        if not interaction.data or "resolved" not in interaction.data:
+            return
+        if "users" in interaction.data["resolved"]:
+            self.mentions = list(interaction.data["resolved"]["users"].values())
+        if "channels" in interaction.data["resolved"]:
+            self.channel_mentions = list(
+                interaction.data["resolved"]["channels"].values()
+            )
+        if "roles" in interaction.data["resolved"]:
+            self.role_mentions = list(interaction.data["resolved"]["roles"].values())
 
 
 # background task is run every set interval while bot is running
 # this method is added to the event loop automatically on bot setup
-async def background_task():
+async def background_task() -> None:
     await client.wait_until_ready()
     while not client.is_closed():
         if callable(settings.background_task):
 
-            async def bgt_decorator(bgt, koduck_instance):
+            async def bgt_decorator(bgt, koduck_instance: Koduck) -> None:
                 try:
                     await bgt(koduck_instance)
-                except Exception as e:
+                except Exception:
                     exc_type, exc_value, _ = sys.exc_info()
-                    error_message = "{}: {}".format(exc_type.__name__, exc_value)
+                    error_message = (
+                        f"{exc_type.__name__ if exc_type else None}: {exc_value}"
+                    )
                     traceback.print_exc()
                     koduck_instance.log(
                         type="background_task_error",
@@ -577,10 +596,12 @@ async def background_task():
 
 
 @client.event
-async def on_ready():
+async def on_ready() -> None:
+    assert client.user
     print("Bot online!")
-    print("Name: {}".format(client.user.name))
-    print("ID: {}".format(client.user.id))
+    print(f"Name: {client.user.name}")
+    print(f"ID: {client.user.id}")
+    assert koduck_instance
     koduck_instance.aiohttp_session = aiohttp.ClientSession()
     await koduck_instance.run_command("refreshcommands")
     await koduck_instance.run_command("updateemojis")
@@ -588,23 +609,29 @@ async def on_ready():
 
 # Log some events from self
 @client.event
-async def on_message_edit(before, after):
+async def on_message_edit(before: discord.Message, after: discord.Message) -> None:
+    assert koduck_instance
+    assert koduck_instance.client.user
     if after.author.id == koduck_instance.client.user.id:
         koduck_instance.log(type="message_edit", message=after)
 
 
 @client.event
-async def on_message_delete(message):
+async def on_message_delete(message: discord.Message) -> None:
+    assert koduck_instance
+    assert koduck_instance.client.user
     if message.author.id == koduck_instance.client.user.id:
         koduck_instance.log(type="message_delete", message=message)
 
 
 # interactions include app (slash) commands and components
 @client.event
-async def on_interaction(interaction):
+async def on_interaction(interaction: discord.Interaction) -> None:
+    assert koduck_instance
+    assert koduck_instance.client.user
     if interaction.user.id == koduck_instance.client.user.id:
         koduck_instance.log(type="interaction_self")
-    # app command interactions are logged in the callback wraper above
+    # app command interactions are logged in the callback wrapper above
     elif interaction.type != discord.InteractionType.application_command:
         koduck_instance.log(type="interaction_user", interaction=interaction)
 
@@ -612,7 +639,9 @@ async def on_interaction(interaction):
 # This is where messages come in, whether a command is triggered or not is checked, and parameters are parsed.
 # Note: don't use " \ or = as command prefix or param delim, since they are used in parsing, it'll mess stuff up.
 @client.event
-async def on_message(message):
+async def on_message(message: discord.Message) -> discord.Message | None:
+    assert koduck_instance
+    assert koduck_instance.client.user
     # log messages from self
     if message.author.id == koduck_instance.client.user.id:
         koduck_instance.log(type="message_send", message=message)
@@ -660,15 +689,16 @@ async def on_message(message):
             # Else parse params
             else:
                 # Things within quotes should escape parsing
-                # Find things within quotes, replace them with a number (which shouldn't have param delim)
+                # Find things within quotes, replace them with a number
+                # (which shouldn't have param delim)
                 temp = context.param_line
-                quotes = []
+                quotes: list[str] = []
                 quote_matches = list(re.finditer(r'(["])(?:\\.|[^\\])*?\1', temp))
                 quote_matches.reverse()
                 for quote in quote_matches:
                     start = quote.span()[0]
                     end = quote.span()[1]
-                    temp = temp[0:start] + '"{}"'.format(len(quotes)) + temp[end:]
+                    temp = temp[0:start] + f'"{len(quotes)}"' + temp[end:]
                     quotes.append(quote.group())
 
                 parsed_params = temp.split(settings.param_delim)
@@ -679,12 +709,12 @@ async def on_message(message):
                 counter = len(quotes) - 1
 
                 # Put the quotes back in, without the quote marks themselves
-                def put_quotes_back(text, quotes, counter):
+                def put_quotes_back(
+                    text: str, quotes: str, counter: int
+                ) -> tuple[str, int]:
                     ans = text
-                    while text.find('"{}"'.format(counter)) != -1 and counter >= 0:
-                        ans = ans.replace(
-                            '"{}"'.format(counter), quotes[counter][1:-1], 1
-                        )
+                    while text.find(f'"{counter}"') != -1 and counter >= 0:
+                        ans = ans.replace(f'"{counter}"', quotes[counter][1:-1], 1)
                         counter -= 1
                     return (ans, counter)
 
@@ -763,13 +793,13 @@ async def on_message(message):
         if isinstance(result, str):
             koduck_instance.log(type="result", extra=result)
 
-    except Exception as e:
+    except Exception:
         exc_type, exc_value, _ = sys.exc_info()
-        error_message = "{}: {}".format(exc_type.__name__, exc_value)
+        error_message = f"{exc_type.__name__ if exc_type else None}: {exc_value}"
         traceback.print_exc()
         await koduck_instance.send_message(
             message,
-            content=settings.message_something_broke + "\n``{}``".format(error_message),
+            content=settings.message_something_broke + f"\n``{error_message}``",
             ignore_cd=True,
         )
         koduck_instance.log(
