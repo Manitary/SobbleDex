@@ -114,3 +114,15 @@ message_ap_no_param = "I need a BP and (optionally) a level"
 message_ap_invalid_param = "BP should be a multiple of 10 between 30 and 90"
 message_ap_invalid_param_2 = "Level should be an integer between 1 and 30"
 ap_table = "shuffle_tables/ap"
+message_exp_no_param = "I need a BP and either one target level or two levels"
+message_exp_invalid_param = "BP should be a multiple of 10 between 30 and 90"
+exp_table = "shuffle_tables/exp"
+message_exp_result_3 = "EXP table for {} BP (Total EXP)"
+message_exp_result_4 = "EXP table for {} BP (EXP from previous level)"
+message_exp_invalid_param_2 = "Level should be an integer between 1 and 30"
+message_exp_result = (
+    "A {} BP Pokemon needs {} EXP to get from Level {} (AP {}) to Level {} (AP {})"
+)
+message_exp_result_2 = (
+    "{} ({} BP) needs {} EXP to get from Level {} (AP {}) to Level {} (AP {})"
+)

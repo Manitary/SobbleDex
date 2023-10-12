@@ -243,75 +243,71 @@ async def ap(
         )
 
 
-async def exp(context, *args, **kwargs):
-    # allow space delimited parameters
-    if len(args) == 1:
-        args = args[0].split(" ")
-
-    if len(args) < 1:
+async def exp(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
+    assert context.koduck
+    if not args:
         return await context.koduck.send_message(
             receive_message=context.message, content=settings.message_exp_no_param
         )
 
+    # allow space delimited parameters
+    if len(args) == 1:
+        args = tuple(args[0].split())
+
     # parse params
-    query = args[0]
+    _query = args[0]
+    query_pokemon = ""
+    # ? split into two functions for digit and string?
     try:
-        query_bp = int(query)
-        if query_bp < 30 or query_bp > 90 or query_bp % 10 != 0:
-            return await context.koduck.send_message(
-                receive_message=context.message,
-                content=settings.message_exp_invalid_param,
-            )
+        query_bp = int(_query)
+        assert query_bp in range(30, 91, 10)
     except ValueError:
-        query_pokemon = await pokemon_lookup(context, query=query)
-        if query_pokemon is None:
-            return "Unrecognized Pokemon"
-        pokemon_details = yadon.ReadRowFromTable(
-            settings.pokemon_table, query_pokemon, named_columns=True
+        query_pokemon = await pokemon_lookup(context, query=_query)
+        if not query_pokemon:
+            print("Unrecognized Pokemon")
+            return
+        pokemon_ = db.query_pokemon(query_pokemon)
+        assert pokemon_
+        query_bp = pokemon_.bp
+    except AssertionError:
+        return await context.koduck.send_message(
+            receive_message=context.message,
+            content=settings.message_exp_invalid_param,
         )
-        query_bp = int(pokemon_details["BP"])
+
+    exp_table = db.query_exp(query_bp)
 
     if len(args) == 1:
-        exp_table = yadon.ReadRowFromTable(settings.exp_table, str(query_bp))[1:]
         desc = settings.message_exp_result_3.format(query_bp)
         desc += "\n```"
-        for i in range(len(exp_table)):
+        for i, xp in enumerate(exp_table):
             if i % 10 == 0:
                 desc += "\n"
-            desc += exp_table[i].rjust(7)
+            desc += str(xp).rjust(7)
         desc += "\n```"
         desc += settings.message_exp_result_4.format(query_bp)
         desc += "\n```"
-        for i in range(len(exp_table)):
+        for i, (xp1, xp2) in enumerate(zip(exp_table, [0] + exp_table)):
             if i % 10 == 0:
                 desc += "\n"
-            if i != 0:
-                exp_to_next = int(exp_table[i]) - int(exp_table[i - 1])
-            else:
-                exp_to_next = int(exp_table[i])
-            desc += str(exp_to_next).rjust(7)
+            desc += str(xp1 - xp2).rjust(7)
         desc += "\n```"
         return await context.koduck.send_message(
             receive_message=context.message, content=desc
         )
 
-    if len(args) == 2:
-        query_level_1 = 1
-        try:
-            query_level_2 = int(args[1])
-        except ValueError:
-            return await context.koduck.send_message(
-                receive_message=context.message,
-                content=settings.message_exp_invalid_param_2,
-            )
-    else:
-        try:
-            query_level_1 = int(args[1])
-            query_level_2 = int(args[2])
-        except ValueError:
-            return await context.koduck.send_message(
-                context.message, content=settings.message_exp_invalid_param_2
-            )
+    try:
+        query_level_1, query_level_2 = (
+            (1, int(args[1])) if len(args) == 2 else (int(args[1]), int(args[2]))
+        )
+    except ValueError:
+        return await context.koduck.send_message(
+            receive_message=context.message,
+            content=settings.message_exp_invalid_param_2,
+        )
+
     if query_level_1 not in range(1, 31) or query_level_2 not in range(1, 31):
         return await context.koduck.send_message(
             receive_message=context.message,
@@ -319,20 +315,13 @@ async def exp(context, *args, **kwargs):
         )
 
     # retrieve data
-    start_exp = int(
-        yadon.ReadRowFromTable(settings.exp_table, str(query_bp))[query_level_1]
-    )
-    end_exp = int(
-        yadon.ReadRowFromTable(settings.exp_table, str(query_bp))[query_level_2]
-    )
-    start_ap = int(
-        yadon.ReadRowFromTable(settings.ap_table, str(query_bp))[query_level_1 - 1]
-    )
-    end_ap = int(
-        yadon.ReadRowFromTable(settings.ap_table, str(query_bp))[query_level_2 - 1]
-    )
+    ap_table = db.query_ap(query_bp)
+    start_exp = exp_table[query_level_1]
+    end_exp = exp_table[query_level_2]
+    start_ap = ap_table[query_level_1 - 1]
+    end_ap = ap_table[query_level_2 - 1]
 
-    if query.isdigit():
+    if _query.isdigit():
         return await context.koduck.send_message(
             receive_message=context.message,
             content=settings.message_exp_result.format(
@@ -344,19 +333,19 @@ async def exp(context, *args, **kwargs):
                 end_ap,
             ),
         )
-    else:
-        return await context.koduck.send_message(
-            receive_message=context.message,
-            content=settings.message_exp_result_2.format(
-                query_pokemon,
-                query_bp,
-                end_exp - start_exp,
-                query_level_1,
-                start_ap,
-                query_level_2,
-                end_ap,
-            ),
-        )
+
+    return await context.koduck.send_message(
+        receive_message=context.message,
+        content=settings.message_exp_result_2.format(
+            query_pokemon,
+            query_bp,
+            end_exp - start_exp,
+            query_level_1,
+            start_ap,
+            query_level_2,
+            end_ap,
+        ),
+    )
 
 
 async def type(context, *args, **kwargs):

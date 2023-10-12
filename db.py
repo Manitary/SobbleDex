@@ -427,6 +427,17 @@ def query_ap(bp: int) -> list[int]:
         return []
     return sorted(q.values())
 
+def query_exp(bp: int) -> list[int]:
+    q = shuffle_connection.execute(
+        f"""
+        SELECT {', '.join(f"lvl{i}" for i in range(1, 31))} FROM exp
+        WHERE base_ap = :bp
+        """,
+        {"bp": bp},
+    ).fetchone()
+    if not q:
+        return []
+    return sorted(q.values())
 
 if __name__ == "__main__":
     ...
