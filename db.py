@@ -140,6 +140,33 @@ def remove_setting(key: str) -> None:
     bot_connection.commit()
 
 
+def update_user_level(user_id: int, level: int) -> None:
+    bot_connection.execute(
+        """
+        INSERT INTO user_levels (user_id, level)
+        VALUES (:user_id, :level)
+        ON CONFLICT DO UPDATE
+        SET level = :level
+        WHERE user_id = :user_id
+        """,
+        {"user_id": user_id, "level": level},
+    )
+    bot_connection.commit()
+
+
+def query_user_level(user_id: int) -> int | None:
+    q = bot_connection.execute(
+        """
+        SELECT level FROM user_levels
+        WHERE user_id = :user_id
+        """,
+        {"user_id": user_id},
+    ).fetchone()
+    if not q:
+        return None
+    return q["level"]
+
+
 def get_commands() -> Iterator[Command]:
     q = bot_connection.execute(
         """

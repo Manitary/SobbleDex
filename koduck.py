@@ -440,24 +440,16 @@ class Koduck:
         delattr(settings, variable)
         return value
 
-    # Updates a user's authority level. Returns 0 if successful, -1 if not (i.e. level wasn't an integer)
-    def update_user_level(self, user_id, level):
-        # level should be an integer
+    def update_user_level(self, user_id: int, level: int) -> bool:
         try:
-            int(level)
+            level = int(level)
         except ValueError:
-            return -1
+            return False
+        db.update_user_level(user_id, level)
+        return True
 
-        yadon.WriteRowToTable(settings.user_levels_table_name, user_id, [str(level)])
-        return 0
-
-    def get_user_level(self, user_id):
-        try:
-            return int(
-                yadon.ReadRowFromTable(settings.user_levels_table_name, str(user_id))[0]
-            )
-        except (TypeError, IndexError, ValueError):
-            return settings.default_user_level
+    def get_user_level(self, user_id: int) -> int:
+        return db.query_user_level(user_id) or settings.default_user_level
 
     # Run a command as if it was triggered by a Discord message
     async def run_command(self, command, context=None, *args, **kwargs):
