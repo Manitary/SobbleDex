@@ -74,6 +74,12 @@ class PuzzleStage(MyStrEnum):
     NORMAL = "Normal"
 
 
+class Param(enum.IntEnum):
+    IGNORE = 0
+    INCLUDE = 1
+    EXCLUDE = 2
+
+
 @dataclass
 class Setting:
     key: str
@@ -339,8 +345,10 @@ class Pokemon:
     max_ap: int
     skill: str
     ss: str
+    icons: int = 0
     msu: int = 0
     mega_power: int = 99
+    fake: bool = False
 
     @property
     def ss_skills(self) -> list[str]:
@@ -349,6 +357,10 @@ class Pokemon:
     @property
     def all_skills(self) -> list[str]:
         return [self.skill] + self.ss_skills
+
+    @property
+    def evo_speed(self) -> int:
+        return self.icons - self.msu
 
 
 @dataclass

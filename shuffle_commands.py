@@ -3,6 +3,7 @@ import datetime
 import difflib
 import itertools
 import re
+from collections import defaultdict
 from math import floor
 from typing import Any, Sequence
 
@@ -16,7 +17,7 @@ import settings
 import utils
 import yadon
 from koduck import KoduckContext
-from models import Stage, StageType
+from models import Param, PokemonType, Stage, StageType
 
 RE_PING = re.compile(r"<@!?[0-9]*>")
 
@@ -1090,144 +1091,133 @@ async def skill_with_pokemon_with_emojis(context, *args, **kwargs):
 # Helper function for query command
 # farmable/ss_filter: 0 = ignore, 1 = include, 2 = exclude
 def pokemon_filter(
-    queries, mega=False, include_fake=False, farmable=0, ss_filter=0, has_mega=False
-):
-    hits = []
-    hits_bp = {}
-    hits_type = {}
-    hits_max_ap = {}
-    hits_evo_speed = {}
+    queries: list[list[str]],
+    mega: bool = False,
+    include_fake: bool = False,
+    farmable: Param = Param.IGNORE,
+    ss_filter: Param = Param.IGNORE,
+    has_mega: bool = False,
+) -> tuple[
+    list[str],
+    dict[int, list[str]],
+    dict[int, list[str]],
+    dict[PokemonType, list[str]],
+    dict[int, list[str]],
+]:
+    hits: list[str] = []
+    hits_bp: dict[int, list[str]] = defaultdict(list)
+    hits_max_ap: dict[int, list[str]] = defaultdict(list)
+    hits_type: dict[PokemonType, list[str]] = defaultdict(list)
+    hits_evo_speed: dict[int, list[str]] = defaultdict(list)
 
-    se_types = []
-    for subquery in queries:
-        left, operation, right = subquery
-        if left == "se":
-            type_details = yadon.ReadRowFromTable(settings.types_table, right)
-            se_types.extend(type_details[2].split(", ") if type_details else [])
+    se_types = set(
+        itertools.chain(
+            *(
+                db.query_weak_against(PokemonType(right))
+                for subquery in queries
+                for left, _, right in subquery
+                if left == "se"
+            )
+        )
+    )
 
-    if farmable != 0:
-        farmable_pokemon = db.get_farmable_pokemon()
+    farmable_pokemon: set[str] = (
+        db.get_farmable_pokemon() if farmable != Param.IGNORE else set()
+    )
+
+    all_pokemon_names = db.get_pokemon_names()
 
     # check each pokemon
-    pokedex = yadon.ReadTable(settings.pokemon_table, named_columns=True)
-    for name, details in pokedex.items():
-        try:
-            dex = int(details["Dex"])
-        except ValueError:
-            dex = 999
-        type = details["Type"]
-        try:
-            bp = int(details["BP"])
-        except ValueError:
-            bp = 0
-        try:
-            rmls = int(details["RML"])
-        except ValueError:
-            rmls = 0
-        try:
-            max_ap = int(details["MaxAP"])
-        except ValueError:
-            max_ap = 0
-        skill = details["Skill"]
-        ss = details["SS"]
-        try:
-            icons = int(details["Icons"])
-        except ValueError:
-            icons = 0
-        try:
-            msu = int(details["MSU"])
-        except ValueError:
-            msu = 0
-        mega_power = details["Mega Power"]
-        evo_speed = icons - msu
-
-        if not mega and mega_power:
+    for pokemon_ in db.get_all_pokemon():
+        if mega ^ bool(pokemon_.mega_power):
             continue
-        if mega and not mega_power:
-            continue
-
-        if has_mega and name in ["Charizard", "Mewtwo", "Charizard (Shiny)"]:
+        # ? add a has_mega field in the pokemon table?
+        # ? or another table to map pokemon -> mega pokemon
+        if has_mega and pokemon_.pokemon in ["Charizard", "Mewtwo", "Charizard (Shiny)"]:
             pass
-        elif has_mega and "Mega {}".format(name) not in pokedex.keys():
+        elif has_mega and f"Mega {pokemon_.pokemon}" not in all_pokemon_names:
             continue
 
-        if not include_fake and details["Fake"]:
+        if not include_fake and pokemon_.fake:
             continue
 
-        if farmable == 1 and name not in farmable_pokemon:
+        if farmable == Param.INCLUDE and pokemon_.pokemon not in farmable_pokemon:
+            continue
+        if farmable == Param.EXCLUDE and pokemon_.pokemon in farmable_pokemon:
             continue
 
-        if farmable == 2 and name in farmable_pokemon:
-            continue
-
-        temp_ss = [x.lower() for x in ss.split("/")]
+        temp_ss = list(map(str.lower, pokemon_.ss_skills))
 
         result = True
         is_ss = False
+        # TODO do this less painfully
         for subquery in queries:
             left, operation, right = subquery
 
             if (left == "dex") and (
-                (operation in [">=", "=>"] and dex < right)
-                or (operation in ["<=", "=<"] and dex > right)
-                or (operation == ">" and dex <= right)
-                or (operation == "<" and dex >= right)
-                or (operation == "=" and dex != right)
-                or (operation == "!=" and dex == right)
+                (operation in [">=", "=>"] and pokemon_.dex < int(right))
+                or (operation in ["<=", "=<"] and pokemon_.dex > int(right))
+                or (operation == ">" and pokemon_.dex <= int(right))
+                or (operation == "<" and pokemon_.dex >= int(right))
+                or (operation == "=" and pokemon_.dex != int(right))
+                or (operation == "!=" and pokemon_.dex == int(right))
             ):
                 result = False
                 break
             if (left == "bp") and (
-                (operation in [">=", "=>"] and bp < right)
-                or (operation in ["<=", "=<"] and bp > right)
-                or (operation == ">" and bp <= right)
-                or (operation == "<" and bp >= right)
-                or (operation == "=" and bp != right)
-                or (operation == "!=" and bp == right)
+                (operation in [">=", "=>"] and pokemon_.bp < int(right))
+                or (operation in ["<=", "=<"] and pokemon_.bp > int(right))
+                or (operation == ">" and pokemon_.bp <= int(right))
+                or (operation == "<" and pokemon_.bp >= int(right))
+                or (operation == "=" and pokemon_.bp != int(right))
+                or (operation == "!=" and pokemon_.bp == int(right))
             ):
                 result = False
                 break
             if (left in ["rml", "rmls"]) and (
-                (operation in [">=", "=>"] and rmls < right)
-                or (operation in ["<=", "=<"] and rmls > right)
-                or (operation == ">" and rmls <= right)
-                or (operation == "<" and rmls >= right)
-                or (operation == "=" and rmls != right)
-                or (operation == "!=" and rmls == right)
+                (operation in [">=", "=>"] and pokemon_.rml < int(right))
+                or (operation in ["<=", "=<"] and pokemon_.rml > int(right))
+                or (operation == ">" and pokemon_.rml <= int(right))
+                or (operation == "<" and pokemon_.rml >= int(right))
+                or (operation == "=" and pokemon_.rml != int(right))
+                or (operation == "!=" and pokemon_.rml == int(right))
             ):
                 result = False
                 break
             if (left == "maxap") and (
-                (operation in [">=", "=>"] and max_ap < right)
-                or (operation in ["<=", "=<"] and max_ap > right)
-                or (operation == ">" and max_ap <= right)
-                or (operation == "<" and max_ap >= right)
-                or (operation == "=" and max_ap != right)
-                or (operation == "!=" and max_ap == right)
+                (operation in [">=", "=>"] and pokemon_.max_ap < int(right))
+                or (operation in ["<=", "=<"] and pokemon_.max_ap > int(right))
+                or (operation == ">" and pokemon_.max_ap <= int(right))
+                or (operation == "<" and pokemon_.max_ap >= int(right))
+                or (operation == "=" and pokemon_.max_ap != int(right))
+                or (operation == "!=" and pokemon_.max_ap == int(right))
             ):
                 result = False
                 break
             if (left == "type") and (
-                (operation == "=" and right.lower() != type.lower())
-                or (operation == "!=" and right.lower() == type.lower())
+                (operation == "=" and right.lower() != pokemon_.type.lower())
+                or (operation == "!=" and right.lower() == pokemon_.type.lower())
             ):
                 result = False
                 break
             if (left == "se") and (
-                (operation == "=" and type not in se_types)
-                or (operation == "!=" and type in se_types)
+                (operation == "=" and pokemon_.type not in se_types)
+                or (operation == "!=" and pokemon_.type in se_types)
             ):
                 result = False
                 break
             if (left in ["skill", "sk"]) and (
                 (
                     operation == "="
-                    and right.lower() != skill.lower()
+                    and right.lower() != pokemon_.skill.lower()
                     and right.lower() not in temp_ss
                 )
                 or (
                     operation == "!="
-                    and (right.lower() == skill.lower() or right.lower() in temp_ss)
+                    and (
+                        right.lower() == pokemon_.skill.lower()
+                        or right.lower() in temp_ss
+                    )
                 )
             ):
                 result = False
@@ -1238,24 +1228,24 @@ def pokemon_filter(
                 and right.lower() in temp_ss
             ):
                 is_ss = True
-                if ss_filter == 2:
+                if ss_filter == Param.EXCLUDE:
                     result = False
             else:
-                if ss_filter == 1:
+                if ss_filter == Param.INCLUDE:
                     result = False
             if (left in ["evospeed", "megaspeed"]) and (
-                (operation in [">=", "=>"] and evo_speed < right)
-                or (operation in ["<=", "=<"] and evo_speed > right)
-                or (operation == ">" and evo_speed <= right)
-                or (operation == "<" and evo_speed >= right)
-                or (operation == "=" and evo_speed != right)
-                or (operation == "!=" and evo_speed == right)
+                (operation in [">=", "=>"] and pokemon_.evo_speed < int(right))
+                or (operation in ["<=", "=<"] and pokemon_.evo_speed > int(right))
+                or (operation == ">" and pokemon_.evo_speed <= int(right))
+                or (operation == "<" and pokemon_.evo_speed >= int(right))
+                or (operation == "=" and pokemon_.evo_speed != int(right))
+                or (operation == "!=" and pokemon_.evo_speed == int(right))
             ):
                 result = False
                 break
             if (left == "name") and (
-                (operation == "=" and right.lower() not in name.lower())
-                or (operation == "!=" and (right.lower() in name.lower()))
+                (operation == "=" and right.lower() not in pokemon_.pokemon.lower())
+                or (operation == "!=" and (right.lower() in pokemon_.pokemon.lower()))
             ):
                 result = False
                 break
@@ -1264,34 +1254,16 @@ def pokemon_filter(
 
         # if skill is used, boldify pokemon with ss
         # it can't start with ** because it needs to be sorted by name
-        if is_ss:
-            hit_name = "{}**".format(name)
-        else:
-            hit_name = name
+        hit_name = f"{pokemon_.pokemon}**" if is_ss else pokemon_.pokemon
 
-        if farmable == 3 and name in farmable_pokemon:
-            hit_name += "\*"
+        #! farmable == 3 is not an option described in the previous documentation
+        if farmable == 3 and pokemon_.pokemon in farmable_pokemon:
+            hit_name += "\\*"
 
-        try:
-            hits_bp[bp].append(hit_name)
-        except KeyError:
-            hits_bp[bp] = [hit_name]
-
-        try:
-            hits_max_ap[max_ap].append(hit_name)
-        except KeyError:
-            hits_max_ap[max_ap] = [hit_name]
-
-        try:
-            hits_type[type].append(hit_name)
-        except KeyError:
-            hits_type[type] = [hit_name]
-
-        try:
-            hits_evo_speed[evo_speed].append(hit_name)
-        except KeyError:
-            hits_evo_speed[evo_speed] = [hit_name]
-
+        hits_bp[pokemon_.bp].append(hit_name)
+        hits_max_ap[pokemon_.max_ap].append(hit_name)
+        hits_type[pokemon_.type].append(hit_name)
+        hits_evo_speed[pokemon_.evo_speed].append(hit_name)
         hits.append(hit_name)
 
     return (hits, hits_bp, hits_max_ap, hits_type, hits_evo_speed)

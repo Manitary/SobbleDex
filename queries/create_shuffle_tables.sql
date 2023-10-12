@@ -218,13 +218,15 @@ CREATE TABLE "pokemon" (
 	"pokemon" TEXT NOT NULL UNIQUE,
 	"dex" INTEGER NOT NULL,
 	"type" TEXT NOT NULL,
-	"bp" INT NOT NULL,
-	"rml" INT NOT NULL DEFAULT 5,
-	"max_ap" INT NOT NULL,
+	"bp" INTEGER NOT NULL,
+	"rml" INTEGER NOT NULL DEFAULT 5,
+	"max_ap" INTEGER NOT NULL,
 	"skill" TEXT NOT NULL,
 	"ss" TEXT,
-	"msu" INT DEFAULT 0,
-	"mega_power" TEXT
+	"icons" INTEGER NOT NULL DEFAULT 0,
+	"msu" INTEGER DEFAULT 0,
+	"mega_power" TEXT,
+	"fake" INTEGER DEFAULT 0
 );
 
 CREATE TABLE "skill_notes" (

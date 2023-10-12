@@ -9,6 +9,7 @@ from models import (
     Event,
     EventPokemon,
     EventStageRotation,
+    Pokemon,
     PokemonType,
     RotationEvent,
     Setting,
@@ -239,6 +240,7 @@ def query_stage_by_pokemon(pokemon: str, stage_type: StageType) -> Iterator[Stag
     for stage in q.fetchall():
         yield Stage(stage_type=stage_type, **stage)
 
+
 def query_event_by_pokemon(pokemon: str) -> Iterator[Event]:
     q = shuffle_connection.execute(
         """
@@ -249,10 +251,11 @@ def query_event_by_pokemon(pokemon: str) -> Iterator[Event]:
         OR pokemon LIKE '%/:pokemon/%'
         COLLATE NOCASE
         """,
-        {'pokemon': pokemon}
+        {"pokemon": pokemon},
     )
     for event in q.fetchall():
         yield Event(**event)
+
 
 def get_all_stages(stage_type: StageType) -> Iterator[Stage]:
     q = shuffle_connection.execute(f"SELECT * FROM {STAGE_TYPE_TABLE[stage_type]}")
@@ -330,6 +333,30 @@ def query_eb_rewards_pokemon(pokemon: str) -> list[EBReward]:
         {"pokemon": pokemon},
     )
     return [EBReward(**stage) for stage in q.fetchall()]
+
+
+def query_weak_against(t: PokemonType) -> list[PokemonType]:
+    q = shuffle_connection.execute(
+        """
+        SELECT weak
+        FROM types
+        WHERE type = :type
+        """,
+        {"type": str(t)},
+    ).fetchone()
+    if not q:
+        return []
+    return [PokemonType(t) for t in q["weak"].split(", ")]
+
+
+def get_all_pokemon() -> Iterator[Pokemon]:
+    q = shuffle_connection.execute(
+        """
+        SELECT * FROM pokemon ORDER BY id
+        """
+    )
+    for pokemon in q.fetchall():
+        yield Pokemon(**pokemon)
 
 
 if __name__ == "__main__":
