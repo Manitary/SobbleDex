@@ -17,7 +17,7 @@ import settings
 import utils
 import yadon
 from koduck import Koduck, KoduckContext
-from models import Param, PokemonType, Stage, StageType
+from models import Param, PokemonType, Reminder, Stage, StageType
 
 RE_PING = re.compile(r"<@!?[0-9]*>")
 
@@ -1763,65 +1763,62 @@ async def choice_react(
     return choice - 1
 
 
-async def remind_me(context, *args, **kwargs):
-    user_reminders = yadon.ReadRowFromTable(
-        settings.reminders_table, context.message.author.id
-    )
+async def remind_me(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
+    assert context.koduck
+    assert context.message
+    assert context.message.author
+    user_id = context.message.author.id
+    user_reminders = db.query_reminder(user_id)
     if not user_reminders:
-        user_reminders = ["", ""]
-    if len(args) > 0 and args[0].isdigit():
+        user_reminders = Reminder(user_id, "", "")
+
+    if not args:
+        return await context.koduck.send_message(
+            receive_message=context.message,
+            content=settings.message_remind_me_status.format(
+                user_reminders.weeks, user_reminders.pokemon
+            ),
+        )
+
+    if args[0].isdigit():
         try:
             query_week = int(args[0])
-            if query_week < 1 or query_week > settings.num_weeks:
-                raise ValueError()
-        except ValueError:
+            assert 1 <= query_week <= settings.num_weeks
+        except (ValueError, AssertionError):
             return await context.koduck.send_message(
                 receive_message=context.message,
                 content=settings.message_week_invalid_param.format(
                     settings.num_weeks, settings.num_weeks
                 ),
             )
-        if str(query_week) in user_reminders[0].split("/"):
+        if query_week in user_reminders.weeks:
             return await context.koduck.send_message(
                 receive_message=context.message,
                 content=settings.message_remind_me_week_exists,
             )
-        reminder_weeks = user_reminders[0].split("/") if user_reminders[0] else []
-        reminder_weeks.append(str(query_week))
-        user_reminders[0] = "/".join(reminder_weeks)
-        yadon.WriteRowToTable(
-            settings.reminders_table, context.message.author.id, user_reminders
-        )
+        db.add_reminder_week(user_id, query_week)
         return await context.koduck.send_message(
             receive_message=context.message,
             content=settings.message_remind_me_week_success.format(query_week),
         )
-    elif len(args) > 0:
-        query_pokemon = await pokemon_lookup(context, query=args[0])
-        if query_pokemon is None:
-            return "Unrecognized Pokemon"
-        if query_pokemon in user_reminders[1].split("/"):
-            return await context.koduck.send_message(
-                receive_message=context.message,
-                content=settings.message_remind_me_pokemon_exists,
-            )
-        reminder_pokemon = user_reminders[1].split("/") if user_reminders[1] else []
-        reminder_pokemon.append(query_pokemon)
-        user_reminders[1] = "/".join(reminder_pokemon)
-        yadon.WriteRowToTable(
-            settings.reminders_table, context.message.author.id, user_reminders
-        )
+
+    query_pokemon = await pokemon_lookup(context, query=args[0])
+    if not query_pokemon:
+        print("Unrecognized Pokemon")
+        return
+
+    if query_pokemon in user_reminders.pokemon:
         return await context.koduck.send_message(
             receive_message=context.message,
-            content=settings.message_remind_me_pokemon_success.format(query_pokemon),
+            content=settings.message_remind_me_pokemon_exists,
         )
-    else:
-        return await context.koduck.send_message(
-            receive_message=context.message,
-            content=settings.message_remind_me_status.format(
-                user_reminders[0], user_reminders[1]
-            ),
-        )
+    db.add_reminder_pokemon(user_id, query_pokemon)
+    return await context.koduck.send_message(
+        receive_message=context.message,
+        content=settings.message_remind_me_pokemon_success.format(query_pokemon),
+    )
 
 
 async def unremind_me(context, *args, **kwargs):

@@ -392,13 +392,27 @@ def get_sm_rewards() -> list[SMReward]:
 def get_reminders() -> Iterator[Reminder]:
     q = shuffle_connection.execute(
         """
-        SELECT user_id, weeks AS _weeks, pokemon AS _pokemon
+        SELECT user_id, weeks, pokemon
         FROM reminders
         ORDER BY id
         """
     )
     for reminder in q.fetchall():
         yield Reminder(**reminder)
+
+
+def query_reminder(user_id: int) -> Reminder | None:
+    q = shuffle_connection.execute(
+        """
+        SELECT user_id, weeks, pokemon
+        FROM reminders
+        WHERE user_id = :user_id
+        """,
+        {"user_id": user_id},
+    ).fetchone()
+    if not q:
+        return None
+    return Reminder(**q)
 
 
 def query_skill(skill: str) -> Skill | None:
@@ -451,6 +465,30 @@ def query_type(t: PokemonType) -> TypeInfo:
         {"type": t.value},
     ).fetchone()
     return TypeInfo(**q)
+
+
+def add_reminder_week(user_id: int, week: int) -> None:
+    shuffle_connection.execute(
+        """
+        UPDATE reminders
+        SET weeks = weeks || ", " || :week
+        WHERE user_id = :user_id
+        """,
+        {"user_id": user_id, "week": str(week)},
+    )
+    shuffle_connection.commit()
+
+
+def add_reminder_pokemon(user_id: int, pokemon: str) -> None:
+    shuffle_connection.execute(
+        """
+        UPDATE reminders
+        SET pokemon = pokemon || ", " || :pokemon
+        WHERE user_id = :user_id
+        """,
+        {"user_id": user_id, "pokemon": pokemon},
+    )
+    shuffle_connection.commit()
 
 
 if __name__ == "__main__":

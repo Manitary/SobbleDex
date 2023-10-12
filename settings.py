@@ -128,4 +128,15 @@ message_exp_result_2 = (
 )
 message_type_no_param = "I need a Type to look up!"
 message_type_invalid_param = "That's not a valid type"
-message_eb_rewards_no_result = "Could not find an Escalation Battles with the Pokemon '{}'"
+message_eb_rewards_no_result = (
+    "Could not find an Escalation Battles with the Pokemon '{}'"
+)
+message_remind_me_status = (
+    "You are signed up to be reminded for:\nWeeks: {}\nPokémon: {}"
+)
+message_remind_me_pokemon_success = (
+    "Okay, you’re signed up to be reminded when {} appears in an event"
+)
+message_remind_me_pokemon_exists = "You already signed up for this Pokémon"
+message_remind_me_week_exists = "You already signed up for this rotation week"
+message_remind_me_week_success = "Okay, you’re signed up to be reminded when rotation week {} starts"
