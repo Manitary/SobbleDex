@@ -152,3 +152,4 @@ message_unremind_me_pokemon_success = (
     "Okay, you’re no longer signed up to be reminded when {} appears in an event"
 )
 custom_responses_table_name = "tables/custom_responses"
+help_messages_table_name = "shuffle_tables/help_messages"

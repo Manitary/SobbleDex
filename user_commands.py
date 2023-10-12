@@ -68,28 +68,15 @@ async def help(context, query="", *args, **kwargs):
         )
 
 
-def get_help_message(message_name):
-    if message_name:
-        help_message = yadon.ReadRowFromTable(
-            settings.help_messages_table_name, "message_help_" + message_name
-        )
-    # Default message if no parameter is given
-    else:
-        help_message = yadon.ReadRowFromTable(
-            settings.help_messages_table_name, "message_help"
-        )
-
+def get_help_message(message_name: str) -> str:
+    help_message = db.query_help_message(message_name)
     # Use {cp} for command prefix and {pd} for parameter delimiter
-    if help_message:
-        return (
-            help_message[0]
-            .replace("{cp}", settings.command_prefix)
-            .replace("{pd}", settings.param_delim)
-            .replace("\\n", "\n")
-            .replace("\\t", "\t")
-        )
-    else:
-        return None
+    return (
+        help_message.replace("{cp}", settings.command_prefix)
+        .replace("{pd}", settings.param_delim)
+        .replace("\\n", "\n")
+        .replace("\\t", "\t")
+    )
 
 
 async def user_info(context, *args, **kwargs):

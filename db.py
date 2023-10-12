@@ -521,5 +521,19 @@ def query_custom_response(message: str) -> str:
     return q["response"]
 
 
+def query_help_message(message: str) -> str:
+    q = bot_connection.execute(
+        """
+        SELECT message_text
+        FROM help_messages
+        WHERE message_type = 'message_help' | :message
+        """,
+        {"message": f"_{message}" if message else ""},
+    ).fetchone()
+    if not q:
+        return ""
+    return q["message_text"]
+
+
 if __name__ == "__main__":
     ...
