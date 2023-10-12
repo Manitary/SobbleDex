@@ -1133,7 +1133,11 @@ def pokemon_filter(
             continue
         # ? add a has_mega field in the pokemon table?
         # ? or another table to map pokemon -> mega pokemon
-        if has_mega and pokemon_.pokemon in ["Charizard", "Mewtwo", "Charizard (Shiny)"]:
+        if has_mega and pokemon_.pokemon in [
+            "Charizard",
+            "Mewtwo",
+            "Charizard (Shiny)",
+        ]:
             pass
         elif has_mega and f"Mega {pokemon_.pokemon}" not in all_pokemon_names:
             continue
@@ -1257,6 +1261,7 @@ def pokemon_filter(
         hit_name = f"{pokemon_.pokemon}**" if is_ss else pokemon_.pokemon
 
         #! farmable == 3 is not an option described in the previous documentation
+        #! the goal is to tag farmable with *, but apparently it's done by default anyway?
         if farmable == 3 and pokemon_.pokemon in farmable_pokemon:
             hit_name += "\\*"
 
@@ -1388,48 +1393,46 @@ async def eb_details_shorthand(context, *args, **kwargs):
     return await eb_details(context, *args, **kwargs)
 
 
-async def week(context, *args, **kwargs):
-    if len(args) < 1:
-        query_week = utils.get_current_week()
-    else:
-        if args[0].isdigit():
-            try:
-                query_week = int(args[0])
-            except ValueError:
-                return await context.koduck.send_message(
-                    receive_message=context.message,
-                    content=settings.message_week_invalid_param.format(
-                        settings.num_weeks, settings.num_weeks
-                    ),
-                )
-        else:
-            query_pokemon = await pokemon_lookup(context, query=args[0])
-            if query_pokemon is None:
-                return "Unrecognized Pokemon"
+async def week(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
+    assert context.koduck
+    curr_week = utils.get_current_week()
+    if not args:
+        return await context.koduck.send_message(
+            receive_message=context.message,
+            embed=embed_formatters.format_week_embed(curr_week),
+        )
 
-            # retrieve data
-            results = []
-            for k, v in yadon.ReadTable(settings.events_table).items():
-                event_pokemon = [x.lower() for x in v[1].split("/")]
-                if query_pokemon.lower() in event_pokemon:
-                    week = v[4]
-                    results.append(week)
-            if len(results) < 1:
-                return await context.koduck.send_message(
-                    receive_message=context.message,
-                    content=settings.message_event_no_result.format(query_pokemon),
-                )
-            sorted_results = [
-                int(x) + 1 for x in results if int(x) + 1 >= utils.get_current_week()
-            ] + [int(x) + 1 for x in results if int(x) + 1 < utils.get_current_week()]
-            query_week = sorted_results[0]
-        if query_week < 1 or query_week > settings.num_weeks:
+    if args[0].isdigit():
+        query_week = int(args[0])
+    else:
+        query_pokemon = await pokemon_lookup(context, query=args[0])
+        if not query_pokemon:
+            print("Unrecognized Pokemon")
+            return
+
+        # retrieve data
+        weeks = [
+            event.repeat_param_1 for event in db.query_event_by_pokemon(query_pokemon)
+        ]
+        if not weeks:
             return await context.koduck.send_message(
                 receive_message=context.message,
-                content=settings.message_week_invalid_param.format(
-                    settings.num_weeks, settings.num_weeks
-                ),
+                content=settings.message_event_no_result.format(query_pokemon),
             )
+        sorted_results = [w + 1 for w in weeks if w + 1 >= curr_week] + [
+            w + 1 for w in weeks if w + 1 < curr_week
+        ]
+        query_week = sorted_results[0]
+
+    if not 1 <= query_week <= settings.num_weeks:
+        return await context.koduck.send_message(
+            receive_message=context.message,
+            content=settings.message_week_invalid_param.format(
+                settings.num_weeks, settings.num_weeks
+            ),
+        )
 
     return await context.koduck.send_message(
         receive_message=context.message,

@@ -100,3 +100,5 @@ message_event_invalid_param = "Result number should be 1 or higher"
 message_event_result_error = "Result number wasn't in the range of results ({})"
 message_event_no_result = "Could not find an event with the Pokemon '{}'"
 types_table = "shuffle_tables/types"
+message_week_invalid_param = "There are {} weeks of events in the event rotation, so I need a number from 1 to {}"
+num_weeks = 24
