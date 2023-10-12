@@ -20,9 +20,10 @@ from typing import Any, Callable, Optional, Union
 import aiohttp
 import discord
 
+import db
 import settings
 import yadon
-from db import get_settings
+from models import Setting
 
 
 class ClientWithBackgroundTask(discord.Client):
@@ -352,7 +353,7 @@ class Koduck:
     # Note: settings is a module with attributes, so removing a setting manually from the table doesn't actually remove the attribute
     # Note: number values will be converted to int/float, and string values will convert "\n"s and "\t"s (since Yadon uses these to organize data)
     def refresh_settings(self) -> None:
-        for setting in get_settings():
+        for setting in db.get_settings():
             value = setting.value
             # try to convert into float or int, otherwise treat as string
             try:
@@ -366,88 +367,76 @@ class Koduck:
 
     # update a setting and updates the settings file accordingly
     # returns None if setting name doesn't exist or auth level is lower than setting's level (defaults to max user level if not specified or setting is in settings.py), returns old value if it does and updating its value succeeded
-    def update_setting(self, variable, value, auth_level=settings.default_user_level):
+    def update_setting(
+        self, variable: str, value: str, auth_level: int = settings.default_user_level
+    ) -> Any | None:
         try:
-            oldvalue = getattr(settings, variable)
+            old_value = getattr(settings, variable)
         except AttributeError:
             return
 
-        try:
-            setting_level = int(
-                yadon.ReadRowFromTable(
-                    settings.settings_table_name, variable, named_columns=True
-                )["Tier"]
-            )
-        except (IndexError, ValueError, TypeError):
-            setting_level = settings.max_user_level
+        setting = db.query_setting(variable)
+        setting_level = setting.tier if setting else settings.max_user_level
+
         if setting_level > auth_level:
             return
 
-        value = value.replace("\n", "\\n").replace("\t", "\\t")
-        yadon.WriteRowToTable(
-            settings.settings_table_name,
-            variable,
-            {"Value": value, "Tier": setting_level},
-            named_columns=True,
-        )
+        db.update_setting(variable, value.replace("\n", "\\n").replace("\t", "\\t"))
+
         try:
             if float(value) % 1 == 0:
-                value = int(value)
+                new_value = int(value)
             else:
-                value = float(value)
+                new_value = float(value)
         except ValueError:
-            value = value.replace("\\n", "\n").replace("\\t", "\t")
-        setattr(settings, variable, value)
-        return oldvalue
+            new_value = value
+        setattr(settings, variable, new_value)
+        return old_value
 
     # add a setting and updates the settings file accordingly
     # returns None if setting already exists, returns value if it doesn't
-    def add_setting(self, variable, value, auth_level=settings.default_user_level):
+    def add_setting(
+        self, variable: str, value: str, auth_level: int = settings.default_user_level
+    ) -> str | None:
         try:
             getattr(settings, variable)
             return
         except AttributeError:
             pass
 
-        value = value.replace("\n", "\\n").replace("\t", "\\t")
-        yadon.WriteRowToTable(
-            settings.settings_table_name,
-            variable,
-            {"Value": value, "Tier": auth_level},
-            named_columns=True,
+        db.add_setting(
+            Setting(
+                variable, value.replace("\n", "\\n").replace("\t", "\\t"), auth_level
+            )
         )
+
         try:
             if float(value) % 1 == 0:
-                value = int(value)
+                new_value = int(value)
             else:
-                value = float(value)
+                new_value = float(value)
         except ValueError:
-            value = value.replace("\\n", "\n").replace("\\t", "\t")
-        setattr(settings, variable, value)
+            new_value = value
+        setattr(settings, variable, new_value)
         return value
 
     # remove a setting and updates the settings file accordingly
     # returns None if setting doesn't exist or level is lower than setting's level (defaults to max user level if not specified or setting is in settings.py), returns the old value if it did
-    def remove_setting(self, variable, auth_level=settings.default_user_level):
+    def remove_setting(
+        self, variable: str, auth_level: int = settings.default_user_level
+    ) -> Any | None:
         try:
             value = getattr(settings, variable)
         except AttributeError:
             return
 
-        try:
-            setting_level = int(
-                yadon.ReadRowFromTable(
-                    settings.settings_table_name, variable, named_columns=True
-                )["Tier"]
-            )
-        except (IndexError, ValueError):
-            setting_level = settings.max_user_level
+        setting = db.query_setting(variable)
+        setting_level = setting.tier if setting else settings.max_user_level
+
         if setting_level > auth_level:
             return
 
-        yadon.RemoveRowFromTable(
-            settings.settings_table_name, variable, named_columns=True
-        )
+        db.remove_setting(variable)
         delattr(settings, variable)
         return value
 

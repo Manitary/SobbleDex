@@ -92,6 +92,54 @@ def get_settings() -> Iterator[Setting]:
         yield Setting(**setting)
 
 
+def query_setting(key: str) -> Setting | None:
+    q = bot_connection.execute(
+        """
+        SELECT key, value, tier
+        FROM settings
+        WHERE key = :key
+        """,
+        {"key": key},
+    ).fetchone()
+    if not q:
+        return None
+    return Setting(**q)
+
+
+def update_setting(key: str, value: str) -> None:
+    bot_connection.execute(
+        """
+        UPDATE settings
+        SET value = :value
+        WHERE key = :key
+        """,
+        {"key": key, "value": value},
+    )
+    bot_connection.commit()
+
+
+def add_setting(setting: Setting) -> None:
+    bot_connection.execute(
+        """
+        INSERT INTO settings (key, value, tier)
+        VALUES (:key, :value, :tier)
+        """,
+        {"key": setting.key, "value": setting.value, "tier": setting.tier},
+    )
+    bot_connection.commit()
+
+
+def remove_setting(key: str) -> None:
+    bot_connection.execute(
+        """
+        DELETE FROM settings
+        WHERE key = :key
+        """,
+        {"key": key},
+    )
+    bot_connection.commit()
+
+
 def get_commands() -> Iterator[Command]:
     q = bot_connection.execute(
         """
