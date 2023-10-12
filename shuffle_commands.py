@@ -840,77 +840,82 @@ def pokemon_filter_results_to_string(buckets, use_emojis=False):
     return output_string
 
 
-async def query(context, *args, **kwargs):
-    try:
-        use_emojis = kwargs["useemojis"]
-    except KeyError:
-        use_emojis = False
-
+async def query(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
+    assert context.koduck
+    use_emojis = kwargs.get("useemojis", False)
     queries = validate_query(context["params"])
 
-    farmable = 0
+    farmable = Param.IGNORE
     if "farmable" in args:
-        farmable = 1
+        farmable = Param.INCLUDE
     if "!farmable" in args:
-        farmable = 2
+        farmable = Param.EXCLUDE
     if "?farmable" in args:
-        farmable = 3
+        #! double check this
+        farmable = Param.IGNORE
     if "farmable" in kwargs:
         if kwargs["farmable"] == "yes":
-            farmable = 1
+            farmable = Param.INCLUDE
         elif kwargs["farmable"] == "no":
-            farmable = 2
+            farmable = Param.EXCLUDE
         elif kwargs["farmable"] == "both":
-            farmable = 3
+            farmable = Param.IGNORE
 
-    ss_filter = 0
+    ss_filter = Param.IGNORE
     if "ss" in args:
-        ss_filter = 1
+        ss_filter = Param.INCLUDE
     if "!ss" in args:
-        ss_filter = 2
+        ss_filter = Param.EXCLUDE
     if "ss" in kwargs:
         if kwargs["ss"] == "yes":
-            ss_filter = 1
+            ss_filter = Param.INCLUDE
         elif kwargs["ss"] == "no":
-            ss_filter = 2
+            ss_filter = Param.EXCLUDE
 
     # force mega if evospeed is used
     if (
-        "evospeed" in [x[0] for x in queries]
-        or "evospeed" in [x[2] for x in queries if x[0] == "sortby"]
-        or "megaspeed" in [x[0] for x in queries]
-        or "megaspeed" in [x[2] for x in queries if x[0] == "sortby"]
+        "evospeed" in (x[0] for x in queries)
+        or "evospeed" in (x[2] for x in queries if x[0] == "sortby")
+        or "megaspeed" in (x[0] for x in queries)
+        or "megaspeed" in (x[2] for x in queries if x[0] == "sortby")
     ):
         kwargs["mega"] = True
 
     # generate a string to show which filters were recognized
     query_string = ""
-    sortby = ""
     if "mega" in args or "mega" in kwargs:
         query_string += "mega and "
+
     if "hasmega" in args or "hasmega" in kwargs:
         query_string += "hasmega and "
-    if farmable == 1:
+
+    if farmable == Param.INCLUDE:
         query_string += "farmable and "
-    elif farmable == 2:
+    elif farmable == Param.EXCLUDE:
         query_string += "not farmable and "
-    if ss_filter == 1:
+
+    if ss_filter == Param.INCLUDE:
         query_string += "only-SS and "
-    elif ss_filter == 2:
+    elif ss_filter == Param.EXCLUDE:
         query_string += "no-SS and "
-    for subquery in queries:
-        left, operation, right = subquery
-        if right != "":
-            query_string += "{}{}{} and ".format(left, operation, right)
-            if left == "sortby":
-                sortby = right
-    if query_string != "":
-        query_string = query_string[:-5]
-    else:
+
+    sortby = ""
+    for left, operation, right in queries:
+        if not right:
+            continue
+        query_string += f"{left}{operation}{right} and "
+        if left == "sortby":
+            sortby = right
+
+    if not query_string:
         return await context.koduck.send_message(
             receive_message=context.message,
             content=settings.message_query_invalid_param,
         )
+
+    query_string = query_string[:-5]
 
     hits, hits_bp, hits_max_ap, hits_type, hits_evo_speed = pokemon_filter(
         queries,
@@ -921,30 +926,34 @@ async def query(context, *args, **kwargs):
         "hasmega" in args or "hasmega" in kwargs,
     )
 
-    # sort results and create a string to send
-    header = settings.message_query_result.format(len(hits), query_string, "{}")
-
     # format output depending on which property to sort by
     if sortby == "bp":
-        buckets = {k: sorted(hits_bp[k]) for k in sorted(hits_bp.keys())}
+        buckets = {k: sorted(v) for k, v in sorted(hits_bp.items())}
         sortby_string = "BP"
     elif sortby == "type":
-        buckets = {k: sorted(hits_type[k]) for k in sorted(hits_type.keys())}
+        buckets = {k: sorted(v) for k, v in sorted(hits_type.items())}
         sortby_string = "Type"
     elif sortby in ["evospeed", "megaspeed"] and ("mega" in args or "mega" in kwargs):
-        buckets = {k: sorted(hits_evo_speed[k]) for k in sorted(hits_evo_speed.keys())}
+        buckets = {k: sorted(v) for k, v in sorted(hits_evo_speed.items())}
         sortby_string = "Mega Evolution Speed"
     else:
-        buckets = {k: sorted(hits_max_ap[k]) for k in sorted(hits_max_ap.keys())}
+        buckets = {k: sorted(v) for k, v in sorted(hits_max_ap.items())}
         sortby_string = "Max AP"
-    header = header.format(sortby_string)
+
+    # sort results and create a string to send
+    header = settings.message_query_result.format(
+        len(hits), query_string, sortby_string
+    )
+
     return await context.koduck.send_message(
         receive_message=context.message,
         embed=embed_formatters.format_query_results_embed(header, buckets, use_emojis),
     )
 
 
-async def query_with_emojis(context, *args, **kwargs):
+async def query_with_emojis(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
     kwargs["useemojis"] = True
     return await query(context, *args, **kwargs)
 
@@ -1089,7 +1098,9 @@ async def skill_with_pokemon(
     )
 
 
-async def skill_with_pokemon_with_emojis(context, *args, **kwargs):
+async def skill_with_pokemon_with_emojis(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
     kwargs["useemojis"] = True
     return await skill_with_pokemon(context, *args, **kwargs)
 

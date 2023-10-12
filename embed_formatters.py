@@ -1,5 +1,5 @@
 import datetime
-from typing import Sequence
+from typing import Any, Sequence
 
 import discord
 import pytz
@@ -65,7 +65,7 @@ def format_pokemon_embed(name, details):
 def format_skill_embed(skill: Skill) -> discord.Embed:
     stats = f"**Description**: {skill.description}\n"
     if skill.notes:
-        stats += f"**Notes**: {utils.emojify(skill.notes.replace("\\n", "\n"))}\n"
+        stats += f"**Notes**: {utils.emojify(skill.notes.replace('\\n', '\n'))}\n"
 
     stats += "**Activation Rates**: {}% / {}% / {}%\n".format(*skill.rates)
 
@@ -74,21 +74,29 @@ def format_skill_embed(skill: Skill) -> discord.Embed:
 
     if skill.bonus_effect == SkillBonus.ACTIVATION_RATE:
         for i, bonus in enumerate(skill.bonus, 2):
-            stats += "**SL{} Bonus**: +{:0.0f}% ({:0.0f}% / {:0.0f}% / {:0.0f}%)\n".format(
-                i,
-                skill.bonus[0],
-                min(100, skill.rates[0] + bonus) if skill.rates[0] else 0,
-                min(100, skill.rates[1] + bonus) if skill.rates[1] else 0,
-                min(100, skill.rates[2] + bonus) if skill.rates[2] else 0,
+            stats += (
+                "**SL{} Bonus**: +{:0.0f}% ({:0.0f}% / {:0.0f}% / {:0.0f}%)\n".format(
+                    i,
+                    skill.bonus[0],
+                    min(100, skill.rates[0] + bonus) if skill.rates[0] else 0,
+                    min(100, skill.rates[1] + bonus) if skill.rates[1] else 0,
+                    min(100, skill.rates[2] + bonus) if skill.rates[2] else 0,
+                )
             )
     elif skill.bonus_effect == SkillBonus.MULTIPLY_DAMAGE:
         for i, bonus in enumerate(skill.bonus, 2):
-            stats += f"**SL{i} Bonus**: x{bonus:0.2f} (x{skill.multiplier*bonus:0.2f})\n"
+            stats += (
+                f"**SL{i} Bonus**: x{bonus:0.2f} (x{skill.multiplier*bonus:0.2f})\n"
+            )
     elif skill.bonus_effect == SkillBonus.ADD_DAMAGE:
         for i, bonus in enumerate(skill.bonus, 2):
-            stats += f"**SL{i} Bonus**: +{bonus:0.2f} (x{skill.multiplier+bonus:0.2f})\n"
+            stats += (
+                f"**SL{i} Bonus**: +{bonus:0.2f} (x{skill.multiplier+bonus:0.2f})\n"
+            )
 
-    stats += "**SP Requirements**: {} => {} => {} => {} (Total: {})\n".format(*skill.sp_cost_partial)
+    stats += "**SP Requirements**: {} => {} => {} => {} (Total: {})\n".format(
+        *skill.sp_cost_partial
+    )
 
     the_color = constants.skill_colors[skill.type]
     embed = discord.Embed(title=skill.skill, color=the_color, description=stats)
@@ -515,36 +523,41 @@ def format_week_embed(query_week: int) -> discord.Embed:
     return embed
 
 
-def format_query_results_embed(header, buckets, use_emojis):
+def format_query_results_embed(
+    header: str, buckets: dict[Any, list[str]], use_emojis: bool
+) -> discord.Embed:
     embed = discord.Embed(description=header)
 
-    for bucket_key in buckets.keys():
+    for bucket_key, items in buckets.items():
         output_string = ""
-        for item in buckets[bucket_key]:
+        for item in items:
             if use_emojis:
                 try:
-                    # surround ss pokemon with parentheses (instead of boldifying it, because, y'know... can't boldify emojis)
+                    # surround ss pokemon with parentheses
+                    # (instead of boldifying it, because, y'know... can't boldify emojis)
+                    # TODO seems a complicated way to remove a trailing **
                     if item.find("**") != -1:
-                        output_string += "([{}])".format(item[:-2])
+                        output_string += f"([{item[:-2]}])"
                     else:
-                        output_string += "[{}]".format(item)
+                        output_string += f"[{item}]"
                 except KeyError:
                     output_string += "{} ".format(
                         "**" + item if item.find("**") != -1 else item
                     )
             else:
                 output_string += "{}, ".format(
-                    "**" + item if item.find("**") != -1 else item
+                    f"**{item}" if item.find("**") != -1 else item
                 )
-        if not use_emojis:
-            output_string = output_string[:-2]
-        else:
+        if use_emojis:
             output_string = utils.emojify(output_string)
+        else:
+            output_string = output_string[:-2]
+
         embed.add_field(name=bucket_key, value=output_string, inline=False)
 
     return embed
 
 
-def format_guides_embed(guides, page=0):
+def format_guides_embed(guides, page: int = 0) -> discord.Embed:
     embed = discord.Embed()
     return embed
