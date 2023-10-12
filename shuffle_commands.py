@@ -1282,18 +1282,22 @@ def pokemon_filter(
     return (hits, hits_bp, hits_max_ap, hits_type, hits_evo_speed)
 
 
-async def eb_rewards(context, *args, **kwargs):
-    if len(args) < 1:
+async def eb_rewards(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
+    assert context.koduck
+    if not args:
         query_pokemon = utils.current_eb_pokemon()
     else:
         # parse params
         query_pokemon = await pokemon_lookup(context, query=args[0])
-        if query_pokemon is None:
-            return "Unrecognized Pokemon"
+        if not query_pokemon:
+            print("Unrecognized Pokemon")
+            return
 
     # retrieve data
-    eb_rewards = yadon.ReadRowFromTable(settings.eb_rewards_table, query_pokemon)
-    if eb_rewards is None:
+    _eb_rewards = db.query_eb_rewards_pokemon(query_pokemon)
+    if not _eb_rewards:
         return await context.koduck.send_message(
             receive_message=context.message,
             content=settings.message_eb_rewards_no_result.format(query_pokemon),
@@ -1301,7 +1305,7 @@ async def eb_rewards(context, *args, **kwargs):
 
     return await context.koduck.send_message(
         receive_message=context.message,
-        embed=embed_formatters.format_eb_rewards_embed([query_pokemon] + eb_rewards),
+        embed=embed_formatters.format_eb_rewards_embed(_eb_rewards),
     )
 
 
@@ -1373,11 +1377,11 @@ async def eb_details(
     eb_starting_board = kwargs.get("startingboard", False)
 
     eb_stage = db.query_stage_by_index(leg.stage_index, StageType.EVENT)
-    eb_rewards = db.query_eb_rewards_pokemon(query_pokemon)
+    _eb_rewards = db.query_eb_rewards_pokemon(query_pokemon)
     eb_reward = ""
-    for entry in eb_rewards:
+    for entry in _eb_rewards:
         if entry.level == query_level:
-            eb_reward = f"[{entry.reward}] x{entry.amount}"
+            eb_reward = f"[{entry.reward}] x{entry.amount} {entry.alternative}"
             break
 
     if eb_starting_board:

@@ -128,3 +128,4 @@ message_exp_result_2 = (
 )
 message_type_no_param = "I need a Type to look up!"
 message_type_invalid_param = "That's not a valid type"
+message_eb_rewards_no_result = "Could not find an Escalation Battles with the Pokemon '{}'"

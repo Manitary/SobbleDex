@@ -8,6 +8,7 @@ import constants
 import db
 import utils
 from models import (
+    EBReward,
     EBStretch,
     Event,
     EventType,
@@ -385,20 +386,14 @@ def format_event_embed(event: Event) -> discord.Embed:
     return embed
 
 
-def format_eb_rewards_embed(values):
-    pokemon = values[0]
-    rewards = values[1:]
-
-    stats = ""
-    for entry in rewards:
-        level, reward_item, reward_amount = entry.split("/")
-        stats += "Level {} reward: {} x{}\n".format(
-            level, utils.emojify("[{}]".format(reward_item)), reward_amount
-        )
-    stats = stats[:-1]
-
+def format_eb_rewards_embed(rewards: Sequence[EBReward]) -> discord.Embed:
+    pokemon = rewards[0].pokemon
+    stats = "\n".join(
+        f"Level {r.level} reward: {utils.emojify(f'[{r.reward}]')} x{r.amount} {r.alternative}"
+        for r in rewards
+    )
     embed = discord.Embed(
-        title="{} Escalation Battles Rewards".format(pokemon),
+        title=f"{pokemon} Escalation Battles Rewards",
         color=0x4E7E4E,
         description=stats,
     )
