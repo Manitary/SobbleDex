@@ -6,15 +6,16 @@ import pytz
 
 import constants
 import db
-import settings
 import utils
-import yadon
 from models import (
     EBStretch,
     Event,
     EventType,
     PuzzleStage,
     RepeatType,
+    Skill,
+    SkillBonus,
+    SkillType,
     Stage,
     StageType,
 )
@@ -61,99 +62,36 @@ def format_pokemon_embed(name, details):
     return embed
 
 
-def format_skill_embed(name, details):
-    def convert_to_float(f):
-        try:
-            return float(f)
-        except ValueError:
-            return 0
+def format_skill_embed(skill: Skill) -> discord.Embed:
+    stats = f"**Description**: {skill.description}\n"
+    if skill.notes:
+        stats += f"**Notes**: {utils.emojify(skill.notes.replace("\\n", "\n"))}\n"
 
-    bonus1 = convert_to_float(details["Bonus1"])
-    bonus2 = convert_to_float(details["Bonus2"])
-    bonus3 = convert_to_float(details["Bonus3"])
-    bonus4 = convert_to_float(details["Bonus4"])
-    rate1 = int(details["Rate1"]) if details["Rate1"].isdigit() else 0
-    rate2 = int(details["Rate2"]) if details["Rate2"].isdigit() else 0
-    rate3 = int(details["Rate3"]) if details["Rate3"].isdigit() else 0
-    multiplier = convert_to_float(details["Multiplier"])
-    sp1 = int(details["SP1"]) if details["SP1"].isdigit() else 0
-    sp2 = int(details["SP2"]) if details["SP2"].isdigit() else 0
-    sp3 = int(details["SP3"]) if details["SP3"].isdigit() else 0
-    sp4 = int(details["SP4"]) if details["SP4"].isdigit() else 0
-    notes = yadon.ReadRowFromTable(settings.skill_notes_table, name)
+    stats += "**Activation Rates**: {}% / {}% / {}%\n".format(*skill.rates)
 
-    stats = "**Description**: {}\n".format(details["Description"])
-    if notes is not None:
-        notes = notes[0].replace("\\n", "\n")
-        stats += "**Notes**: {}\n".format(utils.emojify(notes))
-    stats += "**Activation Rates**: {}% / {}% / {}%\n".format(rate1, rate2, rate3)
-    if details["Type"] != "Mega Boost":
-        stats += "**Damage Multiplier**: x{:0.2f}\n".format(multiplier)
-    if details["Bonus Effect"] == "Activation Rate":
-        stats += "**SL{} Bonus**: +{:0.0f}% ({:0.0f}% / {:0.0f}% / {:0.0f}%)\n".format(
-            2,
-            bonus1,
-            min(100, rate1 + bonus1) if rate1 != 0 else 0,
-            min(100, rate2 + bonus1) if rate2 != 0 else 0,
-            min(100, rate3 + bonus1) if rate3 != 0 else 0,
-        )
-        stats += "**SL{} Bonus**: +{:0.0f}% ({:0.0f}% / {:0.0f}% / {:0.0f}%)\n".format(
-            3,
-            bonus2,
-            min(100, rate1 + bonus2) if rate1 != 0 else 0,
-            min(100, rate2 + bonus2) if rate2 != 0 else 0,
-            min(100, rate3 + bonus2) if rate3 != 0 else 0,
-        )
-        stats += "**SL{} Bonus**: +{:0.0f}% ({:0.0f}% / {:0.0f}% / {:0.0f}%)\n".format(
-            4,
-            bonus3,
-            min(100, rate1 + bonus3) if rate1 != 0 else 0,
-            min(100, rate2 + bonus3) if rate2 != 0 else 0,
-            min(100, rate3 + bonus3) if rate3 != 0 else 0,
-        )
-        stats += "**SL{} Bonus**: +{:0.0f}% ({:0.0f}% / {:0.0f}% / {:0.0f}%)\n".format(
-            5,
-            bonus4,
-            min(100, rate1 + bonus4) if rate1 != 0 else 0,
-            min(100, rate2 + bonus4) if rate2 != 0 else 0,
-            min(100, rate3 + bonus4) if rate3 != 0 else 0,
-        )
-    elif details["Bonus Effect"] == "Multiply Damage":
-        stats += "**SL{} Bonus**: x{:0.2f} (x{:0.2f})\n".format(
-            2, bonus1, multiplier * bonus1
-        )
-        stats += "**SL{} Bonus**: x{:0.2f} (x{:0.2f})\n".format(
-            3, bonus2, multiplier * bonus2
-        )
-        stats += "**SL{} Bonus**: x{:0.2f} (x{:0.2f})\n".format(
-            4, bonus3, multiplier * bonus3
-        )
-        stats += "**SL{} Bonus**: x{:0.2f} (x{:0.2f})\n".format(
-            5, bonus4, multiplier * bonus4
-        )
-    elif details["Bonus Effect"] == "Add Damage":
-        stats += "**SL{} Bonus**: +{:0.2f} (x{:0.2f})\n".format(
-            2, bonus1, multiplier + bonus1
-        )
-        stats += "**SL{} Bonus**: +{:0.2f} (x{:0.2f})\n".format(
-            3, bonus2, multiplier + bonus2
-        )
-        stats += "**SL{} Bonus**: +{:0.2f} (x{:0.2f})\n".format(
-            4, bonus3, multiplier + bonus3
-        )
-        stats += "**SL{} Bonus**: +{:0.2f} (x{:0.2f})\n".format(
-            5, bonus4, multiplier + bonus4
-        )
-    stats += "**SP Requirements**: {} => {} => {} => {} (Total: {})\n".format(
-        sp1, sp2 - sp1, sp3 - sp2, sp4 - sp3, sp4
-    )
+    if skill.type != SkillType.MEGA_BOOST:
+        stats += f"**Damage Multiplier**: x{skill.multiplier:0.2f}\n"
 
-    the_color = (
-        constants.skill_colors[details["Type"]]
-        if details["Type"] in constants.skill_colors.keys()
-        else discord.Embed.Empty
-    )
-    embed = discord.Embed(title=name, color=the_color, description=stats)
+    if skill.bonus_effect == SkillBonus.ACTIVATION_RATE:
+        for i, bonus in enumerate(skill.bonus, 2):
+            stats += "**SL{} Bonus**: +{:0.0f}% ({:0.0f}% / {:0.0f}% / {:0.0f}%)\n".format(
+                i,
+                skill.bonus[0],
+                min(100, skill.rates[0] + bonus) if skill.rates[0] else 0,
+                min(100, skill.rates[1] + bonus) if skill.rates[1] else 0,
+                min(100, skill.rates[2] + bonus) if skill.rates[2] else 0,
+            )
+    elif skill.bonus_effect == SkillBonus.MULTIPLY_DAMAGE:
+        for i, bonus in enumerate(skill.bonus, 2):
+            stats += f"**SL{i} Bonus**: x{bonus:0.2f} (x{skill.multiplier*bonus:0.2f})\n"
+    elif skill.bonus_effect == SkillBonus.ADD_DAMAGE:
+        for i, bonus in enumerate(skill.bonus, 2):
+            stats += f"**SL{i} Bonus**: +{bonus:0.2f} (x{skill.multiplier+bonus:0.2f})\n"
+
+    stats += "**SP Requirements**: {} => {} => {} => {} (Total: {})\n".format(*skill.sp_cost_partial)
+
+    the_color = constants.skill_colors[skill.type]
+    embed = discord.Embed(title=skill.skill, color=the_color, description=stats)
     return embed
 
 

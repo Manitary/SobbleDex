@@ -171,22 +171,24 @@ async def pokemon(context, *args, **kwargs):
     )
 
 
-async def skill(context, *args, **kwargs):
-    if len(args) < 1:
+async def skill(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
+    assert context.koduck
+    if not args:
         return await context.koduck.send_message(
             receive_message=context.message, content=settings.message_skill_no_param
         )
 
     # parse params
     query_skill = await pokemon_lookup(context, query=args[0], skill_lookup=True)
-    if query_skill is None:
-        return "Unrecognized Skill"
+    if not query_skill:
+        print("Unrecognized Skill")
+        return
 
     # retrieve data
-    values = yadon.ReadRowFromTable(
-        settings.skills_table, query_skill, named_columns=True
-    )
-    if values is None:
+    skill_ = db.query_skill(query_skill)
+    if not skill_:
         return await context.koduck.send_message(
             receive_message=context.message,
             content=settings.message_skill_no_result.format(query_skill),
@@ -194,7 +196,7 @@ async def skill(context, *args, **kwargs):
 
     return await context.koduck.send_message(
         receive_message=context.message,
-        embed=embed_formatters.format_skill_embed(query_skill, values),
+        embed=embed_formatters.format_skill_embed(skill_),
     )
 
 

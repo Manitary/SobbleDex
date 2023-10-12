@@ -13,7 +13,7 @@ class MyStrEnum(enum.StrEnum):
     @classmethod
     def _missing_(cls, value: object) -> Self:
         if isinstance(value, str):
-            value = value.upper()
+            value = value.upper().replace(" ", "_")
             if value in dir(cls):
                 return cls[value]
         raise ValueError(f"Invalid event type: {value}")
@@ -78,6 +78,18 @@ class Param(enum.IntEnum):
     IGNORE = 0
     INCLUDE = 1
     EXCLUDE = 2
+
+
+class SkillType(MyStrEnum):
+    OFFENSIVE = "Offensive"
+    DEFENSIVE = "Defensive"
+    MEGA_BOOST = "Mega Boost"
+
+
+class SkillBonus(MyStrEnum):
+    MULTIPLY_DAMAGE = "Multiply Damage"
+    ACTIVATION_RATE = "Activation Rate"
+    ADD_DAMAGE = "Add Damage"
 
 
 @dataclass
@@ -455,3 +467,45 @@ class Reminder:
     @property
     def pokemon(self) -> list[str]:
         return self._pokemon.split("/")
+
+
+class Skill:
+    def __init__(
+        self,
+        id: int,
+        skill: str,
+        description: str,
+        rate1: int,
+        rate2: int,
+        rate3: int,
+        type: str,
+        multiplier: float,
+        bonus_effect: str,
+        bonus1: float,
+        bonus2: float,
+        bonus3: float,
+        bonus4: float,
+        sp1: int,
+        sp2: int,
+        sp3: int,
+        sp4: int,
+        notes: str,
+    ) -> None:
+        self.id = id
+        self.skill = skill
+        self.description = description
+        self.rates = (rate1, rate2, rate3)
+        self.type = SkillType(type)
+        self.multiplier = multiplier
+        self.bonus_effect = SkillBonus(bonus_effect)
+        self.bonus = (bonus1, bonus2, bonus3, bonus4)
+        self.sp_cost = (sp1, sp2, sp3, sp4)
+        self.notes = notes or ""
+
+    @property
+    def sp_cost_partial(self) -> tuple[int, ...]:
+        return (
+            (self.sp_cost[0],)
+            + tuple(map(lambda x: x[0] - x[1], zip(self.sp_cost[1:], self.sp_cost)))
+            + (self.sp_cost[-1],)
+        )

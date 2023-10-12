@@ -103,3 +103,6 @@ types_table = "shuffle_tables/types"
 message_week_invalid_param = "There are {} weeks of events in the event rotation, so I need a number from 1 to {}"
 num_weeks = 24
 sm_rewards_table = "shuffle_tables/sm_rewards"
+message_skill_no_param = "I need a Skill name to look up!"
+message_skill_no_result = "Could not find a Skill entry with the name '{}'"
+skill_notes_table = "shuffle_tables/skill_notes"

@@ -14,6 +14,7 @@ from models import (
     Reminder,
     RotationEvent,
     Setting,
+    Skill,
     SMReward,
     Stage,
     StageType,
@@ -384,6 +385,21 @@ def get_reminders() -> Iterator[Reminder]:
     )
     for reminder in q.fetchall():
         yield Reminder(**reminder)
+
+
+def query_skill(skill: str) -> Skill | None:
+    q = shuffle_connection.execute(
+        """
+        SELECT * FROM skills
+        LEFT JOIN skill_notes
+        ON skills.name = skill_notes.name
+        WHERE skill = :skill
+        """,
+        {"skill": skill},
+    ).fetchone()
+    if not q:
+        return None
+    return Skill(**q)
 
 
 if __name__ == "__main__":
