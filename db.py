@@ -13,6 +13,7 @@ from models import (
     PokemonType,
     RotationEvent,
     Setting,
+    SMReward,
     Stage,
     StageType,
 )
@@ -357,6 +358,19 @@ def get_all_pokemon() -> Iterator[Pokemon]:
     )
     for pokemon in q.fetchall():
         yield Pokemon(**pokemon)
+
+
+def get_sm_rewards() -> list[SMReward]:
+    q = shuffle_connection.execute(
+        """
+        SELECT
+        level, first_reward_type AS reward, first_reward_amount AS amount,
+        repeat_reward_type AS reward_repeat, repeat_reward_amount AS amount_repeat
+        FROM sm_rewards
+        ORDER BY level
+        """
+    )
+    return [SMReward(**reward) for reward in q.fetchall()]
 
 
 if __name__ == "__main__":

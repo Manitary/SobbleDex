@@ -102,3 +102,4 @@ message_event_no_result = "Could not find an event with the Pokemon '{}'"
 types_table = "shuffle_tables/types"
 message_week_invalid_param = "There are {} weeks of events in the event rotation, so I need a number from 1 to {}"
 num_weeks = 24
+sm_rewards_table = "shuffle_tables/sm_rewards"

@@ -1445,15 +1445,18 @@ async def next_week(context, *args, **kwargs):
     return await week(context, *args, **kwargs)
 
 
-async def sm_rewards(context, *args, **kwargs):
-    table = yadon.ReadTable(settings.sm_rewards_table)
-    level = ""
-    first_clear = ""
-    repeat_clear = ""
-    for k, v in table.items():
-        level += "{}\n".format(k)
-        first_clear += utils.emojify("[{}] x{}\n".format(v[0], v[1]))
-        repeat_clear += utils.emojify("[{}] x{}\n".format(v[2], v[3]))
+async def sm_rewards(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
+    assert context.koduck
+    reward_list = db.get_sm_rewards()
+    level = "\n".join(str(reward.level) for reward in reward_list)
+    first_clear = "\n".join(
+        utils.emojify(f"[{r.reward}] x{r.amount}") for r in reward_list
+    )
+    repeat_clear = "\n".join(
+        utils.emojify(f"[{r.reward_repeat}] x{r.amount_repeat}") for r in reward_list
+    )
 
     embed = discord.Embed(title="Survival Mode Rewards", color=0xFF0000)
     embed.add_field(name="Level", value=level, inline=True)

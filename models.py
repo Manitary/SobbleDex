@@ -431,3 +431,12 @@ class Event:
         next_start = self.date_start_datetime + num_cycles * timedelta(168)
         next_end = self.date_end_datetime + num_cycles * timedelta(168)
         return next_start, next_end
+
+
+@dataclass
+class SMReward:
+    level: int
+    reward: str
+    amount: int
+    reward_repeat: str
+    amount_repeat: int
