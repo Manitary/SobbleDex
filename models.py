@@ -460,6 +460,20 @@ class Reminder:
         self.weeks = list(map(int, weeks.split(", ")))
         self.pokemon = pokemon.split(", ")
 
+    def remove_week(self, week: int) -> None:
+        self.weeks.remove(week)
+
+    def remove_pokemon(self, pokemon: str) -> None:
+        self.pokemon.remove(pokemon)
+
+    @property
+    def weeks_str(self) -> str:
+        return ", ".join(map(str, self.weeks))
+
+    @property
+    def pokemon_str(self) -> str:
+        return ", ".join(self.pokemon)
+
 
 class Skill:
     def __init__(

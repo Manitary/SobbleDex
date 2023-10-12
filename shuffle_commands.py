@@ -1821,65 +1821,62 @@ async def remind_me(
     )
 
 
-async def unremind_me(context, *args, **kwargs):
-    if len(args) < 1:
+async def unremind_me(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
+    assert context.koduck
+    if not args:
         return await context.koduck.send_message(
             receive_message=context.message,
             content=settings.message_unremind_me_no_param,
         )
-
-    user_reminders = yadon.ReadRowFromTable(
-        settings.reminders_table, context.message.author.id
-    )
+    assert context.message
+    assert context.message.author
+    user_id = context.message.author.id
+    user_reminders = db.query_reminder(user_id)
     if not user_reminders:
-        user_reminders = ["", ""]
+        user_reminders = Reminder(user_id, "", "")
 
     if args[0].isdigit():
         try:
             query_week = int(args[0])
-            if query_week < 1 or query_week > settings.num_weeks:
-                raise ValueError()
-        except ValueError:
+            assert 1 <= query_week <= settings.num_weeks
+        except (ValueError, AssertionError):
             return await context.koduck.send_message(
                 receive_message=context.message,
                 content=settings.message_week_invalid_param.format(
                     settings.num_weeks, settings.num_weeks
                 ),
             )
-        if str(query_week) not in user_reminders[0].split("/"):
+        if query_week not in user_reminders.weeks:
             return await context.koduck.send_message(
                 receive_message=context.message,
                 content=settings.message_unremind_me_week_non_exists,
             )
-        reminder_weeks = user_reminders[0].split("/") if user_reminders[0] else []
-        reminder_weeks.remove(str(query_week))
-        user_reminders[0] = "/".join(reminder_weeks)
-        yadon.WriteRowToTable(
-            settings.reminders_table, context.message.author.id, user_reminders
-        )
+
+        user_reminders.remove_week(query_week)  #
+        db.update_reminder(user_reminders)
         return await context.koduck.send_message(
             receive_message=context.message,
             content=settings.message_unremind_me_week_success.format(query_week),
         )
-    else:
-        query_pokemon = await pokemon_lookup(context, query=args[0])
-        if query_pokemon is None:
-            return "Unrecognized Pokemon"
-        if query_pokemon not in user_reminders[1].split("/"):
-            return await context.koduck.send_message(
-                receive_message=context.message,
-                content=settings.message_unremind_me_pokemon_non_exists,
-            )
-        reminder_pokemon = user_reminders[1].split("/") if user_reminders[1] else []
-        reminder_pokemon.remove(query_pokemon)
-        user_reminders[1] = "/".join(reminder_pokemon)
-        yadon.WriteRowToTable(
-            settings.reminders_table, context.message.author.id, user_reminders
-        )
+    query_pokemon = await pokemon_lookup(context, query=args[0])
+    if not query_pokemon:
+        print("Unrecognized Pokemon")
+        return
+
+    if query_pokemon not in user_reminders.pokemon:
         return await context.koduck.send_message(
             receive_message=context.message,
-            content=settings.message_unremind_me_pokemon_success.format(query_pokemon),
+            content=settings.message_unremind_me_pokemon_non_exists,
         )
+
+    user_reminders.remove_pokemon(query_pokemon)
+    db.update_reminder(user_reminders)
+    return await context.koduck.send_message(
+        receive_message=context.message,
+        content=settings.message_unremind_me_pokemon_success.format(query_pokemon),
+    )
 
 
 current_day = -1

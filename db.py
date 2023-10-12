@@ -491,5 +491,21 @@ def add_reminder_pokemon(user_id: int, pokemon: str) -> None:
     shuffle_connection.commit()
 
 
+def update_reminder(reminder: Reminder) -> None:
+    shuffle_connection.execute(
+        """
+        UPDATE reminders
+        SET weeks = :weeks, pokemon = :pokemon
+        WHERE user_id = :user_id
+        """,
+        {
+            "user_id": reminder.user_id,
+            "weeks": reminder.weeks_str,
+            "pokemon": reminder.pokemon_str,
+        },
+    )
+    shuffle_connection.commit()
+
+
 if __name__ == "__main__":
     ...

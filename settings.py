@@ -139,4 +139,15 @@ message_remind_me_pokemon_success = (
 )
 message_remind_me_pokemon_exists = "You already signed up for this Pokémon"
 message_remind_me_week_exists = "You already signed up for this rotation week"
-message_remind_me_week_success = "Okay, you’re signed up to be reminded when rotation week {} starts"
+message_remind_me_week_success = (
+    "Okay, you’re signed up to be reminded when rotation week {} starts"
+)
+message_unremind_me_no_param = "I need a week number or a Pokémon name"
+message_unremind_me_week_non_exists = "You aren’t signed up for this rotation week"
+message_unremind_me_week_success = (
+    "Okay, you’re no longer signed up to be reminded when rotation week {} starts"
+)
+message_unremind_me_pokemon_non_exists = "You aren’t signed up for this Pokémon"
+message_unremind_me_pokemon_success = (
+    "Okay, you’re no longer signed up to be reminded when {} appears in an event"
+)
