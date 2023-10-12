@@ -1,9 +1,12 @@
 import enum
+import re
 from dataclasses import dataclass
 from datetime import datetime, timedelta
 from typing import Callable, Self
 
 import pytz
+
+RE_MOVES_EXP = re.compile(r"(\d+) \(Mobile: (\d+)\)")
 
 
 class MyStrEnum(enum.StrEnum):
@@ -36,6 +39,39 @@ class RepeatType(MyStrEnum):
     YEARLY = "Yearly"
     WEEKLY = "Weekly"
     ROTATION = "Rotation"
+
+
+class StageType(MyStrEnum):
+    MAIN = "Main"
+    EXPERT = "Expert"
+    EVENT = "Event"
+    ALL = "all"
+
+
+class PokemonType(MyStrEnum):
+    NORMAL = "Normal"
+    FIGHTING = "Fighting"
+    FLYING = "Flying"
+    POISON = "Poison"
+    GROUND = "Ground"
+    ROCK = "Rock"
+    BUG = "Bug"
+    GHOST = "Ghost"
+    STEEL = "Steel"
+    FIRE = "Fire"
+    WATER = "Water"
+    GRASS = "Grass"
+    ELECTRIC = "Electric"
+    PSYCHIC = "Psychic"
+    ICE = "Ice"
+    DRAGON = "Dragon"
+    DARK = "Dark"
+    FAIRY = "Fairy"
+
+
+class PuzzleStage(MyStrEnum):
+    PUZZLE = "Puzzle"
+    NORMAL = "Normal"
 
 
 @dataclass
@@ -193,3 +229,140 @@ class EventStageRotation:
             f" x{self.drops[2].amount}" if self.drops[2].amount != 1 else "",
             self.drops[2].rate,
         )
+
+
+class Stage:
+    def __init__(
+        self,
+        id: int,
+        pokemon: str,
+        hp: int,
+        hp_mobile: int,
+        moves: str,
+        seconds: int,
+        exp: str,
+        base_catch: int,
+        bonus_catch: int,
+        base_catch_mobile: int,
+        bonus_catch_mobile: int,
+        default_supports: str,
+        s_rank: int,
+        a_rank: int,
+        b_rank: int,
+        num_s_ranks_to_unlock: int,
+        is_puzzle_stage: str,
+        extra_hp: int,
+        layout_index: int,
+        cost_type: str,
+        attempt_cost: int,
+        drop_1_item: str,
+        drop_2_item: str,
+        drop_3_item: str,
+        drop_1_amount: int,
+        drop_2_amount: int,
+        drop_3_amount: int,
+        drop_1_rate: float,
+        drop_2_rate: float,
+        drop_3_rate: float,
+        items_available: str,
+        rewards: str,
+        rewards_UX: str,
+        cd1: str,
+        cd2: str,
+        cd3: str,
+        stage_type: StageType,
+    ) -> None:
+        self.id = id
+        self.pokemon = pokemon
+        self.hp = hp
+        self.hp_mobile = hp_mobile
+        try:
+            self.moves = self.moves_mobile = int(moves)
+        except ValueError as e:
+            match = RE_MOVES_EXP.match(moves)
+            if not match:
+                raise e
+            self.moves = int(match.group(1))
+            self.moves_mobile = int(match.group(2))
+        self.seconds = seconds
+        try:
+            self.exp = self.exp_mobile = int(exp)
+        except ValueError as e:
+            match = RE_MOVES_EXP.match(exp)
+            if not match:
+                raise e
+            self.exp = int(match.group(1))
+            self.exp_mobile = int(match.group(2))
+        self.base_catch = base_catch
+        self.bonus_catch = bonus_catch
+        self.base_catch_mobile = base_catch_mobile
+        self.bonus_catch_mobile = bonus_catch_mobile
+        self.default_supports = default_supports.split("/")
+        self.s_rank = s_rank
+        self.a_rank = a_rank
+        self.b_rank = b_rank
+        self.s_unlock = num_s_ranks_to_unlock
+        self.is_puzzle_stage = PuzzleStage(is_puzzle_stage)
+        self.extra_hp = extra_hp
+        self.layout_index = layout_index
+        self.cost = StageCost(CostType(cost_type), attempt_cost)
+        self.drops = [
+            Drop(drop_1_item, drop_1_amount, drop_1_rate),
+            Drop(drop_2_item, drop_2_amount, drop_2_rate),
+            Drop(drop_3_item, drop_3_amount, drop_3_rate),
+        ]
+        self.items = items_available.split("/")
+        self.rewards = rewards
+        self.rewards_ux = rewards_UX
+        self.disruptions = [cd1, cd2, cd3]
+        self.stage_type = stage_type
+
+    @property
+    def string_id(self) -> str:
+        if self.stage_type == StageType.MAIN:
+            return str(self.id)
+        if self.stage_type == StageType.EXPERT:
+            return f"ex{self.id}"
+        if self.stage_type == StageType.EVENT:
+            return f"s{self.id}"
+        raise ValueError("Cannot generate stage id")
+
+
+@dataclass
+class Pokemon:
+    id: str
+    pokemon: str
+    dex: int
+    type: PokemonType
+    bp: int
+    rml: int
+    max_ap: int
+    skill: str
+    ss: str
+    msu: int = 0
+    mega_power: int = 99
+
+    @property
+    def ss_skills(self) -> list[str]:
+        return self.ss.split("/")
+
+    @property
+    def all_skills(self) -> list[str]:
+        return [self.skill] + self.ss_skills
+
+
+@dataclass
+class EBStretch:
+    pokemon: str
+    start_level: int
+    end_level: int
+    stage_index: int
+
+
+@dataclass
+class EBReward:
+    pokemon: str
+    level: int
+    reward: str
+    amount: int
+    alternative: str

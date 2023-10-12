@@ -4,14 +4,24 @@ from typing import Any, Iterator
 from models import (
     Command,
     Drop,
+    EBReward,
+    EBStretch,
     EventPokemon,
     EventStageRotation,
+    PokemonType,
     RotationEvent,
     Setting,
+    Stage,
+    StageType,
 )
 
 DB_BOT_PATH = "bot.sqlite"
 DB_SHUFFLE_PATH = "shuffle.sqlite"
+STAGE_TYPE_TABLE = {
+    StageType.MAIN: "main_stages",
+    StageType.EXPERT: "expert_stages",
+    StageType.EVENT: "event_stages",
+}
 
 # TODO Initialise these connections in main where appropriate instead of using global variables
 
@@ -201,6 +211,110 @@ def get_all_event_pokemon() -> Iterator[EventPokemon]:
     )
     for p in q.fetchall():
         yield EventPokemon(**p)
+
+
+def query_stage_by_index(index: int, stage_type: StageType) -> Stage:
+    q = shuffle_connection.execute(
+        f"""
+        SELECT * FROM {STAGE_TYPE_TABLE[stage_type]}
+        WHERE id = :id
+        """,
+        {"id": index},
+    ).fetchone()
+    if not q:
+        raise ValueError(f"Invalid stage index: {index}")
+    return Stage(stage_type=stage_type, **q)
+
+
+def query_stage_by_pokemon(pokemon: str, stage_type: StageType) -> Iterator[Stage]:
+    q = shuffle_connection.execute(
+        f"""
+        SELECT * FROM {STAGE_TYPE_TABLE[stage_type]}
+        WHERE pokemon = :pokemon
+        COLLATE NOCASE
+        """,
+        {"pokemon": pokemon},
+    )
+    for stage in q.fetchall():
+        yield Stage(stage_type=stage_type, **stage)
+
+
+def get_all_stages(stage_type: StageType) -> Iterator[Stage]:
+    q = shuffle_connection.execute(f"SELECT * FROM {STAGE_TYPE_TABLE[stage_type]}")
+    for stage in q.fetchall():
+        yield Stage(stage_type=stage_type, **stage)
+
+
+def get_pokemon_names() -> set[str]:
+    q = shuffle_connection.execute(
+        """
+        SELECT pokemon
+        FROM pokemon
+        """
+    ).fetchall()
+    return {x["pokemon"] for x in q}
+
+
+def get_skill_names() -> set[str]:
+    q = shuffle_connection.execute(
+        """
+        SELECT skill
+        FROM skills
+        """
+    ).fetchall()
+    return {x["skill"] for x in q}
+
+
+def query_eb_pokemon(pokemon: str) -> list[EBStretch]:
+    q = shuffle_connection.execute(
+        """
+        SELECT pokemon, start_level, end_level, stage_index
+        FROM eb_details
+        WHERE pokemon = :pokemon
+        ORDER BY id
+        """,
+        {"pokemon": pokemon},
+    )
+    return [EBStretch(**leg) for leg in q.fetchall()]
+
+
+def query_pokemon_type(pokemon: str) -> PokemonType:
+    q = shuffle_connection.execute(
+        """
+        SELECT type
+        FROM pokemon
+        WHERE pokemon = :pokemon
+        """,
+        {"pokemon": pokemon},
+    )
+    return PokemonType(q.fetchone()["type"])
+
+
+def query_stage_notes(stage_id: str) -> str:
+    q = shuffle_connection.execute(
+        """
+        SELECT notes
+        FROM stage_notes
+        WHERE stage_id = :stage_id
+        """,
+        {"stage_id": stage_id},
+    ).fetchone()
+    if not q:
+        return ""
+    return q["notes"]
+
+
+def query_eb_rewards_pokemon(pokemon: str) -> list[EBReward]:
+    q = shuffle_connection.execute(
+        """
+        SELECT pokemon, level, reward, amount, alternative
+        FROM eb_rewards
+        WHERE pokemon = :pokemon
+        ORDER BY id
+        """,
+        {"pokemon": pokemon},
+    )
+    return [EBReward(**stage) for stage in q.fetchall()]
 
 
 if __name__ == "__main__":

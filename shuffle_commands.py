@@ -16,6 +16,7 @@ import settings
 import utils
 import yadon
 from koduck import KoduckContext
+from models import Stage, StageType
 
 RE_PING = re.compile(r"<@!?[0-9]*>")
 
@@ -374,8 +375,11 @@ async def type(context, *args, **kwargs):
         )
 
 
-async def stage(context, *args, **kwargs):
-    if len(args) < 1:
+async def stage(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
+    assert context.koduck
+    if not args:
         return await context.koduck.send_message(
             receive_message=context.message, content=settings.message_stage_no_param
         )
@@ -384,31 +388,27 @@ async def stage(context, *args, **kwargs):
     if len(args) == 1:
         temp = args[0].split(" ")
         if len(temp) > 1 and temp[-1].isdigit():
-            args = ["".join(temp[:-1]), temp[-1]]
+            args = ("".join(temp[:-1]), temp[-1])
 
     result_number = 0
-    try:
-        shorthand = kwargs["shorthand"]
-    except KeyError:
-        shorthand = False
-    try:
-        starting_board = kwargs["startingboard"]
-    except KeyError:
-        starting_board = False
+    shorthand = kwargs.get("shorthand", False)
+    stage_starting_board = kwargs.get("startingboard", False)
 
     # parse params
+    stage_index = 0
     query_pokemon = args[0]
     if query_pokemon.isdigit():
-        stage_type = "main"
+        stage_type = StageType.MAIN
         stage_index = int(query_pokemon)
     elif query_pokemon.lower().startswith("ex") and query_pokemon[2:].isdigit():
-        stage_type = "expert"
+        stage_type = StageType.EXPERT
         stage_index = int(query_pokemon[2:])
     elif query_pokemon.lower().startswith("s") and query_pokemon[1:].isdigit():
-        stage_type = "event"
+        stage_type = StageType.EVENT
         stage_index = int(query_pokemon[1:])
     else:
-        stage_type = "all"
+        stage_type = StageType.ALL
+
     if len(args) >= 2:
         try:
             result_number = int(args[1])
@@ -423,21 +423,24 @@ async def stage(context, *args, **kwargs):
                 content=settings.message_stage_invalid_param,
             )
 
-    results = []
+    results: list[Stage] = []
     # retrieve data
-    if stage_type == "main":
-        values = yadon.ReadRowFromTable(settings.main_stages_table, str(stage_index))
-        if values is None:
+    if stage_type == StageType.MAIN:
+        try:
+            candidate_stage = db.query_stage_by_index(stage_index, stage_type)
+            results.append(candidate_stage)
+        except ValueError:
             return await context.koduck.send_message(
                 receive_message=context.message,
                 content=settings.message_stage_main_invalid_param.format(
                     settings.main_stages_min_index, settings.main_stages_max_index
                 ),
             )
-        results.append([str(stage_index)] + values)
-    elif stage_type == "expert":
-        values = yadon.ReadRowFromTable(settings.expert_stages_table, str(stage_index))
-        if values is None:
+    elif stage_type == StageType.EXPERT:
+        try:
+            candidate_stage = db.query_stage_by_index(stage_index, stage_type)
+            results.append(candidate_stage)
+        except ValueError:
             return await context.koduck.send_message(
                 receive_message=context.message,
                 content=settings.message_stage_expert_invalid_param.format(
@@ -445,118 +448,94 @@ async def stage(context, *args, **kwargs):
                     settings.expert_stages_max_index + 1,
                 ),
             )
-        results.append(["ex{}".format(stage_index)] + values)
-    elif stage_type == "event":
-        values = yadon.ReadRowFromTable(settings.event_stages_table, str(stage_index))
-        if values is None:
+    elif stage_type == StageType.EVENT:
+        try:
+            candidate_stage = db.query_stage_by_index(stage_index, stage_type)
+            results.append(candidate_stage)
+        except ValueError:
             return await context.koduck.send_message(
                 receive_message=context.message,
                 content=settings.message_stage_event_invalid_param.format(
                     settings.event_stages_min_index, settings.event_stages_max_index
                 ),
             )
-        results.append(["s{}".format(stage_index)] + values)
-    elif stage_type == "all":
+    elif stage_type == StageType.ALL:
         query_pokemon = await pokemon_lookup(context, query=query_pokemon)
-        if query_pokemon is None:
-            return "Unrecognized Pokemon"
+        if not query_pokemon:
+            print("Unrecognized Pokemon")
+            return
 
         # redirect to EB if queried pokemon is in EB table
-        eb_details_2 = yadon.ReadRowFromTable(settings.eb_details_table, query_pokemon)
-        if eb_details_2 is not None:
+        if db.query_eb_pokemon(query_pokemon):
             return await eb_details(context, *[query_pokemon], **kwargs)
+        results = (
+            list(db.query_stage_by_pokemon(query_pokemon, StageType.MAIN))
+            + list(db.query_stage_by_pokemon(query_pokemon, StageType.EXPERT))
+            + list(db.query_stage_by_pokemon(query_pokemon, StageType.EVENT))
+        )
 
-        main_stages = [
-            (v[0], [str(k)] + v)
-            for k, v in yadon.ReadTable(settings.main_stages_table).items()
-        ]
-        expert_stages = [
-            (v[0], ["ex{}".format(k)] + v)
-            for k, v in yadon.ReadTable(settings.expert_stages_table).items()
-        ]
-        event_stages = [
-            (v[0], ["s{}".format(k)] + v)
-            for k, v in yadon.ReadTable(settings.event_stages_table).items()
-        ]
-        all_stages = main_stages + expert_stages + event_stages
-        results = []
-        for pokemon, values in all_stages:
-            if pokemon.lower() == query_pokemon.lower():
-                results.append(values)
-
-    if len(results) == 0:
-        no_result_message = await context.koduck.send_message(
+    if not results:
+        return await context.koduck.send_message(
             receive_message=context.message,
             content=settings.message_stage_no_result.format(query_pokemon),
         )
 
     # if a result number is given
-    elif result_number != 0:
+    if result_number:
         try:
-            if starting_board:
+            if stage_starting_board:
                 return await context.koduck.send_message(
                     receive_message=context.message,
                     embed=embed_formatters.format_starting_board_embed(
                         results[result_number - 1]
                     ),
                 )
-            else:
-                return await context.koduck.send_message(
-                    receive_message=context.message,
-                    embed=embed_formatters.format_stage_embed(
-                        results[result_number - 1], shorthand=shorthand
-                    ),
-                )
+            return await context.koduck.send_message(
+                receive_message=context.message,
+                embed=embed_formatters.format_stage_embed(
+                    results[result_number - 1], shorthand=shorthand
+                ),
+            )
         except IndexError:
             return await context.koduck.send_message(
                 receive_message=context.message,
                 content=settings.message_stage_result_error.format(len(results)),
             )
 
-    elif len(results) == 1:
-        if starting_board:
+    if len(results) == 1:
+        if stage_starting_board:
             return await context.koduck.send_message(
                 receive_message=context.message,
                 embed=embed_formatters.format_starting_board_embed(results[0]),
             )
-        else:
-            return await context.koduck.send_message(
-                receive_message=context.message,
-                embed=embed_formatters.format_stage_embed(
-                    results[0], shorthand=shorthand
-                ),
-            )
-
-    elif len(results) > 1:
-        indices = []
-        output_string = ""
-        for i in range(len(results)):
-            values = results[i]
-            indices.append(values[0])
-            if i < settings.choice_react_limit:
-                output_string += "\n{} {}".format(
-                    constants.number_emojis[i + 1], indices[i]
-                )
-
-        choice = await choice_react(
-            context,
-            min(len(indices), settings.choice_react_limit),
-            settings.message_stage_multiple_results + output_string,
+        return await context.koduck.send_message(
+            receive_message=context.message,
+            embed=embed_formatters.format_stage_embed(results[0], shorthand=shorthand),
         )
-        if choice is None:
-            return
-        elif starting_board:
-            return await context.koduck.send_message(
-                receive_message=context.message,
-                embed=embed_formatters.format_starting_board_embed(results[choice]),
-            )
-        else:
-            return await context.koduck.send_message(
-                receive_message=context.message,
-                embed=embed_formatters.format_stage_embed(
-                    results[choice], shorthand=shorthand
-                ),
-            )
+
+    indices: list[str] = []
+    output_string = ""
+    for i, candidate_stage in enumerate(results):
+        indices.append(candidate_stage.string_id)
+        if i < settings.choice_react_limit:
+            output_string += f"\n{constants.number_emojis[i + 1]} {indices[i]}"
+
+    choice = await choice_react(
+        context,
+        min(len(indices), settings.choice_react_limit),
+        settings.message_stage_multiple_results + output_string,
+    )
+    if choice is None:
+        return
+    if stage_starting_board:
+        return await context.koduck.send_message(
+            receive_message=context.message,
+            embed=embed_formatters.format_starting_board_embed(results[choice]),
+        )
+    return await context.koduck.send_message(
+        receive_message=context.message,
+        embed=embed_formatters.format_stage_embed(results[choice], shorthand=shorthand),
+    )
 
 
 async def stage_shorthand(context, *args, **kwargs):
@@ -1336,16 +1315,19 @@ async def eb_rewards(context, *args, **kwargs):
     )
 
 
-async def eb_details(context, *args, **kwargs):
-    if len(args) < 1 or args[0].isdigit():
+async def eb_details(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
+    assert context.koduck
+    if not args or args[0].isdigit():
         eb_pokemon = utils.current_eb_pokemon()
-        args = [eb_pokemon] + list(args)
+        args = (eb_pokemon,) + args
 
     # allow space delimited parameters
     if len(args) == 1:
         temp = args[0].split(" ")
         if len(temp) > 1 and temp[-1].isdigit():
-            args = [" ".join(temp[:-1]), temp[-1]]
+            args = (" ".join(temp[:-1]), temp[-1])
 
     query_level = 0
     if len(args) >= 2:
@@ -1365,76 +1347,61 @@ async def eb_details(context, *args, **kwargs):
 
     # parse params
     query_pokemon = await pokemon_lookup(context, query=args[0])
-    if query_pokemon is None:
-        return "Unrecognized Pokemon"
+    if not query_pokemon:
+        print("Unrecognized Pokemon")
+        return
 
     # verify that queried pokemon is in EB table
-    eb_details_2 = yadon.ReadRowFromTable(settings.eb_details_table, query_pokemon)
-    if eb_details_2 is None:
+    eb_details_2 = db.query_eb_pokemon(query_pokemon)
+    if not eb_details_2:
         return await context.koduck.send_message(
             receive_message=context.message,
             content=settings.message_eb_no_result.format(query_pokemon),
         )
 
     # optional level param which will return a stage embed instead
-    if query_level > 0:
-        # should be in increasing order
-        for level_set in eb_details_2:
-            start_level, end_level, stage_index = level_set.split("/")
-            if int(end_level) < 0 or query_level < int(end_level):
-                break
-        values = yadon.ReadRowFromTable(settings.event_stages_table, stage_index)
+    if query_level <= 0:
+        return await context.koduck.send_message(
+            receive_message=context.message,
+            embed=embed_formatters.format_eb_details_embed(eb_details_2),
+        )
 
-        # extra string to show level range of this eb stage
-        if int(start_level) == int(end_level) - 1:
-            level_range = " (Level {})".format(start_level)
-        elif int(end_level) < 0:
-            level_range = " (Levels {}+ ({}))".format(start_level, query_level)
-        else:
-            level_range = " (Levels {} to {} ({}))".format(
-                start_level, int(end_level) - 1, query_level
-            )
-        delta = query_level - int(start_level)
+    leg = next(x for x in eb_details_2 if x.end_level < 0 or x.end_level > query_level)
+    # extra string to show level range of this eb stage
+    if leg.start_level == leg.end_level - 1:
+        level_range = f" (Level {leg.start_level})"
+    elif leg.end_level < 0:
+        level_range = f" (Levels {leg.start_level}+ ({query_level}))"
+    else:
+        level_range = (
+            f" (Levels {leg.start_level} to {leg.end_level-1} ({query_level}))"
+        )
 
-        try:
-            shorthand = kwargs["shorthand"]
-        except KeyError:
-            shorthand = False
-        try:
-            starting_board = kwargs["startingboard"]
-        except KeyError:
-            starting_board = False
+    delta = query_level - leg.start_level
 
-        stage_info = ["s{}".format(stage_index)] + values
+    shorthand = kwargs.get("shorthand", False)
+    eb_starting_board = kwargs.get("startingboard", False)
 
-        eb_reward = ""
-        eb_rewards = yadon.ReadRowFromTable(settings.eb_rewards_table, query_pokemon)
-        for entry in eb_rewards:
-            level, reward_item, reward_amount = entry.split("/")
-            if int(level) == query_level:
-                eb_reward = "[{}] x{}".format(reward_item, reward_amount)
-                break
+    eb_stage = db.query_stage_by_index(leg.stage_index, StageType.EVENT)
+    eb_rewards = db.query_eb_rewards_pokemon(query_pokemon)
+    eb_reward = ""
+    for entry in eb_rewards:
+        if entry.level == query_level:
+            eb_reward = f"[{entry.reward}] x{entry.amount}"
+            break
 
-        if starting_board:
-            return await context.koduck.send_message(
-                receive_message=context.message,
-                embed=embed_formatters.format_starting_board_embed(stage_info),
-            )
-        else:
-            return await context.koduck.send_message(
-                receive_message=context.message,
-                embed=embed_formatters.format_stage_embed(
-                    stage_info,
-                    eb_data=(level_range, delta, eb_reward, query_level),
-                    shorthand=shorthand,
-                ),
-            )
-
+    if eb_starting_board:
+        return await context.koduck.send_message(
+            receive_message=context.message,
+            embed=embed_formatters.format_starting_board_embed(eb_stage),
+        )
     else:
         return await context.koduck.send_message(
             receive_message=context.message,
-            embed=embed_formatters.format_eb_details_embed(
-                [query_pokemon] + eb_details_2
+            embed=embed_formatters.format_stage_embed(
+                eb_stage,
+                eb_data=(level_range, delta, eb_reward, query_level),
+                shorthand=shorthand,
             ),
         )
 
@@ -1566,101 +1533,93 @@ async def drain_list(context, *args, **kwargs):
     )
 
 
-# Look up a queried Pokemon to see if it exists as an alias (and/or in an additionally provided list), provide some suggestions to the user if it doesn't, and return the corrected query, otherwise None
+# ? Split skill_lookup?
 async def pokemon_lookup(
-    context, query=None, enable_dym=True, skill_lookup=False, *args, **kwargs
-):
-    if query is None:
-        query = args[0]
+    context: KoduckContext,
+    query: str = "",
+    enable_dym: bool = True,
+    skill_lookup: bool = False,
+    *args: str,
+    **kwargs: Any,
+) -> str:
+    """Return a corrected query of the required pokemon/skill.
 
-    aliases = {
-        k.lower(): v[0] for k, v in yadon.ReadTable(settings.aliases_table).items()
-    }
-    try:
-        query = aliases[query.lower()]
-    except KeyError:
-        pass
+    Check if it exists as an alias, and/or in an additionally provided list.
+    Provide some suggestions to the user if it does not."""
+    assert context.koduck
+    query = query or args[0]
+    aliases = db.get_aliases()
+    query = aliases.get(query.lower(), query)
 
-    pokemon_dict = {
-        k.lower(): k
-        for k in yadon.ReadTable(settings.pokemon_table, named_columns=True).keys()
-    }
-    skill_dict = {
-        k.lower(): k
-        for k in yadon.ReadTable(settings.skills_table, named_columns=True).keys()
-    }
+    pokemon_dict = {k.lower(): k for k in db.get_pokemon_names()}
+    skill_dict = {k.lower(): k for k in db.get_skill_names()}
     # get properly capitalized name
+    query = (
+        skill_dict.get(query.lower(), query)
+        if skill_lookup
+        else pokemon_dict.get(query.lower(), query)
+    )
     try:
-        if skill_lookup:
-            query = skill_dict[query.lower()]
-        else:
-            query = pokemon_dict[query.lower()]
+        query = (
+            skill_dict[query.lower()] if skill_lookup else pokemon_dict[query.lower()]
+        )
+        found = True
     except KeyError:
-        pass
+        found = False
 
-    if (not skill_lookup and query.lower() not in pokemon_dict.keys()) or (
-        skill_lookup and query.lower() not in skill_dict.keys()
-    ):
-        if not enable_dym:
-            return
-
-        if skill_lookup:
-            add = skill_dict.values()
-        else:
-            add = pokemon_dict.values()
-
-        close_matches = difflib.get_close_matches(
-            query,
-            list(aliases.keys()) + list(add),
-            n=settings.dym_limit,
-            cutoff=settings.dym_threshold,
-        )
-        if len(close_matches) == 0:
-            await context.koduck.send_message(
-                receive_message=context.message,
-                content=settings.message_pokemon_lookup_no_result.format(
-                    "Skill" if skill_lookup else "Pokemon", query
-                ),
-            )
-            return
-
-        choices = []
-        no_duplicates = []
-        for close_match in close_matches:
-            try:
-                if aliases[close_match].lower() not in no_duplicates:
-                    choices.append((close_match, aliases[close_match]))
-                    no_duplicates.append(aliases[close_match].lower())
-            except KeyError:
-                if close_match.lower() not in no_duplicates:
-                    choices.append((close_match, close_match))
-                    no_duplicates.append(close_match.lower())
-
-        output_string = ""
-        for i in range(len(choices)):
-            output_string += "\n{} {}".format(
-                constants.number_emojis[i + 1],
-                choices[i][0]
-                if choices[i][0] == choices[i][1]
-                else "{} ({})".format(choices[i][0], choices[i][1]),
-            )
-        result = await choice_react(
-            context,
-            len(choices),
-            settings.message_pokemon_lookup_no_result.format(
-                "Skill" if skill_lookup else "Pokemon", query
-            )
-            + "\n"
-            + settings.message_pokemon_lookup_suggest
-            + output_string,
-        )
-        if result is None:
-            return
-        else:
-            return choices[result][1]
-
-    else:
+    if found:
         return query
+
+    if not enable_dym:
+        return ""
+
+    add = skill_dict.values() if skill_lookup else pokemon_dict.values()
+
+    close_matches = difflib.get_close_matches(
+        query,
+        list(aliases.keys()) + list(add),
+        n=settings.dym_limit,
+        cutoff=settings.dym_threshold,
+    )
+
+    if not close_matches:
+        await context.koduck.send_message(
+            receive_message=context.message,
+            content=settings.message_pokemon_lookup_no_result.format(
+                "Skill" if skill_lookup else "Pokemon", query
+            ),
+        )
+        return ""
+
+    choices: list[tuple[str, str]] = []
+    no_duplicates: list[str] = []
+    for close_match in close_matches:
+        alias = aliases.get(close_match, close_match).lower()
+        if alias not in no_duplicates:
+            choices.append((close_match, alias))
+            no_duplicates.append(close_match.lower())
+
+    output_string = ""
+    for i, choice in enumerate(choices):
+        output_string += (
+            f"\n{constants.number_emojis[i + 1]} {choice[0]}" + ""
+            if choice[0] == choice[1]
+            else f" ({choice[1]})"
+        )
+
+    result = await choice_react(
+        context,
+        len(choices),
+        settings.message_pokemon_lookup_no_result.format(
+            "Skill" if skill_lookup else "Pokemon", query
+        )
+        + "\n"
+        + settings.message_pokemon_lookup_suggest
+        + output_string,
+    )
+    if result is None:
+        return ""
+    return choices[result][1]
 
 
 async def submit_comp_score(context, *args, **kwargs):
@@ -1757,7 +1716,10 @@ async def comp_scores(context, *args, **kwargs):
     )
 
 
-async def choice_react(context, num_choices, question_string):
+async def choice_react(
+    context: KoduckContext, num_choices: int, question_string: str
+) -> int | None:
+    assert context.koduck
     # there are only 9 (10) number emojis :(
     num_choices = min(num_choices, 9)
     num_choices = min(num_choices, settings.choice_react_limit)
@@ -1767,13 +1729,15 @@ async def choice_react(context, num_choices, question_string):
     choice_emojis = constants.number_emojis[: num_choices + 1]
 
     # add reactions
-    for i in range(len(choice_emojis)):
-        await the_message.add_reaction(choice_emojis[i])
+    assert the_message
+    for emoji in choice_emojis:
+        await the_message.add_reaction(emoji)
 
     # wait for reaction (with timeout)
-    def check(reaction, user):
+    def check(reaction: discord.Reaction, user: discord.User) -> bool:
         return (
             reaction.message.id == the_message.id
+            and isinstance(context.message, discord.Message)
             and user == context.message.author
             and str(reaction.emoji) in choice_emojis
         )
@@ -1786,11 +1750,10 @@ async def choice_react(context, num_choices, question_string):
         reaction = None
 
     # remove reactions
-    for i in range(len(choice_emojis)):
+    for emoji in choice_emojis:
         try:
-            await the_message.remove_reaction(
-                choice_emojis[i], context.koduck.client.user
-            )
+            assert context.koduck.client.user
+            await the_message.remove_reaction(emoji, context.koduck.client.user)
         except discord.errors.NotFound:
             break
 
@@ -1801,8 +1764,7 @@ async def choice_react(context, num_choices, question_string):
     choice = choice_emojis.index(result_emoji)
     if choice == 0:
         return
-    else:
-        return choice - 1
+    return choice - 1
 
 
 async def remind_me(context, *args, **kwargs):

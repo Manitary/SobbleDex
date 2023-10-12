@@ -1,14 +1,15 @@
 import datetime
+from typing import Sequence
 
 import discord
 import pytz
 
 import constants
+import db
 import settings
 import utils
 import yadon
-from db import get_event_stage_by_index, query_event_week
-from models import EventType
+from models import EBStretch, EventType, PuzzleStage, Stage, StageType
 
 
 def format_pokemon_embed(name, details):
@@ -156,255 +157,175 @@ def format_type_embed(values):
     return embed
 
 
-def format_stage_embed(values, eb_data=("", 0, "", 0), shorthand=False):
-    (
-        index,
-        pokemon,
-        hp,
-        hp_mobile,
-        moves,
-        seconds,
-        exp,
-        base_catch,
-        bonus_catch,
-        base_catch_mobile,
-        bonus_catch_mobile,
-        default_supports,
-        s_rank,
-        a_rank,
-        b_rank,
-        num_s_ranks_to_unlock,
-        is_puzzle_stage,
-        extra_hp,
-        layout_index,
-        cost_type,
-        attempt_cost,
-        drop_1_item,
-        drop_1_amount,
-        drop_2_item,
-        drop_2_amount,
-        drop_3_item,
-        drop_3_amount,
-        drop_1_rate,
-        drop_2_rate,
-        drop_3_rate,
-        items,
-        rewards,
-        rewards_UX,
-        cd1,
-        cd2,
-        cd3,
-    ) = values
-    notes = yadon.ReadRowFromTable(settings.stage_notes_table, index)
+def format_stage_embed(
+    stage: Stage,
+    eb_data: tuple[str, int, str, int] = ("", 0, "", 0),
+    shorthand: bool = False,
+) -> discord.Embed:
+    notes = db.query_stage_notes(stage.string_id)
 
-    if index.isdigit():
-        stage_type = "Main"
-    elif index.startswith("ex"):
-        stage_type = "Expert"
-        index = index[2:]
-    elif index.startswith("s"):
-        stage_type = "Event"
-        index = index[1:]
-
-    if hp != hp_mobile:
+    if stage.hp != stage.hp_mobile:
         stats = "**3DS HP**: {}{}\n**Mobile HP**: {}{}".format(
-            hp,
-            " (UX: {})".format(int(hp) * 3)
-            if stage_type == "Main" and is_puzzle_stage != "Puzzle"
+            stage.hp,
+            f" (UX: {stage.hp*3})"
+            if stage.stage_type == StageType.MAIN
+            and stage.is_puzzle_stage != PuzzleStage.PUZZLE
             else "",
-            hp_mobile,
-            " (UX: {})".format(int(hp_mobile) * 3)
-            if stage_type == "Main" and is_puzzle_stage != "Puzzle"
+            stage.hp_mobile,
+            f" (UX: {stage.hp_mobile*3})"
+            if stage.stage_type == StageType.MAIN
+            and stage.is_puzzle_stage != PuzzleStage.PUZZLE
             else "",
         )
     else:
         stats = "**HP**: {}{}{}".format(
-            hp,
-            " (UX: {})".format(int(hp) * 3)
-            if stage_type == "Main" and is_puzzle_stage != "Puzzle"
+            stage.hp,
+            f" (UX: {stage.hp*3})"
+            if stage.stage_type == StageType.MAIN
+            and stage.is_puzzle_stage != PuzzleStage.PUZZLE
             else "",
-            " + {} ({})".format(extra_hp, int(hp) + (int(extra_hp) * eb_data[1]))
-            if extra_hp != "0"
+            f" + {stage.extra_hp} ({stage.hp + stage.extra_hp * eb_data[1]})"
+            if stage.extra_hp
             else "",
         )
+
     stats += "\n**{}**: {}\n**Experience**: {}".format(
-        "Moves" if moves != "0" else "Seconds", moves if moves != "0" else seconds, exp
-    )
+        "Moves" if stage.moves else "Seconds", stage.moves or stage.seconds, stage.exp
+    )  #! broken if moves =/= mobile moves (same for exp)
+
     if eb_data[3] == 0:
         stats += "\n**Catchability**: {}% + {}%/{}".format(
-            base_catch, bonus_catch, "move" if moves != "0" else "3sec"
+            stage.base_catch, stage.bonus_catch, "move" if stage.moves else "3sec"
         )
-        if base_catch != base_catch_mobile or bonus_catch != bonus_catch_mobile:
+        if (
+            stage.base_catch != stage.base_catch_mobile
+            or stage.bonus_catch != stage.bonus_catch_mobile
+        ):
             stats += " (Mobile: {}% + {}%/{})".format(
-                base_catch_mobile,
-                bonus_catch_mobile,
-                "move" if moves != "0" else "3sec",
+                stage.base_catch_mobile,
+                stage.bonus_catch_mobile,
+                "move" if stage.moves else "3sec",
             )
     else:
-        stats += "\n**Catchability**: {}%".format(min(eb_data[3], 100))
-    default_supports = default_supports.split("/")
-    if len(default_supports) > 4:
-        num_extra = len(default_supports) - 4
+        stats += f"\n**Catchability**: {min(eb_data[3], 100)}%"
+
+    num_extra = max(len(stage.default_supports) - 4, 0)
+    if num_extra:
         stats += "\n**Default Supports**: {} | {}".format(
             utils.emojify(
-                "".join(["[{}]".format(p) for p in default_supports[0:num_extra]])
+                "".join([f"[{p}]" for p in stage.default_supports[0:num_extra]])
             ),
             utils.emojify(
-                "".join(["[{}]".format(p) for p in default_supports[num_extra:]])
+                "".join([f"[{p}]" for p in stage.default_supports[num_extra:]])
             ),
         )
     else:
         stats += "\n**Default Supports**: {}".format(
-            utils.emojify("".join(["[{}]".format(p) for p in default_supports]))
+            utils.emojify("".join([f"[{p}]" for p in stage.default_supports]))
         )
-    stats += "\n**Rank Requirements**: {} / {} / {}".format(s_rank, a_rank, b_rank)
-    if stage_type == "Expert":
-        stats += "\n**S-Ranks to unlock**: {}".format(num_s_ranks_to_unlock)
+
+    stats += (
+        f"\n**Rank Requirements**: {stage.s_rank} / {stage.a_rank} / {stage.b_rank}"
+    )
+
+    if stage.stage_type == StageType.EXPERT:
+        stats += f"\n**S-Ranks to unlock**: {stage.s_unlock}"
+
     stats += "\n**Attempt Cost**: {} x{}".format(
-        utils.emojify("[{}]".format(cost_type)), attempt_cost
+        utils.emojify(f"[{stage.cost.type}]"), stage.cost.amount
     )
-    if drop_1_item != "Nothing" or drop_2_item != "Nothing" or drop_3_item != "Nothing":
+
+    if any(d.item != "Nothing" for d in stage.drops):
         stats += "\n**Drop Items**: {}{} / {}{} / {}{}\n**Drop Rates**: {}% / {}% / {}%".format(
-            utils.emojify("[{}]".format(drop_1_item)),
-            " x{}".format(drop_1_amount) if drop_1_amount != "1" else "",
-            utils.emojify("[{}]".format(drop_2_item)),
-            " x{}".format(drop_2_amount) if drop_2_amount != "1" else "",
-            utils.emojify("[{}]".format(drop_3_item)),
-            " x{}".format(drop_3_amount) if drop_3_amount != "1" else "",
-            drop_1_rate,
-            drop_2_rate,
-            drop_3_rate,
+            utils.emojify(f"[{stage.drops[0].item}]"),
+            f" x{stage.drops[0].amount}" if stage.drops[0].amount != 1 else "",
+            utils.emojify(f"[{stage.drops[1].item}]"),
+            f" x{stage.drops[1].amount}" if stage.drops[1].amount != 1 else "",
+            utils.emojify(f"[{stage.drops[2].item}]"),
+            f" x{stage.drops[2].amount}" if stage.drops[2].amount != 1 else "",
+            stage.drops[0].rate,
+            stage.drops[1].rate,
+            stage.drops[2].rate,
         )
-    items = items.split("/")
     # auto remove c-1 if less than 4 supports
-    if len(default_supports) < 4 and "C-1" in items:
-        items.remove("C-1")
     stats += "\n**Items**: {}".format(
-        utils.emojify("".join(["[{}]".format(item) for item in items]))
+        utils.emojify(
+            "".join(
+                [
+                    f"[{item}]"
+                    for item in stage.items
+                    if not (len(stage.default_supports) < 4 and item == "C-1")
+                ]
+            )
+        )
     )
-    if rewards != "Nothing":
-        stats += "\n**Initial clear reward**: {}".format(utils.emojify(rewards))
-    if rewards_UX != "Nothing":
-        stats += "\n**UX Initial clear reward**: {}".format(utils.emojify(rewards_UX))
+    if stage.rewards != "Nothing":
+        stats += f"\n**Initial clear reward**: {utils.emojify(stage.rewards)}"
+
+    if stage.rewards_ux != "Nothing":
+        stats += f"\n**UX Initial clear reward**: {utils.emojify(stage.rewards_ux)}"
+
     if eb_data[2]:
-        stats += "\n**EB stage clear reward**: {}".format(utils.emojify(eb_data[2]))
-    if notes is not None:
+        stats += f"\n**EB stage clear reward**: {utils.emojify(eb_data[2])}"
+
+    if notes:
         stats += "\n**Notes**: {}".format(utils.emojify(notes[0]).replace("\\n", "\n"))
 
     header = "{} Stage {}: {}{}{}".format(
-        stage_type,
-        index,
-        pokemon,
-        " " + utils.emojify("[{}]".format(pokemon)),
+        stage.stage_type,
+        stage.id,
+        stage.pokemon,
+        " " + utils.emojify(f"[{stage.pokemon}]"),
         eb_data[0],
     )
-    type = yadon.ReadRowFromTable(settings.pokemon_table, pokemon, named_columns=True)[
-        "Type"
-    ]
+
+    pokemon_type = db.query_pokemon_type(stage.pokemon)
     embed = discord.Embed(
-        title=header, color=constants.type_colors[type], description=stats
+        title=header, color=constants.type_colors[pokemon_type], description=stats
     )
-    if not shorthand:
-        if layout_index != "0":
-            embed.set_thumbnail(
-                url="https://raw.githubusercontent.com/Chupalika/Kaleo/icons/{} Stages Layouts/Layout Index {}.png".format(
-                    stage_type, layout_index
-                ).replace(
-                    " ", "%20"
-                )
-            )
-            embed.url = "https://raw.githubusercontent.com/Chupalika/Kaleo/icons/{} Stages Layouts/Layout Index {}.png".format(
-                stage_type, layout_index
-            ).replace(
-                " ", "%20"
-            )
-        if cd1 != "Nothing":
-            embed.add_field(
-                name="**Countdown 1**",
-                value=utils.emojify(cd1.replace("\\n", "\n")),
-                inline=False,
-            )
-        if cd2 != "Nothing":
-            embed.add_field(
-                name="**Countdown 2**",
-                value=utils.emojify(cd2.replace("\\n", "\n")),
-                inline=False,
-            )
-        if cd3 != "Nothing":
-            embed.add_field(
-                name="**Countdown 3**",
-                value=utils.emojify(cd3.replace("\\n", "\n")),
-                inline=False,
-            )
+    if shorthand:
+        return embed
+
+    if stage.layout_index:
+        embed.set_thumbnail(
+            url=(
+                "https://raw.githubusercontent.com/Chupalika/Kaleo/icons/"
+                f"{stage.stage_type} Stages Layouts/Layout Index {stage.layout_index}.png"
+            ).replace(" ", "%20")
+        )
+        embed.url = (
+            "https://raw.githubusercontent.com/Chupalika/Kaleo/icons/"
+            f"{stage.stage_type} Stages Layouts/Layout Index {stage.layout_index}.png"
+        ).replace(" ", "%20")
+
+    for i, disruption in enumerate(stage.disruptions, 1):
+        if disruption == "Nothing":
+            continue
+        embed.add_field(
+            name=f"**Countdown {i}**",
+            value=utils.emojify(disruption.replace("\\n", "\n")),
+            inline=False,
+        )
     return embed
 
 
-def format_starting_board_embed(values):
-    (
-        index,
-        pokemon,
-        _,
-        _,
-        _,
-        _,
-        _,
-        _,
-        _,
-        _,
-        _,
-        _,
-        _,
-        _,
-        _,
-        _,
-        _,
-        _,
-        layout_index,
-        _,
-        _,
-        _,
-        _,
-        _,
-        _,
-        _,
-        _,
-        _,
-        _,
-        _,
-        _,
-        _,
-        _,
-        _,
-        _,
-        _,
-    ) = values
-
-    if index.isdigit():
-        stage_type = "Main"
-    elif index.startswith("ex"):
-        stage_type = "Expert"
-        index = index[2:]
-    elif index.startswith("s"):
-        stage_type = "Event"
-        index = index[1:]
-
-    header = "{} Stage Index {}: {} {}".format(
-        stage_type, index, pokemon, utils.emojify("[{}]".format(pokemon))
+def format_starting_board_embed(stage: Stage) -> discord.Embed:
+    header = (
+        f"{stage.stage_type} Stage Index {stage.id}: {stage.pokemon} "
+        + utils.emojify(f"[{stage.pokemon}]")
     )
-    type = yadon.ReadRowFromTable(settings.pokemon_table, pokemon, named_columns=True)[
-        "Type"
-    ]
-    embed = discord.Embed(title=header, color=constants.type_colors[type])
-    if layout_index != "0":
-        embed.set_image(
-            url="https://raw.githubusercontent.com/Chupalika/Kaleo/icons/{} Stages Layouts/Layout Index {}.png".format(
-                stage_type, layout_index
-            ).replace(
-                " ", "%20"
-            )
-        )
-    else:
+    pokemon_type = db.query_pokemon_type(stage.pokemon)
+    embed = discord.Embed(title=header, color=constants.type_colors[pokemon_type])
+    if not stage.layout_index:
         embed.description = "No initial board layout"
+        return embed
+
+    embed.set_image(
+        url=(
+            "https://raw.githubusercontent.com/Chupalika/Kaleo/icons/"
+            f"{stage.stage_type} Stages Layouts/Layout Index {stage.layout_index}.png"
+        ).replace(" ", "%20")
+    )
     return embed
 
 
@@ -608,41 +529,37 @@ def format_eb_rewards_embed(values):
     return embed
 
 
-def format_eb_details_embed(values):
-    pokemon_name = values[0]
-    level_sets = values[1:]
+def format_eb_details_embed(eb_stretches: Sequence[EBStretch]) -> discord.Embed:
+    if not eb_stretches:
+        raise ValueError("No EB stretch provided")
 
     stats = ""
-    for levelset in level_sets:
-        start_level, end_level, stage_index = levelset.split("/")
-        stage_values = yadon.ReadRowFromTable(settings.event_stages_table, stage_index)
+    for leg in eb_stretches:
+        stage = db.query_stage_by_index(leg.stage_index, StageType.EVENT)
 
-        if end_level == "-1":
-            levels = "**Levels {}+**".format(start_level)
-        elif int(start_level) == int(end_level) - 1:
-            levels = "**Level {}**".format(start_level)
+        if leg.end_level == -1:
+            levels = f"**Levels {leg.start_level}+**"
+        elif leg.start_level == leg.end_level - 1:
+            levels = f"**Level {leg.start_level}**"
         else:
-            levels = "**Levels {} to {}**".format(start_level, int(end_level) - 1)
+            levels = f"**Levels {leg.start_level} to {leg.end_level-1}**"
 
         extra = ""
-        default_supports = stage_values[10].split("/")
-        if len(default_supports) == 3:
+        if len(stage.default_supports) == 3:
             extra = " **(3 supports)**"
-        elif len(default_supports) == 5:
-            extra = utils.emojify(
-                " **(5th support: [{}])**".format(default_supports[0])
-            )
+        elif len(stage.default_supports) == 5:
+            extra = utils.emojify(f" **(5th support: [{stage.default_supports[0]}])**")
 
         stats += "{}: {}{} / {}{}\n".format(
             levels,
-            stage_values[1],
-            " + {}".format(stage_values[16]) if stage_values[16] != "0" else "",
-            stage_values[4] if stage_values[4] != "0" else stage_values[3],
+            stage.hp,
+            f" + {stage.extra_hp}" if stage.extra_hp else "",
+            stage.seconds or stage.moves,
             extra,
         )
 
     embed = discord.Embed(
-        title="{} Escalation Battles Details".format(pokemon_name),
+        title=f"{eb_stretches[0].pokemon} Escalation Battles Details",
         color=0x4E7E4E,
         description=stats,
     )
@@ -657,9 +574,9 @@ def format_week_embed(query_week: int) -> discord.Embed:
     eb: str = ""
     safari: str = ""
 
-    for event in query_event_week(query_week):
+    for event in db.query_event_week(query_week):
         event_pokemon = event.pokemon.split("/")
-        stage = get_event_stage_by_index(event.stage_ids[0])
+        stage = db.get_event_stage_by_index(event.stage_ids[0])
         drops_string = stage.str_drops(utils.emojify, compact=True)
         attempt_cost_string = stage.cost.to_str(utils.emojify)
         unlock_cost_string = event.str_unlock(utils.emojify)
