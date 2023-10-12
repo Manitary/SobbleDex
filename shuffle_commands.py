@@ -202,28 +202,28 @@ async def skill(
     )
 
 
-async def ap(context, *args, **kwargs):
-    if len(args) < 1:
+async def ap(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
+    assert context.koduck
+    if not args:
         return await context.koduck.send_message(
             receive_message=context.message, content=settings.message_ap_no_param
         )
 
     query_bp = args[0]
-    if query_bp not in ["30", "40", "50", "60", "70", "80", "90"]:
+    if not query_bp.isdigit() or query_bp not in map(str, range(30, 91, 10)):
         return await context.koduck.send_message(
             receive_message=context.message, content=settings.message_ap_invalid_param
         )
-    ap_list = yadon.ReadRowFromTable(settings.ap_table, query_bp)
+
+    ap_list = db.query_ap(int(query_bp))
 
     if len(args) >= 2:
         try:
             query_level = int(args[1])
-        except ValueError:
-            return await context.koduck.send_message(
-                receive_message=context.message,
-                content=settings.message_ap_invalid_param_2,
-            )
-        if query_level not in range(1, 31):
+            assert 1 <= query_level <= 30
+        except (ValueError, AssertionError):
             return await context.koduck.send_message(
                 receive_message=context.message,
                 content=settings.message_ap_invalid_param_2,
@@ -233,13 +233,10 @@ async def ap(context, *args, **kwargs):
         )
     else:
         desc = "```"
-        for i in range(len(ap_list)):
+        for i, ap_ in enumerate(ap_list):
             if i % 10 == 0:
                 desc += "\n"
-            if int(ap_list[i]) >= 100:
-                desc += "{} ".format(ap_list[i])
-            else:
-                desc += " {} ".format(ap_list[i])
+            desc += f"{ap_} " if ap_ >= 100 else f" {ap_} "
         desc += "\n```"
         return await context.koduck.send_message(
             receive_message=context.message, content=desc
