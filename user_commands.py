@@ -1,17 +1,21 @@
 import asyncio
 import random
+from typing import Any
 
 import discord
 
+import db
 import settings
 import yadon
+from koduck import KoduckContext
 
 
 # When someone says a trigger message, respond with a custom response!
-async def custom_response(context, *args, **kwargs):
-    response = yadon.ReadRowFromTable(
-        settings.custom_responses_table_name, context["command"]
-    )
+async def custom_response(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
+    assert context.koduck
+    response = db.query_custom_response(context["command"])
     if response:
         return await context.koduck.send_message(
             receive_message=context.message, content=response[0]

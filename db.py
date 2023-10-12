@@ -507,5 +507,19 @@ def update_reminder(reminder: Reminder) -> None:
     shuffle_connection.commit()
 
 
+def query_custom_response(message: str) -> str:
+    q = bot_connection.execute(
+        """
+        SELECT response
+        FROM custom_responses
+        WHERE message = :message
+        """,
+        {"message": message},
+    ).fetchone()
+    if not q:
+        return ""
+    return q["response"]
+
+
 if __name__ == "__main__":
     ...

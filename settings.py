@@ -151,3 +151,4 @@ message_unremind_me_pokemon_non_exists = "You aren’t signed up for this Pokém
 message_unremind_me_pokemon_success = (
     "Okay, you’re no longer signed up to be reminded when {} appears in an event"
 )
+custom_responses_table_name = "tables/custom_responses"
