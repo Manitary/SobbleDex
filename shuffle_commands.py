@@ -724,11 +724,11 @@ async def paginate_embeds(
     return the_message
 
 
-def validate_query(subqueries):
+def validate_query(subqueries: list[str]) -> list[tuple[str, str, str]]:
     # allow space delimited parameters
     if len(subqueries) == 1 and len(subqueries[0].split("=")) > 2:
         subqueries = subqueries[0].split(" ")
-        new_subqueries = []
+        new_subqueries: list[str] = []
         for subquery in subqueries:
             operation = ""
             for op in [">=", "<=", "=>", "=<", ">", "<", "!=", "="]:
@@ -741,7 +741,7 @@ def validate_query(subqueries):
                 new_subqueries.append(subquery)
         subqueries = new_subqueries
 
-    validated_queries = []
+    validated_queries: list[tuple[str, str, str]] = []
     for subquery in subqueries:
         subquery = subquery.strip()
         # accept five (seven) different operations
@@ -791,14 +791,15 @@ def validate_query(subqueries):
         # make sure these are integers...
         elif left in ["dex", "bp", "rml", "rmls", "maxap", "evospeed", "megaspeed"]:
             try:
-                right = int(right)
+                _ = int(right)
             except ValueError:
                 continue
         # make sure type and se are valid types
         elif left in ["type", "se"]:
             right = right.lower().capitalize()
-            type_details = yadon.ReadRowFromTable(settings.types_table, right)
-            if type_details is None:
+            try:
+                _ = PokemonType(right)
+            except ValueError:
                 continue
 
         validated_queries.append((left, operation, right))
@@ -948,13 +949,13 @@ async def query_with_emojis(context, *args, **kwargs):
     return await query(context, *args, **kwargs)
 
 
-async def skill_with_pokemon(context, *args, **kwargs):
-    try:
-        use_emojis = kwargs["useemojis"]
-    except KeyError:
-        use_emojis = False
+async def skill_with_pokemon(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
+    assert context.koduck
+    use_emojis = kwargs.get("useemojis", False)
 
-    if len(args) < 1:
+    if not args:
         return await context.koduck.send_message(
             receive_message=context.message, content=settings.message_skill_no_param
         )
@@ -963,14 +964,13 @@ async def skill_with_pokemon(context, *args, **kwargs):
 
     # lookup and validate skill
     query_skill = await pokemon_lookup(context, query=query_skill, skill_lookup=True)
-    if query_skill is None:
-        return "Unrecognized Skill"
+    if not query_skill:
+        print("Unrecognized Skill")
+        return
 
     # retrieve skill data
-    values = yadon.ReadRowFromTable(
-        settings.skills_table, query_skill, named_columns=True
-    )
-    if values is None:
+    skill_ = db.query_skill(query_skill)
+    if not skill_:
         return await context.koduck.send_message(
             receive_message=context.message,
             content=settings.message_skill_no_result.format(query_skill),
@@ -980,67 +980,71 @@ async def skill_with_pokemon(context, *args, **kwargs):
     copy_of_params.remove(args[0])
     queries = validate_query(copy_of_params)
 
-    farmable = 0
+    farmable = Param.IGNORE
     if "farmable" in args:
-        farmable = 1
+        farmable = Param.INCLUDE
     if "!farmable" in args:
-        farmable = 2
+        farmable = Param.EXCLUDE
     if "?farmable" in args:
-        farmable = 3
+        #! double check again the meaning of this
+        farmable = Param.IGNORE
     if "farmable" in kwargs:
         if kwargs["farmable"] == "yes":
-            farmable = 1
+            farmable = Param.INCLUDE
         elif kwargs["farmable"] == "no":
-            farmable = 2
+            farmable = Param.EXCLUDE
         elif kwargs["farmable"] == "both":
-            farmable = 3
+            farmable = Param.IGNORE
 
-    ss_filter = 0
+    ss_filter = Param.IGNORE
     if "ss" in args:
-        ss_filter = 1
+        ss_filter = Param.INCLUDE
     if "!ss" in args:
-        ss_filter = 2
+        ss_filter = Param.EXCLUDE
     if "ss" in kwargs:
         if kwargs["ss"] == "yes":
-            ss_filter = 1
+            ss_filter = Param.INCLUDE
         elif kwargs["ss"] == "no":
-            ss_filter = 2
+            ss_filter = Param.EXCLUDE
 
     # force mega if evospeed is used
     if (
-        "evospeed" in [x[0] for x in queries]
-        or "evospeed" in [x[2] for x in queries if x[0] == "sortby"]
-        or "megaspeed" in [x[0] for x in queries]
-        or "megaspeed" in [x[2] for x in queries if x[0] == "sortby"]
+        "evospeed" in (x[0] for x in queries)
+        or "evospeed" in (x[2] for x in queries if x[0] == "sortby")
+        or "megaspeed" in (x[0] for x in queries)
+        or "megaspeed" in (x[2] for x in queries if x[0] == "sortby")
     ):
         kwargs["mega"] = True
 
     # generate a string to show which filters were recognized
     query_string = ""
-    sortby = ""
     if "mega" in args or "mega" in kwargs:
         query_string += "mega and "
     if "hasmega" in args or "hasmega" in kwargs:
         query_string += "hasmega and "
-    if farmable == 1:
+    if farmable == Param.INCLUDE:
         query_string += "farmable and "
-    elif farmable == 2:
+    elif farmable == Param.EXCLUDE:
         query_string += "not farmable and "
-    if ss_filter == 1:
+
+    if ss_filter == Param.INCLUDE:
         query_string += "only-SS and "
-    elif ss_filter == 2:
+    elif ss_filter == Param.EXCLUDE:
         query_string += "no-SS and "
-    for subquery in queries:
-        left, operation, right = subquery
-        if right != "":
-            query_string += "{}{}{} and ".format(left, operation, right)
-            if left == "sortby":
-                sortby = right
-    if query_string != "":
+
+    sortby = ""
+    for left, operation, right in queries:
+        if not right:
+            continue
+        query_string += f"{left}{operation}{right} and "
+        if left == "sortby":
+            sortby = right
+
+    if query_string:
         query_string = query_string[:-5]
 
     # query for pokemon with this skill
-    queries.append(("skill", "=", query_skill))
+    queries.append(("skill", "=", skill_.skill))
     hits, hits_bp, hits_max_ap, hits_type, hits_evo_speed = pokemon_filter(
         queries,
         "mega" in args or "mega" in kwargs,
@@ -1051,35 +1055,35 @@ async def skill_with_pokemon(context, *args, **kwargs):
     )
 
     # format output
-    if len(hits) == 0:
+    if not hits:
         field_value = "None"
         sortby_string = ""
     else:
         # format output depending on which property to sort by (default maxap)
         if sortby == "bp":
-            buckets = {k: sorted(hits_bp[k]) for k in sorted(hits_bp.keys())}
+            buckets = {k: sorted(v) for k, v in sorted(hits_bp.items())}
             sortby_string = "BP"
         elif sortby == "type":
-            buckets = {k: sorted(hits_type[k]) for k in sorted(hits_type.keys())}
+            buckets = {k: sorted(v) for k, v in sorted(hits_type.items())}
             sortby_string = "Type"
         elif sortby in ["evospeed", "megaspeed"] and (
             "mega" in args or "mega" in kwargs
         ):
-            buckets = {
-                k: sorted(hits_evo_speed[k]) for k in sorted(hits_evo_speed.keys())
-            }
+            buckets = {k: sorted(v) for k, v in sorted(hits_evo_speed.items())}
             sortby_string = "Mega Evolution Speed"
         else:
-            buckets = {k: sorted(hits_max_ap[k]) for k in sorted(hits_max_ap.keys())}
+            buckets = {k: sorted(v) for k, v in sorted(hits_max_ap.items())}
             sortby_string = "Max AP"
         field_value = pokemon_filter_results_to_string(buckets, use_emojis)
+
     field_name = "Pokemon with this skill{}{}".format(
-        " ({})".format(query_string) if query_string else "",
-        " sorted by {}".format(sortby_string) if sortby_string else "",
+        f" ({query_string})" if query_string else "",
+        f" sorted by {sortby_string}" if sortby_string else "",
     )
 
-    embed = embed_formatters.format_skill_embed(query_skill, values)
+    embed = embed_formatters.format_skill_embed(skill_)
     embed.add_field(name=field_name, value=field_value)
+
     return await context.koduck.send_message(
         receive_message=context.message, embed=embed
     )
@@ -1093,7 +1097,7 @@ async def skill_with_pokemon_with_emojis(context, *args, **kwargs):
 # Helper function for query command
 # farmable/ss_filter: 0 = ignore, 1 = include, 2 = exclude
 def pokemon_filter(
-    queries: list[list[str]],
+    queries: list[tuple[str, str, str]],
     mega: bool = False,
     include_fake: bool = False,
     farmable: Param = Param.IGNORE,
@@ -1116,8 +1120,7 @@ def pokemon_filter(
         itertools.chain(
             *(
                 db.query_weak_against(PokemonType(right))
-                for subquery in queries
-                for left, _, right in subquery
+                for left, _, right in queries
                 if left == "se"
             )
         )
