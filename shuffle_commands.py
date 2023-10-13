@@ -15,14 +15,14 @@ import db
 import embed_formatters
 import settings
 import utils
-import yadon
 from koduck import Koduck, KoduckContext
 from models import Param, PokemonType, Reminder, Stage, StageType
 
 RE_PING = re.compile(r"<@!?[0-9]*>")
 
 
-async def update_emojis(context, *args, **kwargs):
+async def update_emojis(context: KoduckContext, *args: str, **kwargs: Any) -> None:
+    assert context.koduck
     utils.emojis = {}
     for server in context.koduck.client.guilds:
         if (
@@ -30,12 +30,13 @@ async def update_emojis(context, *args, **kwargs):
             or server.id == settings.main_server_id
         ):
             for emoji in server.emojis:
-                utils.emojis[emoji.name.lower()] = "<:{}:{}>".format(
-                    emoji.name, emoji.id
-                )
+                utils.emojis[emoji.name.lower()] = f"<:{emoji.name}:{emoji.id}>"
 
 
-async def emojify_2(context, *args, **kwargs):
+async def emojify_2(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
+    assert context.koduck
     emojified_message = utils.emojify(context.param_line, check_aliases=True)
     if emojified_message:
         return await context.koduck.send_message(
@@ -533,18 +534,25 @@ async def stage(
     )
 
 
-async def stage_shorthand(context, *args, **kwargs):
+async def stage_shorthand(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
     kwargs["shorthand"] = True
     return await stage(context, *args, **kwargs)
 
 
-async def starting_board(context, *args, **kwargs):
+async def starting_board(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
     kwargs["startingboard"] = True
     return await stage(context, *args, **kwargs)
 
 
-async def disruption_pattern(context, *args, **kwargs):
-    if len(args) < 1:
+async def disruption_pattern(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
+    assert context.koduck
+    if not args:
         return await context.koduck.send_message(
             receive_message=context.message, content=settings.message_dp_no_param
         )
@@ -552,20 +560,13 @@ async def disruption_pattern(context, *args, **kwargs):
     # parse params
     try:
         query_index = int(args[0])
-    except ValueError:
-        return await context.koduck.send_message(
-            receive_message=context.message,
-            content=settings.message_dp_invalid_param.format(
-                settings.disruption_patterns_min_index,
-                settings.disruption_patterns_max_index,
-            ),
+        assert (
+            query_index % 6 == 0
+            and settings.disruption_patterns_min_index
+            <= query_index
+            <= settings.disruption_patterns_max_index
         )
-
-    if (
-        query_index % 6 != 0
-        or query_index < settings.disruption_patterns_min_index
-        or query_index > settings.disruption_patterns_max_index
-    ):
+    except (ValueError, AssertionError):
         return await context.koduck.send_message(
             receive_message=context.message,
             content=settings.message_dp_invalid_param.format(
@@ -576,11 +577,10 @@ async def disruption_pattern(context, *args, **kwargs):
 
     embed = discord.Embed()
     embed.set_image(
-        url="https://raw.githubusercontent.com/Chupalika/Kaleo/icons/Disruption Patterns/Pattern Index {}.png".format(
-            query_index
-        ).replace(
-            " ", "%20"
-        )
+        url=(
+            "https://raw.githubusercontent.com/Chupalika/Kaleo/icons/Disruption Patterns/"
+            f"Pattern Index {query_index}.png"
+        ).replace(" ", "%20")
     )
     return await context.koduck.send_message(
         receive_message=context.message, embed=embed
@@ -799,20 +799,23 @@ def validate_query(subqueries: list[str]) -> list[tuple[str, str, str]]:
     return validated_queries
 
 
-def pokemon_filter_results_to_string(buckets, use_emojis=False):
+def pokemon_filter_results_to_string(
+    buckets: dict[Any, list[str]], use_emojis: bool = False
+) -> str:
     farmable_pokemon = db.get_farmable_pokemon()
     output_string = ""
-    for bucket_key in buckets.keys():
-        output_string += "\n**{}**: ".format(bucket_key)
-        for item in buckets[bucket_key]:
+    for bucket_key, items in buckets.items():
+        output_string += f"\n**{bucket_key}**: "
+        for item in items:
             farmable = item.replace("**", "") in farmable_pokemon
             if use_emojis:
                 try:
-                    # surround ss pokemon with parentheses (instead of boldifying it, because, y'know... can't boldify emojis)
+                    # surround ss pokemon with parentheses
+                    # (instead of boldifying it, because, y'know... can't boldify emojis)
                     if item.find("**") != -1:
-                        output_string += "([{}])".format(item.replace("**", ""))
+                        output_string += f"([{item.replace(" ** ", " ")}])"
                     else:
-                        output_string += "[{}]".format(item)
+                        output_string += f"[{item}]"
                     if farmable:
                         output_string += "\\*"
                 except KeyError:
@@ -1400,7 +1403,9 @@ async def eb_details(
         )
 
 
-async def eb_details_shorthand(context, *args, **kwargs):
+async def eb_details_shorthand(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
     kwargs["shorthand"] = True
     return await eb_details(context, *args, **kwargs)
 
@@ -1452,8 +1457,10 @@ async def week(
     )
 
 
-async def next_week(context, *args, **kwargs):
-    args = [str(utils.get_current_week() % 24 + 1)]
+async def next_week(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
+    args = (str(utils.get_current_week() % 24 + 1),)
     return await week(context, *args, **kwargs)
 
 
@@ -1479,10 +1486,13 @@ async def sm_rewards(
     )
 
 
-async def drain_list(context, *args, **kwargs):
+async def drain_list(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
+    assert context.koduck
     # allow space delimited parameters
     if len(args) == 1:
-        args = args[0].split(" ")
+        args = tuple(args[0].split(" "))
 
     # first arg script name, second arg hp, third arg moves
     if len(args) != 2:
@@ -1494,13 +1504,8 @@ async def drain_list(context, *args, **kwargs):
     try:
         hp = int(args[0])
         moves = int(args[1])
-    except ValueError:
-        return await context.koduck.send_message(
-            receive_message=context.message,
-            content=settings.message_drain_list_invalid_param,
-        )
-
-    if hp <= 0 or moves <= 0:
+        assert hp > 0 and moves > 0
+    except (ValueError, AssertionError):
         return await context.koduck.send_message(
             receive_message=context.message,
             content=settings.message_drain_list_invalid_param,
@@ -1512,13 +1517,11 @@ async def drain_list(context, *args, **kwargs):
             content=settings.message_drain_list_invalid_param_2,
         )
 
-    output = "```\nhp:    {}\nmoves: {}\n\n".format(str(hp), str(moves))
+    output = f"```\nhp:    {hp}\nmoves: {moves}\n\n"
 
     for i in range(moves):
         drain_amount = int(floor(float(hp) * 0.1))
-        output += "{:>2}: {:>5} ({:>6} => {:>6})\n".format(
-            moves - i, drain_amount, hp, hp - drain_amount
-        )
+        output += f"{moves-i:>2}: {drain_amount:>5} ({hp:>6} => {hp-drain_amount:>6})\n"
         hp -= drain_amount
 
     output += "```"
@@ -1531,10 +1534,10 @@ async def drain_list(context, *args, **kwargs):
 # ? Split skill_lookup?
 async def pokemon_lookup(
     context: KoduckContext,
+    *args: str,
     query: str = "",
     enable_dym: bool = True,
     skill_lookup: bool = False,
-    *args: str,
     **kwargs: Any,
 ) -> str:
     """Return a corrected query of the required pokemon/skill.
@@ -1902,7 +1905,7 @@ async def background_task(koduck_instance: Koduck) -> None:
     event_pokemon = utils.get_current_event_pokemon()
     for reminder in db.get_reminders():
         reminder_strings: list[str] = []
-        if week_changed and str(current_week) in reminder.weeks:
+        if week_changed and current_week in reminder.weeks:
             reminder_strings.append(settings.message_reminder_week.format(current_week))
         reminder_strings.extend(
             settings.message_reminder_pokemon.format(ep)

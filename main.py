@@ -3,8 +3,8 @@ import logging
 import sys
 from typing import Any
 
+import db
 import settings
-from db import get_commands
 from koduck import Koduck, KoduckContext
 
 
@@ -13,7 +13,7 @@ from koduck import Koduck, KoduckContext
 async def refresh_commands(context: KoduckContext, *args: Any, **kwargs: Any) -> None:
     assert context.koduck
     errors: list[str] = []
-    commands = list(get_commands())
+    commands = list(db.get_commands())
     if commands:
         context.koduck.clear_commands()
         for command in commands:
@@ -70,7 +70,7 @@ async def refresh_commands(context: KoduckContext, *args: Any, **kwargs: Any) ->
 
 
 # Background task is run every set interval while bot is running (by default every 10 seconds)
-async def background_task(koduck_instance):
+async def background_task(koduck_instance: Koduck) -> None:
     pass
 
 

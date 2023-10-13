@@ -10,7 +10,18 @@ from models import EventType, RepeatType
 
 T = TypeVar("T")
 
-emojis = {}
+emojis: dict[str, str] = {}
+
+RE_PUNCTUATION = re.compile(r"[- ()-'.%+:#]")
+WEEKDAYS = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+]
 
 
 def alias(query: str) -> str:
@@ -19,19 +30,7 @@ def alias(query: str) -> str:
 
 
 def strip_punctuation(string: str) -> str:
-    return (
-        string.replace(" ", "")
-        .replace("(", "")
-        .replace(")", "")
-        .replace("-", "")
-        .replace("'", "")
-        .replace("é", "e")
-        .replace(".", "")
-        .replace("%", "")
-        .replace("+", "")
-        .replace(":", "")
-        .replace("#", "")
-    )
+    return RE_PUNCTUATION.sub("", string).replace("é", "e")
 
 
 def remove_duplicates(l: list[T]) -> list[T]:
@@ -45,32 +44,23 @@ def remove_duplicates(l: list[T]) -> list[T]:
 def emojify(the_message: str, check_aliases: bool = False) -> str:
     emojified_message = the_message
 
-    possible_emojis = re.findall(r"\[[^\[\]]*\]", the_message)
+    possible_emojis: list[str] = re.findall(r"\[[^\[\]]*\]", the_message)
     possible_emojis = remove_duplicates(possible_emojis)
 
     # for each of the strings that were in []
-    for i in range(len(possible_emojis)):
-        raw = possible_emojis[i][1:-1]
+    for emoji in possible_emojis:
+        raw = emoji[1:-1]
         # figure out the string that is trying to be emojified
-        if check_aliases:
-            try:
-                emoji_name = alias(raw)
-            except:
-                emoji_name = raw
-        else:
-            emoji_name = raw
+        emoji_name = alias(raw) if check_aliases else raw
         # replace it with the emoji if it exists
-        try:
-            emojified_message = emojified_message.replace(
-                "[{}]".format(raw), emojis[strip_punctuation(emoji_name.lower())]
-            )
-        except KeyError:
-            emojified_message = emojified_message.replace("[{}]".format(raw), raw)
+        emojified_message = emojified_message.replace(
+            f"[{raw}]", emojis.get(strip_punctuation(emoji_name.lower()), raw)
+        )
 
     return emojified_message
 
 
-def get_current_week():
+def get_current_week() -> int:
     er_start_time = datetime.datetime(
         settings.er_start_year,
         settings.er_start_month,
@@ -130,16 +120,4 @@ def get_current_event_pokemon() -> list[str]:
 
 
 def event_week_day(day: int) -> str:
-    return [
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-    ][(day + 1) % 7]
-
-
-if __name__ == "__main__":
-    print(get_current_event_pokemon())
+    return WEEKDAYS[(day + 1) % 7]

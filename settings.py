@@ -153,3 +153,19 @@ message_unremind_me_pokemon_success = (
 )
 custom_responses_table_name = "tables/custom_responses"
 help_messages_table_name = "shuffle_tables/help_messages"
+main_server_id = 0
+message_dp_no_param = "I need a Disruption Pattern index to look up!"
+message_dp_invalid_param = (
+    "Disruption Pattern index should be a multiple of 6 from {} to {}"
+)
+disruption_patterns_min_index = 0
+disruption_patterns_max_index = 7260
+message_drain_list_no_param = "message_drain_list_no_param"
+message_drain_list_invalid_param = (
+    "One of the arguments wasn't an integer greater than 0"
+)
+message_drain_list_invalid_param_2 = "Moves has a limit of 55"
+er_start_year = 2018
+er_start_month = 2
+er_start_day = 13
+er_start_hour = 6
