@@ -216,3 +216,13 @@ message_request_roles_start = "Select a role to assign or unassign"
 message_request_roles_finished = "All done"
 message_no_mentioned_user_2 = "I need exactly zero or one mentioned user!"
 roll_default_max = 7260
+message_refresh_settings_success = "Settings refreshed"
+message_refresh_app_commands_success = "App commands refreshed successfully"
+message_add_admin_failed = "That user is already an admin"
+message_add_admin_success = "<@!{}> is now an admin!"
+message_remove_admin_failed = "That user is not an admin"
+message_remove_admin_success = "<@!{}> is no longer an admin"
+message_purge_invalid_param = (
+    "Please give me an integer number of bot messages to purge"
+)
+purge_search_limit = 100
