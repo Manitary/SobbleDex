@@ -610,5 +610,92 @@ def query_help_message(message: str) -> str:
     return q["message_text"]
 
 
+def query_commands(command: str) -> Command | None:
+    q = bot_connection.execute(
+        """
+        SELECT
+        command_name, module_name, method_name,
+        command_type, command_tier, description
+        FROM commands
+        WHERE command_name = :command 
+        """,
+        {"command": command},
+    ).fetchone()
+    if not q:
+        return None
+    return Command(**q)
+
+
+def add_custom_response(trigger: str, response: str) -> bool:
+    try:
+        bot_connection.execute(
+            """
+            INSERT INTO custom_responses
+            (message, response)
+            VALUES (:trigger, :response)
+            """,
+            {"trigger": trigger, "response": response},
+        )
+        bot_connection.execute(
+            """
+            INSERT INTO commands
+            (command_name, module_name, method_name, command_type, command_tier)
+            VALUES
+            (:trigger, 'user_commands', 'custom_response', 'match', 1)
+            """,
+            {"trigger": trigger},
+        )
+        bot_connection.commit()
+        return True
+    except sqlite3.DatabaseError:
+        bot_connection.rollback()
+        return False
+
+
+def remove_custom_response(trigger: str) -> bool:
+    q = bot_connection.execute(
+        """
+        DELETE FROM custom_responses
+        WHERE message = :message
+        RETURNING message
+        """,
+        {"message": trigger},
+    ).fetchone()
+    if not q:
+        return False
+    bot_connection.execute(
+        """
+        DELETE FROM commands
+        WHERE command_name = :message
+        """,
+        {"message": trigger},
+    )
+    bot_connection.commit()
+    return True
+
+
+def add_requestable_roles(guild_id: int, *role_id: int) -> None:
+    bot_connection.executemany(
+        """
+        INSERT INTO requestable_roles (guild_id, role_id)
+        VALUES (:guild, :role)
+        ON CONFLICT DO NOTHING
+        """,
+        ({"guild": guild_id, "role": x} for x in role_id),
+    )
+    bot_connection.commit()
+
+
+def remove_requestable_roles(guild_id: int, *role_id: int) -> None:
+    bot_connection.executemany(
+        """
+        DELETE FROM requestable_roles
+        WHERE guild_id = :guild AND role_id = :role
+        """,
+        ({"guild": guild_id, "role": x} for x in role_id),
+    )
+    bot_connection.commit()
+
+
 if __name__ == "__main__":
     ...

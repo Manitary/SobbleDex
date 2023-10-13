@@ -169,3 +169,34 @@ er_start_year = 2018
 er_start_month = 2
 er_start_day = 13
 er_start_hour = 6
+message_update_setting_success = "Updated {} from {} to {}"
+message_update_setting_failed = (
+    "That setting name doesn't seem to exist or you don't have permission to edit it"
+)
+message_add_setting_success = "Successfully added setting"
+message_add_setting_failed = "That setting name already exists"
+message_remove_setting_success = "Successfully removed setting"
+message_remove_setting_failed = (
+    "That setting name doesn't seem to exist or you don't have permission to edit it"
+)
+message_no_mentioned_user = "I need exactly one mentioned user!"
+message_restrict_failed = "That user is already restricted"
+message_restrict_failed_2 = "{} admins cannot be restricted"
+message_restrict_success = "<@!{}> is now restricted from using {} commands"
+message_unrestrict_failed = "That user is not restricted"
+message_unrestrict_success = "<@!{}> is now unrestricted from using {} commands"
+message_add_response_failed = (
+    "That trigger message already has a custom response message"
+)
+message_add_response_success = "Added a custom response: '{}' -> '{}'"
+message_remove_response_failed = (
+    "'{}' doesn't seem to have a corresponding custom response"
+)
+message_remove_response_success = "Removed a custom response"
+message_change_nickname_failed = "Cannot change nickname outside of a server"
+message_add_requestable_roles_no_role = "I need a role to add"
+requestable_roles_table_name = "tables/requestable_roles"
+message_add_requestable_roles_success = "Roles added"
+message_remove_requestable_roles_no_role = "I need a role to add"
+message_remove_requestable_roles_success = "Roles removed"
+bot_name = ""
