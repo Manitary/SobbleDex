@@ -8,6 +8,9 @@ import pytz
 
 RE_MOVES_EXP = re.compile(r"(\d+) \(Mobile: (\d+)\)")
 
+STR_DROP_SINGLE = " [{}{} {}% / {}% / {}%]"
+STR_DROP_MULTIPLE = " [{}{} {}% / {}{} {}% / {}{} {}%]"
+
 
 class MyStrEnum(enum.StrEnum):
     @classmethod
@@ -124,7 +127,7 @@ class StageCost:
     def to_str(self, emojify: Callable[[str], str]) -> str:
         if self.type == CostType.HEART and self.amount == 1:
             return ""
-        return " ({} x{})".format(emojify(f"[{self.type}]"), self.amount)
+        return f" ({emojify(f'[{self.type}]')} x{self.amount})"
 
 
 class RotationEvent:
@@ -149,9 +152,8 @@ class RotationEvent:
     def str_unlock(self, emojify: Callable[[str], str]) -> str:
         if self.cost_unlock == "Nothing":
             return ""
-        return " ({} {})".format(
-            emojify(self.cost_unlock.split()[1]),
-            self.cost_unlock.split()[2],
+        return (
+            f" ({emojify(self.cost_unlock.split()[1])} {self.cost_unlock.split()[2]})"
         )
 
 
@@ -236,14 +238,14 @@ class EventStageRotation:
             and len({d.item for d in self.drops}) == 1
             and len({d.amount for d in self.drops}) == 1
         ):
-            return " [{}{} {}% / {}% / {}%]".format(
+            return STR_DROP_SINGLE.format(
                 emojify(f"[{self.drops[0].item}]"),
                 f" x{self.drops[0].amount}" if self.drops[0].amount != 1 else "",
                 self.drops[0].rate,
                 self.drops[1].rate,
                 self.drops[2].rate,
             )
-        return " [{}{} {}% / {}{} {}% / {}{} {}%]".format(
+        return STR_DROP_MULTIPLE.format(
             emojify(f"[{self.drops[0].item}]"),
             f" x{self.drops[0].amount}" if self.drops[0].amount != 1 else "",
             self.drops[0].rate,
@@ -291,7 +293,7 @@ class Stage:
         drop_3_rate: float,
         items_available: str,
         rewards: str,
-        rewards_UX: str,
+        rewards_ux: str,
         cd1: str,
         cd2: str,
         cd3: str,
@@ -338,7 +340,7 @@ class Stage:
         ]
         self.items = items_available.split("/")
         self.rewards = rewards
-        self.rewards_ux = rewards_UX
+        self.rewards_ux = rewards_ux
         self.disruptions = [cd1, cd2, cd3]
         self.stage_type = stage_type
 

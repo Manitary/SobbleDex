@@ -1,7 +1,7 @@
 import asyncio
 import random
 from collections import defaultdict
-from typing import Any, Iterable
+from typing import Iterable
 
 import discord
 
@@ -20,18 +20,16 @@ DISCORD_ACTIVITIES = {
 
 
 # When someone says a trigger message, respond with a custom response!
-async def custom_response(
-    context: KoduckContext, *args: str, **kwargs: Any
-) -> discord.Message | None:
+async def custom_response(context: KoduckContext) -> discord.Message | None:
     assert context.koduck
-    response = db.query_custom_response(context["command"])
+    response = db.query_custom_response(context.command)
     if response:
         return await context.koduck.send_message(
             receive_message=context.message, content=response[0]
         )
 
 
-async def oops(context: KoduckContext, *args: str, **kwargs: Any) -> str:
+async def oops(context: KoduckContext) -> str:
     """Delete the last bot output triggered by the user.
 
     This information is tracked starting from bot startup,
@@ -50,9 +48,7 @@ async def oops(context: KoduckContext, *args: str, **kwargs: Any) -> str:
         return await oops(context)
 
 
-async def list_commands(
-    context: KoduckContext, *args: str, **kwargs: Any
-) -> discord.Message | None:
+async def list_commands(context: KoduckContext) -> discord.Message | None:
     """List all commands that the user has permission to run.
 
     Group the commands by function. Multiple aliases are shown in parentheses.
@@ -76,9 +72,7 @@ async def list_commands(
     )
 
 
-async def help(
-    context: KoduckContext, *args: str, query: str = "", **kwargs: Any
-) -> discord.Message | None:
+async def help(context: KoduckContext, query: str = "") -> discord.Message | None:
     assert context.koduck
     help_message = get_help_message(query)
     if not help_message:
@@ -99,9 +93,7 @@ def get_help_message(message_name: str) -> str:
     )
 
 
-async def user_info(
-    context: KoduckContext, *args: str, **kwargs: Any
-) -> discord.Message | None:
+async def user_info(context: KoduckContext) -> discord.Message | None:
     # if there is no mentioned user, use the message sender instead
     assert context.koduck
     assert context.message
@@ -174,7 +166,7 @@ async def user_info(
 
 
 async def roll(
-    context: KoduckContext, max_value: int | str = "", **kwargs: Any
+    context: KoduckContext, max_value: int | str = ""
 ) -> discord.Message | None:
     assert context.koduck
     assert context.message
@@ -199,9 +191,7 @@ async def roll(
     )
 
 
-async def request_roles(
-    context: KoduckContext, *args: str, **kwargs: Any
-) -> discord.Message | None:
+async def request_roles(context: KoduckContext) -> discord.Message | None:
     assert context.koduck
     assert context.message
 

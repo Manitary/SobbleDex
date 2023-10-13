@@ -1,13 +1,20 @@
-# -*- coding: utf_8 -*-
-# Koduck connects to Discord as a bot and sets up a system in which functions are triggered by messages it can see that meet a set of conditions
-# Yadon helps by using text files to keep track of data, like command details, settings, and user levels!
-# - Yadon will provide fresh data whenever it's used. However, Koduck needs to keep its own track of two things and won't know if the text files were manually updated:
-# -- Command details include function objects, which can't be passed in simply through text (from Yadon), since Koduck should not have access to these functions
-# --- Which means command details can only be passed in from outside (main) either before client startup or through a function triggered by a command
-# --- To make it easier to initialize commands from Yadon, Koduck will try to run the "refresh_commands" command after startup if it was passed in
-# -- Settings are stored as attributes in a module where a bunch of required settings are initialized
-# --- Settings read from the settings table will replace any initialized settings
-# --- If a setting is removed from the settings table and refresh_settings() is called, the setting will still be active (to be fixed)
+"""
+-*- coding: utf_8 -*-
+
+Koduck connects to Discord as a bot and sets up a system in which functions
+are triggered by messages that meet a set of conditions.
+
+It uses a sqlite database to keep track of data, like command details, settings, and user levels.
+
+-- Command details include function objects, which can't be passed in simply through text,
+since Koduck should not have access to these functions
+--- Which means command details can only be passed in from outside (main)
+either before client startup or through a function triggered by a command
+--- To make it easier to initialize commands,
+Koduck will try to run the "refresh_commands" command after startup if it was passed in
+-- Settings are stored as attributes in a module where a bunch of required settings are initialized
+--- Settings read from the settings table will replace any initialized settings
+"""
 
 from __future__ import annotations
 
@@ -127,7 +134,7 @@ class Koduck:
                     else ""
                 )
             if hasattr(message.channel, "name"):
-                log_fields["channel_name"] = "#" + message.channel.name
+                log_fields["channel_name"] = "#" + message.channel.name  # type: ignore
             log_fields["message_content"] = message.content
 
             for property_name in ["embeds", "attachments", "stickers"]:
@@ -164,7 +171,9 @@ class Koduck:
                     else ""
                 )
             if hasattr(interaction.channel, "name"):
-                log_fields["channel_name"] = "#" + interaction.channel.name
+                log_fields["channel_name"] = (
+                    "#" + interaction.channel.name  # type:ignore
+                )
             if not log_fields["data"]:
                 log_fields["data"] = {}
             log_fields["data"]["interaction"] = interaction.data
@@ -193,6 +202,7 @@ class Koduck:
         - view: a Discord View to include in the outgoing Discord Message
         - ignore_cd: set this to True to ignore cooldown checks"""
 
+        # TODO shouldn't these two be arguments with default values?
         content = kwargs["content"] if "content" in kwargs else ""
         embed = kwargs["embed"] if "embed" in kwargs else None
         send_channel = channel
@@ -228,7 +238,8 @@ class Koduck:
                 the_message = await receive_message.interaction.followup.send(**kwargs)
         # send message to an interaction
         elif isinstance(receive_message, discord.Interaction) and channel is None:
-            # This is not returning the sent message for some reason, so here's a workaround to fetch it after it's sent
+            # This is not returning the sent message for some reason,
+            # so here's a workaround to fetch it after it's sent
             if not receive_message.response.is_done():
                 await receive_message.response.send_message(**kwargs)
                 the_message = await receive_message.original_response()
@@ -492,8 +503,8 @@ class Koduck:
     async def run_command(
         self,
         command: str,
-        context: KoduckContext | None = None,
         *args: str,
+        context: KoduckContext | None = None,
         **kwargs: Any,
     ):
         if context is None:
@@ -650,10 +661,13 @@ async def on_interaction(interaction: discord.Interaction) -> None:
         koduck_instance.log(type="interaction_user", interaction=interaction)
 
 
-# This is where messages come in, whether a command is triggered or not is checked, and parameters are parsed.
-# Note: don't use " \ or = as command prefix or param delim, since they are used in parsing, it'll mess stuff up.
 @client.event
 async def on_message(message: discord.Message) -> discord.Message | None:
+    """React to a new message.
+
+    Check whether a command is triggered, and parse parameters.
+    Note: don't use ``"``, ``\\``, or ``=`` as command prefix or parameter delimiters,
+    since they are used in parsing, it will mess stuff up."""
     assert koduck_instance
     assert koduck_instance.client.user
     # log messages from self
@@ -750,7 +764,7 @@ async def on_message(message: discord.Message) -> discord.Message | None:
                             param[param.index("=") + 1 :].strip(), quotes, counter
                         )
                         kwargs[keyword] = value
-                        context.params.append("{}={}".format(keyword, value))
+                        context.params.append(f"{keyword}={value}")
                     else:
                         arg, counter = put_quotes_back(param.strip(), quotes, counter)
                         args.append(arg)

@@ -21,7 +21,7 @@ from models import Param, PokemonType, Reminder, Stage, StageType
 RE_PING = re.compile(r"<@!?[0-9]*>")
 
 
-async def update_emojis(context: KoduckContext, *args: str, **kwargs: Any) -> None:
+async def update_emojis(context: KoduckContext) -> None:
     assert context.koduck
     utils.emojis = {}
     for server in context.koduck.client.guilds:
@@ -34,7 +34,7 @@ async def update_emojis(context: KoduckContext, *args: str, **kwargs: Any) -> No
 
 
 async def emojify_2(
-    context: KoduckContext, *args: str, **kwargs: Any
+    context: KoduckContext
 ) -> discord.Message | None:
     assert context.koduck
     emojified_message = utils.emojify(context.param_line, check_aliases=True)
@@ -45,7 +45,7 @@ async def emojify_2(
 
 
 async def add_alias(
-    context: KoduckContext, *args: str, **kwargs: Any
+    context: KoduckContext, *args: str
 ) -> discord.Message | None:
     assert context.koduck
     if len(args) < 2:
@@ -86,7 +86,7 @@ async def add_alias(
 
 
 async def remove_alias(
-    context: KoduckContext, *args: str, **kwargs: Any
+    context: KoduckContext, *args: str
 ) -> discord.Message | None:
     assert context.koduck
     if not args:
@@ -117,7 +117,7 @@ async def remove_alias(
 
 
 async def list_aliases(
-    context: KoduckContext, *args: str, **kwargs: Any
+    context: KoduckContext, *args: str
 ) -> discord.Message | None:
     assert context.koduck
     if len(args) < 1:
@@ -146,7 +146,7 @@ async def list_aliases(
 
 
 async def pokemon(
-    context: KoduckContext, *args: str, **kwargs: Any
+    context: KoduckContext, *args: str
 ) -> discord.Message | None:
     assert context.koduck
     if not args:
@@ -155,7 +155,7 @@ async def pokemon(
         )
 
     # parse params
-    query_pokemon = await pokemon_lookup(context, query=args[0])
+    query_pokemon = await pokemon_lookup(context, _query=args[0])
     if not query_pokemon:
         print("Unrecognized Pokemon")
         return
@@ -175,7 +175,7 @@ async def pokemon(
 
 
 async def skill(
-    context: KoduckContext, *args: str, **kwargs: Any
+    context: KoduckContext, *args: str
 ) -> discord.Message | None:
     assert context.koduck
     if not args:
@@ -184,7 +184,7 @@ async def skill(
         )
 
     # parse params
-    query_skill = await pokemon_lookup(context, query=args[0], skill_lookup=True)
+    query_skill = await pokemon_lookup(context, _query=args[0], skill_lookup=True)
     if not query_skill:
         print("Unrecognized Skill")
         return
@@ -204,7 +204,7 @@ async def skill(
 
 
 async def ap(
-    context: KoduckContext, *args: str, **kwargs: Any
+    context: KoduckContext, *args: str
 ) -> discord.Message | None:
     assert context.koduck
     if not args:
@@ -245,7 +245,7 @@ async def ap(
 
 
 async def exp(
-    context: KoduckContext, *args: str, **kwargs: Any
+    context: KoduckContext, *args: str
 ) -> discord.Message | None:
     assert context.koduck
     if not args:
@@ -265,7 +265,7 @@ async def exp(
         query_bp = int(_query)
         assert query_bp in range(30, 91, 10)
     except ValueError:
-        query_pokemon = await pokemon_lookup(context, query=_query)
+        query_pokemon = await pokemon_lookup(context, _query=_query)
         if not query_pokemon:
             print("Unrecognized Pokemon")
             return
@@ -350,7 +350,7 @@ async def exp(
 
 
 async def type(
-    context: KoduckContext, *args: str, **kwargs: Any
+    context: KoduckContext, *args: str
 ) -> discord.Message | None:
     assert context.koduck
     if not args:
@@ -456,7 +456,7 @@ async def stage(
                 ),
             )
     elif stage_type == StageType.ALL:
-        query_pokemon = await pokemon_lookup(context, query=query_pokemon)
+        query_pokemon = await pokemon_lookup(context, _query=query_pokemon)
         if not query_pokemon:
             print("Unrecognized Pokemon")
             return
@@ -549,7 +549,7 @@ async def starting_board(
 
 
 async def disruption_pattern(
-    context: KoduckContext, *args: str, **kwargs: Any
+    context: KoduckContext, *args: str
 ) -> discord.Message | None:
     assert context.koduck
     if not args:
@@ -588,7 +588,7 @@ async def disruption_pattern(
 
 
 async def event(
-    context: KoduckContext, *args: str, **kwargs: Any
+    context: KoduckContext, *args: str
 ) -> discord.Message | None:
     assert context.koduck
     if not args:
@@ -618,7 +618,7 @@ async def event(
                 receive_message=context.message,
                 content=settings.message_event_invalid_param,
             )
-    query_pokemon = await pokemon_lookup(context, query=args[0])
+    query_pokemon = await pokemon_lookup(context, _query=args[0])
     if not query_pokemon:
         print("Unrecognized Pokemon")
         return
@@ -967,7 +967,7 @@ async def skill_with_pokemon(
     query_skill = args[0]
 
     # lookup and validate skill
-    query_skill = await pokemon_lookup(context, query=query_skill, skill_lookup=True)
+    query_skill = await pokemon_lookup(context, _query=query_skill, skill_lookup=True)
     if not query_skill:
         print("Unrecognized Skill")
         return
@@ -1286,14 +1286,14 @@ def pokemon_filter(
 
 
 async def eb_rewards(
-    context: KoduckContext, *args: str, **kwargs: Any
+    context: KoduckContext, *args: str
 ) -> discord.Message | None:
     assert context.koduck
     if not args:
         query_pokemon = utils.current_eb_pokemon()
     else:
         # parse params
-        query_pokemon = await pokemon_lookup(context, query=args[0])
+        query_pokemon = await pokemon_lookup(context, _query=args[0])
         if not query_pokemon:
             print("Unrecognized Pokemon")
             return
@@ -1343,7 +1343,7 @@ async def eb_details(
             )
 
     # parse params
-    query_pokemon = await pokemon_lookup(context, query=args[0])
+    query_pokemon = await pokemon_lookup(context, _query=args[0])
     if not query_pokemon:
         print("Unrecognized Pokemon")
         return
@@ -1411,7 +1411,7 @@ async def eb_details_shorthand(
 
 
 async def week(
-    context: KoduckContext, *args: str, **kwargs: Any
+    context: KoduckContext, *args: str
 ) -> discord.Message | None:
     assert context.koduck
     curr_week = utils.get_current_week()
@@ -1424,7 +1424,7 @@ async def week(
     if args[0].isdigit():
         query_week = int(args[0])
     else:
-        query_pokemon = await pokemon_lookup(context, query=args[0])
+        query_pokemon = await pokemon_lookup(context, _query=args[0])
         if not query_pokemon:
             print("Unrecognized Pokemon")
             return
@@ -1465,7 +1465,7 @@ async def next_week(
 
 
 async def sm_rewards(
-    context: KoduckContext, *args: str, **kwargs: Any
+    context: KoduckContext
 ) -> discord.Message | None:
     assert context.koduck
     reward_list = db.get_sm_rewards()
@@ -1487,7 +1487,7 @@ async def sm_rewards(
 
 
 async def drain_list(
-    context: KoduckContext, *args: str, **kwargs: Any
+    context: KoduckContext, *args: str
 ) -> discord.Message | None:
     assert context.koduck
     # allow space delimited parameters
@@ -1535,38 +1535,37 @@ async def drain_list(
 async def pokemon_lookup(
     context: KoduckContext,
     *args: str,
-    query: str = "",
+    _query: str = "",
     enable_dym: bool = True,
     skill_lookup: bool = False,
-    **kwargs: Any,
 ) -> str:
     """Return a corrected query of the required pokemon/skill.
 
     Check if it exists as an alias, and/or in an additionally provided list.
     Provide some suggestions to the user if it does not."""
     assert context.koduck
-    query = query or args[0]
+    _query = _query or args[0]
     aliases = db.get_aliases()
-    query = aliases.get(query.lower(), query)
+    _query = aliases.get(_query.lower(), _query)
 
     pokemon_dict = {k.lower(): k for k in db.get_pokemon_names()}
     skill_dict = {k.lower(): k for k in db.get_skill_names()}
     # get properly capitalized name
-    query = (
-        skill_dict.get(query.lower(), query)
+    _query = (
+        skill_dict.get(_query.lower(), _query)
         if skill_lookup
-        else pokemon_dict.get(query.lower(), query)
+        else pokemon_dict.get(_query.lower(), _query)
     )
     try:
-        query = (
-            skill_dict[query.lower()] if skill_lookup else pokemon_dict[query.lower()]
+        _query = (
+            skill_dict[_query.lower()] if skill_lookup else pokemon_dict[_query.lower()]
         )
         found = True
     except KeyError:
         found = False
 
     if found:
-        return query
+        return _query
 
     if not enable_dym:
         return ""
@@ -1574,7 +1573,7 @@ async def pokemon_lookup(
     add = skill_dict.values() if skill_lookup else pokemon_dict.values()
 
     close_matches = difflib.get_close_matches(
-        query,
+        _query,
         list(aliases.keys()) + list(add),
         n=settings.dym_limit,
         cutoff=settings.dym_threshold,
@@ -1584,7 +1583,7 @@ async def pokemon_lookup(
         await context.koduck.send_message(
             receive_message=context.message,
             content=settings.message_pokemon_lookup_no_result.format(
-                "Skill" if skill_lookup else "Pokemon", query
+                "Skill" if skill_lookup else "Pokemon", _query
             ),
         )
         return ""
@@ -1609,7 +1608,7 @@ async def pokemon_lookup(
         context,
         len(choices),
         settings.message_pokemon_lookup_no_result.format(
-            "Skill" if skill_lookup else "Pokemon", query
+            "Skill" if skill_lookup else "Pokemon", _query
         )
         + "\n"
         + settings.message_pokemon_lookup_suggest
@@ -1767,7 +1766,7 @@ async def choice_react(
 
 
 async def remind_me(
-    context: KoduckContext, *args: str, **kwargs: Any
+    context: KoduckContext, *args: str
 ) -> discord.Message | None:
     assert context.koduck
     assert context.message
@@ -1807,7 +1806,7 @@ async def remind_me(
             content=settings.message_remind_me_week_success.format(query_week),
         )
 
-    query_pokemon = await pokemon_lookup(context, query=args[0])
+    query_pokemon = await pokemon_lookup(context, _query=args[0])
     if not query_pokemon:
         print("Unrecognized Pokemon")
         return
@@ -1825,7 +1824,7 @@ async def remind_me(
 
 
 async def unremind_me(
-    context: KoduckContext, *args: str, **kwargs: Any
+    context: KoduckContext, *args: str
 ) -> discord.Message | None:
     assert context.koduck
     if not args:
@@ -1863,7 +1862,7 @@ async def unremind_me(
             receive_message=context.message,
             content=settings.message_unremind_me_week_success.format(query_week),
         )
-    query_pokemon = await pokemon_lookup(context, query=args[0])
+    query_pokemon = await pokemon_lookup(context, _query=args[0])
     if not query_pokemon:
         print("Unrecognized Pokemon")
         return

@@ -11,6 +11,8 @@ import discord
 from koduck import KoduckContext
 from models import SMStageResult, SMTeam, WMTeam
 
+SM_STRING = "{:8.8}  {:5.2f}  {:3.0f}  {:4.1f} ~ {:4.1f}  {:4.1f} ~ {:4.1f}"
+
 scriptdir = os.path.dirname(os.path.realpath(__file__)) + os.sep
 shuffle_calc_json_filename = f"{scriptdir}shuffle_calc_data.json"
 
@@ -58,9 +60,7 @@ def initialize_shuffle_calc_json_data(
 ) = initialize_shuffle_calc_json_data(shuffle_calc_json_filename)
 
 
-async def sm(
-    context: KoduckContext, *args: str, **kwargs: Any
-) -> discord.Message | None:
+async def sm(context: KoduckContext, *args: str) -> discord.Message | None:
     assert context.koduck
     if len(sm_data) == 0 or len(sm_stages_data) < 300 or context["message"].author.bot:
         return
@@ -141,7 +141,7 @@ async def sm(
             tmega = "Mega"
         team_name = f"{tmega}-{strat[1:].upper()}"
         txt.append(
-            "{:8.8}  {:5.2f}  {:3.0f}  {:4.1f} ~ {:4.1f}  {:4.1f} ~ {:4.1f}".format(
+            SM_STRING.format(
                 team_name,
                 max(1.0, selected_stage_data["results"][strat][0]),
                 100.0
@@ -169,9 +169,7 @@ async def sm(
     )
 
 
-async def wm(
-    context: KoduckContext, *args: str, **kwargs: Any
-) -> discord.Message | None:
+async def wm(context: KoduckContext) -> discord.Message | None:
     assert context.koduck
     assert context.message
     if not wm_data or context.message.author.bot:
@@ -188,9 +186,7 @@ async def wm(
     )
 
 
-async def explain(
-    context: KoduckContext, *args: str, **kwargs: Any
-) -> discord.Message | None:
+async def explain(context: KoduckContext, *args: str) -> discord.Message | None:
     assert context.koduck
     assert context.message
     if not explain_data or context.message.author.bot:

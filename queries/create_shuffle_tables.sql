@@ -88,7 +88,7 @@ CREATE TABLE "event_stages" (
 	"drop_3_rate" FLOAT,
 	"items_available" TEXT,
 	"rewards" TEXT,
-	"rewards_UX" TEXT,
+	"rewards_ux" TEXT,
 	"cd1" TEXT,
 	"cd2" TEXT,
 	"cd3" TEXT
@@ -127,7 +127,7 @@ CREATE TABLE "main_stages" (
 	"drop_3_rate" FLOAT,
 	"items_available" TEXT,
 	"rewards" TEXT,
-	"rewards_UX" TEXT,
+	"rewards_ux" TEXT,
 	"cd1" TEXT,
 	"cd2" TEXT,
 	"cd3" TEXT
@@ -166,7 +166,7 @@ CREATE TABLE "expert_stages" (
 	"drop_3_rate" FLOAT,
 	"items_available" TEXT,
 	"rewards" TEXT,
-	"rewards_UX" TEXT,
+	"rewards_ux" TEXT,
 	"cd1" TEXT,
 	"cd2" TEXT,
 	"cd3" TEXT

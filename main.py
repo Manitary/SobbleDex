@@ -10,7 +10,7 @@ from koduck import Koduck, KoduckContext
 
 # Required method to setup Koduck.
 # Can also be run as a command after startup to update any manual changes to the commands table.
-async def refresh_commands(context: KoduckContext, *args: Any, **kwargs: Any) -> None:
+async def refresh_commands(context: KoduckContext) -> None:
     assert context.koduck
     errors: list[str] = []
     commands = list(db.get_commands())

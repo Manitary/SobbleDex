@@ -9,7 +9,7 @@ from koduck import KoduckContext
 
 
 async def update_setting(
-    context: KoduckContext, setting_name: str, new_value: Any, *args: str, **kwargs: Any
+    context: KoduckContext, setting_name: str, new_value: Any
 ) -> discord.Message | None:
     assert context.koduck
     assert context.message
@@ -32,7 +32,7 @@ async def update_setting(
 
 
 async def add_setting(
-    context: KoduckContext, setting_name: str, value: Any, *args: str, **kwargs: Any
+    context: KoduckContext, setting_name: str, value: Any
 ) -> discord.Message | None:
     assert context.koduck
     assert context.message
@@ -50,7 +50,7 @@ async def add_setting(
 
 
 async def remove_setting(
-    context: KoduckContext, setting_name: str, *args: Any, **kwargs: Any
+    context: KoduckContext, setting_name: str
 ) -> discord.Message | None:
     assert context.koduck
     assert context.message
@@ -68,9 +68,7 @@ async def remove_setting(
     )
 
 
-async def restrict_user(
-    context: KoduckContext, *args: str, **kwargs: Any
-) -> discord.Message | None:
+async def restrict_user(context: KoduckContext) -> discord.Message | None:
     assert context.koduck
     assert context.message
     # need exactly one mentioned user (the order in the mentioned list is unreliable)
@@ -100,9 +98,7 @@ async def restrict_user(
     )
 
 
-async def unrestrict_user(
-    context: KoduckContext, *args: str, **kwargs: Any
-) -> discord.Message | None:
+async def unrestrict_user(context: KoduckContext) -> discord.Message | None:
     assert context.koduck
     assert context.message
     # need exactly one mentioned user (the order in the mentioned list is unreliable)
@@ -126,7 +122,7 @@ async def unrestrict_user(
 
 
 async def add_response(
-    context: KoduckContext, trigger: str, response: str, *args: str, **kwargs: Any
+    context: KoduckContext, trigger: str, response: str
 ) -> discord.Message | None:
     assert context.koduck
     success = db.add_custom_response(trigger, response)
@@ -143,7 +139,7 @@ async def add_response(
 
 
 async def remove_response(
-    context: KoduckContext, trigger: str, *args: str, **kwargs: Any
+    context: KoduckContext, trigger: str
 ) -> discord.Message | None:
     assert context.koduck
     success = db.remove_custom_response(trigger)
@@ -160,7 +156,7 @@ async def remove_response(
 
 
 async def change_nickname(
-    context: KoduckContext, *args: str, nickname: str = "", **kwargs: Any
+    context: KoduckContext, nickname: str = ""
 ) -> discord.Message | discord.Member | None:
     assert context.koduck
     assert context.message
@@ -174,9 +170,7 @@ async def change_nickname(
     return await self_member.edit(nick=nickname)
 
 
-async def add_requestable_roles(
-    context: KoduckContext, *args: str, **kwargs: Any
-) -> discord.Message | None:
+async def add_requestable_roles(context: KoduckContext) -> discord.Message | None:
     assert context.koduck
     assert context.message
     if not context.message.role_mentions:
@@ -194,9 +188,7 @@ async def add_requestable_roles(
     )
 
 
-async def remove_requestable_roles(
-    context: KoduckContext, *args: str, **kwargs: Any
-) -> discord.Message | None:
+async def remove_requestable_roles(context: KoduckContext) -> discord.Message | None:
     assert context.koduck
     assert context.message
     if not context.message.role_mentions:

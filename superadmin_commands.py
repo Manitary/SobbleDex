@@ -1,22 +1,16 @@
-from typing import Any
-
 import discord
 
 import settings
 from koduck import KoduckContext
 
 
-async def shutdown(context: KoduckContext, *args: str, **kwargs: Any) -> None:
+async def shutdown(context: KoduckContext) -> None:
     assert context.koduck
     return await context.koduck.client.close()
 
 
 async def send_message(
-    context: KoduckContext,
-    channel_id: int,
-    message_content: str,
-    *args: str,
-    **kwargs: Any
+    context: KoduckContext, channel_id: int, message_content: str
 ) -> discord.Message | None:
     assert context.koduck
     try:
@@ -32,16 +26,14 @@ async def send_message(
     )
 
 
-# note: discord server prevents any user, including bots, from changing usernames more than twice per hour
-async def change_name(
-    context: KoduckContext, username: str, *args: str, **kwargs: Any
-) -> discord.ClientUser:
+# note: discord server prevents users (and bots) from changing usernames more than twice per hour
+async def change_name(context: KoduckContext, username: str) -> discord.ClientUser:
     assert context.koduck
     assert context.koduck.client.user
     return await context.koduck.client.user.edit(username=username)
 
 
-async def change_status(context: KoduckContext, *args: str, **kwargs: Any) -> None:
+async def change_status(context: KoduckContext) -> None:
     assert context.koduck
     if not context.param_line:
         return await context.koduck.client.change_presence(
@@ -53,9 +45,7 @@ async def change_status(context: KoduckContext, *args: str, **kwargs: Any) -> No
 
 
 # Updates any manual changes to the settings table
-async def refresh_settings(
-    context: KoduckContext, *args: str, **kwargs: Any
-) -> discord.Message | None:
+async def refresh_settings(context: KoduckContext) -> discord.Message | None:
     assert context.koduck
     context.koduck.refresh_settings()
     return await context.koduck.send_message(
@@ -64,10 +54,11 @@ async def refresh_settings(
     )
 
 
-# Syncs the slash commands to Discord. This is not done automatically and should be done by running this command if changes were made to the slash commands.
-async def refresh_app_commands(
-    context: KoduckContext, *args: str, **kwargs: Any
-) -> None:
+async def refresh_app_commands(context: KoduckContext) -> None:
+    """Syncs the slash commands to Discord.
+
+    This is not done automatically. Run this command if changes were made to the slash commands.
+    """
     assert context.koduck
     await context.koduck.refresh_app_commands()
     await context.koduck.send_message(
@@ -76,9 +67,7 @@ async def refresh_app_commands(
     )
 
 
-async def add_admin(
-    context: KoduckContext, *args: str, **kwargs: Any
-) -> discord.Message | None:
+async def add_admin(context: KoduckContext) -> discord.Message | None:
     assert context.koduck
     assert context.message
     # need exactly one mentioned user (the order in the mentioned list is unreliable)
@@ -103,9 +92,7 @@ async def add_admin(
     )
 
 
-async def remove_admin(
-    context: KoduckContext, *args: str, **kwargs: Any
-) -> discord.Message | None:
+async def remove_admin(context: KoduckContext) -> discord.Message | None:
     assert context.koduck
     assert context.message
     # need exactly one mentioned user (the order in the mentioned list is unreliable)
@@ -131,9 +118,7 @@ async def remove_admin(
     )
 
 
-async def purge(
-    context: KoduckContext, message_count: int, *args: str, **kwargs: Any
-) -> discord.Message | None:
+async def purge(context: KoduckContext, message_count: int) -> discord.Message | None:
     """Search through the past settings.purge_search_limit number of messages in this channel
     and delete given number of bot messages"""
     assert context.koduck
