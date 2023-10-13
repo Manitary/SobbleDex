@@ -301,8 +301,8 @@ async def exp(context: KoduckContext, *args: str) -> discord.Message | None:
 
     # retrieve data
     ap_table = db.query_ap(query_bp)
-    start_exp = exp_table[query_level_1]
-    end_exp = exp_table[query_level_2]
+    start_exp = exp_table[query_level_1 - 1]
+    end_exp = exp_table[query_level_2 - 1]
     start_ap = ap_table[query_level_1 - 1]
     end_ap = ap_table[query_level_2 - 1]
 
