@@ -324,11 +324,8 @@ def query_event_by_pokemon(pokemon: str) -> Iterator[Event]:
     q = shuffle_connection.execute(
         """
         SELECT * FROM events
-        WHERE pokemon = ':pokemon'
-        OR pokemon LIKE ':pokemon/%' 
-        OR pokemon LIKE '%/:pokemon'
-        OR pokemon LIKE '%/:pokemon/%'
-        COLLATE NOCASE
+        WHERE pokemon LIKE '%' || :pokemon
+        OR pokemon LIKE '%' || :pokemon || '/%' 
         """,
         {"pokemon": pokemon},
     )
