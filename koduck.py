@@ -22,6 +22,7 @@ import asyncio
 import datetime
 import functools
 import re
+import sqlite3
 import sys
 import traceback
 from collections import defaultdict
@@ -497,7 +498,13 @@ class Koduck:
         return True
 
     def get_user_level(self, user_id: int) -> int:
-        return db.query_user_level(user_id) or settings.default_user_level
+        try:
+            level = db.query_user_level(user_id)
+            assert level is not None
+        except (sqlite3.OperationalError, AssertionError) as e:
+            print(f"Failed to get user level: {e}")
+            return settings.default_user_level
+        return level
 
     # Run a command as if it was triggered by a Discord message
     async def run_command(
