@@ -2,7 +2,7 @@ import enum
 import re
 from dataclasses import dataclass
 from datetime import datetime, timedelta
-from typing import Callable, Self
+from typing import Any, Callable, Self
 
 import pytz
 
@@ -107,6 +107,13 @@ class Command:
     command_type: str
     command_tier: int
     description: str
+
+
+@dataclass(frozen=True)
+class RealCommand:
+    function: Callable[..., Any]
+    type: str
+    tier: int
 
 
 @dataclass

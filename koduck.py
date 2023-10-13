@@ -26,7 +26,7 @@ import pytz
 
 import db
 import settings
-from models import Setting
+from models import RealCommand, Setting
 
 
 class ClientWithBackgroundTask(discord.Client):
@@ -63,7 +63,9 @@ class Koduck:
         # ``type`` is a string that determines the trigger type of the command,
         # should be one of (prefix, match, contain, slash)
         # ``tier`` is the user authority level required to run the command
-        self.commands = {}
+
+        self.commands: dict[str, RealCommand] = {}
+
         self.prefix_commands: list[str] = []
         self.match_commands: list[str] = []
         self.contain_commands: list[str] = []
@@ -93,7 +95,7 @@ class Koduck:
         interaction: Optional[discord.Interaction] = None,
         extra: str = "",
     ) -> None:
-        log_fields = {
+        log_fields: dict[str, Any] = {
             "timestamp": datetime.datetime.now(datetime.timezone.utc).strftime(
                 "%Y-%m-%d %H:%M:%S.%f"
             ),
@@ -106,20 +108,24 @@ class Koduck:
             "discord_tag": "",
             "nickname": "",
             "message_content": "",
-            "data": "",
+            "data": defaultdict(list),
             "extra": extra,
         }
 
         if message:
             log_fields["user_id"] = message.author.id
             username = message.author.name
-            discr = message.author.discriminator
-            log_fields["discord_tag"] = "{}#{}".format(username, discr)
+            discriminator = message.author.discriminator
+            log_fields["discord_tag"] = f"{username}#{discriminator}"
             if message.guild is not None:
                 log_fields["server_id"] = message.guild.id
                 log_fields["channel_id"] = message.channel.id
                 log_fields["server_name"] = message.guild.name
-                log_fields["nickname"] = message.author.nick or ""
+                log_fields["nickname"] = (
+                    (message.author.nick or "")
+                    if isinstance(message.author, discord.Member)
+                    else ""
+                )
             if hasattr(message.channel, "name"):
                 log_fields["channel_name"] = "#" + message.channel.name
             log_fields["message_content"] = message.content
@@ -144,13 +150,19 @@ class Koduck:
         elif interaction:
             log_fields["user_id"] = interaction.user.id
             username = interaction.user.name
-            discr = interaction.user.discriminator
-            log_fields["discord_tag"] = "{}#{}".format(username, discr)
+            discriminator = interaction.user.discriminator
+            log_fields["discord_tag"] = f"{username}#{discriminator}"
             if interaction.guild is not None:
                 log_fields["server_id"] = interaction.guild.id
-                log_fields["channel_id"] = interaction.channel.id
+                log_fields["channel_id"] = (
+                    interaction.channel.id if interaction.channel else ""
+                )
                 log_fields["server_name"] = interaction.guild.name
-                log_fields["nickname"] = interaction.user.nick or ""
+                log_fields["nickname"] = (
+                    (interaction.user.nick or "")
+                    if isinstance(interaction.user, discord.Member)
+                    else ""
+                )
             if hasattr(interaction.channel, "name"):
                 log_fields["channel_name"] = "#" + interaction.channel.name
             if not log_fields["data"]:
@@ -312,19 +324,17 @@ class Koduck:
             self.command_tree.add_command(app_command)
         else:
             return
-        self.commands[command_name.lower()] = (function, type, tier)
+        self.commands[command_name.lower()] = RealCommand(function, type, tier)
 
-    # Remove a command, returns 0 if successful, -1 if command not recognized
-    def remove_command(self, command: str):
-        if command not in self.commands.keys():
-            return -1
-        command_details = self.commands[command]
+    def remove_command(self, command: str) -> None:
+        if command not in self.commands:
+            return
         {
             "prefix": self.prefix_commands,
             "match": self.match_commands,
             "contain": self.contain_commands,
             "slash": self.slash_commands,
-        }[command_details[1]].remove(command)
+        }[self.commands[command].type].remove(command)
         del self.commands[command]
 
     def clear_commands(self) -> None:
@@ -335,9 +345,13 @@ class Koduck:
         self.commands = {}
         self.command_tree.clear_commands(guild=None)
 
-    # Registers a "run" slash command which simulates running a prefix command
-    # This is helpful if the bot doesn't have the message_content intent (for unverified bots that are in over 100 servers) and you prefer to use prefix commands
     def add_run_slash_command(self) -> None:
+        """Registers a "run" slash command which simulates running a prefix command.
+
+        This is helpful if the bot doesn't have the message_content intent
+        (for unverified bots that are in over 100 servers) and you prefer to use prefix commands.
+        """
+
         async def run_command(interaction: discord.Interaction, command: str) -> None:
             message_content = settings.command_prefix + command
             message = SlashMessage(interaction, message_content)
@@ -486,7 +500,7 @@ class Koduck:
             context = KoduckContext()
             context.koduck = koduck_instance
         try:
-            function = self.commands[command][0]
+            function = self.commands[command].function
             return await function(context, *args, **kwargs)
         except (KeyError, IndexError):
             return
@@ -765,7 +779,7 @@ async def on_message(message: discord.Message) -> discord.Message | None:
 
         # CHECK PERMISSIONS OF USER
         user_level = koduck_instance.get_user_level(message.author.id)
-        if user_level < koduck_instance.commands[context.command][2]:
+        if user_level < koduck_instance.commands[context.command].tier:
             koduck_instance.log(
                 type=activity_type, extra=settings.message_restricted_access
             )
@@ -778,7 +792,7 @@ async def on_message(message: discord.Message) -> discord.Message | None:
 
         koduck_instance.log(type=activity_type, message=message)
         # RUN THE COMMAND
-        function = koduck_instance.commands[context.command][0]
+        function = koduck_instance.commands[context.command].function
         try:
             result = await function(context, *args, **kwargs)
         except TypeError as e:

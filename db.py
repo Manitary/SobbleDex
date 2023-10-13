@@ -697,5 +697,18 @@ def remove_requestable_roles(guild_id: int, *role_id: int) -> None:
     bot_connection.commit()
 
 
+def query_requestable_roles(guild_id: int) -> Iterator[int]:
+    q = bot_connection.execute(
+        """
+        SELECT role_id
+        FROM requestable_roles
+        WHERE guild_id = :guild
+        """,
+        {"guild": guild_id},
+    )
+    for role in q.fetchall():
+        yield role["role_id"]
+
+
 if __name__ == "__main__":
     ...

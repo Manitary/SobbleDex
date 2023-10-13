@@ -1,13 +1,22 @@
 import asyncio
 import random
-from typing import Any
+from collections import defaultdict
+from typing import Any, Iterable
 
 import discord
 
 import db
 import settings
-import yadon
 from koduck import KoduckContext
+from models import RealCommand
+
+DISCORD_ACTIVITIES = {
+    discord.ActivityType.playing: "Playing",
+    discord.ActivityType.streaming: "Streaming",
+    discord.ActivityType.listening: "Listening",
+    discord.ActivityType.watching: "Watching",
+    discord.ActivityType.unknown: "unknown",
+}
 
 
 # When someone says a trigger message, respond with a custom response!
@@ -22,8 +31,14 @@ async def custom_response(
         )
 
 
-# Deletes the last bot output triggered by the user. This information is tracked starting from bot startup, and only when koduck.send_message is used
-async def oops(context, *args, **kwargs):
+async def oops(context: KoduckContext, *args: str, **kwargs: Any) -> str:
+    """Delete the last bot output triggered by the user.
+
+    This information is tracked starting from bot startup,
+    and only when koduck.send_message is used.
+    """
+    assert context.koduck
+    assert context.message
     try:
         the_message = context.koduck.output_history[context.message.author.id].pop()
     except (KeyError, IndexError):
@@ -35,37 +50,42 @@ async def oops(context, *args, **kwargs):
         return await oops(context)
 
 
-async def list_commands(context, *args, **kwargs):
-    # filter out the commands that the user doesn't have permission to run
-    # group the commands by function, multiple aliases for one function will be put in parentheses to indicate that fact to the user
+async def list_commands(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
+    """List all commands that the user has permission to run.
+
+    Group the commands by function. Multiple aliases are shown in parentheses.
+    """
+    assert context.koduck
+    assert context.message
     current_level = context.koduck.get_user_level(context.message.author.id)
-    available_commands = {}
+
+    available_commands: dict[RealCommand, list[str]] = defaultdict(list)
+
     for command_name, command in context.koduck.commands.items():
-        if command[2] <= current_level and command[1] == "prefix":
-            try:
-                available_commands[command[0]].append(command_name)
-            except KeyError:
-                available_commands[command[0]] = [command_name]
-    output = ""
-    for function, command_names in available_commands.items():
-        if len(command_names) > 1:
-            output += "({}), ".format(", ".join(command_names))
-        else:
-            output += "{}, ".format(command_names[0])
-    output = output[:-2]
+        if command.tier <= current_level and command.type == "prefix":
+            available_commands[command].append(command_name)
+
+    output = ", ".join(
+        f"({', '.join(command_names)})" if len(command_names) > 0 else command_names[0]
+        for command_names in available_commands.values()
+    )
     return await context.koduck.send_message(
         receive_message=context.message, content=output
     )
 
 
-async def help(context, query="", *args, **kwargs):
+async def help(
+    context: KoduckContext, *args: str, query: str = "", **kwargs: Any
+) -> discord.Message | None:
+    assert context.koduck
     help_message = get_help_message(query)
     if not help_message:
         help_message = get_help_message("unknown_command")
-    if help_message:
-        return await context.koduck.send_message(
-            receive_message=context.message, content=help_message
-        )
+    return await context.koduck.send_message(
+        receive_message=context.message, content=help_message
+    )
 
 
 def get_help_message(message_name: str) -> str:
@@ -79,9 +99,14 @@ def get_help_message(message_name: str) -> str:
     )
 
 
-async def user_info(context, *args, **kwargs):
+async def user_info(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
     # if there is no mentioned user, use the message sender instead
-    if len(context.message.raw_mentions) == 0:
+    assert context.koduck
+    assert context.message
+    user = None
+    if not context.message.raw_mentions:
         if context.message.guild is None:
             user = context.message.author
         else:
@@ -95,138 +120,143 @@ async def user_info(context, *args, **kwargs):
             user = context.message.guild.get_member(context.message.raw_mentions[0])
             if user is None:
                 user = context.koduck.client.get_user(context.message.raw_mentions[0])
-    else:
-        return await context.koduck.sendmessage(
-            context.message, sendcontent=settings.message_no_mentioned_user_2
+    if not user or len(context.message.raw_mentions) > 1:
+        return await context.koduck.send_message(
+            context.message, content=settings.message_no_mentioned_user_2
         )
 
     username = user.name
-    discr = user.discriminator
+    discriminator = user.discriminator
     avatar = user.display_avatar
     creation_date = user.created_at
 
-    # these properties only appear in Member object (subclass of User) which is only available from Servers
-    if isinstance(user, discord.Member):
-        activities = user.activities
-        join_date = user.joined_at
-        color = user.color
-        if len(activities) == 0:
-            embed = discord.Embed(
-                title="{}#{}".format(username, discr),
-                description=str(user.status),
-                color=color,
-            )
-        else:
-            desc = ""
-            for activity in activities:
-                if isinstance(activity, discord.CustomActivity):
-                    desc += "{}\n".format(activity)
-                else:
-                    type_string = {
-                        discord.ActivityType.playing: "Playing",
-                        discord.ActivityType.streaming: "Streaming",
-                        discord.ActivityType.listening: "Listening",
-                        discord.ActivityType.watching: "Watching",
-                        discord.ActivityType.unknown: "unknown",
-                    }[activity.type]
-                    desc += "{} {}\n".format(type_string, activity.name)
-            embed = discord.Embed(
-                title="{}#{}".format(username, discr), description=desc, color=color
-            )
-        embed.add_field(
-            name="Account creation date",
-            value=creation_date.strftime("%Y-%m-%d %H:%M:%S UTC"),
-            inline=False,
-        )
-        embed.add_field(
-            name="Server join date",
-            value=join_date.strftime("%Y-%m-%d %H:%M:%S UTC"),
-            inline=False,
-        )
-        embed.set_thumbnail(url=avatar.url)
-        return await context.koduck.send_message(
-            receive_message=context.message, embed=embed
-        )
-    else:
+    # if user is not in a server (i.e. User but not Member)
+    if not isinstance(user, discord.Member):
         embed = discord.Embed(
-            title="{}#{}".format(username, discr),
-            description="Account creation date: {}".format(
-                creation_date.strftime("%Y-%m-%d %H:%M:%S UTC")
-            ),
+            title=f"{username}#{discriminator}",
+            description=f"Account creation date: {creation_date.strftime('%Y-%m-%d %H:%M:%S UTC')}",
         )
         embed.set_thumbnail(url=avatar.url)
         return await context.koduck.send_message(
             receive_message=context.message, embed=embed
         )
 
+    activities = user.activities
+    join_date = user.joined_at
+    color = user.color
 
-async def roll(context, max_value=None, *args, **kwargs):
-    if max_value:
-        try:
-            max = int(max_value)
-        except ValueError:
-            max = settings.roll_default_max
-    else:
-        max = settings.roll_default_max
+    embed = discord.Embed(
+        title=f"{username}#{discriminator}",
+        description=str(user.status)
+        if not activities
+        else "\n".join(
+            f"{activity}"
+            if isinstance(activity, discord.CustomActivity)
+            else f"{DISCORD_ACTIVITIES[activity.type]} {activity.name}"
+            for activity in activities
+        ),
+        color=color,
+    )
+    embed.add_field(
+        name="Account creation date",
+        value=creation_date.strftime("%Y-%m-%d %H:%M:%S UTC"),
+        inline=False,
+    )
+    embed.add_field(
+        name="Server join date",
+        value=join_date.strftime("%Y-%m-%d %H:%M:%S UTC") if join_date else "Unknown",
+        inline=False,
+    )
+    embed.set_thumbnail(url=avatar.url)
+    return await context.koduck.send_message(
+        receive_message=context.message, embed=embed
+    )
 
-    if max >= 0:
+
+async def roll(
+    context: KoduckContext, max_value: int | str = "", **kwargs: Any
+) -> discord.Message | None:
+    assert context.koduck
+    assert context.message
+    try:
+        max_value = int(max_value)
+    except ValueError:
+        max_value = settings.roll_default_max
+
+    if max_value >= 0:
         return await context.koduck.send_message(
             receive_message=context.message,
             content=settings.message_roll_result.format(
-                context.message.author.mention, random.randint(0, max)
-            ),
-        )
-    else:
-        return await context.koduck.send_message(
-            receive_message=context.message,
-            content=settings.message_roll_result.format(
-                context.message.author.mention, random.randint(max, 0)
+                context.message.author.mention, random.randint(0, max_value)
             ),
         )
 
+    return await context.koduck.send_message(
+        receive_message=context.message,
+        content=settings.message_roll_result.format(
+            context.message.author.mention, random.randint(max_value, 0)
+        ),
+    )
 
-async def request_roles(context, *args, **kwargs):
+
+async def request_roles(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
+    assert context.koduck
+    assert context.message
+
     if context.message.guild is None:
         return await context.koduck.send_message(
             receive_message=context.message,
             content=settings.message_request_roles_no_guild,
         )
 
-    role_ids = yadon.ReadRowFromTable(
-        settings.requestable_roles_table_name, context.message.guild.id
-    )
+    role_ids = set(db.query_requestable_roles(context.message.guild.id))
 
-    if role_ids is None or len(role_ids) == 0:
+    if not role_ids:
         return await context.koduck.send_message(
             receive_message=context.message,
             content=settings.message_request_roles_no_roles,
         )
 
-    requestable_roles = []
-    for role_id in role_ids:
-        role = context.message.guild.get_role(int(role_id))
-        if role is None:
-            continue
-        requestable_roles.append(role)
+    requestable_roles = list(
+        filter(None, map(context.message.guild.get_role, role_ids))
+    )
 
-    async def add_role(member, role_id):
-        role = context.message.guild.get_role(int(role_id))
+    async def add_role(member: discord.Member, role_id: int) -> bool:
+        assert context.message
+        assert context.message.guild
+        role = context.message.guild.get_role(role_id)
+        if not role:
+            return False
         try:
             await member.add_roles(role)
             return True
         except discord.errors.Forbidden:
             return False
 
-    async def remove_role(member, role_id):
-        role = context.message.guild.get_role(int(role_id))
+    async def remove_role(member: discord.Member, role_id: int) -> bool:
+        assert context.message
+        assert context.message.guild
+        role = context.message.guild.get_role(role_id)
+        if not role:
+            return False
         try:
             await member.remove_roles(role)
             return True
         except discord.errors.Forbidden:
             return False
 
-    class RoleButton(discord.ui.Button):
-        async def callback(self, interaction):
+    class RoleButton(discord.ui.Button[discord.ui.View]):
+        role: discord.Role
+        roles: list[discord.Role]
+
+        async def callback(self, interaction: discord.Interaction) -> None:
+            assert context.message
+            assert interaction.message
+            assert isinstance(context.message.author, discord.Member)
+            assert isinstance(interaction.user, discord.Member)
+
             response_string = ""
             new_roles = context.message.author.roles
 
@@ -284,7 +314,9 @@ async def request_roles(context, *args, **kwargs):
                 content=new_message_content, view=new_view
             )
 
-    def create_view(requestable_roles, user_roles):
+    def create_view(
+        requestable_roles: Iterable[discord.Role], user_roles: Iterable[discord.Role]
+    ) -> discord.ui.View:
         the_view = discord.ui.View(timeout=60)
         for role in requestable_roles:
             has_role = role in user_roles
@@ -293,12 +325,13 @@ async def request_roles(context, *args, **kwargs):
             )
             # button labels have 80 character limit, while role names have 100 character limit
             the_button = RoleButton(style=style, label=role.name[:80])
-            the_button.roles = requestable_roles
+            the_button.roles = list(requestable_roles)
             the_button.role = role
             the_view.add_item(the_button)
         return the_view
 
     # set up initial view and send it
+    assert isinstance(context.message.author, discord.Member)
     the_view = create_view(requestable_roles, context.message.author.roles)
     message_content = (
         context.message.author.mention + " " + settings.message_request_roles_start
@@ -309,6 +342,7 @@ async def request_roles(context, *args, **kwargs):
     timed_out = await the_view.wait()
     if timed_out:
         # re-fetch the message to get the latest message content
+        assert the_message
         latest_message = await the_message.channel.fetch_message(the_message.id)
         message_content = (
             latest_message.content + "\n" + settings.message_request_roles_finished
@@ -316,7 +350,7 @@ async def request_roles(context, *args, **kwargs):
         await the_message.edit(content=message_content, view=None)
 
 
-async def ping(interaction, delay: int):
+async def ping(interaction: discord.Interaction, delay: int) -> None:
     await interaction.response.defer(thinking=True)
     await asyncio.sleep(delay)
     await interaction.command.koduck.send_message(interaction, content="pong")
