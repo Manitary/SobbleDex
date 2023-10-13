@@ -4,35 +4,47 @@ import difflib
 import json
 import os
 import re
+from typing import Any
+
+import discord
+
+from koduck import KoduckContext
+from models import SMStageResult, SMTeam, WMTeam
 
 scriptdir = os.path.dirname(os.path.realpath(__file__)) + os.sep
-shuffle_calc_json_filename = "{}{}".format(scriptdir, "shuffle_calc_data.json")
+shuffle_calc_json_filename = f"{scriptdir}shuffle_calc_data.json"
 
 
-def initialize_shuffle_calc_json_data(_filename):
+def initialize_shuffle_calc_json_data(
+    _filename: str,
+) -> tuple[
+    list[SMStageResult],
+    list[list[str]],
+    list[str],
+    list[SMTeam],
+    list[WMTeam],
+    dict[str, str],
+]:
     json_data = {}
     if os.path.isfile(_filename):
-        with open(_filename) as json_file:
+        with open(_filename, encoding="utf-8") as json_file:
             try:
-                json_data = json.load(json_file)
+                json_data: dict[str, Any] = json.load(json_file)
             except Exception as e:
                 print(str(e))
-                if test_mode:
-                    print_custom(str(e))
-    jk = json_data.keys()
-    sm_data = json_data["sm_teams"] if "sm_teams" in jk else []
-    wm_data = json_data["wm_teams"] if "wm_teams" in jk else []
-    sm_stages_data = json_data["sm_stages_results"] if "sm_stages_results" in jk else []
-    explain_data = json_data["explainations"] if "explainations" in jk else []
-    sm_stage_aliases_by_stage = [k["aliases"] for k in sm_stages_data]
-    sm_stage_aliases = [m for k in sm_stages_data for m in k["aliases"]]
+    _sm_data: list[SMTeam] = json_data.get("sm_teams", [])
+    _wm_data: list[WMTeam] = json_data.get("wm_teams", [])
+    _sm_stages_data: list[SMStageResult] = json_data.get("sm_stages_results", [])
+    _explain_data: dict[str, str] = json_data.get("explainations", {})
+    _sm_stage_aliases_by_stage = [k["aliases"] for k in _sm_stages_data]
+    _sm_stage_aliases = [m for k in _sm_stages_data for m in k["aliases"]]
     return (
-        sm_stages_data,
-        sm_stage_aliases_by_stage,
-        sm_stage_aliases,
-        sm_data,
-        wm_data,
-        explain_data,
+        _sm_stages_data,
+        _sm_stage_aliases_by_stage,
+        _sm_stage_aliases,
+        _sm_data,
+        _wm_data,
+        _explain_data,
     )
 
 
@@ -46,7 +58,10 @@ def initialize_shuffle_calc_json_data(_filename):
 ) = initialize_shuffle_calc_json_data(shuffle_calc_json_filename)
 
 
-async def sm(context, *args, **kwargs):
+async def sm(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
+    assert context.koduck
     if len(sm_data) == 0 or len(sm_stages_data) < 300 or context["message"].author.bot:
         return
     selected_stage_index = -1
@@ -86,113 +101,111 @@ async def sm(context, *args, **kwargs):
                     if best_selected_stage_index >= 0:
                         selected_stage_index = best_selected_stage_index
     if show_help or selected_stage_index == -1:
-        txts = [
+        txt = [
             "Test accuracy: 10 repeats per move",
             "```Win%  Exp (Std%)  Moves  Team",
         ]
         for strat in sm_data:
-            if strat["show"]:
-                if len(txts) == 5:
-                    txts.append("=" * 32)
-                txts.append(
-                    "{:4.1f}  {:4.0f}  {:4.1f}  {:5.1f}  {}".format(
-                        strat["winrate"],
-                        float(strat["exp"]),
-                        strat["exp_stdm"],
-                        strat["moves_left"],
-                        strat["team"],
-                    )
-                )
-        txts[-1] += "```"
-        await context["koduck"].send_message(
-            context["message"], content="\n".join(txts).strip()
-        )
-    elif selected_stage_index < 0 or selected_stage_index >= 300:
-        await context["koduck"].send_message(
-            context["message"], content="Couldn't reverse the SM stage index! :warning:"
-        )
-    else:
-        selected_stage_data = sm_stages_data[selected_stage_index]
-        txts = [
-            "Stage **{:d}**: **{}** ({:.1f}% encounter)".format(
-                selected_stage_index + 1,
-                selected_stage_data["aliases"][0].title(),
-                selected_stage_data["encounter"],
-            ),
-            "```Strategy  Moves Std%    Range-68%    Range-95%",
-        ]
-        for strat in selected_strategy:
-            tmega = ""
-            if strat[0] == "b":
-                tmega = "Bee"
-            elif strat[0] == "p":
-                tmega = "Pin"
-            elif strat[0] == "c":
-                tmega = "MCX"
-            else:
-                tmega = "Mega"
-            team_name = "{}-{}".format(tmega, strat[1:].upper())
-            txts.append(
-                "{:8.8}  {:5.2f}  {:3.0f}  {:4.1f} ~ {:4.1f}  {:4.1f} ~ {:4.1f}".format(
-                    team_name,
-                    max(1.0, selected_stage_data["results"][strat][0]),
-                    100.0
-                    * selected_stage_data["results"][strat][2]
-                    / selected_stage_data["results"][strat][0],
-                    max(
-                        1.0,
-                        selected_stage_data["results"][strat][0]
-                        - selected_stage_data["results"][strat][2],
-                    ),
-                    selected_stage_data["results"][strat][0]
-                    + selected_stage_data["results"][strat][2],
-                    max(
-                        1.0,
-                        selected_stage_data["results"][strat][0]
-                        - 2 * selected_stage_data["results"][strat][2],
-                    ),
-                    selected_stage_data["results"][strat][0]
-                    + 2 * selected_stage_data["results"][strat][2],
-                )
+            if not strat["show"]:
+                continue
+            if len(txt) == 5:
+                txt.append("=" * 32)
+            txt.append(
+                f"{strat['winrate']:4.1f}  {strat['exp']:4.0f}  "
+                f"{strat['exp_stdm']:4.1f}  {strat['moves_left']:5.1f}  {strat['team']}"
             )
-        txts[-1] += "```"
-        await context["koduck"].send_message(
-            context["message"], content="\n".join(txts).strip()
+        txt[-1] += "```"
+        return await context.koduck.send_message(
+            context.message, content="\n".join(txt).strip()
+        )
+    if selected_stage_index < 0 or selected_stage_index >= 300:
+        return await context.koduck.send_message(
+            context.message, content="Couldn't reverse the SM stage index! :warning:"
         )
 
-
-async def wm(context, *args, **kwargs):
-    if len(wm_data) == 0 or context["message"].author.bot:
-        return
-    txts = ["Moves used: **15** (*+5 price not applied*)", "```Coins Std%  Team"]
-    for strat in wm_data:
-        if strat["show"]:
-            txts.append(
-                "{:d}  {:4.1f}  {}".format(
-                    strat["coins15m"], strat["std"], strat["team"]
-                )
+    selected_stage_data = sm_stages_data[selected_stage_index]
+    txt = [
+        f"Stage **{selected_stage_index + 1}**: **{selected_stage_data['aliases'][0].title()}**"
+        f" ({selected_stage_data['encounter']:.1f}% encounter)",
+        "```Strategy  Moves Std%    Range-68%    Range-95%",
+    ]
+    for strat in selected_strategy:
+        tmega = ""
+        if strat[0] == "b":
+            tmega = "Bee"
+        elif strat[0] == "p":
+            tmega = "Pin"
+        elif strat[0] == "c":
+            tmega = "MCX"
+        else:
+            tmega = "Mega"
+        team_name = f"{tmega}-{strat[1:].upper()}"
+        txt.append(
+            "{:8.8}  {:5.2f}  {:3.0f}  {:4.1f} ~ {:4.1f}  {:4.1f} ~ {:4.1f}".format(
+                team_name,
+                max(1.0, selected_stage_data["results"][strat][0]),
+                100.0
+                * selected_stage_data["results"][strat][2]
+                / selected_stage_data["results"][strat][0],
+                max(
+                    1.0,
+                    selected_stage_data["results"][strat][0]
+                    - selected_stage_data["results"][strat][2],
+                ),
+                selected_stage_data["results"][strat][0]
+                + selected_stage_data["results"][strat][2],
+                max(
+                    1.0,
+                    selected_stage_data["results"][strat][0]
+                    - 2 * selected_stage_data["results"][strat][2],
+                ),
+                selected_stage_data["results"][strat][0]
+                + 2 * selected_stage_data["results"][strat][2],
             )
-    txts[-1] += "```"
-    await context["koduck"].send_message(
-        context["message"], content="\n".join(txts).strip()
+        )
+    txt[-1] += "```"
+    return await context.koduck.send_message(
+        context.message, content="\n".join(txt).strip()
     )
 
 
-async def explain(context, *args, **kwargs):
-    from_dm = context["message"].guild is None
-    if len(explain_data.keys()) == 0 or context["message"].author.bot:
+async def wm(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
+    assert context.koduck
+    assert context.message
+    if not wm_data or context.message.author.bot:
+        return
+    txt = ["Moves used: **15** (*+5 price not applied*)", "```Coins Std%  Team"]
+    txt.extend(
+        f"{strat['coins15m']}  {strat['std']:4.1f}  {strat['team']}"
+        for strat in wm_data
+        if strat["show"]
+    )
+    txt[-1] += "```"
+    return await context.koduck.send_message(
+        context.message, content="\n".join(txt).strip()
+    )
+
+
+async def explain(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
+    assert context.koduck
+    assert context.message
+    if not explain_data or context.message.author.bot:
         return
     question = [
         k.strip().lower().replace(":", "") for k in " ".join(args).split(",") + ["help"]
     ][0]
-    if question in explain_data.keys():
+    if question in explain_data:
         txt = explain_data[question].replace("@", "\n")
     else:
-        txt = "Usage: **explain argument**. Valid arguments are: {}\nFor more details, visit the Advanced Game Mechanics guide: https://www.reddit.com/r/PokemonShuffle/comments/bdvau1/advanced_game_mechanics/".format(
-            ", ".join(list(sorted([k for k in explain_data.keys()])))
+        txt = (
+            "Usage: **explain argument**. "
+            f"Valid arguments are: {', '.join(sorted(explain_data.keys()))}\n"
+            "For more details, visit the Advanced Game Mechanics guide: "
+            "https://old.reddit.com/r/PokemonShuffle/comments/bdvau1/advanced_game_mechanics/"
         )
-    await context["koduck"].send_message(context["message"], content=txt)
 
-
-if __name__ == "__main__":
-    sobble_obj.loop.run_until_complete(sobble_obj.start(bot_key))
+    return await context.koduck.send_message(context["message"], content=txt)

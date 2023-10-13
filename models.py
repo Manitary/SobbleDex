@@ -2,7 +2,7 @@ import enum
 import re
 from dataclasses import dataclass
 from datetime import datetime, timedelta
-from typing import Any, Callable, Self
+from typing import Any, Callable, Self, TypedDict
 
 import pytz
 
@@ -542,3 +542,33 @@ class TypeInfo:
         self.weak = weak
         self.resist = resist
         self.status_immune = status_immune
+
+
+class SMTeam(TypedDict):
+    show: int
+    info: str
+    sst: str
+    team: str
+    strat: str
+    winrate: float
+    exp: int
+    exp_stdm: float
+    stages: float
+    stages_stdm: float
+    moves_left: float
+    resources: str
+
+
+class WMTeam(TypedDict):
+    show: int
+    strat: str
+    team: str
+    coins15m: int
+    std: float
+
+
+class SMStageResult(TypedDict):
+    stage: int
+    aliases: list[str]
+    encounter: float
+    results: dict[str, list[float]]
