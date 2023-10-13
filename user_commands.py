@@ -64,7 +64,7 @@ async def list_commands(context: KoduckContext) -> discord.Message | None:
             available_commands[command].append(command_name)
 
     output = ", ".join(
-        f"({', '.join(command_names)})" if len(command_names) > 0 else command_names[0]
+        f"({', '.join(command_names)})" if len(command_names) > 1 else command_names[0]
         for command_names in available_commands.values()
     )
     return await context.koduck.send_message(
