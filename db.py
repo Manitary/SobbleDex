@@ -597,11 +597,11 @@ def query_custom_response(message: str) -> str:
 
 
 def query_help_message(message: str) -> str:
-    q = bot_connection.execute(
+    q = shuffle_connection.execute(
         """
         SELECT message_text
         FROM help_messages
-        WHERE message_type = 'message_help' | :message
+        WHERE message_type = 'message_help' || :message
         """,
         {"message": f"_{message}" if message else ""},
     ).fetchone()
