@@ -51,7 +51,6 @@ def format_pokemon_embed(pokemon: Pokemon) -> discord.Embed:
             f"{pokemon.pokemon}.png"
         )
         .replace("%", "%25")
-        .replace(":", "")
         .replace(" ", "%20")
     )
     return embed
