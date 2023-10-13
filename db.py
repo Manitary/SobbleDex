@@ -493,10 +493,14 @@ def query_reminder(user_id: int) -> Reminder | None:
 def query_skill(skill: str) -> Skill | None:
     q = shuffle_connection.execute(
         """
-        SELECT * FROM skills
-        LEFT JOIN skill_notes
-        ON skills.name = skill_notes.name
-        WHERE skill = :skill
+        SELECT
+        s.id AS id, s.skill AS skill, description, rate1, rate2, rate3,
+        type, multiplier, bonus_effect, bonus1, bonus2, bonus3, bonus4,
+        sp1, sp2, sp3, sp4, notes
+        FROM skills s
+        LEFT JOIN skill_notes sn
+        ON s.skill = sn.skill
+        WHERE s.skill = :skill
         """,
         {"skill": skill},
     ).fetchone()
