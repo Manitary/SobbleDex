@@ -12,7 +12,7 @@ T = TypeVar("T")
 
 emojis: dict[str, str] = {}
 
-RE_PUNCTUATION = re.compile(r"[- ()-'.%+:#]")
+RE_PUNCTUATION = re.compile(r"[- ()'.%+:#]")
 WEEKDAYS = [
     "Sunday",
     "Monday",
