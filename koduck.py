@@ -63,7 +63,6 @@ class Koduck:
         global koduck_instance
         koduck_instance = self
         self.command_tree = discord.app_commands.CommandTree(self.client)
-        self.aiohttp_session: aiohttp.ClientSession | None = None
 
         # command -> (function, type, tier)
         # ``command`` is a string which represents the command name
@@ -634,7 +633,6 @@ async def on_ready() -> None:
     print(f"Name: {client.user.name}")
     print(f"ID: {client.user.id}")
     assert koduck_instance
-    koduck_instance.aiohttp_session = aiohttp.ClientSession()
     await koduck_instance.run_command("refreshcommands")
     await koduck_instance.run_command("updateemojis")
 
