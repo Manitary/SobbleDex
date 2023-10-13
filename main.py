@@ -1,7 +1,6 @@
 import importlib
 import logging
 import sys
-from typing import Any
 
 import db
 import settings

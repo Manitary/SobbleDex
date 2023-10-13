@@ -33,9 +33,7 @@ async def update_emojis(context: KoduckContext) -> None:
                 utils.emojis[emoji.name.lower()] = f"<:{emoji.name}:{emoji.id}>"
 
 
-async def emojify_2(
-    context: KoduckContext
-) -> discord.Message | None:
+async def emojify_2(context: KoduckContext) -> discord.Message | None:
     assert context.koduck
     emojified_message = utils.emojify(context.param_line, check_aliases=True)
     if emojified_message:
@@ -44,9 +42,7 @@ async def emojify_2(
         )
 
 
-async def add_alias(
-    context: KoduckContext, *args: str
-) -> discord.Message | None:
+async def add_alias(context: KoduckContext, *args: str) -> discord.Message | None:
     assert context.koduck
     if len(args) < 2:
         return await context.koduck.send_message(
@@ -85,9 +81,7 @@ async def add_alias(
     )
 
 
-async def remove_alias(
-    context: KoduckContext, *args: str
-) -> discord.Message | None:
+async def remove_alias(context: KoduckContext, *args: str) -> discord.Message | None:
     assert context.koduck
     if not args:
         return await context.koduck.send_message(
@@ -116,9 +110,7 @@ async def remove_alias(
     )
 
 
-async def list_aliases(
-    context: KoduckContext, *args: str
-) -> discord.Message | None:
+async def list_aliases(context: KoduckContext, *args: str) -> discord.Message | None:
     assert context.koduck
     if len(args) < 1:
         return await context.koduck.send_message(
@@ -145,9 +137,7 @@ async def list_aliases(
     )
 
 
-async def pokemon(
-    context: KoduckContext, *args: str
-) -> discord.Message | None:
+async def pokemon(context: KoduckContext, *args: str) -> discord.Message | None:
     assert context.koduck
     if not args:
         return await context.koduck.send_message(
@@ -174,9 +164,7 @@ async def pokemon(
     )
 
 
-async def skill(
-    context: KoduckContext, *args: str
-) -> discord.Message | None:
+async def skill(context: KoduckContext, *args: str) -> discord.Message | None:
     assert context.koduck
     if not args:
         return await context.koduck.send_message(
@@ -203,9 +191,7 @@ async def skill(
     )
 
 
-async def ap(
-    context: KoduckContext, *args: str
-) -> discord.Message | None:
+async def ap(context: KoduckContext, *args: str) -> discord.Message | None:
     assert context.koduck
     if not args:
         return await context.koduck.send_message(
@@ -244,9 +230,7 @@ async def ap(
         )
 
 
-async def exp(
-    context: KoduckContext, *args: str
-) -> discord.Message | None:
+async def exp(context: KoduckContext, *args: str) -> discord.Message | None:
     assert context.koduck
     if not args:
         return await context.koduck.send_message(
@@ -349,9 +333,7 @@ async def exp(
     )
 
 
-async def type(
-    context: KoduckContext, *args: str
-) -> discord.Message | None:
+async def type(context: KoduckContext, *args: str) -> discord.Message | None:
     assert context.koduck
     if not args:
         return await context.koduck.send_message(
@@ -587,9 +569,7 @@ async def disruption_pattern(
     )
 
 
-async def event(
-    context: KoduckContext, *args: str
-) -> discord.Message | None:
+async def event(context: KoduckContext, *args: str) -> discord.Message | None:
     assert context.koduck
     if not args:
         return await context.koduck.send_message(
@@ -1285,9 +1265,7 @@ def pokemon_filter(
     return (hits, hits_bp, hits_max_ap, hits_type, hits_evo_speed)
 
 
-async def eb_rewards(
-    context: KoduckContext, *args: str
-) -> discord.Message | None:
+async def eb_rewards(context: KoduckContext, *args: str) -> discord.Message | None:
     assert context.koduck
     if not args:
         query_pokemon = utils.current_eb_pokemon()
@@ -1410,9 +1388,7 @@ async def eb_details_shorthand(
     return await eb_details(context, *args, **kwargs)
 
 
-async def week(
-    context: KoduckContext, *args: str
-) -> discord.Message | None:
+async def week(context: KoduckContext, *args: str) -> discord.Message | None:
     assert context.koduck
     curr_week = utils.get_current_week()
     if not args:
@@ -1464,9 +1440,7 @@ async def next_week(
     return await week(context, *args, **kwargs)
 
 
-async def sm_rewards(
-    context: KoduckContext
-) -> discord.Message | None:
+async def sm_rewards(context: KoduckContext) -> discord.Message | None:
     assert context.koduck
     reward_list = db.get_sm_rewards()
     level = "\n".join(str(reward.level) for reward in reward_list)
@@ -1486,9 +1460,7 @@ async def sm_rewards(
     )
 
 
-async def drain_list(
-    context: KoduckContext, *args: str
-) -> discord.Message | None:
+async def drain_list(context: KoduckContext, *args: str) -> discord.Message | None:
     assert context.koduck
     # allow space delimited parameters
     if len(args) == 1:
@@ -1765,9 +1737,7 @@ async def choice_react(
     return choice - 1
 
 
-async def remind_me(
-    context: KoduckContext, *args: str
-) -> discord.Message | None:
+async def remind_me(context: KoduckContext, *args: str) -> discord.Message | None:
     assert context.koduck
     assert context.message
     assert context.message.author
@@ -1823,9 +1793,7 @@ async def remind_me(
     )
 
 
-async def unremind_me(
-    context: KoduckContext, *args: str
-) -> discord.Message | None:
+async def unremind_me(context: KoduckContext, *args: str) -> discord.Message | None:
     assert context.koduck
     if not args:
         return await context.koduck.send_message(
