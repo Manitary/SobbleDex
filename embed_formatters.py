@@ -219,7 +219,7 @@ def format_stage_embed(
         stats += f"\n**EB stage clear reward**: {utils.emojify(eb_data[2])}"
 
     if notes:
-        stats += "\n**Notes**: {}".format(utils.emojify(notes[0]).replace("\\n", "\n"))
+        stats += "\n**Notes**: {}".format(utils.emojify(notes).replace("\\n", "\n"))
 
     header = "{} Stage {}: {}{}{}".format(
         stage.stage_type,
