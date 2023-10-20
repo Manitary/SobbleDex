@@ -401,6 +401,8 @@ class Koduck:
                     value = int(value)
                 else:
                     value = float(value)
+            except TypeError:
+                value = None
             except ValueError:
                 value = value.replace("\\n", "\n").replace("\\t", "\t")
             setattr(settings, setting.key, value)
@@ -431,7 +433,7 @@ class Koduck:
                 new_value = int(value)
             else:
                 new_value = float(value)
-        except ValueError:
+        except (ValueError, TypeError):
             new_value = value
         setattr(settings, variable, new_value)
         return old_value
@@ -459,7 +461,7 @@ class Koduck:
                 new_value = int(value)
             else:
                 new_value = float(value)
-        except ValueError:
+        except (ValueError, TypeError):
             new_value = value
         setattr(settings, variable, new_value)
         return value
