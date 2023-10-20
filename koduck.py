@@ -28,7 +28,6 @@ import traceback
 from collections import defaultdict
 from typing import Any, Callable, Optional, Self, Union
 
-import aiohttp
 import discord
 import pytz
 
