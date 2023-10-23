@@ -226,3 +226,5 @@ message_purge_invalid_param = (
     "Please give me an integer number of bot messages to purge"
 )
 purge_search_limit = 100
+message_last_query_not_stage = "Your previous query was not a main or EX stage"
+message_last_query_error = "Unexpected error, contact my owner to investigate"

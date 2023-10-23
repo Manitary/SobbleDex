@@ -16,7 +16,7 @@ import embed_formatters
 import settings
 import utils
 from koduck import Koduck, KoduckContext
-from models import Param, PokemonType, Reminder, Stage, StageType
+from models import Param, PokemonType, QueryType, Reminder, Stage, StageType, UserQuery
 
 RE_PING = re.compile(r"<@!?[0-9]*>")
 
@@ -353,10 +353,44 @@ async def type(context: KoduckContext, *args: str) -> discord.Message | None:
     )
 
 
+async def next_stage(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
+    assert context.koduck
+    assert context.message
+    user_id = context.message.author.id
+    query_history = context.koduck.query_history[user_id]
+    if len(query_history) < 2 or query_history[-2].type != QueryType.STAGE:
+        return await context.koduck.send_message(
+            receive_message=context.message,
+            content=settings.message_last_query_not_stage,
+        )
+    if not query_history[-2].args:
+        return await context.koduck.send_message(
+            receive_message=context.message,
+            content=settings.message_last_query_error,
+        )
+    last_stage_id = query_history[-2].args[0]
+    assert isinstance(last_stage_id, str)
+    if last_stage_id.startswith("s"):
+        return await context.koduck.send_message(
+            receive_message=context.message,
+            content=settings.message_last_query_not_stage,
+        )
+    if last_stage_id.startswith("ex"):
+        return await stage(context, f"ex{int(last_stage_id[2:]) + 1}")
+    if last_stage_id.isdigit():
+        next_id = int(last_stage_id) + 1
+        if next_id == 701:
+            next_id = 1
+        return await stage(context, str(next_id))
+
+
 async def stage(
     context: KoduckContext, *args: str, **kwargs: Any
 ) -> discord.Message | None:
     assert context.koduck
+    assert context.message
     if not args:
         return await context.koduck.send_message(
             receive_message=context.message, content=settings.message_stage_no_param
@@ -460,6 +494,9 @@ async def stage(
 
     # if a result number is given
     if result_number:
+        context.koduck.query_history[context.message.author.id][-1] = UserQuery(
+            QueryType.STAGE, args=(results[result_number - 1].string_id,)
+        )
         try:
             if stage_starting_board:
                 return await context.koduck.send_message(
@@ -481,6 +518,9 @@ async def stage(
             )
 
     if len(results) == 1:
+        context.koduck.query_history[context.message.author.id][-1] = UserQuery(
+            QueryType.STAGE, args=(results[0].string_id,)
+        )
         if stage_starting_board:
             return await context.koduck.send_message(
                 receive_message=context.message,
@@ -504,7 +544,13 @@ async def stage(
         settings.message_stage_multiple_results + output_string,
     )
     if choice is None:
+        context.koduck.query_history[context.message.author.id][-1] = UserQuery(
+            QueryType.ANY, args=args, kwargs=kwargs
+        )
         return
+    context.koduck.query_history[context.message.author.id][-1] = UserQuery(
+        QueryType.STAGE, args=(results[choice].string_id,)
+    )
     if stage_starting_board:
         return await context.koduck.send_message(
             receive_message=context.message,
