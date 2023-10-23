@@ -9,8 +9,10 @@
 #--- Settings read from the settings table will replace any initialized settings
 #--- If a setting is removed from the settings table and refresh_settings() is called, the setting will still be active (to be fixed)
 
+from collections import defaultdict
 import discord
 import asyncio, aiohttp
+from models import QueryType, UserQuery
 import settings, yadon
 import sys, re
 import datetime, functools, traceback
@@ -54,6 +56,7 @@ class Koduck:
         self.contain_commands = []
         self.slash_commands = []
         
+        self.query_history: dict[int, list[UserQuery]] = defaultdict(list)
         self.output_history = {} #userid -> list of Discord Messages sent by bot in response to the user, oldest first (only keeps track since bot startup)
         self.last_message_DT = {} #channelid -> datetime of most recent Discord Message sent
         self.interactions = {} #interactionid -> boolean indicating whether the interaction received a response
@@ -602,6 +605,17 @@ async def on_message(message):
             return
         
         koduck_instance.log(type=activity_type, message=message)
+
+        #ADD THE USER QUERY TO THEIR HISTORY
+        koduck_instance.query_history[message.author.id].append(
+            UserQuery(QueryType(context.command), args=tuple(args), kwargs=kwargs)
+        )
+        koduck_instance.query_history[
+            message.author.id
+        ] = koduck_instance.query_history[message.author.id][
+            -settings.output_history_size :
+        ]
+
         #RUN THE COMMAND
         function = koduck_instance.commands[context.command][0]
         try:

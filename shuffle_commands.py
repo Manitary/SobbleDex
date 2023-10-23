@@ -1,8 +1,11 @@
 import datetime, pytz, difflib, re
+from typing import Any
 from math import floor
 from collections import OrderedDict
 import discord
 import asyncio
+from koduck import KoduckContext
+from models import QueryType, UserQuery
 import settings
 import yadon
 import constants
@@ -257,10 +260,47 @@ async def type(context, *args, **kwargs):
     else:
         return await context.koduck.send_message(receive_message=context.message, embed=embed_formatters.format_type_embed([query_type] + values))
 
+async def next_stage(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
+    query_history = context.koduck.query_history[context.message.author.id]
+    if len(query_history) < 2 or query_history[-2].type != QueryType.STAGE:
+        return await context.koduck.send_message(
+            receive_message=context.message,
+            content=settings.message_last_query_not_stage,
+        )
+    query_ = query_history[-2]
+    if not query_.args:
+        return await context.koduck.send_message(
+            receive_message=context.message,
+            content=settings.message_last_query_error,
+        )
+    last_stage_id = query_.args[0]
+    if last_stage_id.startswith("s"):
+        return await context.koduck.send_message(
+            receive_message=context.message,
+            content=settings.message_last_query_not_stage,
+        )
+    if last_stage_id.startswith("ex"):
+        return await stage(context, f"ex{int(last_stage_id[2:]) + 1}", **query_.kwargs)
+    if last_stage_id.isdigit():
+        next_id = int(last_stage_id) + 1
+        if next_id == 701:
+            next_id = 1
+        return await stage(context, str(next_id), **query_.kwargs)
+    return await context.koduck.send_message(
+            receive_message=context.message,
+            content=settings.message_last_query_error,
+        )
+
 async def stage(context, *args, **kwargs):
+    #change current query type to ANY in case stage does not return a stage message
+    user_query_history = context.koduck.query_history[context.message.author.id]
+    user_query_history[-1] = UserQuery(QueryType.ANY, args=args, kwargs=kwargs)
+
     if len(args) < 1:
         return await context.koduck.send_message(receive_message=context.message, content=settings.message_stage_no_param)
-    
+
     #allow space delimited parameters
     if len(args) == 1:
         temp = args[0].split(" ")
@@ -339,6 +379,7 @@ async def stage(context, *args, **kwargs):
     
     #if a result number is given
     elif result_number != 0:
+        user_query_history[-1] = UserQuery(QueryType.STAGE, args=(results[result_number - 1][0],), kwargs=kwargs)
         try:
             if starting_board:
                 return await context.koduck.send_message(receive_message=context.message, embed=embed_formatters.format_starting_board_embed(results[result_number-1]))
@@ -348,6 +389,7 @@ async def stage(context, *args, **kwargs):
             return await context.koduck.send_message(receive_message=context.message, content=settings.message_stage_result_error.format(len(results)))
     
     elif len(results) == 1:
+        user_query_history[-1] = UserQuery(QueryType.STAGE, args=(results[0][0],), kwargs=kwargs)
         if starting_board:
             return await context.koduck.send_message(receive_message=context.message, embed=embed_formatters.format_starting_board_embed(results[0]))
         else:
@@ -365,7 +407,8 @@ async def stage(context, *args, **kwargs):
         choice = await choice_react(context, min(len(indices), settings.choice_react_limit), settings.message_stage_multiple_results + output_string)
         if choice is None:
             return
-        elif starting_board:
+        user_query_history[-1] = UserQuery(QueryType.STAGE, args=(results[choice][0],), kwargs=kwargs)
+        if starting_board:
             return await context.koduck.send_message(receive_message=context.message, embed=embed_formatters.format_starting_board_embed(results[choice]))
         else:
             return await context.koduck.send_message(receive_message=context.message, embed=embed_formatters.format_stage_embed(results[choice], shorthand=shorthand))
