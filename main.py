@@ -2,6 +2,8 @@ import importlib
 import logging
 import sys
 
+import dotenv
+
 import db
 import settings
 from koduck import Koduck, KoduckContext
@@ -73,14 +75,25 @@ async def background_task(koduck_instance: Koduck) -> None:
     pass
 
 
-settings.background_task = background_task
+def main() -> None:
+    config = dotenv.dotenv_values(".env")
+    token = config.get("token", "")
+    if not token:
+        print("Token not configured")
+        sys.exit(1)
 
-koduck = Koduck()
-koduck.add_command("refreshcommands", refresh_commands, "prefix", 3)
-if settings.enable_debug_logger:
-    log_handler = logging.FileHandler(
-        filename=settings.debug_log_file_name, encoding="utf-8", mode="w"
-    )
-    koduck.client.run(settings.token, log_handler=log_handler, log_level=logging.DEBUG)
-else:
-    koduck.client.run(settings.token, log_handler=None)
+    settings.background_task = background_task
+
+    koduck = Koduck()
+    koduck.add_command("refreshcommands", refresh_commands, "prefix", 3)
+    if settings.enable_debug_logger:
+        log_handler = logging.FileHandler(
+            filename=settings.debug_log_file_name, encoding="utf-8", mode="w"
+        )
+        koduck.client.run(token, log_handler=log_handler, log_level=logging.DEBUG)
+    else:
+        koduck.client.run(token, log_handler=None)
+
+
+if __name__ == "__main__":
+    main()

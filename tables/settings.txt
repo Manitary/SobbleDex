@@ -1,5 +1,4 @@
 HEADER	Value	Tier
-token	token	
 command_prefix	?	
 param_delim	,	
 custom_responses_table_name	tables/custom_responses	
