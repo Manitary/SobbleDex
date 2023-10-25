@@ -33,6 +33,7 @@ import pytz
 
 import db
 import settings
+import utils
 from models import RealCommand, Setting
 
 
@@ -84,6 +85,9 @@ class Koduck:
         # channelid -> datetime of most recent Discord Message sent
         self.interactions: dict[int, bool] = {}
         # interactionid -> boolean indicating whether the interaction received a response
+
+        self.emojis: dict[str, str] = {}
+        # emoji map available, updated with ``shuffle_commands.update_emojis``
 
         self.refresh_settings()
 
@@ -201,11 +205,27 @@ class Koduck:
         - view: a Discord View to include in the outgoing Discord Message
         - ignore_cd: set this to True to ignore cooldown checks"""
 
-        # TODO shouldn't these two be arguments with default values?
-        content = kwargs["content"] if "content" in kwargs else ""
-        embed = kwargs["embed"] if "embed" in kwargs else None
-        send_channel = channel
+        emojify = functools.partial(
+            utils.emojify,
+            emojis=self.emojis,
+            check_aliases=kwargs.get("check_aliases", False),
+        )
+        if "content" in kwargs:
+            kwargs["content"] = emojify(kwargs["content"])
 
+        if "embed" in kwargs:
+            embed: discord.Embed = kwargs["embed"]
+            embed.title = emojify(embed.title or "") or None
+            embed.description = emojify(embed.description or "") or None
+            for i, field in enumerate(embed.fields):
+                embed.set_field_at(
+                    i,
+                    name=field.name,
+                    value=emojify(field.value or ""),
+                    inline=field.inline,
+                )
+
+        send_channel = channel
         if isinstance(receive_message, discord.Interaction):
             send_channel = receive_message.channel
         # If send_message was triggered by a user message, check cooldowns

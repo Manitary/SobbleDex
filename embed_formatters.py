@@ -59,7 +59,7 @@ def format_pokemon_embed(pokemon: Pokemon) -> discord.Embed:
 def format_skill_embed(skill: Skill) -> discord.Embed:
     stats = f"**Description**: {skill.description}\n"
     if skill.notes:
-        stats += f"**Notes**: {utils.emojify(skill.notes.replace('\\n', '\n'))}\n"
+        stats += f"**Notes**: {skill.notes.replace('\\n', '\n')}\n"
 
     stats += "**Activation Rates**: {}% / {}% / {}%\n".format(*skill.rates)
 
@@ -162,16 +162,12 @@ def format_stage_embed(
     num_extra = max(len(stage.default_supports) - 4, 0)
     if num_extra:
         stats += "\n**Default Supports**: {} | {}".format(
-            utils.emojify(
-                "".join([f"[{p}]" for p in stage.default_supports[0:num_extra]])
-            ),
-            utils.emojify(
-                "".join([f"[{p}]" for p in stage.default_supports[num_extra:]])
-            ),
+            "".join([f"[{p}]" for p in stage.default_supports[0:num_extra]]),
+            "".join([f"[{p}]" for p in stage.default_supports[num_extra:]]),
         )
     else:
         stats += "\n**Default Supports**: {}".format(
-            utils.emojify("".join([f"[{p}]" for p in stage.default_supports]))
+            "".join([f"[{p}]" for p in stage.default_supports])
         )
 
     stats += (
@@ -182,16 +178,16 @@ def format_stage_embed(
         stats += f"\n**S-Ranks to unlock**: {stage.s_unlock}"
 
     stats += "\n**Attempt Cost**: {} x{}".format(
-        utils.emojify(f"[{stage.cost.type}]"), stage.cost.amount
+        f"[{stage.cost.type}]", stage.cost.amount
     )
 
     if any(d.item != "Nothing" for d in stage.drops):
         stats += "\n**Drop Items**: {}{} / {}{} / {}{}\n**Drop Rates**: {}% / {}% / {}%".format(
-            utils.emojify(f"[{stage.drops[0].item}]"),
+            f"[{stage.drops[0].item}]",
             f" x{stage.drops[0].amount}" if stage.drops[0].amount != 1 else "",
-            utils.emojify(f"[{stage.drops[1].item}]"),
+            f"[{stage.drops[1].item}]",
             f" x{stage.drops[1].amount}" if stage.drops[1].amount != 1 else "",
-            utils.emojify(f"[{stage.drops[2].item}]"),
+            f"[{stage.drops[2].item}]",
             f" x{stage.drops[2].amount}" if stage.drops[2].amount != 1 else "",
             stage.drops[0].rate,
             stage.drops[1].rate,
@@ -199,33 +195,29 @@ def format_stage_embed(
         )
     # auto remove c-1 if less than 4 supports
     stats += "\n**Items**: {}".format(
-        utils.emojify(
-            "".join(
-                [
-                    f"[{item}]"
-                    for item in stage.items
-                    if not (len(stage.default_supports) < 4 and item == "C-1")
-                ]
-            )
+        "".join(
+            f"[{item}]"
+            for item in stage.items
+            if not (len(stage.default_supports) < 4 and item == "C-1")
         )
     )
     if stage.rewards != "Nothing":
-        stats += f"\n**Initial clear reward**: {utils.emojify(stage.rewards)}"
+        stats += f"\n**Initial clear reward**: {stage.rewards}"
 
     if stage.rewards_ux != "Nothing":
-        stats += f"\n**UX Initial clear reward**: {utils.emojify(stage.rewards_ux)}"
+        stats += f"\n**UX Initial clear reward**: {stage.rewards_ux}"
 
     if eb_data[2]:
-        stats += f"\n**EB stage clear reward**: {utils.emojify(eb_data[2])}"
+        stats += f"\n**EB stage clear reward**: {eb_data[2]}"
 
     if notes:
-        stats += "\n**Notes**: {}".format(utils.emojify(notes).replace("\\n", "\n"))
+        stats += "\n**Notes**: {}".format(notes.replace("\\n", "\n"))
 
     header = "{} Stage {}: {}{}{}".format(
         stage.stage_type,
         stage.id,
         stage.pokemon,
-        " " + utils.emojify(f"[{stage.pokemon}]"),
+        f" [{stage.pokemon}]",
         eb_data[0],
     )
 
@@ -253,7 +245,7 @@ def format_stage_embed(
             continue
         embed.add_field(
             name=f"**Countdown {i}**",
-            value=utils.emojify(disruption.replace("\\n", "\n")),
+            value=disruption.replace("\\n", "\n"),
             inline=False,
         )
     return embed
@@ -261,8 +253,7 @@ def format_stage_embed(
 
 def format_starting_board_embed(stage: Stage) -> discord.Embed:
     header = (
-        f"{stage.stage_type} Stage Index {stage.id}: {stage.pokemon} "
-        + utils.emojify(f"[{stage.pokemon}]")
+        f"{stage.stage_type} Stage Index {stage.id}: {stage.pokemon} [{stage.pokemon}]"
     )
     pokemon_type = db.query_pokemon_type(stage.pokemon)
     embed = discord.Embed(title=header, color=constants.type_colors[pokemon_type])
@@ -345,12 +336,12 @@ def format_event_embed(event: Event) -> discord.Embed:
             ends_when = end_time_2 - datetime.datetime.now(tz=pytz.utc)
 
     embed = discord.Embed(
-        title=utils.emojify(header), color=constants.event_type_colors[event.event_type]
+        title=header, color=constants.event_type_colors[event.event_type]
     )
     if event_pokemon_string:
         embed.add_field(
             name="Event Pokémon",
-            value=utils.emojify(event_pokemon_string),
+            value=event_pokemon_string,
             inline=False,
         )
     if starts_when and starts_when > datetime.timedelta():
@@ -379,7 +370,7 @@ def format_event_embed(event: Event) -> discord.Embed:
     if event.cost_unlock or event.notes:
         embed.add_field(
             name="Misc. Details",
-            value=utils.emojify(f"{event.cost_unlock}\n{event.notes}"),
+            value=f"{event.cost_unlock}\n{event.notes}",
             inline=False,
         )
     return embed
@@ -388,7 +379,7 @@ def format_event_embed(event: Event) -> discord.Embed:
 def format_eb_rewards_embed(rewards: Sequence[EBReward]) -> discord.Embed:
     pokemon = rewards[0].pokemon
     stats = "\n".join(
-        f"Level {r.level} reward: {utils.emojify(f'[{r.reward}]')} x{r.amount} {r.alternative}"
+        f"Level {r.level} reward: {f'[{r.reward}]'} x{r.amount} {r.alternative}"
         for r in rewards
     )
     embed = discord.Embed(
@@ -418,7 +409,7 @@ def format_eb_details_embed(eb_stretches: Sequence[EBStretch]) -> discord.Embed:
         if len(stage.default_supports) == 3:
             extra = " **(3 supports)**"
         elif len(stage.default_supports) == 5:
-            extra = utils.emojify(f" **(5th support: [{stage.default_supports[0]}])**")
+            extra = f" **(5th support: [{stage.default_supports[0]}])**"
 
         stats += "{}: {}{} / {}{}\n".format(
             levels,
@@ -447,14 +438,14 @@ def format_week_embed(query_week: int) -> discord.Embed:
     for event in db.query_event_week(query_week):
         event_pokemon = event.pokemon.split("/")
         stage = db.get_event_stage_by_index(event.stage_ids[0])
-        drops_string = stage.str_drops(utils.emojify, compact=True)
-        attempt_cost_string = stage.cost.to_str(utils.emojify)
-        unlock_cost_string = event.str_unlock(utils.emojify)
+        drops_string = stage.str_drops(compact=True)
+        attempt_cost_string = str(stage.cost)
+        unlock_cost_string = event.str_unlock
 
         # Challenge
         if event.stage_type == EventType.CHALLENGE:
             gc += "- {}{}{}{}\n".format(
-                utils.emojify(f"[{event_pokemon[0]}]"),
+                f"[{event_pokemon[0]}]",
                 drops_string,
                 attempt_cost_string,
                 unlock_cost_string,
@@ -464,34 +455,29 @@ def format_week_embed(query_week: int) -> discord.Embed:
             event_pokemon: list[str] = utils.remove_duplicates(event_pokemon)
             if len(event_pokemon) == 1:
                 oad += "- {}{}{}".format(
-                    utils.emojify(f"[{event_pokemon[0]}]"),
+                    f"[{event_pokemon[0]}]",
                     drops_string,
                     attempt_cost_string,
                 )
             else:
-                daily += "- " + "".join(
-                    utils.emojify(f"[{pokemon}]") for pokemon in event_pokemon
-                )
+                daily += "- " + "".join(f"[{pokemon}]" for pokemon in event_pokemon)
                 daily += drops_string
         # Competition
         elif event.stage_type == EventType.COMPETITIVE:
             # There are duplicate entries... grab only one of them
             if not comp:
                 items_string = "".join(
-                    utils.emojify(f"[{item}]")
-                    for item in stage.items_available.split("/")
+                    f"[{item}]" for item in stage.items_available.split("/")
                 )
-                comp += "- {} ({})".format(
-                    utils.emojify(f"[{event_pokemon[0]}]"), items_string
-                )
+                comp += "- {} ({})".format(f"[{event_pokemon[0]}]", items_string)
         # EB
         elif event.stage_type == EventType.ESCALATION:
-            eb += "- {}{}".format(utils.emojify(f"[{event_pokemon[0]}]"), drops_string)
+            eb += "- {}{}".format(f"[{event_pokemon[0]}]", drops_string)
         # Safari
         elif event.stage_type == EventType.SAFARI:
             # For some reason the first pokemon is duplicated here
             safari += "- " + ", ".join(
-                "{} ({:.2f}%)".format(utils.emojify(f"[{pokemon}]"), rate)
+                "{} ({:.2f}%)".format(f"[{pokemon}]", rate)
                 for pokemon, rate in zip(event_pokemon[1:], event.encounter_rates)
             )
             safari += drops_string
@@ -535,9 +521,7 @@ def format_query_results_embed(
                 output_string += "{}, ".format(
                     f"**{item}" if item.find("**") != -1 else item
                 )
-        if use_emojis:
-            output_string = utils.emojify(output_string)
-        else:
+        if not use_emojis:
             output_string = output_string[:-2]
 
         embed.add_field(name=bucket_key, value=output_string, inline=False)

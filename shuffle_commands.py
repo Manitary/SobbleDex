@@ -23,23 +23,24 @@ RE_PING = re.compile(r"<@!?[0-9]*>")
 
 async def update_emojis(context: KoduckContext) -> None:
     assert context.koduck
-    utils.emojis = {}
+    context.koduck.emojis = {}
     for server in context.koduck.client.guilds:
-        if (
+        if not (
             server.name.startswith("Pokemon Shuffle Icons")
             or server.id == settings.main_server_id
         ):
-            for emoji in server.emojis:
-                utils.emojis[emoji.name.lower()] = f"<:{emoji.name}:{emoji.id}>"
+            continue
+        for emoji in server.emojis:
+            context.koduck.emojis[emoji.name.lower()] = f"<:{emoji.name}:{emoji.id}>"
 
 
 async def emojify_2(context: KoduckContext) -> discord.Message | None:
     assert context.koduck
-    emojified_message = utils.emojify(context.param_line, check_aliases=True)
-    if emojified_message:
-        return await context.koduck.send_message(
-            receive_message=context.message, content=emojified_message
-        )
+    if not context.param_line:
+        return
+    return await context.koduck.send_message(
+        receive_message=context.message, content=context.param_line, check_aliases=True
+    )
 
 
 async def add_alias(context: KoduckContext, *args: str) -> discord.Message | None:
@@ -789,20 +790,14 @@ def pokemon_filter_results_to_string(
         for item in items:
             farmable = item.replace("**", "") in farmable_pokemon
             if use_emojis:
-                try:
-                    # surround ss pokemon with parentheses
-                    # (instead of boldifying it, because, y'know... can't boldify emojis)
-                    if item.find("**") != -1:
-                        output_string += f"([{item.replace(" ** ", " ")}])"
-                    else:
-                        output_string += f"[{item}]"
-                    if farmable:
-                        output_string += "\\*"
-                except KeyError:
-                    output_string += "{}{} ".format(
-                        "**" + item if item.find("**") != -1 else item,
-                        "\\*" if farmable else "",
-                    )
+                # surround ss pokemon with parentheses
+                # (instead of boldifying it, because, y'know... can't boldify emojis)
+                if item.find("**") != -1:
+                    output_string += f"([{item.replace("**", "")}])"  # fmt: skip
+                else:
+                    output_string += f"[{item}]"
+                if farmable:
+                    output_string += "\\*"
             else:
                 output_string += "{}{}, ".format(
                     "**" + item if item.find("**") != -1 else item,
@@ -810,8 +805,6 @@ def pokemon_filter_results_to_string(
                 )
         if not use_emojis:
             output_string = output_string[:-2]
-        else:
-            output_string = utils.emojify(output_string)
     return output_string
 
 
@@ -1444,11 +1437,9 @@ async def sm_rewards(context: KoduckContext) -> discord.Message | None:
     assert context.koduck
     reward_list = db.get_sm_rewards()
     level = "\n".join(str(reward.level) for reward in reward_list)
-    first_clear = "\n".join(
-        utils.emojify(f"[{r.reward}] x{r.amount}") for r in reward_list
-    )
+    first_clear = "\n".join(f"[{r.reward}] x{r.amount}" for r in reward_list)
     repeat_clear = "\n".join(
-        utils.emojify(f"[{r.reward_repeat}] x{r.amount_repeat}") for r in reward_list
+        f"[{r.reward_repeat}] x{r.amount_repeat}" for r in reward_list
     )
 
     embed = discord.Embed(title="Survival Mode Rewards", color=0xFF0000)
