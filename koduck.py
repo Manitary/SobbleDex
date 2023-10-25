@@ -386,7 +386,6 @@ class Koduck:
     def refresh_settings(self) -> None:
         """Refresh settings in case of manual update of the table. Always run on startup.
 
-        token can only be updated by restarting the bot
         Note: settings is a module with attributes, so removing a setting manually
         from the table doesn't actually remove the attribute
         Note: number values will be converted to int/float, and string values will
