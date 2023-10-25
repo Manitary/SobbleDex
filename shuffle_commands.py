@@ -790,20 +790,14 @@ def pokemon_filter_results_to_string(
         for item in items:
             farmable = item.replace("**", "") in farmable_pokemon
             if use_emojis:
-                try:
-                    # surround ss pokemon with parentheses
-                    # (instead of boldifying it, because, y'know... can't boldify emojis)
-                    if item.find("**") != -1:
-                        output_string += f"([{item.replace("**", "")}])"  # fmt: skip
-                    else:
-                        output_string += f"[{item}]"
-                    if farmable:
-                        output_string += "\\*"
-                except KeyError:
-                    output_string += "{}{} ".format(
-                        "**" + item if item.find("**") != -1 else item,
-                        "\\*" if farmable else "",
-                    )
+                # surround ss pokemon with parentheses
+                # (instead of boldifying it, because, y'know... can't boldify emojis)
+                if item.find("**") != -1:
+                    output_string += f"([{item.replace("**", "")}])"  # fmt: skip
+                else:
+                    output_string += f"[{item}]"
+                if farmable:
+                    output_string += "\\*"
             else:
                 output_string += "{}{}, ".format(
                     "**" + item if item.find("**") != -1 else item,
