@@ -86,6 +86,9 @@ class Koduck:
         self.interactions: dict[int, bool] = {}
         # interactionid -> boolean indicating whether the interaction received a response
 
+        self.emojis: dict[str, str] = {}
+        # emoji map available, updated with ``shuffle_commands.update_emojis``
+
         self.refresh_settings()
 
     # Records bot activity in the log text file, each log on one line,
@@ -203,7 +206,9 @@ class Koduck:
         - ignore_cd: set this to True to ignore cooldown checks"""
 
         emojify = functools.partial(
-            utils.emojify, check_aliases=kwargs.get("check_aliases", False)
+            utils.emojify,
+            emojis=self.emojis,
+            check_aliases=kwargs.get("check_aliases", False),
         )
         if "content" in kwargs:
             kwargs["content"] = emojify(kwargs["content"])

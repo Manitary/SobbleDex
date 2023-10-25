@@ -7,8 +7,6 @@ import db
 import settings
 from models import EventType, RepeatType
 
-emojis: dict[str, str] = {}
-
 RE_PUNCTUATION = re.compile(r"[- ()'.%+:#]")
 
 WEEKDAYS = [
@@ -40,7 +38,7 @@ def remove_duplicates[T](l: list[T]) -> list[T]:  # pylint: disable=E0602
     return ans
 
 
-def emojify(text: str, check_aliases: bool = False) -> str:
+def emojify(text: str, emojis: dict[str,str], check_aliases: bool = False) -> str:
     if not text:
         return ""
     emojified_text = text
