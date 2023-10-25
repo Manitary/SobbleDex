@@ -1,128 +1,123 @@
+import datetime
 import re
-import datetime, pytz
+from typing import TypeVar
+
+import pytz
+
+import db
 import settings
-import yadon
+from models import EventType, RepeatType
 
-emojis = {}
+T = TypeVar("T")
 
-def alias(query):
-    aliases = {k.lower():v[0] for k,v in yadon.ReadTable(settings.aliases_table).items()}
-    try:
-        return aliases[query.lower()]
-    except KeyError:
-        return query
+emojis: dict[str, str] = {}
 
-def strip_punctuation(string):
-    return string.replace(" ", "").replace("(", "").replace(")", "").replace("-", "").replace("'", "").replace("é", "e").replace(".", "").replace("%", "").replace("+", "").replace(":", "").replace("#", "")
+RE_PUNCTUATION = re.compile(r"[- ()'.%+:#]")
+WEEKDAYS = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+]
 
-def remove_duplicates(list):
-    ans = []
-    for item in list:
+
+def alias(query: str) -> str:
+    aliases = db.get_aliases()
+    return aliases.get(query.lower(), query)
+
+
+def strip_punctuation(string: str) -> str:
+    return RE_PUNCTUATION.sub("", string).replace("é", "e")
+
+
+def remove_duplicates(l: list[T]) -> list[T]:
+    ans: list[T] = []
+    for item in l:
         if item not in ans:
             ans.append(item)
     return ans
 
-def emojify(the_message, check_aliases=False):
+
+def emojify(the_message: str, check_aliases: bool = False) -> str:
     emojified_message = the_message
-    
-    possible_emojis = re.findall(r"\[[^\[\]]*\]", the_message)
+
+    possible_emojis: list[str] = re.findall(r"\[[^\[\]]*\]", the_message)
     possible_emojis = remove_duplicates(possible_emojis)
-    
-    #for each of the strings that were in []
-    for i in range(len(possible_emojis)):
-        raw = possible_emojis[i][1:-1]
-        #figure out the string that is trying to be emojified
-        if check_aliases:
-            try:
-                emoji_name = alias(raw)
-            except:
-                emoji_name = raw
-        else:
-            emoji_name = raw
-        #replace it with the emoji if it exists
-        try:
-            emojified_message = emojified_message.replace("[{}]".format(raw), emojis[strip_punctuation(emoji_name.lower())])
-        except KeyError:
-            emojified_message = emojified_message.replace("[{}]".format(raw), raw)
-    
+
+    # for each of the strings that were in []
+    for emoji in possible_emojis:
+        raw = emoji[1:-1]
+        # figure out the string that is trying to be emojified
+        emoji_name = alias(raw) if check_aliases else raw
+        # replace it with the emoji if it exists
+        emojified_message = emojified_message.replace(
+            f"[{raw}]", emojis.get(strip_punctuation(emoji_name.lower()), raw)
+        )
+
     return emojified_message
 
-def get_current_week():
-    er_start_time = datetime.datetime(settings.er_start_year, settings.er_start_month, settings.er_start_day, settings.er_start_hour, tzinfo=pytz.utc)
+
+def get_current_week() -> int:
+    er_start_time = datetime.datetime(
+        settings.er_start_year,
+        settings.er_start_month,
+        settings.er_start_day,
+        settings.er_start_hour,
+        tzinfo=pytz.utc,
+    )
     current_time = datetime.datetime.now(tz=pytz.utc)
     td = current_time - er_start_time
     query_week = ((td.days // 7) % 24) + 1
     return query_week
 
-def current_eb_pokemon():
-    query_week = get_current_week()
-    events = yadon.ReadTable(settings.events_table)
-    for index, values in events.items():
-        stage_type, event_pokemon, _, repeat_type, repeat_param_1, _, _, _, duration_string, _, _, _ = values
-        event_week = int(repeat_param_1) + 1
-        #assumes EBs are either 1 week or 2 weeks
-        event_week_2 = event_week + 1 if duration_string == "14 days" else event_week
-        if stage_type == "Escalation" and repeat_type == "Rotation" and (event_week == query_week or event_week_2 == query_week):
-            return event_pokemon
-    return None
 
-def get_current_event_pokemon():
-    date = datetime.datetime.now(tz=pytz.utc)
-    ans = []
-    for k,v in yadon.ReadTable(settings.events_table).items():
-        stage_type, event_pokemon, _, repeat_type, repeat_param_1, repeat_param_2, start_time, end_time, duration_string, cost_string, attempts_string, encounter_rates = v
-        if repeat_type == "Weekly" and date.weekday() == repeat_param_1:
-            ans += event_pokemon.split("/")
-        elif repeat_type == "Monthly" and date.day == repeat_param_1:
-            ans += event_pokemon.split("/")
-        elif repeat_type == "Yearly" and date.month == repeat_param_1:
-            #assuming all yearly events are daily stage type
-            event_start_date = datetime.datetime(date.year, repeat_param_1, repeat_param_2)
-            #assuming the format "3 days"
-            duration = int(duration_string.split(" ")[0])
-            td = date - event_start_date
-            if (td.days >= 0 and td.days < duration):
-                ans.append(event_pokemon.split("/")[td.days])
-        elif repeat_type == "Rotation":
-            st = start_time.split("/")
-            et = end_time.split("/")
-            start_time = datetime.datetime(int(st[0]), int(st[1]), int(st[2]), int(st[3]), int(st[4]), tzinfo=pytz.utc)
-            end_time = datetime.datetime(int(et[0]), int(et[1]), int(et[2]), int(et[3]), int(et[4]), tzinfo=pytz.utc)
-            while end_time < datetime.datetime.now(tz=pytz.utc):
-                start_time = start_time + datetime.timedelta(168)
-                end_time = end_time + datetime.timedelta(168)
-            
-            if stage_type == "Daily":
-                duration = int(duration_string.split(" ")[0])
+def current_eb_pokemon() -> str:
+    return db.query_eb_pokemon_by_week(get_current_week())
+
+
+def get_current_event_pokemon() -> list[str]:
+    date = datetime.datetime.now(tz=pytz.utc) + datetime.timedelta(6)
+    ans: list[str] = []
+    for event in db.get_all_event_pokemon():
+        if (
+            event.repeat_type == RepeatType.WEEKLY
+            and date.weekday() == event.repeat_param_1
+        ):
+            ans.extend(event.pokemon)
+        elif (
+            event.repeat_type == RepeatType.MONTHLY and date.day == event.repeat_param_1
+        ):
+            ans.extend(event.pokemon)
+        elif (
+            event.repeat_type == RepeatType.YEARLY
+            and date.month == event.repeat_param_1
+        ):
+            # assuming all yearly events are daily stage type
+            # assuming the format "3 days"
+            td = date - event.this_year_start_date
+            if 0 <= td.days < event.duration:
+                ans.append(event.pokemon[td.days % len(event.pokemon)])  # maybe td+1
+        elif event.repeat_type == RepeatType.ROTATION:
+            start_time = event.latest_start_time_for(date)
+
+            if event.stage_type == EventType.DAILY:
                 td = date - start_time
-                if (td.days >= 0 and td.days < duration):
+                if 0 <= td.days < event.duration:
                     try:
-                        ans.append(event_pokemon.split("/")[(td.days + 1) % 7])
+                        ans.append(event.pokemon[(td.days + 1) % 7])
                     except IndexError:
                         pass
-            elif date.year == start_time.year and date.month == start_time.month and date.day == start_time.day and event_pokemon not in ans:
-                ans += event_pokemon.split("/")
+            elif (
+                date.year == start_time.year
+                and date.month == start_time.month
+                and date.day == start_time.day
+            ):
+                ans.extend([pokemon for pokemon in event.pokemon if pokemon not in ans])
     return ans
 
-def get_farmable_pokemon():
-    farmable_pokemon = []
-    
-    main_stages = yadon.ReadTable(settings.main_stages_table)
-    for main_stage in main_stages.values():
-        drops = [main_stage[20], main_stage[22], main_stage[24]]
-        if "PSB" in drops:
-            farmable_pokemon.append(main_stage[0])
-    
-    expert_stages = yadon.ReadTable(settings.expert_stages_table)
-    for expert_stage in expert_stages.values():
-        drops = [expert_stage[20], expert_stage[22], expert_stage[24]]
-        if "PSB" in drops:
-            farmable_pokemon.append(expert_stage[0])
-    
-    event_stages = yadon.ReadTable(settings.event_stages_table)
-    for event_stage in event_stages.values():
-        drops = [event_stage[20], event_stage[22], event_stage[24]]
-        if "PSB" in drops:
-            farmable_pokemon.append(event_stage[0])
-    
-    return farmable_pokemon
+
+def event_week_day(day: int) -> str:
+    return WEEKDAYS[(day + 1) % 7]
