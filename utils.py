@@ -1,6 +1,5 @@
 import datetime
 import re
-from typing import TypeVar
 
 import pytz
 
@@ -8,11 +7,10 @@ import db
 import settings
 from models import EventType, RepeatType
 
-T = TypeVar("T")
-
 emojis: dict[str, str] = {}
 
 RE_PUNCTUATION = re.compile(r"[- ()'.%+:#]")
+
 WEEKDAYS = [
     "Sunday",
     "Monday",
@@ -33,18 +31,20 @@ def strip_punctuation(string: str) -> str:
     return RE_PUNCTUATION.sub("", string).replace("é", "e")
 
 
-def remove_duplicates(l: list[T]) -> list[T]:
+def remove_duplicates[T](l: list[T]) -> list[T]:  # pylint: disable=E0602
     ans: list[T] = []
     for item in l:
-        if item not in ans:
-            ans.append(item)
+        if item in ans:
+            continue
+        ans.append(item)
     return ans
 
 
-def emojify(the_message: str, check_aliases: bool = False) -> str:
-    emojified_message = the_message
-
-    possible_emojis: list[str] = re.findall(r"\[[^\[\]]*\]", the_message)
+def emojify(text: str, check_aliases: bool = False) -> str:
+    if not text:
+        return ""
+    emojified_text = text
+    possible_emojis: list[str] = re.findall(r"\[[^\[\]]*\]", text)
     possible_emojis = remove_duplicates(possible_emojis)
 
     # for each of the strings that were in []
@@ -53,11 +53,11 @@ def emojify(the_message: str, check_aliases: bool = False) -> str:
         # figure out the string that is trying to be emojified
         emoji_name = alias(raw) if check_aliases else raw
         # replace it with the emoji if it exists
-        emojified_message = emojified_message.replace(
+        emojified_text = emojified_text.replace(
             f"[{raw}]", emojis.get(strip_punctuation(emoji_name.lower()), raw)
         )
 
-    return emojified_message
+    return emojified_text
 
 
 def get_current_week() -> int:

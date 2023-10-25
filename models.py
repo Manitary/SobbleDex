@@ -124,10 +124,10 @@ class StageCost:
     type: CostType
     amount: int
 
-    def to_str(self, emojify: Callable[[str], str]) -> str:
+    def __str__(self) -> str:
         if self.type == CostType.HEART and self.amount == 1:
             return ""
-        return f" ({emojify(f'[{self.type}]')} x{self.amount})"
+        return f" ([{self.type}] x{self.amount})"
 
 
 class RotationEvent:
@@ -149,12 +149,11 @@ class RotationEvent:
             else tuple()
         )
 
-    def str_unlock(self, emojify: Callable[[str], str]) -> str:
+    @property
+    def str_unlock(self) -> str:
         if self.cost_unlock == "Nothing":
             return ""
-        return (
-            f" ({emojify(self.cost_unlock.split()[1])} {self.cost_unlock.split()[2]})"
-        )
+        return f" ({self.cost_unlock.split()[1]} {self.cost_unlock.split()[2]})"
 
 
 class EventPokemon:
@@ -230,7 +229,7 @@ class EventStageRotation:
     def attempt_cost(self) -> int:
         return self.cost.amount
 
-    def str_drops(self, emojify: Callable[[str], str], compact: bool = False) -> str:
+    def str_drops(self, compact: bool = False) -> str:
         if not any(self.drops):
             return ""
         if (
@@ -239,20 +238,20 @@ class EventStageRotation:
             and len({d.amount for d in self.drops}) == 1
         ):
             return STR_DROP_SINGLE.format(
-                emojify(f"[{self.drops[0].item}]"),
+                f"[{self.drops[0].item}]",
                 f" x{self.drops[0].amount}" if self.drops[0].amount != 1 else "",
                 self.drops[0].rate,
                 self.drops[1].rate,
                 self.drops[2].rate,
             )
         return STR_DROP_MULTIPLE.format(
-            emojify(f"[{self.drops[0].item}]"),
+            f"[{self.drops[0].item}]",
             f" x{self.drops[0].amount}" if self.drops[0].amount != 1 else "",
             self.drops[0].rate,
-            emojify(f"[{self.drops[1].item}]"),
+            f"[{self.drops[1].item}]",
             f" x{self.drops[1].amount}" if self.drops[1].amount != 1 else "",
             self.drops[1].rate,
-            emojify(f"[{self.drops[2].item}]"),
+            f"[{self.drops[2].item}]",
             f" x{self.drops[2].amount}" if self.drops[2].amount != 1 else "",
             self.drops[2].rate,
         )
