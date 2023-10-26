@@ -1844,7 +1844,7 @@ current_day = -1
 current_week = -1
 
 
-async def background_task(koduck_instance: Koduck) -> None:
+async def background_task(koduck: Koduck) -> None:
     global current_day
     global current_week
     current_time = datetime.datetime.now(tz=pytz.timezone("Etc/GMT+6"))
@@ -1871,12 +1871,9 @@ async def background_task(koduck_instance: Koduck) -> None:
             if ep in reminder.pokemon
         )
         if reminder_strings:
-            the_user = await koduck_instance.client.fetch_user(reminder.user_id)
+            the_user = await koduck.client.fetch_user(reminder.user_id)
             await the_user.send(
                 content=settings.message_reminder_header.format(
                     reminder.user_id, "\n".join(reminder_strings)
                 )
             )
-
-
-settings.background_task = background_task

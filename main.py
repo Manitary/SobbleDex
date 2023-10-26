@@ -6,6 +6,7 @@ import dotenv
 
 import db
 import settings
+import shuffle_commands
 from koduck import Koduck, KoduckContext
 
 
@@ -70,11 +71,6 @@ async def refresh_commands(context: KoduckContext) -> None:
         print(errors)
 
 
-# Background task is run every set interval while bot is running (by default every 10 seconds)
-async def background_task(koduck_instance: Koduck) -> None:
-    pass
-
-
 def main() -> None:
     config = dotenv.dotenv_values(".env")
     token = config.get("token", "")
@@ -82,7 +78,7 @@ def main() -> None:
         print("Token not configured")
         sys.exit(1)
 
-    settings.background_task = background_task
+    settings.background_task = shuffle_commands.background_task
 
     koduck = Koduck()
     koduck.add_command("refreshcommands", refresh_commands, "prefix", 3)

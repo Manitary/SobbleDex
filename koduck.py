@@ -26,7 +26,7 @@ import sqlite3
 import sys
 import traceback
 from collections import defaultdict
-from typing import Any, Callable, Optional, Self, Union
+from typing import Any, Callable, Coroutine, Optional, Self, Union
 
 import discord
 import pytz
@@ -39,7 +39,37 @@ from models import RealCommand, Setting
 
 class ClientWithBackgroundTask(discord.Client):
     async def setup_hook(self) -> None:
-        self.loop.create_task(background_task())
+        self.loop.create_task(self.background_task(settings.background_task))
+
+    # background task is run every set interval while bot is running
+    # this method is added to the event loop automatically on bot setup
+    async def background_task(
+        self,
+        bgt: Callable[..., Coroutine[Any, Any, None]] | None,
+    ) -> None:
+        await self.wait_until_ready()
+        while not self.is_closed():
+            if bgt is None:
+                print("No background task assigned")
+                return
+
+            async def bgt_decorator() -> None:
+                assert koduck_instance
+                try:
+                    await bgt(koduck_instance)
+                except Exception:
+                    exc_type, exc_value, _ = sys.exc_info()
+                    error_message = (
+                        f"{exc_type.__name__ if exc_type else None}: {exc_value}"
+                    )
+                    traceback.print_exc()
+                    koduck_instance.log(
+                        type="background_task_error",
+                        extra=settings.message_unhandled_error.format(error_message),
+                    )
+
+            self.loop.create_task(bgt_decorator())
+            await asyncio.sleep(settings.background_task_interval)
 
 
 intents = discord.Intents.default()
@@ -617,33 +647,6 @@ class SlashMessage:
             )
         if "roles" in interaction.data["resolved"]:
             self.role_mentions = list(interaction.data["resolved"]["roles"].values())
-
-
-# background task is run every set interval while bot is running
-# this method is added to the event loop automatically on bot setup
-async def background_task() -> None:
-    await client.wait_until_ready()
-    while not client.is_closed():
-        if callable(settings.background_task):
-
-            async def bgt_decorator(bgt, koduck_instance: Koduck) -> None:
-                try:
-                    await bgt(koduck_instance)
-                except Exception:
-                    exc_type, exc_value, _ = sys.exc_info()
-                    error_message = (
-                        f"{exc_type.__name__ if exc_type else None}: {exc_value}"
-                    )
-                    traceback.print_exc()
-                    koduck_instance.log(
-                        type="background_task_error",
-                        extra=settings.message_unhandled_error.format(error_message),
-                    )
-
-            client.loop.create_task(
-                bgt_decorator(settings.background_task, koduck_instance)
-            )
-        await asyncio.sleep(settings.background_task_interval)
 
 
 @client.event
