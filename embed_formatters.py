@@ -370,7 +370,7 @@ def format_event_embed(event: Event) -> discord.Embed:
             ends_when.seconds // 3600,
         )
     else:
-        event_duration_string = f"{start_time} to {end_time} ({ event.duration})"
+        event_duration_string = f"{'/'.join(event.date_start)} to {'/'.join(event.date_end)} ({ event.duration})"
     embed.add_field(
         name=date_header,
         value=f"Event duration: {event_duration_string}",
