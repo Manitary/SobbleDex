@@ -1557,7 +1557,7 @@ async def pokemon_lookup(
         alias = aliases.get(close_match, close_match).lower()
         if alias not in no_duplicates:
             choices.append((close_match, alias))
-            no_duplicates.append(close_match.lower())
+            no_duplicates.append(alias.lower())
 
     output_string = ""
     for i, choice in enumerate(choices):
