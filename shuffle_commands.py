@@ -223,15 +223,12 @@ async def ap(
         )
 
 
+@utils.allow_space_delimiter()
 @utils.min_param(num=1, error=settings.message_exp_no_param)
 async def exp(
     context: KoduckContext, *args: str, **kwargs: Any
 ) -> discord.Message | None:
     assert context.koduck
-
-    # allow space delimited parameters
-    if len(args) == 1:
-        args = tuple(args[0].split())
 
     # parse params
     _query = args[0]
@@ -345,18 +342,12 @@ async def type(
     )
 
 
+@utils.allow_space_delimiter()
 @utils.min_param(num=1, error=settings.message_stage_no_param)
 async def stage(
     context: KoduckContext, *args: str, **kwargs: Any
 ) -> discord.Message | None:
     assert context.koduck
-
-    # allow space delimited parameters
-    if len(args) == 1:
-        temp = args[0].split(" ")
-        if len(temp) > 1 and temp[-1].isdigit():
-            args = ("".join(temp[:-1]), temp[-1])
-
     result_number = 0
     shorthand = kwargs.get("shorthand", False)
     stage_starting_board = kwargs.get("startingboard", False)
@@ -555,17 +546,12 @@ async def disruption_pattern(
     )
 
 
+@utils.allow_space_delimiter()
 @utils.min_param(num=1, error=settings.message_event_no_param)
 async def event(
     context: KoduckContext, *args: str, **kwargs: Any
 ) -> discord.Message | None:
     assert context.koduck
-
-    # allow space delimited parameters
-    if len(args) == 1:
-        temp = args[0].split(" ")
-        if len(temp) > 1 and temp[-1].isdigit():
-            args = ("".join(temp[:-1]), temp[-1])
 
     result_number = 1
 
@@ -1267,6 +1253,7 @@ async def eb_rewards(context: KoduckContext, *args: str) -> discord.Message | No
     )
 
 
+@utils.allow_space_delimiter()
 async def eb_details(
     context: KoduckContext, *args: str, **kwargs: Any
 ) -> discord.Message | None:
@@ -1274,12 +1261,6 @@ async def eb_details(
     if not args or args[0].isdigit():
         eb_pokemon = utils.current_eb_pokemon()
         args = (eb_pokemon,) + args
-
-    # allow space delimited parameters
-    if len(args) == 1:
-        temp = args[0].split(" ")
-        if len(temp) > 1 and temp[-1].isdigit():
-            args = (" ".join(temp[:-1]), temp[-1])
 
     query_level = 0
     if len(args) >= 2:
@@ -1435,17 +1416,14 @@ async def sm_rewards(context: KoduckContext) -> discord.Message | None:
     )
 
 
+@utils.allow_space_delimiter()
 @utils.min_param(num=2, error=settings.message_drain_list_no_param)
 async def drain_list(
     context: KoduckContext, *args: str, **kwargs: Any
 ) -> discord.Message | None:
     assert context.koduck
-    # allow space delimited parameters
-    if len(args) == 1:
-        args = tuple(args[0].split(" "))
 
     # first arg hp, second arg moves
-
     try:
         hp = int(args[0])
         moves = int(args[1])
