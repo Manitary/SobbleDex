@@ -43,12 +43,11 @@ async def emojify_2(context: KoduckContext) -> discord.Message | None:
     )
 
 
-async def add_alias(context: KoduckContext, *args: str) -> discord.Message | None:
+@utils.min_param(num=2, error=settings.message_add_alias_no_param)
+async def add_alias(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
     assert context.koduck
-    if len(args) < 2:
-        return await context.koduck.send_message(
-            receive_message=context.message, content=settings.message_add_alias_no_param
-        )
     if len(args) > settings.manage_alias_limit + 1:
         return await context.koduck.send_message(
             receive_message=context.message,
@@ -82,13 +81,11 @@ async def add_alias(context: KoduckContext, *args: str) -> discord.Message | Non
     )
 
 
-async def remove_alias(context: KoduckContext, *args: str) -> discord.Message | None:
+@utils.min_param(num=1, error=settings.message_remove_alias_no_param)
+async def remove_alias(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
     assert context.koduck
-    if not args:
-        return await context.koduck.send_message(
-            receive_message=context.message,
-            content=settings.message_remove_alias_no_param,
-        )
     if len(args) > settings.manage_alias_limit:
         return await context.koduck.send_message(
             receive_message=context.message,
@@ -111,13 +108,11 @@ async def remove_alias(context: KoduckContext, *args: str) -> discord.Message | 
     )
 
 
-async def list_aliases(context: KoduckContext, *args: str) -> discord.Message | None:
+@utils.min_param(num=1, error=settings.message_list_aliases_no_param)
+async def list_aliases(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
     assert context.koduck
-    if len(args) < 1:
-        return await context.koduck.send_message(
-            receive_message=context.message,
-            content=settings.message_list_aliases_no_param,
-        )
 
     # parse params
     aliases = db.get_aliases()
@@ -138,12 +133,11 @@ async def list_aliases(context: KoduckContext, *args: str) -> discord.Message | 
     )
 
 
-async def pokemon(context: KoduckContext, *args: str) -> discord.Message | None:
+@utils.min_param(num=1, error=settings.message_pokemon_no_param)
+async def pokemon(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
     assert context.koduck
-    if not args:
-        return await context.koduck.send_message(
-            receive_message=context.message, content=settings.message_pokemon_no_param
-        )
 
     # parse params
     query_pokemon = await pokemon_lookup(context, _query=args[0])
@@ -165,12 +159,11 @@ async def pokemon(context: KoduckContext, *args: str) -> discord.Message | None:
     )
 
 
-async def skill(context: KoduckContext, *args: str) -> discord.Message | None:
+@utils.min_param(num=1, error=settings.message_skill_no_param)
+async def skill(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
     assert context.koduck
-    if not args:
-        return await context.koduck.send_message(
-            receive_message=context.message, content=settings.message_skill_no_param
-        )
 
     # parse params
     query_skill = await pokemon_lookup(context, _query=args[0], skill_lookup=True)
@@ -192,12 +185,11 @@ async def skill(context: KoduckContext, *args: str) -> discord.Message | None:
     )
 
 
-async def ap(context: KoduckContext, *args: str) -> discord.Message | None:
+@utils.min_param(num=1, error=settings.message_ap_no_param)
+async def ap(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
     assert context.koduck
-    if not args:
-        return await context.koduck.send_message(
-            receive_message=context.message, content=settings.message_ap_no_param
-        )
 
     query_bp = args[0]
     if not query_bp.isdigit() or query_bp not in map(str, range(30, 91, 10)):
@@ -231,12 +223,11 @@ async def ap(context: KoduckContext, *args: str) -> discord.Message | None:
         )
 
 
-async def exp(context: KoduckContext, *args: str) -> discord.Message | None:
+@utils.min_param(num=1, error=settings.message_exp_no_param)
+async def exp(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
     assert context.koduck
-    if not args:
-        return await context.koduck.send_message(
-            receive_message=context.message, content=settings.message_exp_no_param
-        )
 
     # allow space delimited parameters
     if len(args) == 1:
@@ -334,12 +325,12 @@ async def exp(context: KoduckContext, *args: str) -> discord.Message | None:
     )
 
 
-async def type(context: KoduckContext, *args: str) -> discord.Message | None:
+@utils.min_param(num=1, error=settings.message_type_no_param)
+async def type(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
     assert context.koduck
-    if not args:
-        return await context.koduck.send_message(
-            receive_message=context.message, content=settings.message_type_no_param
-        )
+
     query_type = args[0].lower().capitalize()
 
     try:
@@ -354,14 +345,11 @@ async def type(context: KoduckContext, *args: str) -> discord.Message | None:
     )
 
 
+@utils.min_param(num=1, error=settings.message_stage_no_param)
 async def stage(
     context: KoduckContext, *args: str, **kwargs: Any
 ) -> discord.Message | None:
     assert context.koduck
-    if not args:
-        return await context.koduck.send_message(
-            receive_message=context.message, content=settings.message_stage_no_param
-        )
 
     # allow space delimited parameters
     if len(args) == 1:
@@ -531,14 +519,11 @@ async def starting_board(
     return await stage(context, *args, **kwargs)
 
 
+@utils.min_param(num=1, error=settings.message_dp_no_param)
 async def disruption_pattern(
-    context: KoduckContext, *args: str
+    context: KoduckContext, *args: str, **kwargs: Any
 ) -> discord.Message | None:
     assert context.koduck
-    if not args:
-        return await context.koduck.send_message(
-            receive_message=context.message, content=settings.message_dp_no_param
-        )
 
     # parse params
     try:
@@ -570,12 +555,11 @@ async def disruption_pattern(
     )
 
 
-async def event(context: KoduckContext, *args: str) -> discord.Message | None:
+@utils.min_param(num=1, error=settings.message_event_no_param)
+async def event(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
     assert context.koduck
-    if not args:
-        return await context.koduck.send_message(
-            receive_message=context.message, content=settings.message_event_no_param
-        )
 
     # allow space delimited parameters
     if len(args) == 1:
@@ -1451,18 +1435,16 @@ async def sm_rewards(context: KoduckContext) -> discord.Message | None:
     )
 
 
-async def drain_list(context: KoduckContext, *args: str) -> discord.Message | None:
+@utils.min_param(num=2, error=settings.message_drain_list_no_param)
+async def drain_list(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
     assert context.koduck
     # allow space delimited parameters
     if len(args) == 1:
         args = tuple(args[0].split(" "))
 
-    # first arg script name, second arg hp, third arg moves
-    if len(args) != 2:
-        return await context.koduck.send_message(
-            receive_message=context.message,
-            content=settings.message_drain_list_no_param,
-        )
+    # first arg hp, second arg moves
 
     try:
         hp = int(args[0])

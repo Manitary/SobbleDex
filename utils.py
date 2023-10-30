@@ -1,10 +1,13 @@
 import datetime
 import re
+from typing import Any, Callable, Protocol
 
+import discord
 import pytz
 
 import db
 import settings
+from koduck import KoduckContext
 from models import EventType, RepeatType
 
 RE_PUNCTUATION = re.compile(r"[- ()'.%+:#]")
@@ -119,3 +122,25 @@ def get_current_event_pokemon() -> list[str]:
 
 def event_week_day(day: int) -> str:
     return WEEKDAYS[(day + 1) % 7]
+
+
+class BotCommand(Protocol):
+    async def __call__(
+        self, context: KoduckContext, *args: str, **kwargs: Any
+    ) -> discord.Message | None:
+        ...
+
+
+def min_param(num: int, error: str) -> Callable[[BotCommand], BotCommand]:
+    def decorator(func: BotCommand) -> BotCommand:
+        async def wrapper(
+            context: KoduckContext, *args: str, **kwargs: Any
+        ) -> discord.Message | None:
+            assert context.koduck
+            if len(args) < num:
+                return await context.koduck.send_message(
+                    receive_message=context.message, content=error
+                )
+            return await func(context, *args, **kwargs)
+        return wrapper
+    return decorator
