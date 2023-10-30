@@ -21,12 +21,9 @@ DISCORD_ACTIVITIES = {
 
 # When someone says a trigger message, respond with a custom response!
 async def custom_response(context: KoduckContext) -> discord.Message | None:
-    assert context.koduck
     response = db.query_custom_response(context.command)
     if response:
-        return await context.koduck.send_message(
-            receive_message=context.message, content=response[0]
-        )
+        return await context.send_message(content=response[0])
 
 
 async def oops(context: KoduckContext) -> str:
@@ -67,19 +64,14 @@ async def list_commands(context: KoduckContext) -> discord.Message | None:
         f"({', '.join(command_names)})" if len(command_names) > 1 else command_names[0]
         for command_names in available_commands.values()
     )
-    return await context.koduck.send_message(
-        receive_message=context.message, content=output
-    )
+    return await context.send_message(content=output)
 
 
 async def help(context: KoduckContext, query: str = "") -> discord.Message | None:
-    assert context.koduck
     help_message = get_help_message(query)
     if not help_message:
         help_message = get_help_message("unknown_command")
-    return await context.koduck.send_message(
-        receive_message=context.message, content=help_message
-    )
+    return await context.send_message(content=help_message)
 
 
 def get_help_message(message_name: str) -> str:
@@ -129,9 +121,7 @@ async def user_info(context: KoduckContext) -> discord.Message | None:
             description=f"Account creation date: {creation_date.strftime('%Y-%m-%d %H:%M:%S UTC')}",
         )
         embed.set_thumbnail(url=avatar.url)
-        return await context.koduck.send_message(
-            receive_message=context.message, embed=embed
-        )
+        return await context.send_message(embed=embed)
 
     activities = user.activities
     join_date = user.joined_at
@@ -160,15 +150,12 @@ async def user_info(context: KoduckContext) -> discord.Message | None:
         inline=False,
     )
     embed.set_thumbnail(url=avatar.url)
-    return await context.koduck.send_message(
-        receive_message=context.message, embed=embed
-    )
+    return await context.send_message(embed=embed)
 
 
 async def roll(
     context: KoduckContext, max_value: int | str = ""
 ) -> discord.Message | None:
-    assert context.koduck
     assert context.message
     try:
         max_value = int(max_value)
@@ -176,15 +163,13 @@ async def roll(
         max_value = settings.roll_default_max
 
     if max_value >= 0:
-        return await context.koduck.send_message(
-            receive_message=context.message,
+        return await context.send_message(
             content=settings.message_roll_result.format(
                 context.message.author.mention, random.randint(0, max_value)
             ),
         )
 
-    return await context.koduck.send_message(
-        receive_message=context.message,
+    return await context.send_message(
         content=settings.message_roll_result.format(
             context.message.author.mention, random.randint(max_value, 0)
         ),
@@ -192,20 +177,17 @@ async def roll(
 
 
 async def request_roles(context: KoduckContext) -> discord.Message | None:
-    assert context.koduck
     assert context.message
 
     if context.message.guild is None:
-        return await context.koduck.send_message(
-            receive_message=context.message,
+        return await context.send_message(
             content=settings.message_request_roles_no_guild,
         )
 
     role_ids = set(db.query_requestable_roles(context.message.guild.id))
 
     if not role_ids:
-        return await context.koduck.send_message(
-            receive_message=context.message,
+        return await context.send_message(
             content=settings.message_request_roles_no_roles,
         )
 
@@ -326,9 +308,7 @@ async def request_roles(context: KoduckContext) -> discord.Message | None:
     message_content = (
         context.message.author.mention + " " + settings.message_request_roles_start
     )
-    the_message = await context.koduck.send_message(
-        receive_message=context.message, content=message_content, view=the_view
-    )
+    the_message = await context.send_message(content=message_content, view=the_view)
     timed_out = await the_view.wait()
     if timed_out:
         # re-fetch the message to get the latest message content

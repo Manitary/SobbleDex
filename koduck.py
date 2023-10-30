@@ -617,6 +617,23 @@ class KoduckContext:
     def __getitem__(self, item: str) -> Any:
         return getattr(self, item)
 
+    async def send_message(
+        self,
+        *args: Any,
+        receive_message: Optional[Union[discord.Message, discord.Interaction]] = None,
+        channel: Optional[discord.abc.Messageable] = None,
+        ignore_cd: bool = False,
+        **kwargs: Any,
+    ) -> discord.Message | None:
+        assert self.koduck
+        return await self.koduck.send_message(
+            *args,
+            receive_message=receive_message or self.message,
+            channel=channel,
+            ignore_cd=ignore_cd,
+            **kwargs,
+        )
+
 
 # Message-like object used in the "run" slash command
 class SlashMessage:

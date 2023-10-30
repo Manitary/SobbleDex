@@ -35,23 +35,16 @@ async def update_emojis(context: KoduckContext) -> None:
 
 
 async def emojify_2(context: KoduckContext) -> discord.Message | None:
-    assert context.koduck
     if not context.param_line:
         return
-    return await context.koduck.send_message(
-        receive_message=context.message, content=context.param_line, check_aliases=True
-    )
+    return await context.send_message(content=context.param_line, check_aliases=True)
 
 
 async def add_alias(context: KoduckContext, *args: str) -> discord.Message | None:
-    assert context.koduck
     if len(args) < 2:
-        return await context.koduck.send_message(
-            receive_message=context.message, content=settings.message_add_alias_no_param
-        )
+        return await context.send_message(content=settings.message_add_alias_no_param)
     if len(args) > settings.manage_alias_limit + 1:
-        return await context.koduck.send_message(
-            receive_message=context.message,
+        return await context.send_message(
             content=settings.message_add_alias_too_many_params.format(
                 settings.manage_alias_limit
             ),
@@ -77,21 +70,16 @@ async def add_alias(context: KoduckContext, *args: str) -> discord.Message | Non
         )
     )
 
-    return await context.koduck.send_message(
-        receive_message=context.message, content=return_message
-    )
+    return await context.send_message(content=return_message)
 
 
 async def remove_alias(context: KoduckContext, *args: str) -> discord.Message | None:
-    assert context.koduck
     if not args:
-        return await context.koduck.send_message(
-            receive_message=context.message,
+        return await context.send_message(
             content=settings.message_remove_alias_no_param,
         )
     if len(args) > settings.manage_alias_limit:
-        return await context.koduck.send_message(
-            receive_message=context.message,
+        return await context.send_message(
             content=settings.message_remove_alias_too_many_params.format(
                 settings.manage_alias_limit
             ),
@@ -106,16 +94,12 @@ async def remove_alias(context: KoduckContext, *args: str) -> discord.Message | 
         )
     )
 
-    return await context.koduck.send_message(
-        receive_message=context.message, content=return_message
-    )
+    return await context.send_message(content=return_message)
 
 
 async def list_aliases(context: KoduckContext, *args: str) -> discord.Message | None:
-    assert context.koduck
     if len(args) < 1:
-        return await context.koduck.send_message(
-            receive_message=context.message,
+        return await context.send_message(
             content=settings.message_list_aliases_no_param,
         )
 
@@ -126,12 +110,10 @@ async def list_aliases(context: KoduckContext, *args: str) -> discord.Message | 
     # action
     results = [k for k, v in aliases.items() if v.lower() == original.lower()]
     if not results:
-        return await context.koduck.send_message(
-            receive_message=context.message,
+        return await context.send_message(
             content=settings.message_list_aliases_no_result,
         )
-    return await context.koduck.send_message(
-        receive_message=context.message,
+    return await context.send_message(
         content=settings.message_list_aliases_result.format(
             original, ", ".join(results)
         ),
@@ -139,11 +121,8 @@ async def list_aliases(context: KoduckContext, *args: str) -> discord.Message | 
 
 
 async def pokemon(context: KoduckContext, *args: str) -> discord.Message | None:
-    assert context.koduck
     if not args:
-        return await context.koduck.send_message(
-            receive_message=context.message, content=settings.message_pokemon_no_param
-        )
+        return await context.send_message(content=settings.message_pokemon_no_param)
 
     # parse params
     query_pokemon = await pokemon_lookup(context, _query=args[0])
@@ -154,23 +133,18 @@ async def pokemon(context: KoduckContext, *args: str) -> discord.Message | None:
     # retrieve data
     pokemon_ = db.query_pokemon(query_pokemon)
     if not pokemon_:
-        return await context.koduck.send_message(
-            receive_message=context.message,
+        return await context.send_message(
             content=settings.message_pokemon_no_result.format(query_pokemon),
         )
 
-    return await context.koduck.send_message(
-        receive_message=context.message,
+    return await context.send_message(
         embed=embed_formatters.format_pokemon_embed(pokemon_),
     )
 
 
 async def skill(context: KoduckContext, *args: str) -> discord.Message | None:
-    assert context.koduck
     if not args:
-        return await context.koduck.send_message(
-            receive_message=context.message, content=settings.message_skill_no_param
-        )
+        return await context.send_message(content=settings.message_skill_no_param)
 
     # parse params
     query_skill = await pokemon_lookup(context, _query=args[0], skill_lookup=True)
@@ -181,29 +155,22 @@ async def skill(context: KoduckContext, *args: str) -> discord.Message | None:
     # retrieve data
     skill_ = db.query_skill(query_skill)
     if not skill_:
-        return await context.koduck.send_message(
-            receive_message=context.message,
+        return await context.send_message(
             content=settings.message_skill_no_result.format(query_skill),
         )
 
-    return await context.koduck.send_message(
-        receive_message=context.message,
+    return await context.send_message(
         embed=embed_formatters.format_skill_embed(skill_),
     )
 
 
 async def ap(context: KoduckContext, *args: str) -> discord.Message | None:
-    assert context.koduck
     if not args:
-        return await context.koduck.send_message(
-            receive_message=context.message, content=settings.message_ap_no_param
-        )
+        return await context.send_message(content=settings.message_ap_no_param)
 
     query_bp = args[0]
     if not query_bp.isdigit() or query_bp not in map(str, range(30, 91, 10)):
-        return await context.koduck.send_message(
-            receive_message=context.message, content=settings.message_ap_invalid_param
-        )
+        return await context.send_message(content=settings.message_ap_invalid_param)
 
     ap_list = db.query_ap(int(query_bp))
 
@@ -212,13 +179,10 @@ async def ap(context: KoduckContext, *args: str) -> discord.Message | None:
             query_level = int(args[1])
             assert 1 <= query_level <= 30
         except (ValueError, AssertionError):
-            return await context.koduck.send_message(
-                receive_message=context.message,
+            return await context.send_message(
                 content=settings.message_ap_invalid_param_2,
             )
-        return await context.koduck.send_message(
-            receive_message=context.message, content=ap_list[query_level - 1]
-        )
+        return await context.send_message(content=ap_list[query_level - 1])
     else:
         desc = "```"
         for i, ap_ in enumerate(ap_list):
@@ -226,17 +190,12 @@ async def ap(context: KoduckContext, *args: str) -> discord.Message | None:
                 desc += "\n"
             desc += f"{ap_} " if ap_ >= 100 else f" {ap_} "
         desc += "\n```"
-        return await context.koduck.send_message(
-            receive_message=context.message, content=desc
-        )
+        return await context.send_message(content=desc)
 
 
 async def exp(context: KoduckContext, *args: str) -> discord.Message | None:
-    assert context.koduck
     if not args:
-        return await context.koduck.send_message(
-            receive_message=context.message, content=settings.message_exp_no_param
-        )
+        return await context.send_message(content=settings.message_exp_no_param)
 
     # allow space delimited parameters
     if len(args) == 1:
@@ -258,8 +217,7 @@ async def exp(context: KoduckContext, *args: str) -> discord.Message | None:
         assert pokemon_
         query_bp = pokemon_.bp
     except AssertionError:
-        return await context.koduck.send_message(
-            receive_message=context.message,
+        return await context.send_message(
             content=settings.message_exp_invalid_param,
         )
 
@@ -280,23 +238,19 @@ async def exp(context: KoduckContext, *args: str) -> discord.Message | None:
                 desc += "\n"
             desc += str(xp1 - xp2).rjust(7)
         desc += "\n```"
-        return await context.koduck.send_message(
-            receive_message=context.message, content=desc
-        )
+        return await context.send_message(content=desc)
 
     try:
         query_level_1, query_level_2 = (
             (1, int(args[1])) if len(args) == 2 else (int(args[1]), int(args[2]))
         )
     except ValueError:
-        return await context.koduck.send_message(
-            receive_message=context.message,
+        return await context.send_message(
             content=settings.message_exp_invalid_param_2,
         )
 
     if query_level_1 not in range(1, 31) or query_level_2 not in range(1, 31):
-        return await context.koduck.send_message(
-            receive_message=context.message,
+        return await context.send_message(
             content=settings.message_exp_invalid_param_2,
         )
 
@@ -308,8 +262,7 @@ async def exp(context: KoduckContext, *args: str) -> discord.Message | None:
     end_ap = ap_table[query_level_2 - 1]
 
     if _query.isdigit():
-        return await context.koduck.send_message(
-            receive_message=context.message,
+        return await context.send_message(
             content=settings.message_exp_result.format(
                 query_bp,
                 end_exp - start_exp,
@@ -320,8 +273,7 @@ async def exp(context: KoduckContext, *args: str) -> discord.Message | None:
             ),
         )
 
-    return await context.koduck.send_message(
-        receive_message=context.message,
+    return await context.send_message(
         content=settings.message_exp_result_2.format(
             query_pokemon,
             query_bp,
@@ -335,21 +287,15 @@ async def exp(context: KoduckContext, *args: str) -> discord.Message | None:
 
 
 async def type(context: KoduckContext, *args: str) -> discord.Message | None:
-    assert context.koduck
     if not args:
-        return await context.koduck.send_message(
-            receive_message=context.message, content=settings.message_type_no_param
-        )
+        return await context.send_message(content=settings.message_type_no_param)
     query_type = args[0].lower().capitalize()
 
     try:
         type_info = db.query_type(PokemonType(query_type))
     except ValueError:
-        return await context.koduck.send_message(
-            receive_message=context.message, content=settings.message_type_invalid_param
-        )
-    return await context.koduck.send_message(
-        receive_message=context.message,
+        return await context.send_message(content=settings.message_type_invalid_param)
+    return await context.send_message(
         embed=embed_formatters.format_type_embed(type_info),
     )
 
@@ -357,11 +303,8 @@ async def type(context: KoduckContext, *args: str) -> discord.Message | None:
 async def stage(
     context: KoduckContext, *args: str, **kwargs: Any
 ) -> discord.Message | None:
-    assert context.koduck
     if not args:
-        return await context.koduck.send_message(
-            receive_message=context.message, content=settings.message_stage_no_param
-        )
+        return await context.send_message(content=settings.message_stage_no_param)
 
     # allow space delimited parameters
     if len(args) == 1:
@@ -392,13 +335,11 @@ async def stage(
         try:
             result_number = int(args[1])
             if result_number <= 0:
-                return await context.koduck.send_message(
-                    receive_message=context.message,
+                return await context.send_message(
                     content=settings.message_stage_invalid_param,
                 )
         except ValueError:
-            return await context.koduck.send_message(
-                receive_message=context.message,
+            return await context.send_message(
                 content=settings.message_stage_invalid_param,
             )
 
@@ -409,8 +350,7 @@ async def stage(
             candidate_stage = db.query_stage_by_index(stage_index, stage_type)
             results.append(candidate_stage)
         except ValueError:
-            return await context.koduck.send_message(
-                receive_message=context.message,
+            return await context.send_message(
                 content=settings.message_stage_main_invalid_param.format(
                     settings.main_stages_min_index, settings.main_stages_max_index
                 ),
@@ -420,8 +360,7 @@ async def stage(
             candidate_stage = db.query_stage_by_index(stage_index, stage_type)
             results.append(candidate_stage)
         except ValueError:
-            return await context.koduck.send_message(
-                receive_message=context.message,
+            return await context.send_message(
                 content=settings.message_stage_expert_invalid_param.format(
                     settings.expert_stages_min_index + 1,
                     settings.expert_stages_max_index + 1,
@@ -432,8 +371,7 @@ async def stage(
             candidate_stage = db.query_stage_by_index(stage_index, stage_type)
             results.append(candidate_stage)
         except ValueError:
-            return await context.koduck.send_message(
-                receive_message=context.message,
+            return await context.send_message(
                 content=settings.message_stage_event_invalid_param.format(
                     settings.event_stages_min_index, settings.event_stages_max_index
                 ),
@@ -454,8 +392,7 @@ async def stage(
         )
 
     if not results:
-        return await context.koduck.send_message(
-            receive_message=context.message,
+        return await context.send_message(
             content=settings.message_stage_no_result.format(query_pokemon),
         )
 
@@ -463,32 +400,27 @@ async def stage(
     if result_number:
         try:
             if stage_starting_board:
-                return await context.koduck.send_message(
-                    receive_message=context.message,
+                return await context.send_message(
                     embed=embed_formatters.format_starting_board_embed(
                         results[result_number - 1]
                     ),
                 )
-            return await context.koduck.send_message(
-                receive_message=context.message,
+            return await context.send_message(
                 embed=embed_formatters.format_stage_embed(
                     results[result_number - 1], shorthand=shorthand
                 ),
             )
         except IndexError:
-            return await context.koduck.send_message(
-                receive_message=context.message,
+            return await context.send_message(
                 content=settings.message_stage_result_error.format(len(results)),
             )
 
     if len(results) == 1:
         if stage_starting_board:
-            return await context.koduck.send_message(
-                receive_message=context.message,
+            return await context.send_message(
                 embed=embed_formatters.format_starting_board_embed(results[0]),
             )
-        return await context.koduck.send_message(
-            receive_message=context.message,
+        return await context.send_message(
             embed=embed_formatters.format_stage_embed(results[0], shorthand=shorthand),
         )
 
@@ -507,12 +439,10 @@ async def stage(
     if choice is None:
         return
     if stage_starting_board:
-        return await context.koduck.send_message(
-            receive_message=context.message,
+        return await context.send_message(
             embed=embed_formatters.format_starting_board_embed(results[choice]),
         )
-    return await context.koduck.send_message(
-        receive_message=context.message,
+    return await context.send_message(
         embed=embed_formatters.format_stage_embed(results[choice], shorthand=shorthand),
     )
 
@@ -534,11 +464,8 @@ async def starting_board(
 async def disruption_pattern(
     context: KoduckContext, *args: str
 ) -> discord.Message | None:
-    assert context.koduck
     if not args:
-        return await context.koduck.send_message(
-            receive_message=context.message, content=settings.message_dp_no_param
-        )
+        return await context.send_message(content=settings.message_dp_no_param)
 
     # parse params
     try:
@@ -550,8 +477,7 @@ async def disruption_pattern(
             <= settings.disruption_patterns_max_index
         )
     except (ValueError, AssertionError):
-        return await context.koduck.send_message(
-            receive_message=context.message,
+        return await context.send_message(
             content=settings.message_dp_invalid_param.format(
                 settings.disruption_patterns_min_index,
                 settings.disruption_patterns_max_index,
@@ -565,17 +491,12 @@ async def disruption_pattern(
             f"Pattern Index {query_index}.png"
         ).replace(" ", "%20")
     )
-    return await context.koduck.send_message(
-        receive_message=context.message, embed=embed
-    )
+    return await context.send_message(embed=embed)
 
 
 async def event(context: KoduckContext, *args: str) -> discord.Message | None:
-    assert context.koduck
     if not args:
-        return await context.koduck.send_message(
-            receive_message=context.message, content=settings.message_event_no_param
-        )
+        return await context.send_message(content=settings.message_event_no_param)
 
     # allow space delimited parameters
     if len(args) == 1:
@@ -590,13 +511,11 @@ async def event(context: KoduckContext, *args: str) -> discord.Message | None:
         try:
             result_number = int(args[1])
             if result_number <= 0:
-                return await context.koduck.send_message(
-                    receive_message=context.message,
+                return await context.send_message(
                     content=settings.message_event_invalid_param,
                 )
         except ValueError:
-            return await context.koduck.send_message(
-                receive_message=context.message,
+            return await context.send_message(
                 content=settings.message_event_invalid_param,
             )
     query_pokemon = await pokemon_lookup(context, _query=args[0])
@@ -608,16 +527,14 @@ async def event(context: KoduckContext, *args: str) -> discord.Message | None:
     events = list(db.query_event_by_pokemon(query_pokemon))
 
     if not events:
-        return await context.koduck.send_message(
-            receive_message=context.message,
+        return await context.send_message(
             content=settings.message_event_result_error.format(len(events)),
         )
 
     try:
         selected_event = events[result_number - 1]
     except IndexError:
-        return await context.koduck.send_message(
-            receive_message=context.message,
+        return await context.send_message(
             content=settings.message_event_no_result.format(query_pokemon),
         )
 
@@ -628,8 +545,7 @@ async def event(context: KoduckContext, *args: str) -> discord.Message | None:
             result_number,
         )
 
-    return await context.koduck.send_message(
-        receive_message=context.message,
+    return await context.send_message(
         embed=embed_formatters.format_event_embed(selected_event),
     )
 
@@ -639,8 +555,7 @@ async def paginate_embeds(
 ) -> discord.Message | None:
     assert context.koduck
     current_page = initial_page
-    the_message = await context.koduck.send_message(
-        receive_message=context.message,
+    the_message = await context.send_message(
         content=f"Showing result {current_page} of {len(pages)}",
         embed=pages[current_page - 1],
     )
@@ -811,7 +726,6 @@ def pokemon_filter_results_to_string(
 async def query(
     context: KoduckContext, *args: str, **kwargs: Any
 ) -> discord.Message | None:
-    assert context.koduck
     use_emojis = kwargs.get("useemojis", False)
     queries = validate_query(context["params"])
 
@@ -878,8 +792,7 @@ async def query(
             sortby = right
 
     if not query_string:
-        return await context.koduck.send_message(
-            receive_message=context.message,
+        return await context.send_message(
             content=settings.message_query_invalid_param,
         )
 
@@ -913,8 +826,7 @@ async def query(
         len(hits), query_string, sortby_string
     )
 
-    return await context.koduck.send_message(
-        receive_message=context.message,
+    return await context.send_message(
         embed=embed_formatters.format_query_results_embed(header, buckets, use_emojis),
     )
 
@@ -929,13 +841,10 @@ async def query_with_emojis(
 async def skill_with_pokemon(
     context: KoduckContext, *args: str, **kwargs: Any
 ) -> discord.Message | None:
-    assert context.koduck
     use_emojis = kwargs.get("useemojis", False)
 
     if not args:
-        return await context.koduck.send_message(
-            receive_message=context.message, content=settings.message_skill_no_param
-        )
+        return await context.send_message(content=settings.message_skill_no_param)
 
     query_skill = args[0]
 
@@ -948,8 +857,7 @@ async def skill_with_pokemon(
     # retrieve skill data
     skill_ = db.query_skill(query_skill)
     if not skill_:
-        return await context.koduck.send_message(
-            receive_message=context.message,
+        return await context.send_message(
             content=settings.message_skill_no_result.format(query_skill),
         )
 
@@ -1061,9 +969,7 @@ async def skill_with_pokemon(
     embed = embed_formatters.format_skill_embed(skill_)
     embed.add_field(name=field_name, value=field_value)
 
-    return await context.koduck.send_message(
-        receive_message=context.message, embed=embed
-    )
+    return await context.send_message(embed=embed)
 
 
 async def skill_with_pokemon_with_emojis(
@@ -1259,7 +1165,6 @@ def pokemon_filter(
 
 
 async def eb_rewards(context: KoduckContext, *args: str) -> discord.Message | None:
-    assert context.koduck
     if not args:
         query_pokemon = utils.current_eb_pokemon()
     else:
@@ -1272,13 +1177,11 @@ async def eb_rewards(context: KoduckContext, *args: str) -> discord.Message | No
     # retrieve data
     _eb_rewards = db.query_eb_rewards_pokemon(query_pokemon)
     if not _eb_rewards:
-        return await context.koduck.send_message(
-            receive_message=context.message,
+        return await context.send_message(
             content=settings.message_eb_rewards_no_result.format(query_pokemon),
         )
 
-    return await context.koduck.send_message(
-        receive_message=context.message,
+    return await context.send_message(
         embed=embed_formatters.format_eb_rewards_embed(_eb_rewards),
     )
 
@@ -1286,7 +1189,6 @@ async def eb_rewards(context: KoduckContext, *args: str) -> discord.Message | No
 async def eb_details(
     context: KoduckContext, *args: str, **kwargs: Any
 ) -> discord.Message | None:
-    assert context.koduck
     if not args or args[0].isdigit():
         eb_pokemon = utils.current_eb_pokemon()
         args = (eb_pokemon,) + args
@@ -1302,14 +1204,12 @@ async def eb_details(
         query_level = args[1]
         try:
             if int(query_level) <= 0:
-                return await context.koduck.send_message(
-                    receive_message=context.message,
+                return await context.send_message(
                     content=settings.message_eb_invalid_param,
                 )
             query_level = int(query_level)
         except ValueError:
-            return await context.koduck.send_message(
-                receive_message=context.message,
+            return await context.send_message(
                 content=settings.message_eb_invalid_param,
             )
 
@@ -1322,15 +1222,13 @@ async def eb_details(
     # verify that queried pokemon is in EB table
     eb_details_2 = db.query_eb_pokemon(query_pokemon)
     if not eb_details_2:
-        return await context.koduck.send_message(
-            receive_message=context.message,
+        return await context.send_message(
             content=settings.message_eb_no_result.format(query_pokemon),
         )
 
     # optional level param which will return a stage embed instead
     if query_level <= 0:
-        return await context.koduck.send_message(
-            receive_message=context.message,
+        return await context.send_message(
             embed=embed_formatters.format_eb_details_embed(eb_details_2),
         )
 
@@ -1359,13 +1257,11 @@ async def eb_details(
             break
 
     if eb_starting_board:
-        return await context.koduck.send_message(
-            receive_message=context.message,
+        return await context.send_message(
             embed=embed_formatters.format_starting_board_embed(eb_stage),
         )
     else:
-        return await context.koduck.send_message(
-            receive_message=context.message,
+        return await context.send_message(
             embed=embed_formatters.format_stage_embed(
                 eb_stage,
                 eb_data=(level_range, delta, eb_reward, query_level),
@@ -1382,11 +1278,9 @@ async def eb_details_shorthand(
 
 
 async def week(context: KoduckContext, *args: str) -> discord.Message | None:
-    assert context.koduck
     curr_week = utils.get_current_week()
     if not args:
-        return await context.koduck.send_message(
-            receive_message=context.message,
+        return await context.send_message(
             embed=embed_formatters.format_week_embed(curr_week),
         )
 
@@ -1403,8 +1297,7 @@ async def week(context: KoduckContext, *args: str) -> discord.Message | None:
             event.repeat_param_1 for event in db.query_event_by_pokemon(query_pokemon)
         ]
         if not weeks:
-            return await context.koduck.send_message(
-                receive_message=context.message,
+            return await context.send_message(
                 content=settings.message_event_no_result.format(query_pokemon),
             )
         sorted_results = [w + 1 for w in weeks if w + 1 >= curr_week] + [
@@ -1413,15 +1306,13 @@ async def week(context: KoduckContext, *args: str) -> discord.Message | None:
         query_week = sorted_results[0]
 
     if not 1 <= query_week <= settings.num_weeks:
-        return await context.koduck.send_message(
-            receive_message=context.message,
+        return await context.send_message(
             content=settings.message_week_invalid_param.format(
                 settings.num_weeks, settings.num_weeks
             ),
         )
 
-    return await context.koduck.send_message(
-        receive_message=context.message,
+    return await context.send_message(
         embed=embed_formatters.format_week_embed(query_week),
     )
 
@@ -1434,7 +1325,6 @@ async def next_week(
 
 
 async def sm_rewards(context: KoduckContext) -> discord.Message | None:
-    assert context.koduck
     reward_list = db.get_sm_rewards()
     level = "\n".join(str(reward.level) for reward in reward_list)
     first_clear = "\n".join(f"[{r.reward}] x{r.amount}" for r in reward_list)
@@ -1446,21 +1336,17 @@ async def sm_rewards(context: KoduckContext) -> discord.Message | None:
     embed.add_field(name="Level", value=level, inline=True)
     embed.add_field(name="First Clear", value=first_clear, inline=True)
     embed.add_field(name="Repeat Clear", value=repeat_clear, inline=True)
-    return await context.koduck.send_message(
-        receive_message=context.message, embed=embed
-    )
+    return await context.send_message(embed=embed)
 
 
 async def drain_list(context: KoduckContext, *args: str) -> discord.Message | None:
-    assert context.koduck
     # allow space delimited parameters
     if len(args) == 1:
         args = tuple(args[0].split(" "))
 
     # first arg script name, second arg hp, third arg moves
     if len(args) != 2:
-        return await context.koduck.send_message(
-            receive_message=context.message,
+        return await context.send_message(
             content=settings.message_drain_list_no_param,
         )
 
@@ -1469,14 +1355,12 @@ async def drain_list(context: KoduckContext, *args: str) -> discord.Message | No
         moves = int(args[1])
         assert hp > 0 and moves > 0
     except (ValueError, AssertionError):
-        return await context.koduck.send_message(
-            receive_message=context.message,
+        return await context.send_message(
             content=settings.message_drain_list_invalid_param,
         )
 
     if moves > 55:
-        return await context.koduck.send_message(
-            receive_message=context.message,
+        return await context.send_message(
             content=settings.message_drain_list_invalid_param_2,
         )
 
@@ -1489,9 +1373,7 @@ async def drain_list(context: KoduckContext, *args: str) -> discord.Message | No
 
     output += "```"
 
-    return await context.koduck.send_message(
-        receive_message=context.message, content=output
-    )
+    return await context.send_message(content=output)
 
 
 # ? Split skill_lookup?
@@ -1506,7 +1388,6 @@ async def pokemon_lookup(
 
     Check if it exists as an alias, and/or in an additionally provided list.
     Provide some suggestions to the user if it does not."""
-    assert context.koduck
     _query = _query or args[0]
     aliases = db.get_aliases()
     _query = aliases.get(_query.lower(), _query)
@@ -1543,8 +1424,7 @@ async def pokemon_lookup(
     )
 
     if not close_matches:
-        await context.koduck.send_message(
-            receive_message=context.message,
+        await context.send_message(
             content=settings.message_pokemon_lookup_no_result.format(
                 "Skill" if skill_lookup else "Pokemon", _query
             ),
@@ -1684,9 +1564,7 @@ async def choice_react(
     # there are only 9 (10) number emojis :(
     num_choices = min(num_choices, 9)
     num_choices = min(num_choices, settings.choice_react_limit)
-    the_message = await context.koduck.send_message(
-        receive_message=context.message, content=question_string
-    )
+    the_message = await context.send_message(content=question_string)
     choice_emojis = constants.number_emojis[: num_choices + 1]
 
     # add reactions
@@ -1729,7 +1607,6 @@ async def choice_react(
 
 
 async def remind_me(context: KoduckContext, *args: str) -> discord.Message | None:
-    assert context.koduck
     assert context.message
     assert context.message.author
     user_id = context.message.author.id
@@ -1738,8 +1615,7 @@ async def remind_me(context: KoduckContext, *args: str) -> discord.Message | Non
         user_reminders = Reminder(user_id, "", "")
 
     if not args:
-        return await context.koduck.send_message(
-            receive_message=context.message,
+        return await context.send_message(
             content=settings.message_remind_me_status.format(
                 user_reminders.weeks, user_reminders.pokemon
             ),
@@ -1750,20 +1626,17 @@ async def remind_me(context: KoduckContext, *args: str) -> discord.Message | Non
             query_week = int(args[0])
             assert 1 <= query_week <= settings.num_weeks
         except (ValueError, AssertionError):
-            return await context.koduck.send_message(
-                receive_message=context.message,
+            return await context.send_message(
                 content=settings.message_week_invalid_param.format(
                     settings.num_weeks, settings.num_weeks
                 ),
             )
         if query_week in user_reminders.weeks:
-            return await context.koduck.send_message(
-                receive_message=context.message,
+            return await context.send_message(
                 content=settings.message_remind_me_week_exists,
             )
         db.add_reminder_week(user_id, query_week)
-        return await context.koduck.send_message(
-            receive_message=context.message,
+        return await context.send_message(
             content=settings.message_remind_me_week_success.format(query_week),
         )
 
@@ -1773,22 +1646,18 @@ async def remind_me(context: KoduckContext, *args: str) -> discord.Message | Non
         return
 
     if query_pokemon in user_reminders.pokemon:
-        return await context.koduck.send_message(
-            receive_message=context.message,
+        return await context.send_message(
             content=settings.message_remind_me_pokemon_exists,
         )
     db.add_reminder_pokemon(user_id, query_pokemon)
-    return await context.koduck.send_message(
-        receive_message=context.message,
+    return await context.send_message(
         content=settings.message_remind_me_pokemon_success.format(query_pokemon),
     )
 
 
 async def unremind_me(context: KoduckContext, *args: str) -> discord.Message | None:
-    assert context.koduck
     if not args:
-        return await context.koduck.send_message(
-            receive_message=context.message,
+        return await context.send_message(
             content=settings.message_unremind_me_no_param,
         )
     assert context.message
@@ -1803,22 +1672,19 @@ async def unremind_me(context: KoduckContext, *args: str) -> discord.Message | N
             query_week = int(args[0])
             assert 1 <= query_week <= settings.num_weeks
         except (ValueError, AssertionError):
-            return await context.koduck.send_message(
-                receive_message=context.message,
+            return await context.send_message(
                 content=settings.message_week_invalid_param.format(
                     settings.num_weeks, settings.num_weeks
                 ),
             )
         if query_week not in user_reminders.weeks:
-            return await context.koduck.send_message(
-                receive_message=context.message,
+            return await context.send_message(
                 content=settings.message_unremind_me_week_non_exists,
             )
 
         user_reminders.remove_week(query_week)  #
         db.update_reminder(user_reminders)
-        return await context.koduck.send_message(
-            receive_message=context.message,
+        return await context.send_message(
             content=settings.message_unremind_me_week_success.format(query_week),
         )
     query_pokemon = await pokemon_lookup(context, _query=args[0])
@@ -1827,15 +1693,13 @@ async def unremind_me(context: KoduckContext, *args: str) -> discord.Message | N
         return
 
     if query_pokemon not in user_reminders.pokemon:
-        return await context.koduck.send_message(
-            receive_message=context.message,
+        return await context.send_message(
             content=settings.message_unremind_me_pokemon_non_exists,
         )
 
     user_reminders.remove_pokemon(query_pokemon)
     db.update_reminder(user_reminders)
-    return await context.koduck.send_message(
-        receive_message=context.message,
+    return await context.send_message(
         content=settings.message_unremind_me_pokemon_success.format(query_pokemon),
     )
 

@@ -18,8 +18,7 @@ async def send_message(
     except ValueError:
         channel_id = -1
     the_channel = context.koduck.client.get_channel(channel_id)
-    return await context.koduck.send_message(
-        receive_message=context.message,
+    return await context.send_message(
         channel=the_channel,
         content=message_content,
         ignore_cd=True,
@@ -48,8 +47,7 @@ async def change_status(context: KoduckContext) -> None:
 async def refresh_settings(context: KoduckContext) -> discord.Message | None:
     assert context.koduck
     context.koduck.refresh_settings()
-    return await context.koduck.send_message(
-        receive_message=context.message,
+    return await context.send_message(
         content=settings.message_refresh_settings_success,
     )
 
@@ -61,8 +59,7 @@ async def refresh_app_commands(context: KoduckContext) -> None:
     """
     assert context.koduck
     await context.koduck.refresh_app_commands()
-    await context.koduck.send_message(
-        receive_message=context.message,
+    await context.send_message(
         content=settings.message_refresh_app_commands_success,
     )
 
@@ -72,22 +69,17 @@ async def add_admin(context: KoduckContext) -> discord.Message | None:
     assert context.message
     # need exactly one mentioned user (the order in the mentioned list is unreliable)
     if len(context.message.raw_mentions) != 1:
-        return await context.koduck.send_message(
-            receive_message=context.message, content=settings.message_no_mentioned_user
-        )
+        return await context.send_message(content=settings.message_no_mentioned_user)
 
     user_id = context.message.raw_mentions[0]
     user_level = context.koduck.get_user_level(user_id)
 
     # already an admin
     if user_level == 2:
-        return await context.koduck.send_message(
-            receive_message=context.message, content=settings.message_add_admin_failed
-        )
+        return await context.send_message(content=settings.message_add_admin_failed)
 
     context.koduck.update_user_level(user_id, 2)
-    return await context.koduck.send_message(
-        receive_message=context.message,
+    return await context.send_message(
         content=settings.message_add_admin_success.format(user_id),
     )
 
@@ -97,23 +89,19 @@ async def remove_admin(context: KoduckContext) -> discord.Message | None:
     assert context.message
     # need exactly one mentioned user (the order in the mentioned list is unreliable)
     if len(context.message.raw_mentions) != 1:
-        return await context.koduck.send_message(
-            receive_message=context.message, content=settings.message_no_mentioned_user
-        )
+        return await context.send_message(content=settings.message_no_mentioned_user)
 
     user_id = context.message.raw_mentions[0]
     user_level = context.koduck.get_user_level(user_id)
 
     # not an admin
     if user_level < 2:
-        return await context.koduck.send_message(
-            receive_message=context.message,
+        return await context.send_message(
             content=settings.message_remove_admin_failed,
         )
 
     context.koduck.update_user_level(user_id, 1)
-    return await context.koduck.send_message(
-        receive_message=context.message,
+    return await context.send_message(
         content=settings.message_remove_admin_success.format(user_id),
     )
 
@@ -126,8 +114,7 @@ async def purge(context: KoduckContext, message_count: int) -> discord.Message |
     try:
         limit = int(message_count)
     except (IndexError, ValueError):
-        return await context.koduck.send_message(
-            receive_message=context.message,
+        return await context.send_message(
             content=settings.message_purge_invalid_param,
         )
     counter = 0

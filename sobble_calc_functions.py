@@ -61,7 +61,6 @@ def initialize_shuffle_calc_json_data(
 
 
 async def sm(context: KoduckContext, *args: str) -> discord.Message | None:
-    assert context.koduck
     if len(sm_data) == 0 or len(sm_stages_data) < 300 or context["message"].author.bot:
         return
     selected_stage_index = -1
@@ -115,12 +114,10 @@ async def sm(context: KoduckContext, *args: str) -> discord.Message | None:
                 f"{strat['exp_stdm']:4.1f}  {strat['moves_left']:5.1f}  {strat['team']}"
             )
         txt[-1] += "```"
-        return await context.koduck.send_message(
-            context.message, content="\n".join(txt).strip()
-        )
+        return await context.send_message(content="\n".join(txt).strip())
     if selected_stage_index < 0 or selected_stage_index >= 300:
-        return await context.koduck.send_message(
-            context.message, content="Couldn't reverse the SM stage index! :warning:"
+        return await context.send_message(
+            content="Couldn't reverse the SM stage index! :warning:"
         )
 
     selected_stage_data = sm_stages_data[selected_stage_index]
@@ -164,13 +161,10 @@ async def sm(context: KoduckContext, *args: str) -> discord.Message | None:
             )
         )
     txt[-1] += "```"
-    return await context.koduck.send_message(
-        context.message, content="\n".join(txt).strip()
-    )
+    return await context.send_message(content="\n".join(txt).strip())
 
 
 async def wm(context: KoduckContext) -> discord.Message | None:
-    assert context.koduck
     assert context.message
     if not wm_data or context.message.author.bot:
         return
@@ -181,13 +175,10 @@ async def wm(context: KoduckContext) -> discord.Message | None:
         if strat["show"]
     )
     txt[-1] += "```"
-    return await context.koduck.send_message(
-        context.message, content="\n".join(txt).strip()
-    )
+    return await context.send_message(content="\n".join(txt).strip())
 
 
 async def explain(context: KoduckContext, *args: str) -> discord.Message | None:
-    assert context.koduck
     assert context.message
     if not explain_data or context.message.author.bot:
         return
@@ -204,4 +195,4 @@ async def explain(context: KoduckContext, *args: str) -> discord.Message | None:
             "https://old.reddit.com/r/PokemonShuffle/comments/bdvau1/advanced_game_mechanics/"
         )
 
-    return await context.koduck.send_message(context["message"], content=txt)
+    return await context.send_message(content=txt)
