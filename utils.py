@@ -1,5 +1,7 @@
 import datetime
+import functools
 import re
+import urllib.parse
 from typing import Any, Callable, Protocol
 
 import discord
@@ -184,3 +186,6 @@ def allow_space_delimiter() -> Callable[[BotCommand], BotCommand]:
         return wrapper
 
     return decorator
+
+
+url_encode = functools.partial(urllib.parse.quote, safe=":/")

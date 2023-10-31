@@ -182,14 +182,14 @@ async def ap(
                 content=settings.message_ap_invalid_param_2,
             )
         return await context.send_message(content=ap_list[query_level - 1])
-    else:
-        desc = "```"
-        for i, ap_ in enumerate(ap_list):
-            if i % 10 == 0:
-                desc += "\n"
-            desc += f"{ap_} " if ap_ >= 100 else f" {ap_} "
-        desc += "\n```"
-        return await context.send_message(content=desc)
+
+    desc = "```"
+    for i, ap_ in enumerate(ap_list):
+        if i % 10 == 0:
+            desc += "\n"
+        desc += f"{ap_} " if ap_ >= 100 else f" {ap_} "
+    desc += "\n```"
+    return await context.send_message(content=desc)
 
 
 @utils.allow_space_delimiter()
@@ -286,7 +286,7 @@ async def exp(
 async def type(
     context: KoduckContext, *args: str, **kwargs: Any
 ) -> discord.Message | None:
-    query_type = args[0].lower().capitalize()
+    query_type = args[0].capitalize()
 
     try:
         type_info = db.query_type(PokemonType(query_type))
@@ -474,10 +474,10 @@ async def disruption_pattern(
 
     embed = discord.Embed()
     embed.set_image(
-        url=(
+        url=utils.url_encode(
             "https://raw.githubusercontent.com/Chupalika/Kaleo/icons/Disruption Patterns/"
-            f"Pattern Index {query_index}.png"
-        ).replace(" ", "%20")
+            f"Pattern Index {query_index}.png",
+        )
     )
     return await context.send_message(embed=embed)
 
@@ -667,7 +667,7 @@ def validate_query(subqueries: list[str]) -> list[tuple[str, str, str]]:
                 continue
         # make sure type and se are valid types
         elif left in ["type", "se"]:
-            right = right.lower().capitalize()
+            right = right.capitalize()
             try:
                 _ = PokemonType(right)
             except ValueError:
@@ -944,7 +944,8 @@ async def skill_with_pokemon(
             sortby_string = "Max AP"
         field_value = pokemon_filter_results_to_string(buckets, use_emojis)
 
-    field_name = "Pokemon with this skill{}{}".format(
+    field_name = (
+        "Pokemon with this skill",
         f" ({query_string})" if query_string else "",
         f" sorted by {sortby_string}" if sortby_string else "",
     )
@@ -1221,8 +1222,6 @@ async def eb_details(
             f" (Levels {leg.start_level} to {leg.end_level-1} ({query_level}))"
         )
 
-    delta = query_level - leg.start_level
-
     shorthand = kwargs.get("shorthand", False)
     eb_starting_board = kwargs.get("startingboard", False)
 
@@ -1238,14 +1237,18 @@ async def eb_details(
         return await context.send_message(
             embed=embed_formatters.format_starting_board_embed(eb_stage),
         )
-    else:
-        return await context.send_message(
-            embed=embed_formatters.format_stage_embed(
-                eb_stage,
-                eb_data=(level_range, delta, eb_reward, query_level),
-                shorthand=shorthand,
+    return await context.send_message(
+        embed=embed_formatters.format_stage_embed(
+            eb_stage,
+            eb_data=(
+                level_range,
+                query_level - leg.start_level,
+                eb_reward,
+                query_level,
             ),
-        )
+            shorthand=shorthand,
+        ),
+    )
 
 
 async def eb_details_shorthand(
@@ -1304,7 +1307,7 @@ async def next_week(
 
 async def sm_rewards(context: KoduckContext) -> discord.Message | None:
     reward_list = db.get_sm_rewards()
-    level = "\n".join(str(reward.level) for reward in reward_list)
+    level = "\n".join(str(r.level) for r in reward_list)
     first_clear = "\n".join(f"[{r.reward}] x{r.amount}" for r in reward_list)
     repeat_clear = "\n".join(
         f"[{r.reward_repeat}] x{r.amount_repeat}" for r in reward_list
@@ -1340,7 +1343,7 @@ async def drain_list(
     output = f"```\nhp:    {hp}\nmoves: {moves}\n\n"
 
     for i in range(moves):
-        drain_amount = int(floor(float(hp) * 0.1))
+        drain_amount = floor(float(hp) * 0.1)
         output += f"{moves-i:>2}: {drain_amount:>5} ({hp:>6} => {hp-drain_amount:>6})\n"
         hp -= drain_amount
 
@@ -1383,11 +1386,9 @@ async def lookup(
     if not enable_dym:
         return ""
 
-    add = names_dict.values()
-
     close_matches = difflib.get_close_matches(
         _query,
-        list(aliases.keys()) + list(add),
+        set(aliases.keys()) | set(names_dict.values()),
         n=settings.dym_limit,
         cutoff=settings.dym_threshold,
     )
@@ -1526,9 +1527,9 @@ async def choice_react(
     context: KoduckContext, num_choices: int, question_string: str
 ) -> int | None:
     assert context.koduck
-    # there are only 9 (10) number emojis :(
-    num_choices = min(num_choices, 9)
-    num_choices = min(num_choices, settings.choice_react_limit)
+    num_choices = min(
+        num_choices, settings.choice_react_limit, len(constants.number_emojis) - 1
+    )
     the_message = await context.send_message(content=question_string)
     choice_emojis = constants.number_emojis[: num_choices + 1]
 
@@ -1564,8 +1565,7 @@ async def choice_react(
     # return the chosen answer if there was one
     if reaction is None:
         return
-    result_emoji = reaction.emoji
-    choice = choice_emojis.index(result_emoji)
+    choice = choice_emojis.index(reaction.emoji)
     if choice == 0:
         return
     return choice - 1
