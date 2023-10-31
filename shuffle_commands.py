@@ -1401,8 +1401,8 @@ async def lookup(
     choices: list[tuple[str, str]] = []
     no_duplicates: list[str] = []
     for close_match in close_matches:
-        alias = aliases.get(close_match, close_match).lower()
-        if alias not in no_duplicates:
+        alias = aliases.get(close_match, close_match)
+        if alias.lower() not in no_duplicates:
             choices.append((close_match, alias))
             no_duplicates.append(alias.lower())
 
