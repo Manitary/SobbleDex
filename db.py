@@ -339,24 +339,18 @@ def get_all_stages(stage_type: StageType) -> Iterator[Stage]:
         yield Stage(stage_type=stage_type, **stage)
 
 
-def get_pokemon_names() -> set[str]:
-    q = shuffle_connection.execute(
-        """
-        SELECT pokemon
-        FROM pokemon
-        """
-    ).fetchall()
-    return {x["pokemon"] for x in q}
-
-
-def get_skill_names() -> set[str]:
-    q = shuffle_connection.execute(
-        """
-        SELECT skill
-        FROM skills
+def get_db_table_column(
+    table: str, column: str, conn: sqlite3.Connection = shuffle_connection
+) -> set[str]:
+    #! Make sure the arguments can never be chosen by the end user.
+    #! Otherwise, make sure to have some sanitisation is in place.
+    q = conn.execute(
+        f"""
+        SELECT {column}
+        FROM {table}
         """
     ).fetchall()
-    return {x["skill"] for x in q}
+    return {x[column] for x in q}
 
 
 def query_eb_pokemon(pokemon: str) -> list[EBStretch]:

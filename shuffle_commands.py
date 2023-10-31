@@ -1,6 +1,7 @@
 import asyncio
 import datetime
 import difflib
+import functools
 import itertools
 import re
 from collections import defaultdict
@@ -123,7 +124,7 @@ async def pokemon(
     context: KoduckContext, *args: str, **kwargs: Any
 ) -> discord.Message | None:
     # parse params
-    query_pokemon = await pokemon_lookup(context, _query=args[0])
+    query_pokemon = await lookup_pokemon(context, _query=args[0])
     if not query_pokemon:
         print("Unrecognized Pokemon")
         return
@@ -145,7 +146,7 @@ async def skill(
     context: KoduckContext, *args: str, **kwargs: Any
 ) -> discord.Message | None:
     # parse params
-    query_skill = await pokemon_lookup(context, _query=args[0], skill_lookup=True)
+    query_skill = await lookup_skill(context, _query=args[0])
     if not query_skill:
         print("Unrecognized Skill")
         return
@@ -204,7 +205,7 @@ async def exp(
         query_bp = int(_query)
         assert query_bp in range(30, 91, 10)
     except ValueError:
-        query_pokemon = await pokemon_lookup(context, _query=_query)
+        query_pokemon = await lookup_pokemon(context, _query=_query)
         if not query_pokemon:
             print("Unrecognized Pokemon")
             return
@@ -366,7 +367,7 @@ async def stage(
                 ),
             )
     elif stage_type == StageType.ALL:
-        query_pokemon = await pokemon_lookup(context, _query=query_pokemon)
+        query_pokemon = await lookup_pokemon(context, _query=query_pokemon)
         if not query_pokemon:
             print("Unrecognized Pokemon")
             return
@@ -500,7 +501,7 @@ async def event(
             return await context.send_message(
                 content=settings.message_event_invalid_param,
             )
-    query_pokemon = await pokemon_lookup(context, _query=args[0])
+    query_pokemon = await lookup_pokemon(context, _query=args[0])
     if not query_pokemon:
         print("Unrecognized Pokemon")
         return
@@ -831,7 +832,7 @@ async def skill_with_pokemon(
     query_skill = args[0]
 
     # lookup and validate skill
-    query_skill = await pokemon_lookup(context, _query=query_skill, skill_lookup=True)
+    query_skill = await lookup_skill(context, _query=query_skill)
     if not query_skill:
         print("Unrecognized Skill")
         return
@@ -997,7 +998,7 @@ def pokemon_filter(
         db.get_farmable_pokemon() if farmable != Param.IGNORE else set()
     )
 
-    all_pokemon_names = db.get_pokemon_names()
+    all_pokemon_names = db.get_db_table_column(table="pokemon", column="pokemon")
 
     # check each pokemon
     for pokemon_ in db.get_all_pokemon():
@@ -1151,7 +1152,7 @@ async def eb_rewards(context: KoduckContext, *args: str) -> discord.Message | No
         query_pokemon = utils.current_eb_pokemon()
     else:
         # parse params
-        query_pokemon = await pokemon_lookup(context, _query=args[0])
+        query_pokemon = await lookup_pokemon(context, _query=args[0])
         if not query_pokemon:
             print("Unrecognized Pokemon")
             return
@@ -1191,7 +1192,7 @@ async def eb_details(
             )
 
     # parse params
-    query_pokemon = await pokemon_lookup(context, _query=args[0])
+    query_pokemon = await lookup_pokemon(context, _query=args[0])
     if not query_pokemon:
         print("Unrecognized Pokemon")
         return
@@ -1264,7 +1265,7 @@ async def week(context: KoduckContext, *args: str) -> discord.Message | None:
     if args[0].isdigit():
         query_week = int(args[0])
     else:
-        query_pokemon = await pokemon_lookup(context, _query=args[0])
+        query_pokemon = await lookup_pokemon(context, _query=args[0])
         if not query_pokemon:
             print("Unrecognized Pokemon")
             return
@@ -1348,45 +1349,41 @@ async def drain_list(
     return await context.send_message(content=output)
 
 
-# ? Split skill_lookup?
-async def pokemon_lookup(
+async def lookup(
     context: KoduckContext,
+    table: str,
+    column: str,
+    name: str,
     *args: str,
     _query: str = "",
     enable_dym: bool = True,
-    skill_lookup: bool = False,
 ) -> str:
-    """Return a corrected query of the required pokemon/skill.
+    """Return a corrected query of the required entry.
 
     Check if it exists as an alias, and/or in an additionally provided list.
-    Provide some suggestions to the user if it does not."""
+    Provide some suggestions to the user if it does not.
+
+    Currently used for pokemon and skills.
+
+    ``table`` and ``column`` must match the values in the database,
+    ``name`` is the term appearing in the bot message.
+
+    Recommended to pre-fill them with ``functools.partial`` for easy re-use.
+    """
+    name = name or table
     _query = _query or args[0]
     aliases = db.get_aliases()
     _query = aliases.get(_query.lower(), _query)
 
-    pokemon_dict = {k.lower(): k for k in db.get_pokemon_names()}
-    skill_dict = {k.lower(): k for k in db.get_skill_names()}
-    # get properly capitalized name
-    _query = (
-        skill_dict.get(_query.lower(), _query)
-        if skill_lookup
-        else pokemon_dict.get(_query.lower(), _query)
-    )
-    try:
-        _query = (
-            skill_dict[_query.lower()] if skill_lookup else pokemon_dict[_query.lower()]
-        )
-        found = True
-    except KeyError:
-        found = False
+    names_dict = {k.lower(): k for k in db.get_db_table_column(table, column)}
 
-    if found:
-        return _query
+    if _query.lower() in names_dict:
+        return names_dict[_query.lower()]
 
     if not enable_dym:
         return ""
 
-    add = skill_dict.values() if skill_lookup else pokemon_dict.values()
+    add = names_dict.values()
 
     close_matches = difflib.get_close_matches(
         _query,
@@ -1397,9 +1394,7 @@ async def pokemon_lookup(
 
     if not close_matches:
         await context.send_message(
-            content=settings.message_pokemon_lookup_no_result.format(
-                "Skill" if skill_lookup else "Pokemon", _query
-            ),
+            content=settings.message_pokemon_lookup_no_result.format(name, _query),
         )
         return ""
 
@@ -1411,23 +1406,21 @@ async def pokemon_lookup(
             choices.append((close_match, alias))
             no_duplicates.append(alias.lower())
 
-    output_string = ""
-    for i, choice in enumerate(choices):
-        output_string += (
-            f"\n{constants.number_emojis[i + 1]} {choice[0]}" + ""
-            if choice[0] == choice[1]
-            else f" ({choice[1]})"
-        )
+    output_string = "\n".join(
+        f"{emoji} {choice[0]}" + f" ({choice[1]})" * (choice[0] != choice[1])
+        for choice, emoji in zip(choices, constants.number_emojis[1:])
+    )
 
     result = await choice_react(
         context,
         len(choices),
-        settings.message_pokemon_lookup_no_result.format(
-            "Skill" if skill_lookup else "Pokemon", _query
-        )
-        + "\n"
-        + settings.message_pokemon_lookup_suggest
-        + output_string,
+        "\n".join(
+            (
+                settings.message_pokemon_lookup_no_result.format(name, _query),
+                settings.message_pokemon_lookup_suggest,
+                output_string,
+            )
+        ),
     )
     if result is None:
         return ""
@@ -1612,7 +1605,7 @@ async def remind_me(context: KoduckContext, *args: str) -> discord.Message | Non
             content=settings.message_remind_me_week_success.format(query_week),
         )
 
-    query_pokemon = await pokemon_lookup(context, _query=args[0])
+    query_pokemon = await lookup_pokemon(context, _query=args[0])
     if not query_pokemon:
         print("Unrecognized Pokemon")
         return
@@ -1659,7 +1652,7 @@ async def unremind_me(context: KoduckContext, *args: str) -> discord.Message | N
         return await context.send_message(
             content=settings.message_unremind_me_week_success.format(query_week),
         )
-    query_pokemon = await pokemon_lookup(context, _query=args[0])
+    query_pokemon = await lookup_pokemon(context, _query=args[0])
     if not query_pokemon:
         print("Unrecognized Pokemon")
         return
@@ -1713,3 +1706,9 @@ async def background_task(koduck: Koduck) -> None:
                     reminder.user_id, "\n".join(reminder_strings)
                 )
             )
+
+
+lookup_pokemon = functools.partial(
+    lookup, table="pokemon", column="pokemon", name="Pokemon"
+)
+lookup_skill = functools.partial(lookup, table="skills", column="skill", name="Skill")
