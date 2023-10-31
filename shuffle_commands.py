@@ -163,12 +163,15 @@ async def skill(
     )
 
 
+@utils.allow_space_delimiter()
 @utils.min_param(num=1, error=settings.message_ap_no_param)
 async def ap(
     context: KoduckContext, *args: str, **kwargs: Any
 ) -> discord.Message | None:
-    query_bp = args[0]
-    if not query_bp.isdigit() or query_bp not in map(str, range(30, 91, 10)):
+    try:
+        query_bp = int(args[0])
+        assert query_bp in range(30, 91, 10)
+    except (ValueError, AssertionError):
         return await context.send_message(content=settings.message_ap_invalid_param)
 
     ap_list = db.query_ap(int(query_bp))
@@ -181,14 +184,16 @@ async def ap(
             return await context.send_message(
                 content=settings.message_ap_invalid_param_2,
             )
-        return await context.send_message(content=ap_list[query_level - 1])
+        return await context.send_message(content=str(ap_list[query_level - 1]))
 
-    desc = "```"
-    for i, ap_ in enumerate(ap_list):
-        if i % 10 == 0:
-            desc += "\n"
-        desc += f"{ap_} " if ap_ >= 100 else f" {ap_} "
-    desc += "\n```"
+    desc = (
+        "```"
+        + "\n".join(
+            " ".join(f"{x:>3}" for x in group)
+            for group in itertools.batched(ap_list, 10)
+        )
+        + "```"
+    )
     return await context.send_message(content=desc)
 
 

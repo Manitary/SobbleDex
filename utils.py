@@ -169,9 +169,12 @@ def allow_space_delimiter() -> Callable[[BotCommand], BotCommand]:
             try:
                 first_num = next(i for i, x in enumerate(temp) if x.isdigit())
                 assert first_num > 0
-            except (StopIteration, AssertionError):
-                # No element is a number, or the first element is a number -> do nothing
+            except StopIteration:
+                # No element is a number -> do nothing
                 pass
+            except AssertionError:
+                # The first element is a number -> split
+                args = temp
             else:
                 # Merge all arguments before the first number
                 # (at least >=2 args due to previous assertion)
