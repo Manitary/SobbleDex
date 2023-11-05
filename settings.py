@@ -225,3 +225,12 @@ message_purge_invalid_param = (
     "Please give me an integer number of bot messages to purge"
 )
 purge_search_limit = 100
+message_submit_comp_score_no_param = (
+    "I need a Competitive Stage Pokemon, a score, and an attached image"
+)
+message_submit_comp_score_no_result = (
+    "That Pokemon doesn’t seem to have a Competitive Stage"
+)
+message_submit_comp_score_invalid_param = "Score doesn’t seem to be valid"
+message_submit_comp_score_success = "Successfully added competition score"
+comp_verify_level = 2

@@ -573,3 +573,15 @@ class SMStageResult(TypedDict):
     aliases: list[str]
     encounter: float
     results: dict[str, list[float]]
+
+
+@dataclass
+class CompetitionSubmission:
+    user_id: int
+    competition_pokemon: str
+    score: int
+    message_id: int
+    message_url: str
+    image_url: str
+    date: datetime
+    verified: bool = False

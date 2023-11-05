@@ -16,7 +16,7 @@ import embed_formatters
 import settings
 import utils
 from koduck import Koduck, KoduckContext
-from models import Param, PokemonType, Reminder, Stage, StageType
+from models import CompetitionSubmission, Param, PokemonType, Reminder, Stage, StageType
 
 RE_PING = re.compile(r"<@!?[0-9]*>")
 
@@ -1462,65 +1462,52 @@ async def pokemon_lookup(
     return choices[result][1]
 
 
-#! WIP never finished
-# async def submit_comp_score(context, *args, **kwargs):
-#     if len(args) < 3:
-#         return await context.koduck.send_message(
-#             receive_message=context.message,
-#             content=settings.message_submit_comp_score_no_param,
-#         )
+async def submit_comp_score(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
+    assert context.message
+    if (
+        len(args) < 2
+        or len(context.message.attachments) != 1
+        or not context.message.attachments[0].url
+    ):
+        return await context.send_message(
+            content=settings.message_submit_comp_score_no_param
+        )
 
-#     # parse and check competition pokemon
-#     query_pokemon = await pokemon_lookup(context, query=args[0])
-#     if query_pokemon is None:
-#         return "Unrecognized Pokemon"
-#     comp_pokemon = set()
-#     for values in yadon.ReadTable(settings.events_table).values():
-#         if values[0] == "Competitive":
-#             comp_pokemon.add(values[1])
-#     if query_pokemon not in comp_pokemon:
-#         return await context.koduck.send_message(
-#             receive_message=context.message,
-#             content=settings.message_submit_comp_score_no_result.format(query_pokemon),
-#         )
+    # parse and check competition pokemon
+    query_pokemon = await pokemon_lookup(context, _query=args[0])
+    if not query_pokemon:
+        print("Unrecognized Pokemon")
+        return
+    if query_pokemon not in db.get_competition_pokemon():
+        return await context.send_message(
+            content=settings.message_submit_comp_score_no_result
+        )
 
-#     # verify score is an integer > 0
-#     if not args[1].isdigit():
-#         return await context.koduck.send_message(
-#             receive_message=context.message,
-#             content=settings.message_submit_comp_score_invalid_param,
-#         )
-#     score = int(args[1])
-
-#     # very screenshot link
-#     link = args[2]
-#     if not link.startswith("https://cdn.discordapp.com/attachments/"):
-#         return await context.koduck.send_message(
-#             receive_message=context.message,
-#             content=settings.message_submit_comp_score_invalid_param_2,
-#         )
-
-#     yadon.WriteRowToTable(
-#         settings.comp_scores_table,
-#         settings.current_comp_score_id,
-#         {
-#             "User ID": context.message.author.id,
-#             "Competition Pokemon": query_pokemon,
-#             "Score": score,
-#             "URL": link,
-#             "Verified": 0,
-#         },
-#         named_columns=True,
-#     )
-#     context.koduck.update_setting(
-#         "current_comp_score_id",
-#         settings.current_comp_score_id + 1,
-#         settings.max_user_level,
-#     )
-#     return await context.koduck.send_message(
-#         receive_message=context.message,
-#         content=settings.message_submit_comp_score_success,
-#     )
+    # verify score is an integer > 0
+    try:
+        assert args[1].isdigit()
+        score = int(args[1])
+        assert score > 0
+    except AssertionError:
+        return await context.send_message(
+            receive_message=context.message,
+            content=settings.message_submit_comp_score_invalid_param,
+        )
+    submission = CompetitionSubmission(
+        user_id=context.message.author.id,
+        competition_pokemon=query_pokemon,
+        score=score,
+        message_id=context.message.id,
+        message_url=context.message.jump_url,
+        image_url=context.message.attachments[0].url,
+        date=context.message.created_at,
+    )
+    db.submit_competition_score(submission)
+    return await context.send_message(
+        content=settings.message_submit_comp_score_success,
+    )
 
 
 # async def comp_scores(context, *args, **kwargs):

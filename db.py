@@ -3,6 +3,7 @@ from typing import Any, Iterator
 
 from models import (
     Command,
+    CompetitionSubmission,
     Drop,
     EBReward,
     EBStretch,
@@ -709,6 +710,61 @@ def query_requestable_roles(guild_id: int) -> Iterator[int]:
     )
     for role in q.fetchall():
         yield role["role_id"]
+
+
+def get_competition_pokemon() -> set[str]:
+    q = shuffle_connection.execute(
+        """
+        SELECT DISTINCT(pokemon)
+        FROM events
+        WHERE stage_type = 'Competitive'
+        """
+    )
+    return {event["pokemon"] for event in q.fetchall()}
+
+
+def submit_competition_score(submission: CompetitionSubmission) -> None:
+    shuffle_connection.execute(
+        """
+        INSERT INTO competition_scores
+        (user_id, competition_pokemon, score, message_id, message_url, image_url, date)
+        VALUES
+        (:user_id, :pokemon, :score, :msg_id, :msg_url, :img_url, :date)
+        """,
+        {
+            "user_id": submission.user_id,
+            "pokemon": submission.competition_pokemon,
+            "score": submission.score,
+            "msg_id": submission.message_id,
+            "msg_url": submission.message_url,
+            "img_url": submission.image_url,
+            "date": submission.date,
+        },
+    )
+    shuffle_connection.commit()
+
+
+def validate_submission_message(message_id: int) -> None:
+    shuffle_connection.execute(
+        """
+        UPDATE competition_scores
+        SET verified = 1
+        WHERE message_id = :message_id
+        """,
+        {"message_id": message_id},
+    )
+    shuffle_connection.commit()
+
+
+def reject_submission_message(message_id: int) -> None:
+    shuffle_connection.execute(
+        """
+        DELETE FROM competition_scores
+        WHERE message_id = :message_id
+        """,
+        {"message_id": message_id},
+    )
+    shuffle_connection.commit()
 
 
 if __name__ == "__main__":

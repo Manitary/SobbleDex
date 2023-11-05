@@ -20,6 +20,7 @@ from __future__ import annotations
 
 import asyncio
 import datetime
+import enum
 import functools
 import re
 import sqlite3
@@ -77,6 +78,7 @@ intents.members = True
 intents.presences = True
 intents.message_content = True
 intents.guilds = True
+intents.reactions = True
 client = ClientWithBackgroundTask(intents=intents)
 koduck_instance: Koduck | None = None
 
@@ -879,3 +881,37 @@ async def on_message(message: discord.Message) -> discord.Message | None:
             type="command_error",
             extra=settings.message_unhandled_error.format(error_message),
         )
+
+
+class VerificationEmoji(enum.StrEnum):
+    YES = "✅"
+    NO = "❌"
+
+
+@client.event
+async def on_raw_reaction_add(payload: discord.RawReactionActionEvent) -> None:
+    # Only process valid emoji
+    if payload.emoji.name not in VerificationEmoji:
+        return
+
+    # Check user level
+    try:
+        level = db.query_user_level(payload.user_id)
+        assert level is not None
+    except (sqlite3.OperationalError, AssertionError) as e:
+        print(f"Failed to get user level: {e}")
+        level = settings.default_user_level
+
+    if level < settings.comp_verify_level:
+        print("User level too low")
+        return
+
+    if payload.emoji.name == VerificationEmoji.YES:
+        db.validate_submission_message(payload.message_id)
+        print("Submission validated")
+        return
+
+    if payload.emoji.name == VerificationEmoji.NO:
+        db.reject_submission_message(payload.message_id)
+        print("Submission rejected")
+        return

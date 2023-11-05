@@ -294,3 +294,15 @@ CREATE TABLE "events" (
 	"notes" TEXT,
 	"encounter_rates" TEXT	
 );
+
+CREATE TABLE "competition_scores" (
+	"id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	"user_id" INTEGER NOT NULL,
+	"competition_pokemon" TEXT NOT NULL,
+	"score" INTEGER NOT NULL,
+	"message_id" INTEGER NOT NULL UNIQUE,
+	"message_url" TEXT NOT NULL UNIQUE,
+	"image_url" TEXT NOT NULL,
+	"date" TEXT NOT NULL,
+	"verified" INTEGER NOT NULL DEFAULT 0
+)
