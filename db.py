@@ -824,5 +824,30 @@ def query_user_competition(
     return tuple(CompetitionSubmission(**entry) for entry in q.fetchall())
 
 
+def delete_user_competition_submissions(user_id: int) -> int:
+    q = shuffle_connection.execute(
+        """
+        DELETE FROM competition_scores
+        WHERE user_id = :id
+        """,
+        {"id": user_id},
+    )
+    shuffle_connection.commit()
+    return q.rowcount
+
+
+def delete_competition_submission(user_id: int, submission_url: str) -> int:
+    q = shuffle_connection.execute(
+        """
+        DELETE FROM competition_scores
+        WHERE user_id = :id
+        AND message_url = :url
+        """,
+        {"id": user_id, "url": submission_url},
+    )
+    shuffle_connection.commit()
+    return q.rowcount
+
+
 if __name__ == "__main__":
     ...

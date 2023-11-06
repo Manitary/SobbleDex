@@ -13,7 +13,8 @@ CREATE TABLE "competition_scores" (
 INSERT INTO commands
     ("command_name", "module_name", "method_name", "command_type", "command_tier", "description")
 VALUES
-    ("leaderboard", "shuffle_commands", "competition_leaderboard", "prefix", 1, "Display the leaderboard for a competitive stage")
+    ("leaderboard", "shuffle_commands", "competition_leaderboard", "prefix", 1, "Display the leaderboard for a competitive stage"),
+	("deletecompscore", "shuffle_commands", "delete_own_comp_scores", "prefix", 1, "Delete one or more of the user's own submissions")
 ;
 
 INSERT INTO settings
@@ -24,7 +25,11 @@ VALUES
     ("message_leaderboard_no_param", "I need a Competitive Stage Pokemon"),
     ("message_leaderboard_no_result", "That Pokemon doesn’t seem to have a Competitive Stage"),
 	("message_leaderboard_no_submissions", "No submission found"),
-	("message_user_comp_no_submissions", "No submission found")
+	("message_user_comp_no_submissions", "No submission found"),
+	("message_user_delete_all_own_comp_scores", "ALL your competition submissions will be deleted. This action is irreversible. Are you sure?"),
+	("message_success_delete_all_own_comp_scores", "{} submissions deleted"),
+	("message_success_delete_own_comp_score", "Submission deleted"),
+	("message_failed_delete_own_comp_score", "Invalid command. Either the URL is not a submission, or the submission does not exist in the database, or it is not your own submission")
 ;
 
 UPDATE commands SET command_tier = 1 WHERE command_name = submitcompscore

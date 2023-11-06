@@ -1650,9 +1650,72 @@ async def comp_scores_all(context: KoduckContext) -> discord.Message | None:
     return await context.send_message(embed=embed)
 
 
+async def delete_own_comp_scores(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
+    """Delete one or more comp submissions by the user.
+
+    If no argument is passed, the user is prompted to delete all of them.
+    Accepts a submission URL as argument to delete only that entry.
+    The URL required is that of the command that executed the submission.
+    """
+    if not args:
+        return await delete_all_user_comp_scores(context)
+    assert context.message
+    user_id = context.message.author.id
+    submission_url = args[0]
+    return await delete_user_comp_score(context, user_id, submission_url)
+
+
+async def delete_all_user_comp_scores(context: KoduckContext) -> discord.Message | None:
+    """Delete ALL the submission from the records.
+
+    The user is prompted for confirmation, as the action is irreversible without periodic backups.
+    """
+    assert context.message
+    choice = await choice_react(
+        context,
+        num_choices=1,
+        question_string=settings.message_user_delete_all_own_comp_scores,
+    )
+    if choice is None:
+        return
+    user_id = context.message.author.id
+    num_entries = db.delete_user_competition_submissions(user_id)
+    return await context.send_message(
+        content=settings.message_success_delete_all_own_comp_scores.format(num_entries)
+    )
+
+
+async def delete_user_comp_score(
+    context: KoduckContext, user_id: int, submission_url: str
+) -> discord.Message | None:
+    """Delete the given submission from the records.
+
+    The submission is deleted only if the user calling the command
+    is the author of the submission.
+    """
+    result = db.delete_competition_submission(user_id, submission_url)
+    if not result:
+        return await context.send_message(
+            content=settings.message_failed_delete_own_comp_score
+        )
+    return await context.send_message(
+        content=settings.message_success_delete_own_comp_score
+    )
+
+
 async def choice_react(
     context: KoduckContext, num_choices: int, question_string: str
 ) -> int | None:
+    """Prompt the user to select an option by reacting with the proposed emojis.
+
+    The default emojis are ❌ to cancel the choice, and number emojis to pick from.
+    Return None in case of timeout or when the first emoji (default: ❌) is selected.
+    Return `n-1` if the number emoji representing `n` is selected.
+
+    Only the user who triggered the function is considered for the selection.
+    """
     assert context.koduck
     # there are only 9 (10) number emojis :(
     num_choices = min(num_choices, 9)
