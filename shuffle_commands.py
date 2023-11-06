@@ -1546,12 +1546,17 @@ async def competition_leaderboard(
         num_entries = settings.comp_leaderboard_size_default
 
     leaderboard = db.query_comp_leaderboard(query_pokemon, num_entries)
+    if not leaderboard:
+        return await context.send_message(
+            content=settings.message_leaderboard_no_submissions
+        )
+
     message_string = "\n".join(
         f"`{i: >2}. {entry.score: >9,}`"
         f" | [[img]]({entry.image_url})"
         f" | [[submission]]({entry.message_url})"
         for i, entry in enumerate(leaderboard, 1)
-    ) # the double brackets are needed to bypass the emoji conversion
+    )  # the double brackets are needed to bypass the emoji conversion
     embed = discord.Embed(
         title=f"Leaderboard: {query_pokemon} [{query_pokemon}]",
         description=message_string,
