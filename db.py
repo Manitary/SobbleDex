@@ -767,5 +767,25 @@ def reject_submission_message(message_id: int) -> None:
     shuffle_connection.commit()
 
 
+def query_comp_leaderboard(
+    pokemon_name: str, num_entries: int, verified: bool = True
+) -> tuple[CompetitionSubmission, ...]:
+    q = shuffle_connection.execute(
+        """
+        SELECT
+        user_id, competition_pokemon, score,
+        message_id, message_url, image_url,
+        date, verified
+        FROM competition_scores
+        WHERE competition_pokemon = :pokemon
+        AND verified = :verified
+        ORDER BY score DESC
+        LIMIT :num
+        """,
+        {"pokemon": pokemon_name, "num": num_entries, "verified": verified},
+    )
+    return tuple(CompetitionSubmission(**entry) for entry in q.fetchall())
+
+
 if __name__ == "__main__":
     ...

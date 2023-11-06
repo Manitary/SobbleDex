@@ -1465,6 +1465,12 @@ async def pokemon_lookup(
 async def submit_comp_score(
     context: KoduckContext, *args: str, **kwargs: Any
 ) -> discord.Message | None:
+    """Submit the score for a competition.
+
+    The command message must include:
+    - The name of the competition.
+    - The final score.
+    - A single attached file (the image of the result)."""
     assert context.message
     if (
         len(args) < 2
@@ -1508,6 +1514,49 @@ async def submit_comp_score(
     return await context.send_message(
         content=settings.message_submit_comp_score_success,
     )
+
+
+async def competition_leaderboard(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
+    """Retrieve the leaderboard for a competition.
+
+    The command message must include the competition name,
+    and optionally the number of entries to display.
+    The maximum amount of entries can be changed in the settings."""
+    # TODO add optional parameter to include unverified entries
+    if not args:
+        return await context.send_message(content=settings.message_leaderboard_no_param)
+
+    # parse and check competition pokemon
+    query_pokemon = await pokemon_lookup(context, _query=args[0])
+    if not query_pokemon:
+        print("Unrecognized Pokemon")
+        return
+    if query_pokemon not in db.get_competition_pokemon():
+        return await context.send_message(
+            content=settings.message_leaderboard_no_result
+        )
+
+    # parse the number of entries to display
+    try:
+        num_entries = int(args[1])
+        assert 0 < num_entries <= settings.comp_leaderboard_size_max
+    except (IndexError, ValueError, AssertionError):
+        num_entries = settings.comp_leaderboard_size_default
+
+    leaderboard = db.query_comp_leaderboard(query_pokemon, num_entries)
+    message_string = "\n".join(
+        f"`{i: >2}. {entry.score: >9,}`"
+        f" | [[img]]({entry.image_url})"
+        f" | [[submission]]({entry.message_url})"
+        for i, entry in enumerate(leaderboard, 1)
+    ) # the double brackets are needed to bypass the emoji conversion
+    embed = discord.Embed(
+        title=f"Leaderboard: {query_pokemon} [{query_pokemon}]",
+        description=message_string,
+    )
+    return await context.send_message(embed=embed)
 
 
 # async def comp_scores(context, *args, **kwargs):

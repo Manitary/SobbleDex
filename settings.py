@@ -234,3 +234,7 @@ message_submit_comp_score_no_result = (
 message_submit_comp_score_invalid_param = "Score doesn’t seem to be valid"
 message_submit_comp_score_success = "Successfully added competition score"
 comp_verify_level = 2
+comp_leaderboard_size_max = 10
+comp_leaderboard_size_default = 5
+message_leaderboard_no_param = "I need a Competitive Stage Pokemon"
+message_leaderboard_no_result = "That Pokemon doesn’t seem to have a Competitive Stage"
