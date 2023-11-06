@@ -23,5 +23,9 @@ VALUES
     ("comp_leaderboard_size_default", "5"),
     ("message_leaderboard_no_param", "I need a Competitive Stage Pokemon"),
     ("message_leaderboard_no_result", "That Pokemon doesn’t seem to have a Competitive Stage"),
-	("message_leaderboard_no_submissions", "No submissions found")
+	("message_leaderboard_no_submissions", "No submission found"),
+	("message_user_comp_no_submissions", "No submission found")
 ;
+
+UPDATE commands SET command_tier = 1 WHERE command_name = submitcompscore
+UPDATE commands SET command_tier = 1 WHERE command_name = compscores

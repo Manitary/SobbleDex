@@ -787,5 +787,42 @@ def query_comp_leaderboard(
     return tuple(CompetitionSubmission(**entry) for entry in q.fetchall())
 
 
+def query_user_competitions(user_id: int) -> tuple[CompetitionSubmission, ...]:
+    q = shuffle_connection.execute(
+        """
+        SELECT
+        user_id, competition_pokemon, MAX(score) as score,
+        message_id, message_url, image_url,
+        date, verified
+        FROM competition_scores
+        WHERE user_id = :id
+        GROUP BY competition_pokemon
+        ORDER BY competition_pokemon
+        """,
+        {"id": user_id},
+    )
+    return tuple(CompetitionSubmission(**entry) for entry in q.fetchall())
+
+
+def query_user_competition(
+    user_id: int, pokemon_name: str, num_entries: int
+) -> tuple[CompetitionSubmission, ...]:
+    q = shuffle_connection.execute(
+        """
+        SELECT
+        user_id, competition_pokemon, score,
+        message_id, message_url, image_url,
+        date, verified
+        FROM competition_scores
+        WHERE user_id = :id
+        AND competition_pokemon = :pokemon
+        ORDER BY score DESC
+        LIMIT :num
+        """,
+        {"id": user_id, "pokemon": pokemon_name, "num": num_entries},
+    )
+    return tuple(CompetitionSubmission(**entry) for entry in q.fetchall())
+
+
 if __name__ == "__main__":
     ...

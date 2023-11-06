@@ -1564,38 +1564,90 @@ async def competition_leaderboard(
     return await context.send_message(embed=embed)
 
 
-# async def comp_scores(context, *args, **kwargs):
-#     user_id = context.message.author.id
-#     user_tag = "{}#{}".format(
-#         context.message.author.name, context.message.author.discriminator
-#     )
-#     comp_scores = yadon.ReadTable(settings.comp_scores_table, named_columns=True)
-#     user_comp_scores = [x for x in comp_scores.values() if int(x["User ID"]) == user_id]
-#     if len(user_comp_scores) == 0:
-#         return await context.koduck.send_message(
-#             receive_message=context.message,
-#             content=settings.message_comp_scores_no_result.format(user_tag),
-#         )
+async def comp_scores(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
+    """Retrieve the top competition scores of the user using the command.
 
-#     user_comp_scores = sorted(
-#         user_comp_scores, key=lambda comp_score: comp_score["Score"]
-#     )
-#     comp_scores_string = "``Competition Pokemon\tScore\tVerified\tURL``"
-#     for comp_score in user_comp_scores:
-#         comp_scores_string += "\n``{}\t{}\t{}\t``[link]({})".format(
-#             comp_score["Competition Pokemon"],
-#             comp_score["Score"],
-#             "Yes" if int(comp_score["Verified"]) else "No",
-#             comp_score["URL"],
-#         )
-#     embed = discord.Embed(
-#         title=settings.message_comp_scores.format(user_tag),
-#         description=comp_scores_string,
-#     )
+    If no argument is passed, return the best score of each competition.
+    Otherwise, return the top scores of the selected competition.
+    The number of top scores can be selected with a second argument,
+    whose default and maximum value can be adjusted in the settings
+    (they are the same as the global leaderboard)."""
+    if not args:
+        return await comp_scores_all(context, *args, **kwargs)
 
-#     return await context.koduck.send_message(
-#         receive_message=context.message, embed=embed
-#     )
+    # parse and check competition pokemon
+    query_pokemon = await pokemon_lookup(context, _query=args[0])
+    if not query_pokemon:
+        print("Unrecognized Pokemon")
+        return
+    if query_pokemon not in db.get_competition_pokemon():
+        return await context.send_message(
+            content=settings.message_leaderboard_no_result
+        )
+
+    # parse the number of entries to display
+    try:
+        num_entries = int(args[1])
+        assert 0 < num_entries <= settings.comp_leaderboard_size_max
+    except (IndexError, ValueError, AssertionError):
+        num_entries = settings.comp_leaderboard_size_default
+
+    return await comp_scores_stage(context, query_pokemon, num_entries)
+
+
+async def comp_scores_stage(
+    context: KoduckContext, pokemon: str, num_entries: int
+) -> discord.Message | None:
+    assert context.message
+    user_id = context.message.author.id
+    user_scores = db.query_user_competition(user_id, pokemon, num_entries)
+    if not user_scores:
+        return await context.send_message(
+            content=settings.message_user_comp_no_submissions
+        )
+
+    message_string = "\n".join(
+        f"`{i: >2}. {entry.score: >9,}`"
+        f" | [[img]]({entry.image_url})"
+        f" | [[submission]]({entry.message_url})"
+        f" | {'Verified' if entry.verified else 'Not verified'}"
+        for i, entry in enumerate(user_scores, 1)
+    )  # the double brackets are needed to bypass the emoji conversion
+    embed = discord.Embed(
+        title=f"Best scores of {context.message.author.name} for {pokemon} [{pokemon}]",
+        description=message_string,
+    )
+    return await context.send_message(embed=embed)
+
+
+async def comp_scores_all(context: KoduckContext) -> discord.Message | None:
+    """Retrieve each competition top score of the user using the command.
+
+    Results are sorted by competition name."""
+    # ? Add an option to sort by score?
+    assert context.message
+    user_id = context.message.author.id
+    user_scores = db.query_user_competitions(user_id)
+    if not user_scores:
+        return await context.send_message(
+            content=settings.message_user_comp_no_submissions
+        )
+
+    message_string = "\n".join(
+        f"[{entry.competition_pokemon}]"
+        f" `{entry.score: >9,}`"
+        f" | [[img]]({entry.image_url})"
+        f" | [[submission]]({entry.message_url})"
+        f" | {'Verified' if entry.verified else 'Not verified'}"
+        for entry in user_scores
+    )  # the double brackets are needed to bypass the emoji conversion
+    embed = discord.Embed(
+        title=f"Best competitions of {context.message.author.name}",
+        description=message_string,
+    )
+    return await context.send_message(embed=embed)
 
 
 async def choice_react(
