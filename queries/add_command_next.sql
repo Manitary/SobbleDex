@@ -1,7 +1,8 @@
 INSERT INTO commands
     ("command_name", "module_name", "method_name", "command_type", "command_tier", "description")
 VALUES
-    ("next", "shuffle_commands", "next_stage", "prefix", 1, "Query the next stage if the previous command requested a main or EX stage")
+    ("next", "shuffle_commands", "next_stage", "prefix", 1, "Query the next stage if the previous command requested a main or EX stage"),
+    ("nextx", "shuffle_commands", "next_stage_shorthand", "prefix", 1, "Query the shorthand version of the next stage if the previous command requested a main or EX stage")
 ;
 
 INSERT INTO settings

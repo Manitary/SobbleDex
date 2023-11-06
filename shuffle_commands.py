@@ -393,6 +393,13 @@ async def next_stage(
     )
 
 
+async def next_stage_shorthand(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
+    kwargs["shorthand"] = True
+    return await next_stage(context, *args, **kwargs)
+
+
 async def stage(
     context: KoduckContext, *args: str, **kwargs: Any
 ) -> discord.Message | None:
