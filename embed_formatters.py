@@ -46,12 +46,10 @@ def format_pokemon_embed(pokemon: Pokemon) -> discord.Embed:
     the_color = constants.type_colors[pokemon.type]
     embed = discord.Embed(title=pokemon.pokemon, color=the_color, description=stats)
     embed.set_thumbnail(
-        url=(
+        url=utils.url_encode(
             "https://raw.githubusercontent.com/Chupalika/Kaleo/icons/Icons/"
             f"{pokemon.pokemon}.png"
         )
-        .replace("%", "%25")
-        .replace(" ", "%20")
     )
     return embed
 
@@ -230,15 +228,15 @@ def format_stage_embed(
 
     if stage.layout_index:
         embed.set_thumbnail(
-            url=(
+            url=utils.url_encode(
                 "https://raw.githubusercontent.com/Chupalika/Kaleo/icons/"
                 f"{stage.stage_type} Stages Layouts/Layout Index {stage.layout_index}.png"
-            ).replace(" ", "%20")
+            )
         )
-        embed.url = (
+        embed.url = utils.url_encode(
             "https://raw.githubusercontent.com/Chupalika/Kaleo/icons/"
             f"{stage.stage_type} Stages Layouts/Layout Index {stage.layout_index}.png"
-        ).replace(" ", "%20")
+        )
 
     for i, disruption in enumerate(stage.disruptions, 1):
         if disruption == "Nothing":
@@ -262,10 +260,10 @@ def format_starting_board_embed(stage: Stage) -> discord.Embed:
         return embed
 
     embed.set_image(
-        url=(
+        url=utils.url_encode(
             "https://raw.githubusercontent.com/Chupalika/Kaleo/icons/"
             f"{stage.stage_type} Stages Layouts/Layout Index {stage.layout_index}.png"
-        ).replace(" ", "%20")
+        )
     )
     return embed
 
