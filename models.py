@@ -1,6 +1,6 @@
 import enum
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import datetime, timedelta
 from typing import Any, Callable, Self, TypedDict
 
@@ -93,6 +93,26 @@ class SkillBonus(MyStrEnum):
     MULTIPLY_DAMAGE = "Multiply Damage"
     ACTIVATION_RATE = "Activation Rate"
     ADD_DAMAGE = "Add Damage"
+
+
+class QueryType(MyStrEnum):
+    ANY = enum.auto()
+    STAGE = enum.auto()
+
+    @classmethod
+    def _missing_(cls, value: object) -> Self:
+        if isinstance(value, str):
+            value = value.upper().replace(" ", "_")
+            if value in dir(cls):
+                return cls[value]
+        return cls["ANY"]
+
+
+@dataclass
+class UserQuery:
+    type: QueryType
+    args: tuple[Any, ...] = field(default_factory=tuple)
+    kwargs: dict[str, Any] = field(default_factory=dict)
 
 
 @dataclass

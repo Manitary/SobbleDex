@@ -34,7 +34,7 @@ import pytz
 import db
 import settings
 import utils
-from models import RealCommand, Setting
+from models import QueryType, RealCommand, Setting, UserQuery
 
 
 class ClientWithBackgroundTask(discord.Client):
@@ -108,6 +108,7 @@ class Koduck:
         self.contain_commands: list[str] = []
         self.slash_commands: list[str] = []
 
+        self.query_history: dict[int, list[UserQuery]] = defaultdict(list)
         self.output_history: dict[int, list[discord.Message]] = defaultdict(list)
         # userid -> list of Discord Messages sent by bot in response to the user, oldest first
         # (only keeps track since bot startup)
@@ -850,6 +851,14 @@ async def on_message(message: discord.Message) -> discord.Message | None:
             return
 
         koduck_instance.log(type=activity_type, message=message)
+        koduck_instance.query_history[message.author.id].append(
+            UserQuery(QueryType(context.command), args=tuple(args), kwargs=kwargs)
+        )
+        koduck_instance.query_history[
+            message.author.id
+        ] = koduck_instance.query_history[message.author.id][
+            -settings.output_history_size :
+        ]
         # RUN THE COMMAND
         function = koduck_instance.commands[context.command].function
         try:
