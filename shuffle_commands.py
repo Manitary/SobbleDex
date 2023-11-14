@@ -119,10 +119,11 @@ async def list_aliases(
     )
 
 
-@utils.min_param(num=1, error=settings.message_pokemon_no_param)
 async def pokemon(
     context: KoduckContext, *args: str, **kwargs: Any
 ) -> discord.Message | None:
+    if not args:
+        return await last_stage_pokemon(context)
     # parse params
     query_pokemon = await lookup_pokemon(context, _query=args[0])
     if not query_pokemon:
@@ -139,6 +140,37 @@ async def pokemon(
     return await context.send_message(
         embed=embed_formatters.format_pokemon_embed(pokemon_),
     )
+
+
+async def last_stage_pokemon(context: KoduckContext) -> discord.Message | None:
+    assert context.koduck
+    assert context.message
+    user_id = context.message.author.id
+    query_history = context.koduck.query_history[user_id]
+    if len(query_history) < 2 or query_history[-2].type != QueryType.STAGE:
+        return await context.send_message(
+            content=settings.message_pokemon_last_query_not_stage
+        )
+    query_ = query_history[-2]
+    if not query_.args:
+        return await context.send_message(content=settings.message_last_query_error)
+    last_stage_id = query_.args[0]
+    assert isinstance(last_stage_id, str)
+    if last_stage_id.startswith("ex"):
+        pokemon_ = db.query_stage_by_index(
+            int(last_stage_id[2:]), StageType.EXPERT
+        ).pokemon
+    elif last_stage_id.startswith("s"):
+        pokemon_ = db.query_stage_by_index(
+            int(last_stage_id[1:]), StageType.EVENT
+        ).pokemon
+    elif last_stage_id.isdigit():
+        pokemon_ = db.query_stage_by_index(int(last_stage_id), StageType.MAIN).pokemon
+    else:
+        return await context.send_message(
+            content=settings.message_pokemon_last_query_not_stage
+        )
+    return await pokemon(context, pokemon_)
 
 
 @utils.min_param(num=1, error=settings.message_skill_no_param)
@@ -1248,6 +1280,8 @@ async def eb_rewards(context: KoduckContext, *args: str) -> discord.Message | No
 async def eb_details(
     context: KoduckContext, *args: str, **kwargs: Any
 ) -> discord.Message | None:
+    assert context.koduck
+    assert context.message
     if not args or args[0].isdigit():
         eb_pokemon = utils.current_eb_pokemon()
         args = (eb_pokemon,) + args
@@ -1306,6 +1340,10 @@ async def eb_details(
         if entry.level == query_level:
             eb_reward = f"[{entry.reward}] x{entry.amount} {entry.alternative}"
             break
+
+    user_id = context.message.author.id
+    query_history = context.koduck.query_history[user_id]
+    query_history[-1] = UserQuery(QueryType.STAGE, (f"s{eb_stage.id}",), kwargs)
 
     if eb_starting_board:
         return await context.send_message(
