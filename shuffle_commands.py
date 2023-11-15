@@ -293,6 +293,10 @@ async def next_stage(
             content=settings.message_last_query_error,
         )
 
+async def next_stage_shorthand(context: KoduckContext, *args: str, **kwargs: Any) -> discord.Message|None:
+    kwargs["shorthand"] = True
+    return await next_stage(context, *args, **kwargs)
+
 async def stage(context, *args, **kwargs):
     #change current query type to ANY in case stage does not return a stage message
     user_query_history = context.koduck.query_history[context.message.author.id]
