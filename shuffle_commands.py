@@ -120,9 +120,24 @@ async def list_aliases(context, *args, **kwargs):
     else:
         return await context.koduck.send_message(receive_message=context.message, content=settings.message_list_aliases_result.format(original, ", ".join(results)))
 
+async def last_stage_pokemon(context: KoduckContext) -> discord.Message | None:
+    assert context.koduck
+    assert context.message
+    user_id = context.message.author.id
+    query_history = context.koduck.query_history[user_id]
+    if len(query_history) < 2 or query_history[-2].type != QueryType.STAGE:
+        return await context.send_message(
+            content=settings.message_pokemon_last_query_not_stage
+        )
+    query_ = query_history[-2]
+    if not (query_.args and "pokemon" in query_.kwargs):
+        return await context.send_message(content=settings.message_last_query_error)
+    last_stage_pokemon = query_.kwargs['pokemon']
+    return await pokemon(context, last_stage_pokemon)
+
 async def pokemon(context, *args, **kwargs):
-    if len(args) < 1:
-        return await context.koduck.send_message(receive_message=context.message, content=settings.message_pokemon_no_param)
+    if not args:
+        return await last_stage_pokemon(context)
     
     #parse params
     query_pokemon = await pokemon_lookup(context, query=args[0])
@@ -373,13 +388,12 @@ async def stage(context, *args, **kwargs):
         for pokemon, values in all_stages:
             if pokemon.lower() == query_pokemon.lower():
                 results.append(values)
-    
     if len(results) == 0:
         no_result_message = await context.koduck.send_message(receive_message=context.message, content=settings.message_stage_no_result.format(query_pokemon))
     
     #if a result number is given
     elif result_number != 0:
-        user_query_history[-1] = UserQuery(QueryType.STAGE, args=(results[result_number - 1][0],), kwargs=kwargs)
+        user_query_history[-1] = UserQuery(QueryType.STAGE, args=(results[result_number - 1][0],), kwargs=kwargs | {"pokemon": results[result_number - 1][1]})
         try:
             if starting_board:
                 return await context.koduck.send_message(receive_message=context.message, embed=embed_formatters.format_starting_board_embed(results[result_number-1]))
@@ -389,7 +403,7 @@ async def stage(context, *args, **kwargs):
             return await context.koduck.send_message(receive_message=context.message, content=settings.message_stage_result_error.format(len(results)))
     
     elif len(results) == 1:
-        user_query_history[-1] = UserQuery(QueryType.STAGE, args=(results[0][0],), kwargs=kwargs)
+        user_query_history[-1] = UserQuery(QueryType.STAGE, args=(results[0][0],), kwargs=kwargs | {"pokemon": results[0][1]})
         if starting_board:
             return await context.koduck.send_message(receive_message=context.message, embed=embed_formatters.format_starting_board_embed(results[0]))
         else:
@@ -407,7 +421,7 @@ async def stage(context, *args, **kwargs):
         choice = await choice_react(context, min(len(indices), settings.choice_react_limit), settings.message_stage_multiple_results + output_string)
         if choice is None:
             return
-        user_query_history[-1] = UserQuery(QueryType.STAGE, args=(results[choice][0],), kwargs=kwargs)
+        user_query_history[-1] = UserQuery(QueryType.STAGE, args=(results[choice][0],), kwargs=kwargs | {"pokemon": results[choice][1]})
         if starting_board:
             return await context.koduck.send_message(receive_message=context.message, embed=embed_formatters.format_starting_board_embed(results[choice]))
         else:
@@ -1074,7 +1088,11 @@ async def eb_details(context, *args, **kwargs):
             starting_board = False
         
         stage_info = ["s{}".format(stage_index)] + values
-        
+
+        user_id = context.message.author.id
+        query_history = context.koduck.query_history[user_id]
+        query_history[-1] = UserQuery(QueryType.STAGE, (f"s{stage_index}",), kwargs | {"pokemon": query_pokemon})
+
         eb_reward = ""
         eb_rewards = yadon.ReadRowFromTable(settings.eb_rewards_table, query_pokemon)
         for entry in eb_rewards:
