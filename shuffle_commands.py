@@ -142,20 +142,21 @@ async def pokemon(
     )
 
 
-async def last_stage_pokemon(context: KoduckContext) -> discord.Message | None:
-    assert context.koduck
-    assert context.message
-    user_id = context.message.author.id
-    query_history = context.koduck.query_history[user_id]
-    if len(query_history) < 2 or query_history[-2].type != QueryType.STAGE:
+async def last_stage_pokemon(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
+    query_ = await latest_stage_query(context)
+    if not query_:
         return await context.send_message(
-            content=settings.message_pokemon_last_query_not_stage
+            content=settings.message_no_previous_stage,
         )
-    query_ = query_history[-2]
+
     if not query_.args:
         return await context.send_message(content=settings.message_last_query_error)
+
     last_stage_id = query_.args[0]
     assert isinstance(last_stage_id, str)
+
     if last_stage_id.startswith("ex"):
         pokemon_ = db.query_stage_by_index(
             int(last_stage_id[2:]), StageType.EXPERT
@@ -168,8 +169,9 @@ async def last_stage_pokemon(context: KoduckContext) -> discord.Message | None:
         pokemon_ = db.query_stage_by_index(int(last_stage_id), StageType.MAIN).pokemon
     else:
         return await context.send_message(
-            content=settings.message_pokemon_last_query_not_stage
+            content=settings.message_last_query_error
         )
+
     return await pokemon(context, pokemon_)
 
 
@@ -334,30 +336,40 @@ async def type(
     )
 
 
-async def next_stage(
-    context: KoduckContext, *args: str, **kwargs: Any
-) -> discord.Message | None:
+async def latest_stage_query(context: KoduckContext) -> UserQuery | None:
     assert context.koduck
     assert context.message
     user_id = context.message.author.id
     query_history = context.koduck.query_history[user_id]
-    if len(query_history) < 2 or query_history[-2].type != QueryType.STAGE:
-        return await context.koduck.send_message(
-            receive_message=context.message,
-            content=settings.message_last_query_not_stage,
+
+    try:
+        query_ = next(q for q in reversed(query_history) if q.type == QueryType.STAGE)
+    except StopIteration:
+        return
+
+    return query_
+
+
+async def next_stage(
+    context: KoduckContext, *args: str, **kwargs: Any
+) -> discord.Message | None:
+    query_ = await latest_stage_query(context)
+    if not query_:
+        return await context.send_message(
+            content=settings.message_no_previous_stage,
         )
-    query_ = query_history[-2]
+
     if not query_.args:
-        return await context.koduck.send_message(
-            receive_message=context.message,
+        return await context.send_message(
             content=settings.message_last_query_error,
         )
+
     last_stage_id = query_.args[0]
     assert isinstance(last_stage_id, str)
+
     if last_stage_id.startswith("s"):
-        return await context.koduck.send_message(
-            receive_message=context.message,
-            content=settings.message_last_query_not_stage,
+        return await context.send_message(
+            content=settings.message_last_query_invalid_stage,
         )
     if last_stage_id.startswith("ex"):
         return await stage(
@@ -368,9 +380,9 @@ async def next_stage(
         if next_id == 701:
             next_id = 1
         return await stage(context, str(next_id), kwargs=query_.kwargs)
-    return await context.koduck.send_message(
-        receive_message=context.message,
-        content=settings.message_last_query_not_stage,
+
+    return await context.send_message(
+        content=settings.message_last_query_error,
     )
 
 
