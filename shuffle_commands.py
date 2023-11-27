@@ -126,12 +126,16 @@ async def last_stage_pokemon(context: KoduckContext) -> discord.Message | None:
     user_id = context.message.author.id
     query_history = context.koduck.query_history[user_id]
     if len(query_history) < 2 or query_history[-2].type != QueryType.STAGE:
-        return await context.send_message(
+        return await context.koduck.send_message(
+            receive_message=context.message,
             content=settings.message_pokemon_last_query_not_stage
         )
     query_ = query_history[-2]
     if not (query_.args and "pokemon" in query_.kwargs):
-        return await context.send_message(content=settings.message_last_query_error)
+        return await context.koduck.send_message(
+            receive_message=context.message,
+            content=settings.message_last_query_error
+        )
     last_stage_pokemon = query_.kwargs['pokemon']
     return await pokemon(context, last_stage_pokemon)
 
