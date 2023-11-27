@@ -17,7 +17,16 @@ import embed_formatters
 import settings
 import utils
 from koduck import Koduck, KoduckContext
-from models import Param, PokemonType, QueryType, Reminder, Stage, StageType, UserQuery
+from models import (
+    Param,
+    Payload,
+    PokemonType,
+    QueryType,
+    Reminder,
+    Stage,
+    StageType,
+    UserQuery,
+)
 
 RE_PING = re.compile(r"<@!?[0-9]*>")
 
@@ -168,17 +177,13 @@ async def last_stage_pokemon(
     elif last_stage_id.isdigit():
         pokemon_ = db.query_stage_by_index(int(last_stage_id), StageType.MAIN).pokemon
     else:
-        return await context.send_message(
-            content=settings.message_last_query_error
-        )
+        return await context.send_message(content=settings.message_last_query_error)
 
     return await pokemon(context, pokemon_)
 
 
 @utils.min_param(num=1, error=settings.message_skill_no_param)
-async def skill(
-    context: KoduckContext, *args: str, **kwargs: Any
-) -> discord.Message | None:
+async def skill(context: KoduckContext, *args: str, **kwargs: Any) -> Payload | None:
     # parse params
     query_skill = await lookup_skill(context, _query=args[0])
     if not query_skill:
@@ -188,13 +193,9 @@ async def skill(
     # retrieve data
     skill_ = db.query_skill(query_skill)
     if not skill_:
-        return await context.send_message(
-            content=settings.message_skill_no_result.format(query_skill),
-        )
+        return Payload(content=settings.message_skill_no_result.format(query_skill))
 
-    return await context.send_message(
-        embed=embed_formatters.format_skill_embed(skill_),
-    )
+    return Payload(embed=embed_formatters.format_skill_embed(skill_))
 
 
 @utils.allow_space_delimiter()

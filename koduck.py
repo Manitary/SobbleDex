@@ -863,6 +863,10 @@ async def on_message(message: discord.Message) -> discord.Message | None:
         function = koduck_instance.commands[context.command].function
         try:
             result = await function(context, *args, **kwargs)
+            if isinstance(result, dict):
+                await koduck_instance.send_message(
+                    receive_message=context.message, **result
+                )
         except TypeError as e:
             # only catch missing argument error to print a different message
             match = re.search(r"missing [0-9]+ required \w+ arguments?: (.+)", str(e))

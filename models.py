@@ -3,6 +3,7 @@ import re
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
 from typing import Any, Callable, Self, TypedDict
+import discord
 
 import pytz
 
@@ -106,6 +107,11 @@ class QueryType(MyStrEnum):
             if value in dir(cls):
                 return cls[value]
         return cls["ANY"]
+
+
+class Payload(TypedDict, total=False):
+    content: str
+    embed: discord.Embed
 
 
 @dataclass

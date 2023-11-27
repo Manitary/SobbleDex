@@ -10,7 +10,7 @@ import pytz
 import db
 import settings
 from koduck import KoduckContext
-from models import EventType, RepeatType
+from models import EventType, Payload, RepeatType
 
 RE_PUNCTUATION = re.compile(r"[- ()'.%+:#]")
 
@@ -129,7 +129,7 @@ def event_week_day(day: int) -> str:
 class BotCommand(Protocol):
     async def __call__(
         self, context: KoduckContext, *args: str, **kwargs: Any
-    ) -> discord.Message | None:
+    ) -> discord.Message | Payload | None:
         ...
 
 
@@ -139,7 +139,7 @@ def min_param(num: int, error: str) -> Callable[[BotCommand], BotCommand]:
     def decorator(func: BotCommand) -> BotCommand:
         async def wrapper(
             context: KoduckContext, *args: str, **kwargs: Any
-        ) -> discord.Message | None:
+        ) -> discord.Message | Payload | None:
             assert context.koduck
             if len(args) < num:
                 return await context.koduck.send_message(
@@ -158,7 +158,7 @@ def allow_space_delimiter() -> Callable[[BotCommand], BotCommand]:
     def decorator(func: BotCommand) -> BotCommand:
         async def wrapper(
             context: KoduckContext, *args: str, **kwargs: Any
-        ) -> discord.Message | None:
+        ) -> discord.Message | Payload | None:
             if len(args) != 1:
                 # Comma-separated arguments -> do nothing
                 return await func(context, *args, **kwargs)
