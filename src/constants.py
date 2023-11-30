@@ -31,3 +31,5 @@ event_type_colors = {
     "Items": 0x00AAFF,
     "Monthly": 0x00AAFF,
 }
+pokemon_levels = tuple(range(1, 31))
+pokemon_bps = tuple(range(30, 91, 10))

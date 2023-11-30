@@ -88,3 +88,21 @@ async def test_exp_90_30_pokemon(context: KoduckContext) -> None:
         )
     )
     assert real == expected
+
+
+@pytest.mark.asyncio
+async def test_exp_80_5_15(context: KoduckContext) -> None:
+    real = await shuffle_commands.exp(context, "80 5 15")
+    expected = Payload(
+        content="A 80 BP Pokemon needs 18225 EXP to get from Level 5 (AP 90) to Level 15 (AP 115)"
+    )
+    assert real == expected
+
+
+@pytest.mark.asyncio
+async def test_exp_70_5_15_pokemon(context: KoduckContext) -> None:
+    real = await shuffle_commands.exp(context, "Gallade 5 15")
+    expected = Payload(
+        content="Gallade (70 BP) needs 17010 EXP to get from Level 5 (AP 80) to Level 15 (AP 110)"
+    )
+    assert real == expected
