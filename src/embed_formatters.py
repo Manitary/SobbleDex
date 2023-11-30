@@ -1,3 +1,4 @@
+import asyncio
 import datetime
 from typing import Any, Sequence
 
@@ -6,6 +7,8 @@ import pytz
 
 import constants
 import db
+import settings
+from koduck import KoduckContext
 import utils
 from models import (
     EBReward,
@@ -530,3 +533,65 @@ def format_query_results_embed(
 def format_guides_embed(guides, page: int = 0) -> discord.Embed:
     embed = discord.Embed()
     return embed
+
+
+async def paginate_embeds(
+    context: KoduckContext, pages: Sequence[discord.Embed], initial_page: int = 1
+) -> discord.Message | None:
+    assert context.koduck
+    current_page = initial_page
+    the_message = await context.send_message(
+        content=f"Showing result {current_page} of {len(pages)}",
+        embed=pages[current_page - 1],
+    )
+    assert the_message
+    await the_message.add_reaction("⬅️")
+    await the_message.add_reaction("➡️")
+
+    while True:
+        # wait for reaction (with timeout)
+        def check(reaction: discord.Reaction, user: discord.User) -> bool:
+            return (
+                reaction.message.id == the_message.id
+                and isinstance(context.message, discord.Message)
+                and user == context.message.author
+                and str(reaction.emoji) in ["⬅️", "➡️"]
+            )
+
+        try:
+            reaction, _ = await context.koduck.client.wait_for(
+                "reaction_add", timeout=settings.dym_timeout, check=check
+            )
+        except asyncio.TimeoutError:
+            reaction = None
+
+        # timeout
+        if reaction is None:
+            break
+
+        # adjust page
+        if reaction.emoji == "⬅️":
+            current_page -= 1
+        elif reaction.emoji == "➡️":
+            current_page += 1
+
+        # wrap
+        if current_page < 1:
+            current_page = len(pages)
+        elif current_page > len(pages):
+            current_page = 1
+
+        await the_message.edit(
+            content=f"Showing result {current_page} of {len(pages)}",
+            embed=pages[current_page - 1],
+        )
+
+    # remove reactions
+    try:
+        assert context.koduck.client.user
+        await the_message.remove_reaction("⬅️", context.koduck.client.user)
+        await the_message.remove_reaction("➡️", context.koduck.client.user)
+    except discord.errors.NotFound:
+        pass
+
+    return the_message

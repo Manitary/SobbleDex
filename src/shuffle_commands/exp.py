@@ -8,7 +8,7 @@ from koduck import KoduckContext
 from models import Payload
 
 from .decorators import allow_space_delimiter, min_param
-from .shuffle_commands import lookup_pokemon
+from .lookup import lookup_pokemon
 
 
 @min_param(1, settings.message_exp_no_param)
