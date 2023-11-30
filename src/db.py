@@ -21,8 +21,8 @@ from models import (
     TypeInfo,
 )
 
-DB_BOT_PATH = "bot.sqlite"
-DB_SHUFFLE_PATH = "shuffle.sqlite"
+DB_BOT_PATH = "db\\bot.sqlite"
+DB_SHUFFLE_PATH = "db\\shuffle.sqlite"
 STAGE_TYPE_TABLE = {
     StageType.MAIN: "main_stages",
     StageType.EXPERT: "expert_stages",

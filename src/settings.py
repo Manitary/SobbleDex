@@ -2,7 +2,7 @@
 commands_table_name = "tables/commands"
 settings_table_name = "tables/settings"
 user_levels_table_name = "tables/user_levels"
-log_file = "log.txt"
+log_file = "logs/log.txt"
 debug_log_file_name = "discord.log"
 
 # BOT SETTINGS

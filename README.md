@@ -23,4 +23,4 @@ I've left out some data that were either variable or sensitive. They're not need
 
 Add a file called `.env` with `token=` followed by your bot token.
 
-Run `python main.py`
+Run `python src\main.py`
