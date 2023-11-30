@@ -261,18 +261,18 @@ async def exp(
 
     if len(args) == 1:
         desc = settings.message_exp_result_3.format(query_bp)
-        desc += "\n```"
-        for i, xp in enumerate(exp_table):
-            if i % 10 == 0:
-                desc += "\n"
-            desc += str(xp).rjust(7)
+        desc += "\n```\n"
+        desc += "\n".join(
+            "".join(f"{x:>7}" for x in group)
+            for group in itertools.batched(exp_table, 10)
+        )
         desc += "\n```"
         desc += settings.message_exp_result_4.format(query_bp)
-        desc += "\n```"
-        for i, (xp1, xp2) in enumerate(zip(exp_table, [0] + exp_table)):
-            if i % 10 == 0:
-                desc += "\n"
-            desc += str(xp1 - xp2).rjust(7)
+        desc += "\n```\n"
+        desc += "\n".join(
+            "".join(f"{(xp1-xp2):>7}" for xp1, xp2 in group)
+            for group in itertools.batched(zip(exp_table, [0] + exp_table), 10)
+        )
         desc += "\n```"
         return Payload(content=desc)
 
