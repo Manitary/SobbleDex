@@ -20,11 +20,8 @@ def min_param(num: int, error: str) -> Callable[[BotCommand], BotCommand]:
         async def wrapper(
             context: KoduckContext, *args: str, **kwargs: Any
         ) -> discord.Message | Payload | None:
-            assert context.koduck
             if len(args) < num:
-                return await context.koduck.send_message(
-                    receive_message=context.message, content=error
-                )
+                return Payload(content=error)
             return await func(context, *args, **kwargs)
 
         return wrapper

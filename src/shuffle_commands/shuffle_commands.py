@@ -265,7 +265,7 @@ async def latest_stage_query(context: KoduckContext) -> UserQuery | None:
 
 async def next_stage(
     context: KoduckContext, *args: str, **kwargs: Any
-) -> discord.Message | None:
+) -> discord.Message | Payload | None:
     query_ = await latest_stage_query(context)
     if not query_:
         return await context.send_message(
@@ -301,14 +301,14 @@ async def next_stage(
 
 async def next_stage_shorthand(
     context: KoduckContext, *args: str, **kwargs: Any
-) -> discord.Message | None:
+) -> discord.Message | Payload | None:
     kwargs["shorthand"] = True
     return await next_stage(context, *args, **kwargs)
 
 
 async def stage(
     context: KoduckContext, *args: str, **kwargs: Any
-) -> discord.Message | None:
+) -> discord.Message | Payload | None:
     assert context.koduck
     assert context.message
     user_query_history = context.koduck.query_history[context.message.author.id]
@@ -470,14 +470,14 @@ async def stage(
 
 async def stage_shorthand(
     context: KoduckContext, *args: str, **kwargs: Any
-) -> discord.Message | None:
+) -> discord.Message | Payload | None:
     kwargs["shorthand"] = True
     return await stage(context, *args, **kwargs)
 
 
 async def starting_board(
     context: KoduckContext, *args: str, **kwargs: Any
-) -> discord.Message | None:
+) -> discord.Message | Payload | None:
     kwargs["startingboard"] = True
     return await stage(context, *args, **kwargs)
 
@@ -1204,7 +1204,7 @@ async def eb_rewards(context: KoduckContext, *args: str) -> discord.Message | No
 @decorators.allow_space_delimiter()
 async def eb_details(
     context: KoduckContext, *args: str, **kwargs: Any
-) -> discord.Message | None:
+) -> discord.Message | Payload | None:
     assert context.koduck
     assert context.message
     if not args or args[0].isdigit():
@@ -1291,7 +1291,7 @@ async def eb_details(
 
 async def eb_details_shorthand(
     context: KoduckContext, *args: str, **kwargs: Any
-) -> discord.Message | None:
+) -> discord.Message | Payload | None:
     kwargs["shorthand"] = True
     return await eb_details(context, *args, **kwargs)
 
