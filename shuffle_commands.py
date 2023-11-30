@@ -234,10 +234,11 @@ async def ap(
 
 
 @decorators.allow_space_delimiter()
-@decorators.min_param(num=1, error=settings.message_exp_no_param)
 async def exp(
     context: KoduckContext, *args: str, **kwargs: Any
-) -> discord.Message | None:
+) -> discord.Message | Payload | None:
+    if not args:
+        return Payload(content=settings.message_exp_no_param)
     # parse params
     _query = args[0]
     query_pokemon = ""
@@ -254,9 +255,7 @@ async def exp(
         assert pokemon_
         query_bp = pokemon_.bp
     except AssertionError:
-        return await context.send_message(
-            content=settings.message_exp_invalid_param,
-        )
+        return Payload(content=settings.message_exp_invalid_param)
 
     exp_table = db.query_exp(query_bp)
 
@@ -275,21 +274,17 @@ async def exp(
                 desc += "\n"
             desc += str(xp1 - xp2).rjust(7)
         desc += "\n```"
-        return await context.send_message(content=desc)
+        return Payload(content=desc)
 
     try:
         query_level_1, query_level_2 = (
             (1, int(args[1])) if len(args) == 2 else (int(args[1]), int(args[2]))
         )
     except ValueError:
-        return await context.send_message(
-            content=settings.message_exp_invalid_param_2,
-        )
+        return Payload(content=settings.message_exp_invalid_param_2)
 
     if query_level_1 not in range(1, 31) or query_level_2 not in range(1, 31):
-        return await context.send_message(
-            content=settings.message_exp_invalid_param_2,
-        )
+        return Payload(content=settings.message_exp_invalid_param_2)
 
     # retrieve data
     ap_table = db.query_ap(query_bp)
@@ -299,7 +294,7 @@ async def exp(
     end_ap = ap_table[query_level_2 - 1]
 
     if _query.isdigit():
-        return await context.send_message(
+        return Payload(
             content=settings.message_exp_result.format(
                 query_bp,
                 end_exp - start_exp,
@@ -310,7 +305,7 @@ async def exp(
             ),
         )
 
-    return await context.send_message(
+    return Payload(
         content=settings.message_exp_result_2.format(
             query_pokemon,
             query_bp,
