@@ -1,5 +1,7 @@
 import datetime
+import functools
 import re
+import urllib.parse
 
 import pytz
 
@@ -119,3 +121,6 @@ def get_current_event_pokemon() -> list[str]:
 
 def event_week_day(day: int) -> str:
     return WEEKDAYS[(day + 1) % 7]
+
+
+url_encode = functools.partial(urllib.parse.quote, safe=":/")
