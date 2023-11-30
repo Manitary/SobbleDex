@@ -13,6 +13,7 @@ import pytz
 
 import constants
 import db
+import decorators
 import embed_formatters
 import settings
 import utils
@@ -50,7 +51,7 @@ async def emojify_2(context: KoduckContext) -> discord.Message | None:
     return await context.send_message(content=context.param_line, check_aliases=True)
 
 
-@utils.min_param(num=2, error=settings.message_add_alias_no_param)
+@decorators.min_param(num=2, error=settings.message_add_alias_no_param)
 async def add_alias(
     context: KoduckContext, *args: str, **kwargs: Any
 ) -> discord.Message | None:
@@ -84,7 +85,7 @@ async def add_alias(
     return await context.send_message(content=return_message)
 
 
-@utils.min_param(num=1, error=settings.message_remove_alias_no_param)
+@decorators.min_param(num=1, error=settings.message_remove_alias_no_param)
 async def remove_alias(
     context: KoduckContext, *args: str, **kwargs: Any
 ) -> discord.Message | None:
@@ -107,7 +108,7 @@ async def remove_alias(
     return await context.send_message(content=return_message)
 
 
-@utils.min_param(num=1, error=settings.message_list_aliases_no_param)
+@decorators.min_param(num=1, error=settings.message_list_aliases_no_param)
 async def list_aliases(
     context: KoduckContext, *args: str, **kwargs: Any
 ) -> discord.Message | None:
@@ -182,7 +183,7 @@ async def last_stage_pokemon(
     return await pokemon(context, pokemon_)
 
 
-@utils.min_param(num=1, error=settings.message_skill_no_param)
+@decorators.min_param(num=1, error=settings.message_skill_no_param)
 async def skill(context: KoduckContext, *args: str, **kwargs: Any) -> Payload | None:
     # parse params
     query_skill = await lookup_skill(context, _query=args[0])
@@ -198,8 +199,8 @@ async def skill(context: KoduckContext, *args: str, **kwargs: Any) -> Payload | 
     return Payload(embed=embed_formatters.format_skill_embed(skill_))
 
 
-@utils.allow_space_delimiter()
-@utils.min_param(num=1, error=settings.message_ap_no_param)
+@decorators.allow_space_delimiter()
+@decorators.min_param(num=1, error=settings.message_ap_no_param)
 async def ap(
     context: KoduckContext, *args: str, **kwargs: Any
 ) -> discord.Message | None:
@@ -232,8 +233,8 @@ async def ap(
     return await context.send_message(content=desc)
 
 
-@utils.allow_space_delimiter()
-@utils.min_param(num=1, error=settings.message_exp_no_param)
+@decorators.allow_space_delimiter()
+@decorators.min_param(num=1, error=settings.message_exp_no_param)
 async def exp(
     context: KoduckContext, *args: str, **kwargs: Any
 ) -> discord.Message | None:
@@ -322,7 +323,7 @@ async def exp(
     )
 
 
-@utils.min_param(num=1, error=settings.message_type_no_param)
+@decorators.min_param(num=1, error=settings.message_type_no_param)
 async def type(
     context: KoduckContext, *args: str, **kwargs: Any
 ) -> discord.Message | None:
@@ -570,7 +571,7 @@ async def starting_board(
     return await stage(context, *args, **kwargs)
 
 
-@utils.min_param(num=1, error=settings.message_dp_no_param)
+@decorators.min_param(num=1, error=settings.message_dp_no_param)
 async def disruption_pattern(
     context: KoduckContext, *args: str, **kwargs: Any
 ) -> discord.Message | None:
@@ -601,8 +602,8 @@ async def disruption_pattern(
     return await context.send_message(embed=embed)
 
 
-@utils.allow_space_delimiter()
-@utils.min_param(num=1, error=settings.message_event_no_param)
+@decorators.allow_space_delimiter()
+@decorators.min_param(num=1, error=settings.message_event_no_param)
 async def event(
     context: KoduckContext, *args: str, **kwargs: Any
 ) -> discord.Message | None:
@@ -1289,7 +1290,7 @@ async def eb_rewards(context: KoduckContext, *args: str) -> discord.Message | No
     )
 
 
-@utils.allow_space_delimiter()
+@decorators.allow_space_delimiter()
 async def eb_details(
     context: KoduckContext, *args: str, **kwargs: Any
 ) -> discord.Message | None:
@@ -1446,8 +1447,8 @@ async def sm_rewards(context: KoduckContext) -> discord.Message | None:
     return await context.send_message(embed=embed)
 
 
-@utils.allow_space_delimiter()
-@utils.min_param(num=2, error=settings.message_drain_list_no_param)
+@decorators.allow_space_delimiter()
+@decorators.min_param(num=2, error=settings.message_drain_list_no_param)
 async def drain_list(
     context: KoduckContext, *args: str, **kwargs: Any
 ) -> discord.Message | None:
