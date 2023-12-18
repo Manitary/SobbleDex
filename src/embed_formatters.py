@@ -1,5 +1,6 @@
 import asyncio
 import datetime
+import math
 from typing import Any, Sequence
 
 import discord
@@ -8,8 +9,8 @@ import pytz
 import constants
 import db
 import settings
-from koduck import KoduckContext
 import utils
+from koduck import KoduckContext
 from models import (
     EBReward,
     EBStretch,
@@ -140,9 +141,21 @@ def format_stage_embed(
             else "",
         )
 
-    stats += "\n**{}**: {}\n**Experience**: {}".format(
-        "Moves" if stage.moves else "Seconds", stage.moves or stage.seconds, stage.exp
-    )  #! broken if moves =/= mobile moves (same for exp)
+    #! broken if moves =/= mobile moves (same for exp)
+    stats += f"\n**{"Moves" if stage.moves else "Seconds"}**: {stage.moves or stage.seconds}"
+
+    if stage.moves:
+        stats += (
+            f"\n**Damage/move**: {math.ceil(stage.hp / stage.moves)}"
+            f" ([M+5] {math.ceil(stage.hp / (stage.moves + 5))})"
+        )
+    else:
+        stats += (
+            f"\n**Damage/second**: {math.ceil(stage.hp / stage.seconds)}"
+            f" ([T+10] {math.ceil(stage.hp / (stage.seconds + 10))})"
+        )
+
+    stats += f"\n**Experience**: {stage.exp}"
 
     if eb_data[3] == 0:
         stats += "\n**Catchability**: {}% + {}%/{}".format(
