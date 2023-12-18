@@ -143,6 +143,9 @@ def format_stage_embed(
 
     #! broken if moves =/= mobile moves (same for exp)
     stats += f"\n**{"Moves" if stage.moves else "Seconds"}**: {stage.moves or stage.seconds}"
+    if stage.moves_mobile != stage.moves:
+        stats += f" (Mobile: {stage.moves_mobile})"
+
 
     if stage.moves:
         stats += (
@@ -156,6 +159,8 @@ def format_stage_embed(
         )
 
     stats += f"\n**Experience**: {stage.exp}"
+    if stage.exp_mobile != stage.exp:
+        stats += f" (Mobile: {stage.exp_mobile})"
 
     if eb_data[3] == 0:
         stats += "\n**Catchability**: {}% + {}%/{}".format(
