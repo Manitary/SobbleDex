@@ -146,17 +146,18 @@ def format_stage_embed(
     if stage.moves_mobile != stage.moves:
         stats += f" (Mobile: {stage.moves_mobile})"
 
-
-    if stage.moves:
-        stats += (
-            f"\n**Damage/move**: {math.ceil(stage.hp / stage.moves)}"
-            f" ([M+5] {math.ceil(stage.hp / (stage.moves + 5))})"
-        )
-    else:
-        stats += (
-            f"\n**Damage/second**: {math.ceil(stage.hp / stage.seconds)}"
-            f" ([T+10] {math.ceil(stage.hp / (stage.seconds + 10))})"
-        )
+    if stage.hp > 1 and stage.is_puzzle_stage != PuzzleStage.PUZZLE:
+        # Exclude competitions, weekend Meowth, and puzzle stages
+        if stage.moves:
+            stats += (
+                f"\n**Damage/move**: {math.ceil(stage.hp / stage.moves)}"
+                f" ([M+5] {math.ceil(stage.hp / (stage.moves + 5))})"
+            )
+        else:
+            stats += (
+                f"\n**Damage/second**: {math.ceil(stage.hp / stage.seconds)}"
+                f" ([T+10] {math.ceil(stage.hp / (stage.seconds + 10))})"
+            )
 
     stats += f"\n**Experience**: {stage.exp}"
     if stage.exp_mobile != stage.exp:
