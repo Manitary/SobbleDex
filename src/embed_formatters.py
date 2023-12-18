@@ -148,16 +148,16 @@ def format_stage_embed(
 
     if stage.hp > 1 and stage.is_puzzle_stage != PuzzleStage.PUZZLE:
         # Exclude competitions, weekend Meowth, and puzzle stages
+        stage_real_hp = stage.hp if not stage.extra_hp else stage.hp + stage.extra_hp * eb_data[1]
+        # When displaying an EB stage, get stage HP from EB leg data
         if stage.moves:
-            stats += (
-                f"\n**Damage/move**: {math.ceil(stage.hp / stage.moves)}"
-                f" ([M+5] {math.ceil(stage.hp / (stage.moves + 5))})"
-            )
+            stats += f"\n**Damage/move**: {math.ceil(stage_real_hp / stage.moves)}"
+            if "M+5" in stage.items:
+                stats += f" ([M+5] {math.ceil(stage_real_hp / (stage.moves + 5))})"
         else:
-            stats += (
-                f"\n**Damage/second**: {math.ceil(stage.hp / stage.seconds)}"
-                f" ([T+10] {math.ceil(stage.hp / (stage.seconds + 10))})"
-            )
+            stats += f"\n**Damage/second**: {math.ceil(stage_real_hp / stage.seconds)}"
+            if "T+10" in stage.items:
+                stats += f" ([T+10] {math.ceil(stage_real_hp / (stage.seconds + 10))})"
 
     stats += f"\n**Experience**: {stage.exp}"
     if stage.exp_mobile != stage.exp:
