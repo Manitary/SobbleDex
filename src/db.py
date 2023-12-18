@@ -218,10 +218,6 @@ def get_farmable_pokemon() -> set[str]:
         WHERE (drop_1_item = "PSB" or drop_2_item = "PSB" or drop_3_item = "PSB")
         UNION
         SELECT pokemon
-        FROM expert_stages
-        WHERE (drop_1_item = "PSB" or drop_2_item = "PSB" or drop_3_item = "PSB")
-        UNION
-        SELECT pokemon
         FROM event_stages
         WHERE (drop_1_item = "PSB" or drop_2_item = "PSB" or drop_3_item = "PSB")
         """
