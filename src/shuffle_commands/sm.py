@@ -2,9 +2,10 @@ import discord
 
 import db
 from koduck import KoduckContext
+from models import Payload
 
 
-async def sm_rewards(context: KoduckContext) -> discord.Message | None:
+async def sm_rewards(context: KoduckContext) -> Payload:
     reward_list = db.get_sm_rewards()
     level = "\n".join(str(r.level) for r in reward_list)
     first_clear = "\n".join(f"[{r.reward}] x{r.amount}" for r in reward_list)
@@ -16,4 +17,5 @@ async def sm_rewards(context: KoduckContext) -> discord.Message | None:
     embed.add_field(name="Level", value=level, inline=True)
     embed.add_field(name="First Clear", value=first_clear, inline=True)
     embed.add_field(name="Repeat Clear", value=repeat_clear, inline=True)
-    return await context.send_message(embed=embed)
+
+    return Payload(embed=embed)
