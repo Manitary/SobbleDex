@@ -1,15 +1,7 @@
 import discord
+from helper.helper_functions import check_embed_equal
 
 import embed_formatters
-
-
-def compare_embeds(expected: discord.Embed, real: discord.Embed) -> None:
-    assert expected.title == real.title
-    assert expected.color == real.color
-    assert len(expected.fields) == len(real.fields)
-    for a, b in zip(expected.fields, real.fields):
-        assert a == b
-    assert expected == real
 
 
 def test_format_week_embed_1() -> None:
@@ -57,7 +49,7 @@ def test_format_week_embed_1() -> None:
         "[Rotom (Mow Rotom)] [[Coin] x100 50.0% / [Coin] x300 12.5% / [Coin] x2000 3.125%]",
     )
 
-    compare_embeds(expected, real)
+    check_embed_equal(expected, real)
 
 
 def test_format_week_embed_2() -> None:
@@ -91,7 +83,7 @@ def test_format_week_embed_2() -> None:
         "[[Coin] x100 50.0% / [Coin] x300 12.5% / [Coin] x2000 3.125%]",
     )
 
-    compare_embeds(expected, real)
+    check_embed_equal(expected, real)
 
 
 def test_format_week_embed_3() -> None:
@@ -132,7 +124,7 @@ def test_format_week_embed_3() -> None:
         "[[Coin] x100 50.0% / [Coin] x300 12.5% / [Coin] x2000 3.125%]",
     )
 
-    compare_embeds(expected, real)
+    check_embed_equal(expected, real)
 
 
 def test_format_week_embed_4() -> None:
@@ -169,7 +161,7 @@ def test_format_week_embed_4() -> None:
         "[Jigglypuff (Winking)] [[PSB] 50.0% / 25.0% / 12.5%]",
     )
 
-    compare_embeds(expected, real)
+    check_embed_equal(expected, real)
 
 
 def test_format_week_embed_5() -> None:
@@ -207,7 +199,7 @@ def test_format_week_embed_5() -> None:
         "[[Coin] x100 50.0% / [Coin] x300 12.5% / [Coin] x2000 3.125%]",
     )
 
-    compare_embeds(expected, real)
+    check_embed_equal(expected, real)
 
 
 def test_format_week_embed_6() -> None:
@@ -241,7 +233,7 @@ def test_format_week_embed_6() -> None:
         "[[Coin] x100 50.0% / [Coin] x300 12.5% / [Coin] x2000 3.125%]",
     )
 
-    compare_embeds(expected, real)
+    check_embed_equal(expected, real)
 
 
 def test_format_week_embed_7() -> None:
@@ -282,7 +274,7 @@ def test_format_week_embed_7() -> None:
         "[[Coin] x100 50.0% / [Coin] x300 12.5% / [Coin] x2000 3.125%]",
     )
 
-    compare_embeds(expected, real)
+    check_embed_equal(expected, real)
 
 
 def test_format_week_embed_8() -> None:
@@ -319,7 +311,7 @@ def test_format_week_embed_8() -> None:
         "[Castform (Winking)] [[PSB] 50.0% / 25.0% / 12.5%]",
     )
 
-    compare_embeds(expected, real)
+    check_embed_equal(expected, real)
 
 
 def test_format_week_embed_9() -> None:
@@ -361,7 +353,7 @@ def test_format_week_embed_9() -> None:
         "[[Coin] x100 50.0% / [Coin] x300 12.5% / [Coin] x2000 3.125%]",
     )
 
-    compare_embeds(expected, real)
+    check_embed_equal(expected, real)
 
 
 def test_format_week_embed_10() -> None:
@@ -407,7 +399,7 @@ def test_format_week_embed_10() -> None:
         "[Brionne] [[Coin] x100 50.0% / [Coin] x300 12.5% / [Coin] x2000 3.125%]",
     )
 
-    compare_embeds(expected, real)
+    check_embed_equal(expected, real)
 
 
 def test_format_week_embed_11() -> None:
@@ -448,7 +440,7 @@ def test_format_week_embed_11() -> None:
         "[Mudbray][Dartrix] [[Coin] x100 50.0% / [Coin] x300 12.5% / [Coin] x2000 3.125%]",
     )
 
-    compare_embeds(expected, real)
+    check_embed_equal(expected, real)
 
 
 def test_format_week_embed_12() -> None:
@@ -485,7 +477,7 @@ def test_format_week_embed_12() -> None:
         "[Swirlix (Winking)] [[PSB] 50.0% / 25.0% / 12.5%]",
     )
 
-    compare_embeds(expected, real)
+    check_embed_equal(expected, real)
 
 
 def test_format_week_embed_13() -> None:
@@ -530,7 +522,7 @@ def test_format_week_embed_13() -> None:
         "[Rotom (Mow Rotom)] [[Coin] x100 50.0% / [Coin] x300 12.5% / [Coin] x2000 3.125%]",
     )
 
-    compare_embeds(expected, real)
+    check_embed_equal(expected, real)
 
 
 def test_format_week_embed_14() -> None:
@@ -572,7 +564,7 @@ def test_format_week_embed_14() -> None:
         "[[Coin] x100 50.0% / [Coin] x300 12.5% / [Coin] x2000 3.125%]",
     )
 
-    compare_embeds(expected, real)
+    check_embed_equal(expected, real)
 
 
 def test_format_week_embed_15() -> None:
@@ -613,7 +605,7 @@ def test_format_week_embed_15() -> None:
         "[[Coin] x100 50.0% / [Coin] x300 12.5% / [Coin] x2000 3.125%]",
     )
 
-    compare_embeds(expected, real)
+    check_embed_equal(expected, real)
 
 
 def test_format_week_embed_16() -> None:
@@ -650,7 +642,7 @@ def test_format_week_embed_16() -> None:
         "[Jigglypuff (Winking)] [[PSB] 50.0% / 25.0% / 12.5%]",
     )
 
-    compare_embeds(expected, real)
+    check_embed_equal(expected, real)
 
 
 def test_format_week_embed_17() -> None:
@@ -692,7 +684,7 @@ def test_format_week_embed_17() -> None:
         "[[Coin] x100 50.0% / [Coin] x300 12.5% / [Coin] x2000 3.125%]",
     )
 
-    compare_embeds(expected, real)
+    check_embed_equal(expected, real)
 
 
 def test_format_week_embed_18() -> None:
@@ -735,7 +727,7 @@ def test_format_week_embed_18() -> None:
         "[[Coin] x100 50.0% / [Coin] x300 12.5% / [Coin] x2000 3.125%]",
     )
 
-    compare_embeds(expected, real)
+    check_embed_equal(expected, real)
 
 
 def test_format_week_embed_19() -> None:
@@ -774,7 +766,7 @@ def test_format_week_embed_19() -> None:
         "[[Coin] x100 50.0% / [Coin] x300 12.5% / [Coin] x2000 3.125%]",
     )
 
-    compare_embeds(expected, real)
+    check_embed_equal(expected, real)
 
 
 def test_format_week_embed_20() -> None:
@@ -811,7 +803,7 @@ def test_format_week_embed_20() -> None:
         "[Castform (Winking)] [[PSB] 50.0% / 25.0% / 12.5%]",
     )
 
-    compare_embeds(expected, real)
+    check_embed_equal(expected, real)
 
 
 def test_format_week_embed_21() -> None:
@@ -853,7 +845,7 @@ def test_format_week_embed_21() -> None:
         "[[Coin] x100 50.0% / [Coin] x300 12.5% / [Coin] x2000 3.125%]",
     )
 
-    compare_embeds(expected, real)
+    check_embed_equal(expected, real)
 
 
 def test_format_week_embed_22() -> None:
@@ -889,7 +881,7 @@ def test_format_week_embed_22() -> None:
         "[Brionne] [[Coin] x100 50.0% / [Coin] x300 12.5% / [Coin] x2000 3.125%]",
     )
 
-    compare_embeds(expected, real)
+    check_embed_equal(expected, real)
 
 
 def test_format_week_embed_23() -> None:
@@ -937,7 +929,7 @@ def test_format_week_embed_23() -> None:
         "[Mudbray][Dartrix] [[Coin] x100 50.0% / [Coin] x300 12.5% / [Coin] x2000 3.125%]",
     )
 
-    compare_embeds(expected, real)
+    check_embed_equal(expected, real)
 
 
 def test_format_week_embed_24() -> None:
@@ -975,7 +967,7 @@ def test_format_week_embed_24() -> None:
         "[Swirlix (Winking)] [[PSB] 50.0% / 25.0% / 12.5%]",
     )
 
-    compare_embeds(expected, real)
+    check_embed_equal(expected, real)
 
 
 def test_format_week_embed_fake_week_less() -> None:
@@ -985,7 +977,7 @@ def test_format_week_embed_fake_week_less() -> None:
     expected.add_field(inline=False, name="One Chance a Day!", value="")
     expected.add_field(inline=False, name="Daily", value="")
 
-    compare_embeds(expected, real)
+    check_embed_equal(expected, real)
 
 
 def test_format_week_embed_fake_week_more() -> None:
@@ -995,4 +987,4 @@ def test_format_week_embed_fake_week_more() -> None:
     expected.add_field(inline=False, name="One Chance a Day!", value="")
     expected.add_field(inline=False, name="Daily", value="")
 
-    compare_embeds(expected, real)
+    check_embed_equal(expected, real)
