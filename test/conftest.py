@@ -1,8 +1,12 @@
+import os
+import sys
 from typing import Iterator
 
 import pytest
 
 import koduck
+
+sys.path.append(os.path.join(os.path.dirname(__file__), "helper"))
 
 
 @pytest.fixture(scope="session")

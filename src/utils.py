@@ -7,7 +7,7 @@ import pytz
 
 import db
 import settings
-from models import EventType, RepeatType
+from models import EventType, RepeatType, Skill, Stage
 
 RE_PUNCTUATION = re.compile(r"[- ()'.%+:#]")
 
@@ -124,3 +124,15 @@ def event_week_day(day: int) -> str:
 
 
 url_encode = functools.partial(urllib.parse.quote, safe=":/")
+
+
+def runs_to_farm(stage: Stage, skill: Skill) -> tuple[int, int]:
+    rates = tuple(drop.rate for drop in stage.drops if drop.item == "PSB")
+    cost = skill.sp_cost[3]
+    expected = round(100 * cost / sum(rates))
+    expected_dri = round(cost / sum(map(chance_with_reroll, rates)))
+    return expected, expected_dri
+
+
+def chance_with_reroll(p: float) -> float:
+    return 1 - (1 - p / 100) ** 2

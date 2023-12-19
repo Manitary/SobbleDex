@@ -1,7 +1,8 @@
 import asyncio
 import datetime
+import itertools
 import math
-from typing import Any, Sequence
+from typing import Any, Iterable, Sequence
 
 import discord
 import pytz
@@ -142,13 +143,17 @@ def format_stage_embed(
         )
 
     #! broken if moves =/= mobile moves (same for exp)
-    stats += f"\n**{"Moves" if stage.moves else "Seconds"}**: {stage.moves or stage.seconds}"
+    stats += (
+        f"\n**{'Moves' if stage.moves else 'Seconds'}**: {stage.moves or stage.seconds}"
+    )
     if stage.moves_mobile != stage.moves:
         stats += f" (Mobile: {stage.moves_mobile})"
 
     if stage.hp > 1 and stage.is_puzzle_stage != PuzzleStage.PUZZLE:
         # Exclude competitions, weekend Meowth, and puzzle stages
-        stage_real_hp = stage.hp if not stage.extra_hp else stage.hp + stage.extra_hp * eb_data[1]
+        stage_real_hp = (
+            stage.hp if not stage.extra_hp else stage.hp + stage.extra_hp * eb_data[1]
+        )
         # When displaying an EB stage, get stage HP from EB leg data
         if stage.moves:
             stats += f"\n**Damage/move**: {math.ceil(stage_real_hp / stage.moves)}"
@@ -614,3 +619,58 @@ async def paginate_embeds(
         pass
 
     return the_message
+
+
+def format_farming_cost(
+    pokemon: Pokemon, stages: Sequence[Stage], skills: Iterable[Skill]
+) -> discord.Embed:
+    description = (
+        "**Stage**: Escalation Battle"
+        if len(stages) > 2
+        else (
+            ("**Stages**: " if len(stages) == 2 else "**Stage**: ")
+            + ", ".join(stage.string_id for stage in stages)
+        )
+    )
+    if len(stages) > 2:
+        stages = [stages[0]]
+
+    embed = discord.Embed(
+        title=pokemon.pokemon,
+        description=description,
+    )
+    embed.set_thumbnail(
+        url=utils.url_encode(
+            "https://raw.githubusercontent.com/Chupalika/Kaleo/icons/Icons/"
+            f"{pokemon.pokemon}.png"
+        )
+    )
+    skill_groups = [
+        list(group)
+        for _, group in itertools.groupby(
+            sorted(skills, key=lambda s: (s.sp_cost[3], s.skill)),
+            key=lambda s: s.sp_cost[3],
+        )
+    ]
+    for group in skill_groups:
+        cost_string = ""
+        for i, stage in enumerate(stages):
+            std, dri = utils.runs_to_farm(stage, group[0])
+            if len(stages) > 1:
+                cost_string += f"{'\n\n' if i else ''}Stage: {stage.string_id}\n"
+            cost_string += skill_farming_cost_string(std, dri, stage)
+
+        embed.add_field(
+            name=", ".join(s.skill for s in group),
+            value=cost_string,
+            inline=False,
+        )
+
+    return embed
+
+
+def skill_farming_cost_string(std: int, dri: int, stage: Stage) -> str:
+    return (
+        f"Average: {std} runs ([{stage.cost.type}]x{std*stage.cost.amount:,})"
+        f"\nDRI (estimate): {dri} runs ([{stage.cost.type}]x{dri*stage.cost.amount:,})"
+    )

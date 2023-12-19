@@ -701,5 +701,21 @@ def query_requestable_roles(guild_id: int) -> Iterator[int]:
         yield role["role_id"]
 
 
+def farming_stages(pokemon_name: str) -> list[Stage]:
+    q = shuffle_connection.execute(
+        """
+        SELECT 'Main' AS stage_type, * FROM main_stages
+        WHERE pokemon = :pokemon
+        AND (drop_1_item = "PSB" or drop_2_item = "PSB" or drop_3_item = "PSB")
+        UNION
+        SELECT 'Event' AS stage_type, * FROM event_stages
+        WHERE pokemon = :pokemon
+        AND (drop_1_item = "PSB" or drop_2_item = "PSB" or drop_3_item = "PSB")
+        """,
+        {"pokemon": pokemon_name},
+    )
+    return [Stage(**stage) for stage in q.fetchall()]
+
+
 if __name__ == "__main__":
     ...
