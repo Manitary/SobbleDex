@@ -14,20 +14,28 @@ async def do_nothing(*args: Any, **kwargs: Any) -> None:
 
 
 @pytest.mark.asyncio
+async def test_no_args(context: KoduckContext) -> None:
+    real = await shuffle_commands.farming_cost(context)
+    expected = Payload(content="I need a Pokemon name to look up!")
+    assert isinstance(real, dict)
+    check_payload_equal(real, expected)
+
+
+@pytest.mark.asyncio
 async def test_invalid_pokemon(
     context: KoduckContext, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     monkeypatch.setattr(context, "send_message", do_nothing)
     real = await shuffle_commands.farming_cost(context, "1")
-    expected = None
-    assert real == expected
+    assert real is None
 
 
 @pytest.mark.asyncio
 async def test_pokemon_not_farmable(context: KoduckContext) -> None:
     real = await shuffle_commands.farming_cost(context, "Flygon")
     expected = Payload(content="Flygon cannot be farmed")
-    assert real == expected
+    assert isinstance(real, dict)
+    check_payload_equal(real, expected)
 
 
 @pytest.mark.asyncio
@@ -46,7 +54,7 @@ async def test_sp_single_skill(context: KoduckContext) -> None:
         inline=False,
     )
     expected = Payload(embed=embed)
-    assert real
+    assert isinstance(real, dict)
     check_payload_equal(real, expected)
 
 
@@ -73,7 +81,7 @@ async def test_two_skill_diff_cost(context: KoduckContext) -> None:
         inline=False,
     )
     expected = Payload(embed=embed)
-    assert real
+    assert isinstance(real, dict)
     check_payload_equal(real, expected)
 
 
@@ -90,7 +98,7 @@ async def test_multiple_skills_same_cost(context: KoduckContext) -> None:
         inline=False,
     )
     expected = Payload(embed=embed)
-    assert real
+    assert isinstance(real, dict)
     check_payload_equal(real, expected)
 
 
@@ -114,7 +122,7 @@ async def test_multiple_stages(context: KoduckContext) -> None:
         inline=False,
     )
     expected = Payload(embed=embed)
-    assert real
+    assert isinstance(real, dict)
     check_payload_equal(real, expected)
 
 
@@ -138,5 +146,5 @@ async def test_multiple_stages_main_sp(context: KoduckContext) -> None:
         inline=False,
     )
     expected = Payload(embed=embed)
-    assert real
+    assert isinstance(real, dict)
     check_payload_equal(real, expected)

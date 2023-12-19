@@ -1,15 +1,16 @@
 from typing import Any
 
-import discord
-
 import db
+import settings
 from embed_formatters import format_farming_cost
 from koduck import KoduckContext
 from models import Payload
 
+from .decorators import min_param
 from .lookup import lookup_pokemon
 
 
+@min_param(1, settings.message_pokemon_no_param)
 async def farming_cost(
     context: KoduckContext, *args: str, **kwargs: Any
 ) -> Payload | None:
