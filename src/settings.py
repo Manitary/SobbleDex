@@ -159,7 +159,7 @@ message_dp_invalid_param = (
 )
 disruption_patterns_min_index = 0
 disruption_patterns_max_index = 7260
-message_drain_list_no_param = "message_drain_list_no_param"
+message_drain_list_no_param = "I need HP and moves to calculate drain values!"
 message_drain_list_invalid_param = (
     "One of the arguments wasn't an integer greater than 0"
 )
