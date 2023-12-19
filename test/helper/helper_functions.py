@@ -11,6 +11,9 @@ def check_payload_equal(p1: Payload, p2: Payload) -> None:
     if "embed" in p1:
         assert "embed" in p2
         check_embed_equal(p1["embed"], p2["embed"])
+    if "check_aliases" in p1:
+        assert "check_aliases" in p2
+        assert p1["check_aliases"] == p2["check_aliases"]
 
 
 def check_embed_equal(e1: discord.Embed, e2: discord.Embed) -> None:

@@ -112,6 +112,7 @@ class QueryType(MyStrEnum):
 class Payload(TypedDict, total=False):
     content: str
     embed: discord.Embed
+    check_aliases: bool
 
 
 @dataclass

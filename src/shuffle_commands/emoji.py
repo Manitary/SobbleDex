@@ -1,7 +1,6 @@
-import discord
-
 import settings
 from koduck import KoduckContext
+from models import Payload
 
 
 async def update_emojis(context: KoduckContext) -> None:
@@ -17,7 +16,7 @@ async def update_emojis(context: KoduckContext) -> None:
             context.koduck.emojis[emoji.name.lower()] = f"<:{emoji.name}:{emoji.id}>"
 
 
-async def emojify_2(context: KoduckContext) -> discord.Message | None:
+async def emojify_2(context: KoduckContext) -> Payload:
     if not context.param_line:
-        return
-    return await context.send_message(content=context.param_line, check_aliases=True)
+        return Payload()
+    return Payload(content=context.param_line, check_aliases=True)

@@ -863,7 +863,7 @@ async def on_message(message: discord.Message) -> discord.Message | None:
         function = koduck_instance.commands[context.command].function
         try:
             result = await function(context, *args, **kwargs)
-            if isinstance(result, dict):
+            if result and isinstance(result, dict):
                 await koduck_instance.send_message(
                     receive_message=context.message, **result
                 )
