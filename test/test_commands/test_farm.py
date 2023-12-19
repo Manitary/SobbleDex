@@ -2,7 +2,7 @@ from typing import Any
 
 import discord
 import pytest
-from helper.helper_functions import check_payload_equal
+from helper import check_payload_equal
 
 import shuffle_commands
 from koduck import KoduckContext
@@ -46,7 +46,8 @@ async def test_sp_single_skill(context: KoduckContext) -> None:
         inline=False,
     )
     expected = Payload(embed=embed)
-    assert real == expected
+    assert real
+    check_payload_equal(real, expected)
 
 
 @pytest.mark.asyncio
@@ -56,7 +57,10 @@ async def test_two_skill_diff_cost(context: KoduckContext) -> None:
         title="Giratina (Origin Forme)", description="**Stage**: Escalation Battle"
     )
     embed.set_thumbnail(
-        url="https://raw.githubusercontent.com/Chupalika/Kaleo/icons/Icons/Giratina%20%28Origin%20Forme%29.png"
+        url=(
+            "https://raw.githubusercontent.com/Chupalika/Kaleo/icons/Icons/"
+            "Giratina%20%28Origin%20Forme%29.png"
+        )
     )
     embed.add_field(
         name="Sinister Power",

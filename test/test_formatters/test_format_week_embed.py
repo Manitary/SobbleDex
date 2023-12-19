@@ -1,5 +1,5 @@
 import discord
-from helper.helper_functions import check_embed_equal
+from helper import check_embed_equal
 
 import embed_formatters
 
@@ -30,9 +30,10 @@ def test_format_week_embed_1() -> None:
     expected.add_field(
         inline=False,
         name="Safari",
-        value="- [Grubbin] (16.67%), [Charjabug] (10.00%), [Vikavolt] (3.33%), [Crabrawler] (16.67%), "
-        "[Crabominable] (6.67%), [Caterpie] (16.67%), [Metapod] (10.00%), [Butterfree] (3.33%), "
-        "[Yungoos] (13.33%), [Gumshoos] (3.33%) [[EBS] 25.0% / [EBM] 3.125% / [EBL] 1.5625%]",
+        value="- [Grubbin] (16.67%), [Charjabug] (10.00%), [Vikavolt] (3.33%), "
+        "[Crabrawler] (16.67%), [Crabominable] (6.67%), [Caterpie] (16.67%), [Metapod] (10.00%), "
+        "[Butterfree] (3.33%), [Yungoos] (13.33%), [Gumshoos] (3.33%) "
+        "[[EBS] 25.0% / [EBM] 3.125% / [EBL] 1.5625%]",
     )
     expected.add_field(
         inline=False,
@@ -184,8 +185,9 @@ def test_format_week_embed_5() -> None:
         inline=False,
         name="Safari",
         value="- [Krabby] (16.67%), [Kingler] (6.67%), [Shellder] (16.67%), [Cloyster] (6.67%), "
-        "[Magikarp (Shiny)] (3.33%), [Gyarados (Shiny)] (3.33%), [Goldeen] (16.67%), [Seaking] (10.00%), "
-        "[Aipom] (13.33%), [Ambipom] (6.67%) [[EBS] 25.0% / [EBM] 3.125% / [EBL] 1.5625%]",
+        "[Magikarp (Shiny)] (3.33%), [Gyarados (Shiny)] (3.33%), [Goldeen] (16.67%), "
+        "[Seaking] (10.00%), [Aipom] (13.33%), [Ambipom] (6.67%) "
+        "[[EBS] 25.0% / [EBM] 3.125% / [EBL] 1.5625%]",
     )
     expected.add_field(
         inline=False,
@@ -257,10 +259,10 @@ def test_format_week_embed_7() -> None:
     expected.add_field(
         inline=False,
         name="Safari",
-        value="- [Electrike] (13.33%), [Manectric] (6.67%), [Darumaka] (16.67%), [Darmanitan] (10.00%), "
-        "[Pikachu (Winking)] (6.67%), [Raichu (Winking)] (6.67%), [Plusle] (13.33%), [Minun] (13.33%), "
-        "[Diglett (Alola Form)] (10.00%), [Dugtrio (Alola Form)] (3.33%) "
-        "[[EBS] 25.0% / [EBM] 3.125% / [EBL] 1.5625%]",
+        value="- [Electrike] (13.33%), [Manectric] (6.67%), [Darumaka] (16.67%), "
+        "[Darmanitan] (10.00%), [Pikachu (Winking)] (6.67%), [Raichu (Winking)] (6.67%), "
+        "[Plusle] (13.33%), [Minun] (13.33%), [Diglett (Alola Form)] (10.00%), "
+        "[Dugtrio (Alola Form)] (3.33%) [[EBS] 25.0% / [EBM] 3.125% / [EBL] 1.5625%]",
     )
     expected.add_field(
         inline=False,
@@ -336,8 +338,9 @@ def test_format_week_embed_9() -> None:
         inline=False,
         name="Safari",
         value="- [Salandit] (20.00%), [Togedemaru] (6.67%), [Roggenrola] (16.67%), "
-        "[Boldore] (10.00%), [Gigalith] (3.33%), [Rockruff] (6.67%), [Geodude (Alola Form)] (16.67%), "
-        "[Graveler (Alola Form)] (10.00%), [Golem (Alola Form)] (3.33%), [Mareanie] (6.67%) "
+        "[Boldore] (10.00%), [Gigalith] (3.33%), [Rockruff] (6.67%), "
+        "[Geodude (Alola Form)] (16.67%), [Graveler (Alola Form)] (10.00%), "
+        "[Golem (Alola Form)] (3.33%), [Mareanie] (6.67%) "
         "[[EBS] 25.0% / [EBM] 3.125% / [EBL] 1.5625%]",
     )
     expected.add_field(
