@@ -40,8 +40,8 @@ async def test_sp_single_skill(context: KoduckContext) -> None:
     embed.add_field(
         name="Double Normal",
         value=(
-            "Average: 123 runs ([Coin]x61,500)"
-            "\nDRI (estimate): 76 runs ([Coin]x38,000)"
+            "Average: 123 runs ([Coin]x57,980)"
+            "\nDRI (estimate): 76 runs ([Coin]x35,890)"
         ),
         inline=False,
     )
@@ -110,6 +110,30 @@ async def test_multiple_stages(context: KoduckContext) -> None:
             "\n\nStage: 645\n"
             "Average: 404 runs ([Heart]x404)"
             "\nDRI (estimate): 226 runs ([Heart]x226)"
+        ),
+        inline=False,
+    )
+    expected = Payload(embed=embed)
+    assert real
+    check_payload_equal(real, expected)
+
+
+@pytest.mark.asyncio
+async def test_multiple_stages_main_sp(context: KoduckContext) -> None:
+    real = await shuffle_commands.farming_cost(context, "Salamence")
+    embed = discord.Embed(title="Salamence", description="**Stages**: 610, s258")
+    embed.set_thumbnail(
+        url="https://raw.githubusercontent.com/Chupalika/Kaleo/icons/Icons/Salamence.png"
+    )
+    embed.add_field(
+        name="Hitting Streak, Mega Boost",
+        value=(
+            "Stage: 610\n"
+            "Average: 229 runs ([Heart]x229)"
+            "\nDRI (estimate): 126 runs ([Heart]x126)"
+            "\n\nStage: s258\n"
+            "Average: 200 runs ([Coin]x54,170)"
+            "\nDRI (estimate): 114 runs ([Coin]x30,950)"
         ),
         inline=False,
     )

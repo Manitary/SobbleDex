@@ -13,6 +13,7 @@ import settings
 import utils
 from koduck import KoduckContext
 from models import (
+    CostType,
     EBReward,
     EBStretch,
     Event,
@@ -670,7 +671,17 @@ def format_farming_cost(
 
 
 def skill_farming_cost_string(std: int, dri: int, stage: Stage) -> str:
+    # Stages reward 200 coins for a first win and 30 coins for each subsequent win
+    # Therefore, if the stage cost coins, the cost is offset by these rewards
+    # Only event stages cost coins to play, and we assume the farming is done within the same week
+    # (i.e. the first-time reward is given only once throughout the farm)
+    real_cost = (
+        (stage.cost.amount - 30)
+        if stage.cost.type == CostType.COIN
+        else stage.cost.amount
+    )
+    bonus_coins = 170 if stage.cost.type == CostType.COIN else 0
     return (
-        f"Average: {std} runs ([{stage.cost.type}]x{std*stage.cost.amount:,})"
-        f"\nDRI (estimate): {dri} runs ([{stage.cost.type}]x{dri*stage.cost.amount:,})"
+        f"Average: {std} runs ([{stage.cost.type}]x{std * real_cost + bonus_coins:,})"
+        f"\nDRI (estimate): {dri} runs ([{stage.cost.type}]x{dri * real_cost + bonus_coins:,})"
     )
