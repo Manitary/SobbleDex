@@ -21,6 +21,7 @@ def check_embed_equal(e1: discord.Embed, e2: discord.Embed) -> None:
     assert e1.description == e2.description
     assert e1.color == e2.color
     assert e1.thumbnail == e2.thumbnail
+    assert e1.url == e2.url
 
     assert len(e1.fields) == len(e2.fields)
     for f1, f2 in zip(e1.fields, e2.fields):
