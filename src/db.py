@@ -1,6 +1,7 @@
 import sqlite3
 from typing import Any, Iterator
 
+from exceptions import InvalidBP, InvalidLevel
 from models import (
     Command,
     Drop,
@@ -497,6 +498,11 @@ def query_skill(skill: str) -> Skill | None:
 
 
 def query_ap(bp: int) -> list[int]:
+    """Return the sorted list of AP for the given BP.
+
+    Raises:
+        InvalidBP: if `bp` is not 30, 40, ..., 90.
+    """
     q = shuffle_connection.execute(
         f"""
         SELECT {', '.join(f"lvl{i}" for i in range(1, 31))} FROM ap
@@ -504,8 +510,10 @@ def query_ap(bp: int) -> list[int]:
         """,
         {"bp": bp},
     ).fetchone()
+
     if not q:
-        return []
+        raise InvalidBP()
+
     return sorted(q.values())
 
 
@@ -715,6 +723,29 @@ def farming_stages(pokemon_name: str) -> list[Stage]:
         {"pokemon": pokemon_name},
     )
     return [Stage(**stage) for stage in q.fetchall()]
+
+
+def get_ap_at_level(bp: int, level: int) -> int:
+    """Return the AP of a pokemon with the given BP and level.
+
+    Raises:
+        InvalidLevel: `level` is not 1, 2, ..., 30.
+        InvalidBP: `bp` is not 30, 40, ..., 90.
+    """
+    try:
+        assert isinstance(level, int)
+        q = shuffle_connection.execute(
+            f"""
+            SELECT lvl{level} AS ap FROM ap
+            WHERE base_ap = :bp
+            """,
+            {"bp": bp},
+        ).fetchone()
+    except (AssertionError, sqlite3.OperationalError) as e:
+        raise InvalidLevel() from e
+    if not q:
+        raise InvalidBP()
+    return q["ap"]
 
 
 if __name__ == "__main__":
