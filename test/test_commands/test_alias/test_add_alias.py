@@ -8,7 +8,7 @@ from shuffle_commands import add_alias
 
 
 @pytest.mark.asyncio
-async def test_fail_no_args(context: KoduckContext) -> None:
+async def test_fail_no_args(patch_shuffle_db: None, context: KoduckContext) -> None:
     real = await add_alias(context)
     expected = Payload(content="I need at least two parameters: original, alias(es)")
     assert isinstance(real, dict)
@@ -16,7 +16,7 @@ async def test_fail_no_args(context: KoduckContext) -> None:
 
 
 @pytest.mark.asyncio
-async def test_fail_one_arg(context: KoduckContext) -> None:
+async def test_fail_one_arg(patch_shuffle_db: None, context: KoduckContext) -> None:
     real = await add_alias(context, "test")
     expected = Payload(content="I need at least two parameters: original, alias(es)")
     assert isinstance(real, dict)
@@ -24,7 +24,9 @@ async def test_fail_one_arg(context: KoduckContext) -> None:
 
 
 @pytest.mark.asyncio
-async def test_fail_too_many_args(context: KoduckContext) -> None:
+async def test_fail_too_many_args(
+    patch_shuffle_db: None, context: KoduckContext
+) -> None:
     real = await add_alias(context, *("test",) * 12)
     expected = Payload(content="Please only give me up to 10 aliases to add!")
     assert isinstance(real, dict)

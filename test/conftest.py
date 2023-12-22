@@ -30,7 +30,7 @@ def context_with_emoji(koduck_instance: Koduck) -> Iterator[KoduckContext]:
     yield koduck_context
 
 
-@pytest.fixture(scope="function", autouse=True)
+@pytest.fixture(scope="function")
 def patch_shuffle_db(monkeypatch: pytest.MonkeyPatch) -> None:
     _db = sqlite3.Connection(":memory:")
     _db.row_factory = db.dict_factory
