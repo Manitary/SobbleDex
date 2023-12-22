@@ -1,6 +1,7 @@
 import datetime
 import functools
 import re
+from typing import Iterable
 import urllib.parse
 
 import pytz
@@ -31,7 +32,7 @@ def strip_punctuation(string: str) -> str:
     return RE_PUNCTUATION.sub("", string).replace("é", "e")
 
 
-def remove_duplicates[T](l: list[T]) -> list[T]:  # pylint: disable=E0602
+def remove_duplicates[T](l: Iterable[T]) -> list[T]:
     ans: list[T] = []
     for item in l:
         if item in ans:
