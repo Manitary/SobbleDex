@@ -399,7 +399,7 @@ class Pokemon:
 
     @property
     def ss_skills(self) -> list[str]:
-        return self.ss.split("/")
+        return self.ss.split("/") if self.ss else []
 
     @property
     def all_skills(self) -> list[str]:

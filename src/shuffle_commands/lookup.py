@@ -132,7 +132,9 @@ async def lookup(
     )
     if result is None:
         return ""
-    return choices[result][1]
+
+    choice = choices[result][1]
+    return names_dict.get(choice.lower(), choice)
 
 
 lookup_pokemon = functools.partial(

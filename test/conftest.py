@@ -2,6 +2,7 @@ import sqlite3
 from typing import Any, Awaitable, Callable, Iterator
 
 import pytest
+from helper_models import MockAuthor, MockMessage
 
 import db
 from koduck import Koduck, KoduckContext
@@ -19,6 +20,14 @@ def _koduck_instance() -> Iterator[Koduck]:
 def context(koduck_instance: Koduck) -> Iterator[KoduckContext]:
     koduck_context = KoduckContext()
     koduck_context.koduck = koduck_instance
+    yield koduck_context
+
+
+@pytest.fixture(scope="session")
+def context_with_fake_message(koduck_instance: Koduck) -> Iterator[KoduckContext]:
+    koduck_context = KoduckContext()
+    koduck_context.koduck = koduck_instance
+    koduck_context.message = MockMessage(MockAuthor(1))
     yield koduck_context
 
 
