@@ -42,7 +42,7 @@ async def add_alias(context, *args, **kwargs):
     failed = []
     failed2 = []
     failed3 = []
-    for alias in args[1:]:
+    for alias in utils.remove_duplicates(filter(None, args[1:])):
         if alias.lower() in aliases.keys():
             failed.append(alias)
         elif re.findall(r"<@!?[0-9]*>", alias):
@@ -64,6 +64,9 @@ async def add_alias(context, *args, **kwargs):
     for f in failed3:
         return_message += settings.message_add_alias_failed_3.format(f) + "\n"
     
+    if not return_message:
+        return_message = settings.message_add_alias_failed_4
+
     return await context.koduck.send_message(receive_message=context.message, content=return_message)
 
 async def remove_alias(context, *args, **kwargs):
