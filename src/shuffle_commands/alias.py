@@ -18,7 +18,8 @@ async def list_aliases(context: KoduckContext, *args: str, **kwargs: Any) -> Pay
     aliases = db.get_aliases()
     original = aliases.get(args[0].lower(), args[0])
 
-    results = [k for k, v in aliases.items() if v.lower() == original.lower()]
+    results = sorted(k for k, v in aliases.items() if v.lower() == original.lower())
+
     if not results:
         return Payload(content=settings.message_list_aliases_no_result)
 
