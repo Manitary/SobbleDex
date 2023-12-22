@@ -1,3 +1,5 @@
+from typing import Awaitable
+
 import pytest
 from helper import check_payload_equal
 
@@ -115,5 +117,16 @@ async def test_exp_70_5_15_pokemon(context: KoduckContext) -> None:
     expected = Payload(
         content="Gallade (70 BP) needs 17010 EXP to get from Level 5 (AP 80) to Level 15 (AP 110)"
     )
+    assert isinstance(real, dict)
+    check_payload_equal(real, expected)
+
+
+@pytest.mark.asyncio
+async def test_invalid_pokemon(
+    context: KoduckContext, monkeypatch: pytest.MonkeyPatch, do_nothing: Awaitable[None]
+) -> None:
+    monkeypatch.setattr(context, "send_message", do_nothing)
+    real = await shuffle_commands.exp(context, "test")
+    expected = Payload()
     assert isinstance(real, dict)
     check_payload_equal(real, expected)

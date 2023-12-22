@@ -16,6 +16,9 @@ from .lookup import lookup_pokemon
 async def exp(context: KoduckContext, *args: str, **kwargs: Any) -> Payload:
     pokemon, bp = await _get_pokemon_bp(context, args[0])
 
+    if not (pokemon or bp):
+        return Payload()
+
     if bp not in constants.pokemon_bps:
         return Payload(content=settings.message_exp_invalid_param)
 

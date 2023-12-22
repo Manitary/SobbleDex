@@ -15,6 +15,14 @@ async def test_no_arg(context: KoduckContext) -> None:
 
 
 @pytest.mark.asyncio
+async def test_invalid_bp_not_int(context: KoduckContext) -> None:
+    real = await shuffle_commands.ap(context, "test")
+    expected = Payload(content="BP should be a multiple of 10 between 30 and 90")
+    assert isinstance(real, dict)
+    check_payload_equal(real, expected)
+
+
+@pytest.mark.asyncio
 async def test_invalid_bp(context: KoduckContext) -> None:
     real = await shuffle_commands.ap(context, "14")
     expected = Payload(content="BP should be a multiple of 10 between 30 and 90")

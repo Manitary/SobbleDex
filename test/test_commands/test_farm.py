@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Awaitable
 
 import discord
 import pytest
@@ -7,10 +7,6 @@ from helper import check_payload_equal
 import shuffle_commands
 from koduck import KoduckContext
 from models import Payload
-
-
-async def do_nothing(*args: Any, **kwargs: Any) -> None:
-    return
 
 
 @pytest.mark.asyncio
@@ -23,7 +19,7 @@ async def test_no_args(context: KoduckContext) -> None:
 
 @pytest.mark.asyncio
 async def test_invalid_pokemon(
-    context: KoduckContext, monkeypatch: pytest.MonkeyPatch
+    context: KoduckContext, monkeypatch: pytest.MonkeyPatch, do_nothing: Awaitable[None]
 ) -> None:
     monkeypatch.setattr(context, "send_message", do_nothing)
     real = await shuffle_commands.farming_cost(context, "1")

@@ -1,5 +1,5 @@
 import sqlite3
-from typing import Iterator
+from typing import Any, Awaitable, Callable, Iterator
 
 import pytest
 
@@ -38,3 +38,11 @@ def patch_shuffle_db(monkeypatch: pytest.MonkeyPatch) -> None:
         query = f.read()
     _db.executescript(query)
     monkeypatch.setattr(db, "shuffle_connection", _db)
+
+
+@pytest.fixture(scope="session")
+def do_nothing() -> Iterator[Callable[..., Awaitable[None]]]:
+    async def _do_nothing(*args: Any, **kwargs: Any) -> None:
+        return
+
+    yield _do_nothing
