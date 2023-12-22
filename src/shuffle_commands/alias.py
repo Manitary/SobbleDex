@@ -79,7 +79,7 @@ async def remove_alias(context: KoduckContext, *args: str, **kwargs: Any) -> Pay
             )
         )
 
-    success, not_exist, failure = db.remove_aliases(*args)
+    success, not_exist, failure = db.remove_aliases(*utils.remove_duplicates(args))
     return_message = "\n".join(
         itertools.chain(
             (settings.message_remove_alias_success.format(*s) for s in success),
