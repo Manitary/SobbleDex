@@ -7,6 +7,7 @@ import embed_formatters
 import settings
 import utils
 from koduck import KoduckContext
+from models import Payload
 
 from .decorators import allow_space_delimiter, min_param
 from .lookup import lookup_pokemon
@@ -63,12 +64,10 @@ async def event(
     )
 
 
-async def week(context: KoduckContext, *args: str) -> discord.Message | None:
+async def week(context: KoduckContext, *args: str) -> discord.Message | Payload | None:
     curr_week = utils.get_current_week()
     if not args:
-        return await context.send_message(
-            embed=embed_formatters.format_week_embed(curr_week),
-        )
+        return Payload(embed=embed_formatters.format_week_embed(curr_week))
 
     if args[0].isdigit():
         query_week = int(args[0])
@@ -76,15 +75,15 @@ async def week(context: KoduckContext, *args: str) -> discord.Message | None:
         query_pokemon = await lookup_pokemon(context, _query=args[0])
         if not query_pokemon:
             print("Unrecognized Pokemon")
-            return
+            return Payload()
 
         # retrieve data
         weeks = [
             event.repeat_param_1 for event in db.query_event_by_pokemon(query_pokemon)
         ]
         if not weeks:
-            return await context.send_message(
-                content=settings.message_event_no_result.format(query_pokemon),
+            return Payload(
+                content=settings.message_event_no_result.format(query_pokemon)
             )
         sorted_results = [w + 1 for w in weeks if w + 1 >= curr_week] + [
             w + 1 for w in weeks if w + 1 < curr_week
@@ -92,19 +91,17 @@ async def week(context: KoduckContext, *args: str) -> discord.Message | None:
         query_week = sorted_results[0]
 
     if not 1 <= query_week <= settings.num_weeks:
-        return await context.send_message(
+        return Payload(
             content=settings.message_week_invalid_param.format(
                 settings.num_weeks, settings.num_weeks
-            ),
+            )
         )
 
-    return await context.send_message(
-        embed=embed_formatters.format_week_embed(query_week),
-    )
+    return Payload(embed=embed_formatters.format_week_embed(query_week))
 
 
 async def next_week(
     context: KoduckContext, *args: str, **kwargs: Any
-) -> discord.Message | None:
+) -> discord.Message | Payload | None:
     args = (str(utils.get_current_week() % 24 + 1),)
     return await week(context, *args, **kwargs)
