@@ -72,7 +72,10 @@ async def test_week_by_number(
 async def test_week_out_of_bound(context: KoduckContext, week_num: int) -> None:
     real = await week(context, str(week_num))
     expected = Payload(
-        content="There are 24 weeks of events in the event rotation, so I need a number from 1 to 24"
+        content=(
+            "There are 24 weeks of events in the event rotation, "
+            "so I need a number from 1 to 24"
+        )
     )
     assert isinstance(real, dict)
     check_payload_equal(real, expected)

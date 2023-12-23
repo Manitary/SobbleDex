@@ -64,7 +64,7 @@ async def event(
     )
 
 
-async def week(context: KoduckContext, *args: str) -> discord.Message | Payload | None:
+async def week(context: KoduckContext, *args: str) -> Payload:
     curr_week = utils.get_current_week()
     if not args:
         return Payload(embed=embed_formatters.format_week_embed(curr_week))
@@ -100,8 +100,5 @@ async def week(context: KoduckContext, *args: str) -> discord.Message | Payload 
     return Payload(embed=embed_formatters.format_week_embed(query_week))
 
 
-async def next_week(
-    context: KoduckContext, *args: str, **kwargs: Any
-) -> discord.Message | Payload | None:
-    args = (str(utils.get_current_week() % 24 + 1),)
-    return await week(context, *args, **kwargs)
+async def next_week(context: KoduckContext, *args: str, **kwargs: Any) -> Payload:
+    return await week(context, str(utils.get_current_week() % 24 + 1), *args, **kwargs)
