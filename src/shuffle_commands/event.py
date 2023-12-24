@@ -17,7 +17,7 @@ from .lookup import lookup_pokemon
 @min_param(num=1, error=settings.message_event_no_param)
 async def event(
     context: KoduckContext, *args: str, **kwargs: Any
-) -> discord.Message | None:
+) -> discord.Message | Payload | None:
     result_number = 1
 
     # parse params
@@ -25,32 +25,25 @@ async def event(
         try:
             result_number = int(args[1])
             if result_number <= 0:
-                return await context.send_message(
-                    content=settings.message_event_invalid_param,
-                )
+                return Payload(content=settings.message_event_invalid_param)
         except ValueError:
-            return await context.send_message(
-                content=settings.message_event_invalid_param,
-            )
+            return Payload(content=settings.message_event_invalid_param)
+
     query_pokemon = await lookup_pokemon(context, _query=args[0])
     if not query_pokemon:
         print("Unrecognized Pokemon")
-        return
+        return Payload()
 
     # retrieve data
     events = list(db.query_event_by_pokemon(query_pokemon))
 
     if not events:
-        return await context.send_message(
-            content=settings.message_event_result_error.format(len(events)),
-        )
+        return Payload(content=settings.message_event_no_result.format(query_pokemon))
 
     try:
         selected_event = events[result_number - 1]
     except IndexError:
-        return await context.send_message(
-            content=settings.message_event_no_result.format(query_pokemon),
-        )
+        return Payload(content=settings.message_event_result_error.format(len(events)))
 
     if len(events) > 1:
         return await embed_formatters.paginate_embeds(
@@ -59,9 +52,7 @@ async def event(
             result_number,
         )
 
-    return await context.send_message(
-        embed=embed_formatters.format_event_embed(selected_event),
-    )
+    return Payload(embed=embed_formatters.format_event_embed(selected_event))
 
 
 async def week(context: KoduckContext, *args: str) -> Payload:

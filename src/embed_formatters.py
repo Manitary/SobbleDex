@@ -333,8 +333,8 @@ def format_event_embed(event: Event) -> discord.Embed:
         st = event.date_start
         et = event.date_end
         if event.repeat_type == RepeatType.ROTATION:
-            start_time = event.date_start_datetime.strftime(DATE_FORMAT)
-            end_time = event.date_end_datetime.strftime(DATE_FORMAT)
+            start_time = event.next_appearance[0].strftime(DATE_FORMAT)
+            end_time = event.next_appearance[1].strftime(DATE_FORMAT)
             starts_when = event.next_appearance[0] - datetime.datetime.now(tz=pytz.utc)
             ends_when = event.next_appearance[1] - datetime.datetime.now(tz=pytz.utc)
         else:
@@ -396,7 +396,7 @@ def format_event_embed(event: Event) -> discord.Embed:
     if event.cost_unlock or event.notes:
         embed.add_field(
             name="Misc. Details",
-            value=f"{event.cost_unlock}\n{event.notes}",
+            value="\n".join(filter(None, (event.cost_unlock, event.notes))),
             inline=False,
         )
     return embed
