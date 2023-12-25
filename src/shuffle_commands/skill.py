@@ -1,7 +1,5 @@
 from typing import Any
 
-import discord
-
 import db
 import embed_formatters
 import settings
@@ -19,7 +17,7 @@ async def skill(context: KoduckContext, *args: str, **kwargs: Any) -> Payload | 
     query_skill = await lookup_skill(context, _query=args[0])
     if not query_skill:
         print("Unrecognized Skill")
-        return
+        return Payload()
 
     # retrieve data
     skill_ = db.query_skill(query_skill)
@@ -31,11 +29,11 @@ async def skill(context: KoduckContext, *args: str, **kwargs: Any) -> Payload | 
 
 async def skill_with_pokemon(
     context: KoduckContext, *args: str, **kwargs: Any
-) -> discord.Message | None:
+) -> Payload:
     use_emojis = kwargs.get("useemojis", False)
 
     if not args:
-        return await context.send_message(content=settings.message_skill_no_param)
+        return Payload(content=settings.message_skill_no_param)
 
     query_skill = args[0]
 
@@ -43,12 +41,12 @@ async def skill_with_pokemon(
     query_skill = await lookup_skill(context, _query=query_skill)
     if not query_skill:
         print("Unrecognized Skill")
-        return
+        return Payload()
 
     # retrieve skill data
     skill_ = db.query_skill(query_skill)
     if not skill_:
-        return await context.send_message(
+        return Payload(
             content=settings.message_skill_no_result.format(query_skill),
         )
 
@@ -61,15 +59,14 @@ async def skill_with_pokemon(
         farmable = Param.INCLUDE
     if "!farmable" in args:
         farmable = Param.EXCLUDE
-    if "?farmable" in args:
-        #! double check again the meaning of this
+    if "?farmable" in args:  # ? default behaviour, should get deprecated
         farmable = Param.IGNORE
     if "farmable" in kwargs:
         if kwargs["farmable"] == "yes":
             farmable = Param.INCLUDE
         elif kwargs["farmable"] == "no":
             farmable = Param.EXCLUDE
-        elif kwargs["farmable"] == "both":
+        elif kwargs["farmable"] == "both":  # ? default behaviour, should get deprecated
             farmable = Param.IGNORE
 
     ss_filter = Param.IGNORE
@@ -153,19 +150,19 @@ async def skill_with_pokemon(
         field_value = pokemon_filter_results_to_string(buckets, use_emojis)
 
     field_name = (
-        "Pokemon with this skill",
-        f" ({query_string})" if query_string else "",
-        f" sorted by {sortby_string}" if sortby_string else "",
+        "Pokemon with this skill"
+        + (f" ({query_string})" if query_string else "")
+        + (f" sorted by {sortby_string}" if sortby_string else "")
     )
 
     embed = embed_formatters.format_skill_embed(skill_)
     embed.add_field(name=field_name, value=field_value)
 
-    return await context.send_message(embed=embed)
+    return Payload(embed=embed)
 
 
 async def skill_with_pokemon_with_emojis(
     context: KoduckContext, *args: str, **kwargs: Any
-) -> discord.Message | None:
+) -> Payload:
     kwargs["useemojis"] = True
     return await skill_with_pokemon(context, *args, **kwargs)

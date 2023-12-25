@@ -75,7 +75,7 @@ def format_skill_embed(skill: Skill) -> discord.Embed:
             stats += (
                 "**SL{} Bonus**: +{:0.0f}% ({:0.0f}% / {:0.0f}% / {:0.0f}%)\n".format(
                     i,
-                    skill.bonus[0],
+                    skill.bonus[i-2],
                     min(100, skill.rates[0] + bonus) if skill.rates[0] else 0,
                     min(100, skill.rates[1] + bonus) if skill.rates[1] else 0,
                     min(100, skill.rates[2] + bonus) if skill.rates[2] else 0,
@@ -92,7 +92,7 @@ def format_skill_embed(skill: Skill) -> discord.Embed:
                 f"**SL{i} Bonus**: +{bonus:0.2f} (x{skill.multiplier+bonus:0.2f})\n"
             )
 
-    stats += "**SP Requirements**: {} => {} => {} => {} (Total: {})\n".format(
+    stats += "**SP Requirements**: {} => {} => {} => {} (Total: {})".format(
         *skill.sp_cost_partial
     )
 
