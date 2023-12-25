@@ -113,3 +113,13 @@ EB_REWARDS_EMBEDS = list(
 @pytest.fixture(params=enumerate(EB_REWARDS_EMBEDS, 1))
 def eb_rewards_embed(request: pytest.FixtureRequest) -> tuple[int, discord.Embed]:
     return request.param
+
+
+EB_DETAILS_EMBEDS = list(
+    map(parse_embed, import_json_asset(ASSETS_PATH / "eb_details_embeds.json"))
+)
+
+
+@pytest.fixture(params=enumerate(EB_DETAILS_EMBEDS, 1))
+def eb_details_embed(request: pytest.FixtureRequest) -> tuple[int, discord.Embed]:
+    return request.param

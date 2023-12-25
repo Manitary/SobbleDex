@@ -14,9 +14,7 @@ from .lookup import lookup_pokemon
 
 
 @allow_space_delimiter()
-async def eb_details(
-    context: KoduckContext, *args: str, **kwargs: Any
-) -> discord.Message | Payload | None:
+async def eb_details(context: KoduckContext, *args: str, **kwargs: Any) -> Payload:
     assert context.koduck
     assert context.message
     if not args or args[0].isdigit():
@@ -27,36 +25,29 @@ async def eb_details(
     if len(args) >= 2:
         query_level = args[1]
         try:
-            if int(query_level) <= 0:
-                return await context.send_message(
-                    content=settings.message_eb_invalid_param,
-                )
             query_level = int(query_level)
-        except ValueError:
-            return await context.send_message(
-                content=settings.message_eb_invalid_param,
-            )
+            assert query_level > 0
+        except (ValueError, AssertionError):
+            return Payload(content=settings.message_eb_invalid_param)
 
     # parse params
     query_pokemon = await lookup_pokemon(context, _query=args[0])
     if not query_pokemon:
         print("Unrecognized Pokemon")
-        return
+        return Payload()
 
     # verify that queried pokemon is in EB table
     eb_details_2 = db.query_eb_pokemon(query_pokemon)
     if not eb_details_2:
-        return await context.send_message(
-            content=settings.message_eb_no_result.format(query_pokemon),
-        )
+        return Payload(content=settings.message_eb_no_result.format(query_pokemon))
 
-    # optional level param which will return a stage embed instead
-    if query_level <= 0:
-        return await context.send_message(
-            embed=embed_formatters.format_eb_details_embed(eb_details_2),
-        )
+    # no level param = return the eb info embed
+    if not query_level:
+        return Payload(embed=embed_formatters.format_eb_details_embed(eb_details_2))
 
+    # optional level param = return a stage embed
     leg = next(x for x in eb_details_2 if x.end_level < 0 or x.end_level > query_level)
+
     # extra string to show level range of this eb stage
     if leg.start_level == leg.end_level - 1:
         level_range = f" (Level {leg.start_level})"
@@ -75,7 +66,9 @@ async def eb_details(
     eb_reward = ""
     for entry in _eb_rewards:
         if entry.level == query_level:
-            eb_reward = f"[{entry.reward}] x{entry.amount} {entry.alternative}"
+            eb_reward = f"[{entry.reward}] x{entry.amount}" + (
+                f" {entry.alternative}" if entry.alternative else ""
+            )
             break
 
     user_id = context.message.author.id
@@ -83,11 +76,11 @@ async def eb_details(
     query_history[-1] = UserQuery(QueryType.STAGE, (f"s{eb_stage.id}",), kwargs)
 
     if eb_starting_board:
-        return await context.send_message(
-            embed=embed_formatters.format_starting_board_embed(eb_stage),
-        )
+        # ! can this ever be reached?
+        # (i.e. how do you pass asking for just the starting board to an eb?)
+        return Payload(embed=embed_formatters.format_starting_board_embed(eb_stage))
 
-    return await context.send_message(
+    return Payload(
         embed=embed_formatters.format_stage_embed(
             eb_stage,
             eb_data=(
@@ -103,14 +96,14 @@ async def eb_details(
 
 async def eb_details_shorthand(
     context: KoduckContext, *args: str, **kwargs: Any
-) -> discord.Message | Payload | None:
+) -> Payload:
     kwargs["shorthand"] = True
-    return await eb_details(context, *args, **kwargs)
+    payload = await eb_details(context, *args, **kwargs)
+    assert isinstance(payload, dict)
+    return payload
 
 
-async def eb_rewards(
-    context: KoduckContext, *args: str
-) -> discord.Message | Payload | None:
+async def eb_rewards(context: KoduckContext, *args: str) -> Payload:
     if not args:
         query_pokemon = utils.current_eb_pokemon()
     else:
