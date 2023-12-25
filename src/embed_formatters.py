@@ -405,7 +405,8 @@ def format_event_embed(event: Event) -> discord.Embed:
 def format_eb_rewards_embed(rewards: Sequence[EBReward]) -> discord.Embed:
     pokemon = rewards[0].pokemon
     stats = "\n".join(
-        f"Level {r.level} reward: {f'[{r.reward}]'} x{r.amount} {r.alternative}"
+        f"Level {r.level} reward: {f'[{r.reward}]'} x{r.amount}"
+        + (f" {r.alternative}" if r.alternative else "")
         for r in rewards
     )
     embed = discord.Embed(

@@ -1,7 +1,7 @@
 import json
 import sqlite3
 from pathlib import Path
-from typing import Any, Awaitable, Callable, Iterator, TypedDict
+from typing import Any, Awaitable, Callable, Iterator, NotRequired, TypedDict
 
 import discord
 import pytest
@@ -76,15 +76,21 @@ class EmbedField(TypedDict):
 
 class EmbedDict(TypedDict):
     title: str
-    color: str
-    fields: list[EmbedField]
+    color: str | int
+    description: NotRequired[str]
+    fields: NotRequired[list[EmbedField]]
 
 
 def parse_embed(embed_dict: EmbedDict) -> discord.Embed:
+    colour = embed_dict["color"]
+    if isinstance(colour, str):
+        colour = int(colour[2:], 16)
     embed = discord.Embed(
-        title=embed_dict["title"], color=int(embed_dict["color"][2:], 16)
+        title=embed_dict["title"],
+        color=colour,
+        description=embed_dict.get("description", None),
     )
-    for field in embed_dict["fields"]:
+    for field in embed_dict.get("fields", []):
         embed.add_field(**field)
     return embed
 
@@ -96,4 +102,14 @@ WEEK_EMBEDS = list(
 
 @pytest.fixture(params=enumerate(WEEK_EMBEDS, 1))
 def week_embed(request: pytest.FixtureRequest) -> tuple[int, discord.Embed]:
+    return request.param
+
+
+EB_REWARDS_EMBEDS = list(
+    map(parse_embed, import_json_asset(ASSETS_PATH / "eb_rewards_embeds.json"))
+)
+
+
+@pytest.fixture(params=enumerate(EB_REWARDS_EMBEDS, 1))
+def eb_rewards_embed(request: pytest.FixtureRequest) -> tuple[int, discord.Embed]:
     return request.param

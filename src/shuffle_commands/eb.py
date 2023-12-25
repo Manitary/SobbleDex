@@ -108,23 +108,22 @@ async def eb_details_shorthand(
     return await eb_details(context, *args, **kwargs)
 
 
-async def eb_rewards(context: KoduckContext, *args: str) -> discord.Message | None:
+async def eb_rewards(
+    context: KoduckContext, *args: str
+) -> discord.Message | Payload | None:
     if not args:
         query_pokemon = utils.current_eb_pokemon()
     else:
-        # parse params
         query_pokemon = await lookup_pokemon(context, _query=args[0])
-        if not query_pokemon:
-            print("Unrecognized Pokemon")
-            return
 
-    # retrieve data
+    if not query_pokemon:
+        print("Unrecognized Pokemon")
+        return Payload()
+
     _eb_rewards = db.query_eb_rewards_pokemon(query_pokemon)
     if not _eb_rewards:
-        return await context.send_message(
+        return Payload(
             content=settings.message_eb_rewards_no_result.format(query_pokemon),
         )
 
-    return await context.send_message(
-        embed=embed_formatters.format_eb_rewards_embed(_eb_rewards),
-    )
+    return Payload(embed=embed_formatters.format_eb_rewards_embed(_eb_rewards))
