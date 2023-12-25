@@ -9,6 +9,7 @@ from helper_models import MockAuthor, MockMessage
 
 import db
 from koduck import Koduck, KoduckContext
+from models import QueryType, UserQuery
 
 pytest.register_assert_rewrite("helper")
 
@@ -41,6 +42,13 @@ def context_with_fake_message(koduck_instance: Koduck) -> Iterator[KoduckContext
     koduck_context.message = MockMessage(MockAuthor(1))
     yield koduck_context
 
+@pytest.fixture(scope="session")
+def context_with_fake_message_and_history(koduck_instance: Koduck) -> Iterator[KoduckContext]:
+    koduck_context = KoduckContext()
+    koduck_context.koduck = koduck_instance
+    koduck_context.message = MockMessage(MockAuthor(1))
+    koduck_context.koduck.query_history = {1: [UserQuery(QueryType.ANY, tuple())]}
+    yield koduck_context
 
 @pytest.fixture(scope="session")
 def context_with_emoji(koduck_instance: Koduck) -> Iterator[KoduckContext]:

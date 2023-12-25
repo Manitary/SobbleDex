@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Awaitable, Callable
 
 import discord
 
@@ -14,7 +14,12 @@ from .lookup import choice_react, lookup_pokemon
 
 
 async def stage(
-    context: KoduckContext, *args: str, **kwargs: Any
+    context: KoduckContext,
+    *args: str,
+    choice_selector: Callable[
+        [KoduckContext, int, str], Awaitable[int | None]
+    ] = choice_react,
+    **kwargs: Any,
 ) -> discord.Message | Payload | None:
     assert context.koduck
     assert context.message
@@ -23,7 +28,7 @@ async def stage(
     user_query_history[-1] = UserQuery(QueryType.ANY, args=args, kwargs=kwargs)
 
     if not args:
-        return await context.send_message(content=settings.message_stage_no_param)
+        return Payload(content=settings.message_stage_no_param)
 
     # allow space delimited parameters
     if len(args) == 1:
@@ -53,14 +58,9 @@ async def stage(
     if len(args) >= 2:
         try:
             result_number = int(args[1])
-            if result_number <= 0:
-                return await context.send_message(
-                    content=settings.message_stage_invalid_param,
-                )
-        except ValueError:
-            return await context.send_message(
-                content=settings.message_stage_invalid_param,
-            )
+            assert result_number > 0
+        except (ValueError, AssertionError):
+            return Payload(content=settings.message_stage_invalid_param)
 
     results: list[Stage] = []
     # retrieve data
@@ -69,7 +69,7 @@ async def stage(
             candidate_stage = db.query_stage_by_index(stage_index, stage_type)
             results.append(candidate_stage)
         except ValueError:
-            return await context.send_message(
+            return Payload(
                 content=settings.message_stage_main_invalid_param.format(
                     settings.main_stages_min_index, settings.main_stages_max_index
                 ),
@@ -79,7 +79,7 @@ async def stage(
             candidate_stage = db.query_stage_by_index(stage_index, stage_type)
             results.append(candidate_stage)
         except ValueError:
-            return await context.send_message(
+            return Payload(
                 content=settings.message_stage_expert_invalid_param.format(
                     settings.expert_stages_min_index + 1,
                     settings.expert_stages_max_index + 1,
@@ -90,7 +90,7 @@ async def stage(
             candidate_stage = db.query_stage_by_index(stage_index, stage_type)
             results.append(candidate_stage)
         except ValueError:
-            return await context.send_message(
+            return Payload(
                 content=settings.message_stage_event_invalid_param.format(
                     settings.event_stages_min_index, settings.event_stages_max_index
                 ),
@@ -99,11 +99,13 @@ async def stage(
         query_pokemon = await lookup_pokemon(context, _query=query_pokemon)
         if not query_pokemon:
             print("Unrecognized Pokemon")
-            return
+            return Payload()
 
         # redirect to EB if queried pokemon is in EB table
         if db.query_eb_pokemon(query_pokemon):
+            # ? no giving the option to select a specific stage?
             return await eb_details(context, *[query_pokemon], **kwargs)
+
         results = (
             list(db.query_stage_by_pokemon(query_pokemon, StageType.MAIN))
             + list(db.query_stage_by_pokemon(query_pokemon, StageType.EXPERT))
@@ -111,31 +113,25 @@ async def stage(
         )
 
     if not results:
-        return await context.send_message(
-            content=settings.message_stage_no_result.format(query_pokemon),
-        )
+        return Payload(content=settings.message_stage_no_result.format(query_pokemon))
 
     # if a result number is given
     if result_number:
+        if not 1 <= result_number <= len(results):
+            return Payload(
+                content=settings.message_stage_result_error.format(len(results))
+            )
+        res = results[result_number - 1]
         user_query_history[-1] = UserQuery(
-            QueryType.STAGE, args=(results[result_number - 1].string_id,), kwargs=kwargs
+            QueryType.STAGE, args=(res.string_id,), kwargs=kwargs
         )
-        try:
-            if stage_starting_board:
-                return await context.send_message(
-                    embed=embed_formatters.format_starting_board_embed(
-                        results[result_number - 1]
-                    ),
-                )
+        if stage_starting_board:
             return await context.send_message(
-                embed=embed_formatters.format_stage_embed(
-                    results[result_number - 1], shorthand=shorthand
-                ),
+                embed=embed_formatters.format_starting_board_embed(res),
             )
-        except IndexError:
-            return await context.send_message(
-                content=settings.message_stage_result_error.format(len(results)),
-            )
+        return Payload(
+            embed=embed_formatters.format_stage_embed(res, shorthand=shorthand),
+        )
 
     if len(results) == 1:
         user_query_history[-1] = UserQuery(
@@ -145,8 +141,8 @@ async def stage(
             return await context.send_message(
                 embed=embed_formatters.format_starting_board_embed(results[0]),
             )
-        return await context.send_message(
-            embed=embed_formatters.format_stage_embed(results[0], shorthand=shorthand),
+        return Payload(
+            embed=embed_formatters.format_stage_embed(results[0], shorthand=shorthand)
         )
 
     indices: list[str] = []
@@ -156,13 +152,13 @@ async def stage(
         if i < settings.choice_react_limit:
             output_string += f"\n{constants.number_emojis[i + 1]} {indices[i]}"
 
-    choice = await choice_react(
+    choice: int | None = await choice_selector(
         context,
         min(len(indices), settings.choice_react_limit),
         settings.message_stage_multiple_results + output_string,
     )
     if choice is None:
-        return
+        return Payload()
     user_query_history[-1] = UserQuery(
         QueryType.STAGE, args=(results[choice].string_id,), kwargs=kwargs
     )
@@ -170,8 +166,8 @@ async def stage(
         return await context.send_message(
             embed=embed_formatters.format_starting_board_embed(results[choice]),
         )
-    return await context.send_message(
-        embed=embed_formatters.format_stage_embed(results[choice], shorthand=shorthand),
+    return Payload(
+        embed=embed_formatters.format_stage_embed(results[choice], shorthand=shorthand)
     )
 
 
