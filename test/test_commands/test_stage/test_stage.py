@@ -7,8 +7,7 @@ from helper.helper_functions import check_payload_equal
 import shuffle_commands.lookup
 from koduck import KoduckContext
 from models import Payload
-from shuffle_commands import stage
-from shuffle_commands.eb import eb_details
+from shuffle_commands import stage, stage_shorthand
 
 
 @pytest.mark.asyncio
@@ -380,4 +379,50 @@ async def test_stage_eb_pokemon_with_args(
     )
     assert isinstance(real, dict)
     assert isinstance(expected, dict)
+    check_payload_equal(real, expected)
+
+
+@pytest.mark.asyncio
+async def test_stage_shorthand_main_by_id(
+    context_with_fake_message_and_history: KoduckContext,
+) -> None:
+    real = await stage_shorthand(context_with_fake_message_and_history, "1")
+    expected = Payload(
+        embed=discord.Embed(
+            title="Main Stage 1: Espurr [Espurr]",
+            colour=16275592,
+            description=(
+                "**3DS HP**: 200 (UX: 600)\n**Mobile HP**: 600 (UX: 1800)\n"
+                "**Moves**: 8\n**Damage/move**: 25 ([M+5] 16)\n"
+                "**Experience**: 8\n**Catchability**: 75% + 5%/move\n"
+                "**Default Supports**: [Pidgey][Happiny][Azurill][Pichu]\n"
+                "**Rank Requirements**: 4 / 3 / 1\n**Attempt Cost**: [Heart] x1\n"
+                "**Items**: [M+5][EXP][MS][C-1]"
+            ),
+        )
+    )
+    assert isinstance(real, dict)
+    check_payload_equal(real, expected)
+
+
+@pytest.mark.asyncio
+async def test_stage_shorthand_multiple_choices_pre_select_with_space(
+    context_with_fake_message_and_history: KoduckContext,
+) -> None:
+    real = await stage_shorthand(context_with_fake_message_and_history, "blissey 3")
+    expected = Payload(
+        embed=discord.Embed(
+            title="Main Stage 645: Blissey [Blissey]",
+            colour=11053176,
+            description=(
+                "**HP**: 22743 (UX: 68229)\n**Moves**: 10\n**Damage/move**: 2275 ([M+5] 1517)\n"
+                "**Experience**: 10\n**Catchability**: 6% + 4%/move\n"
+                "**Default Supports**: [Pidgey][Happiny][Azurill][Pichu]\n"
+                "**Rank Requirements**: 5 / 2 / 1\n**Attempt Cost**: [Heart] x1\n"
+                "**Drop Items**: [PSB] / [PSB] / [PSB]\n**Drop Rates**: 25.0% / 3.125% / 1.5625%\n"
+                "**Items**: [M+5][EXP][MS][C-1][DD]"
+            ),
+        )
+    )
+    assert isinstance(real, dict)
     check_payload_equal(real, expected)

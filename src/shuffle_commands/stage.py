@@ -20,7 +20,7 @@ async def stage(
         [KoduckContext, int, str], Awaitable[int | None]
     ] = choice_react,
     **kwargs: Any,
-) -> discord.Message | Payload | None:
+) -> Payload:
     assert context.koduck
     assert context.message
     user_query_history = context.koduck.query_history[context.message.author.id]
@@ -104,7 +104,9 @@ async def stage(
         # redirect to EB if queried pokemon is in EB table
         if db.query_eb_pokemon(query_pokemon):
             # ? no giving the option to select a specific stage?
-            return await eb_details(context, *[query_pokemon], **kwargs)
+            payload = await eb_details(context, *[query_pokemon], **kwargs)
+            assert isinstance(payload, dict)
+            return payload
 
         results = (
             list(db.query_stage_by_pokemon(query_pokemon, StageType.MAIN))
@@ -126,9 +128,7 @@ async def stage(
             QueryType.STAGE, args=(res.string_id,), kwargs=kwargs
         )
         if stage_starting_board:
-            return await context.send_message(
-                embed=embed_formatters.format_starting_board_embed(res),
-            )
+            return Payload(embed=embed_formatters.format_starting_board_embed(res))
         return Payload(
             embed=embed_formatters.format_stage_embed(res, shorthand=shorthand),
         )
@@ -138,8 +138,8 @@ async def stage(
             QueryType.STAGE, args=(results[0].string_id,), kwargs=kwargs
         )
         if stage_starting_board:
-            return await context.send_message(
-                embed=embed_formatters.format_starting_board_embed(results[0]),
+            return Payload(
+                embed=embed_formatters.format_starting_board_embed(results[0])
             )
         return Payload(
             embed=embed_formatters.format_stage_embed(results[0], shorthand=shorthand)
@@ -163,7 +163,7 @@ async def stage(
         QueryType.STAGE, args=(results[choice].string_id,), kwargs=kwargs
     )
     if stage_starting_board:
-        return await context.send_message(
+        return Payload(
             embed=embed_formatters.format_starting_board_embed(results[choice]),
         )
     return Payload(
@@ -171,16 +171,12 @@ async def stage(
     )
 
 
-async def stage_shorthand(
-    context: KoduckContext, *args: str, **kwargs: Any
-) -> discord.Message | Payload | None:
+async def stage_shorthand(context: KoduckContext, *args: str, **kwargs: Any) -> Payload:
     kwargs["shorthand"] = True
     return await stage(context, *args, **kwargs)
 
 
-async def starting_board(
-    context: KoduckContext, *args: str, **kwargs: Any
-) -> discord.Message | Payload | None:
+async def starting_board(context: KoduckContext, *args: str, **kwargs: Any) -> Payload:
     kwargs["startingboard"] = True
     return await stage(context, *args, **kwargs)
 
