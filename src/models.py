@@ -3,8 +3,8 @@ import re
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
 from typing import Any, Callable, Self, TypedDict
-import discord
 
+import discord
 import pytz
 
 RE_MOVES_EXP = re.compile(r"(\d+) \(Mobile: (\d+)\)")
@@ -492,8 +492,8 @@ class SMReward:
 class Reminder:
     def __init__(self, user_id: int, weeks: str, pokemon: str) -> None:
         self.user_id = user_id
-        self.weeks = list(map(int, weeks.split(", ")))
-        self.pokemon = pokemon.split(", ")
+        self.weeks = list(map(int, filter(None, weeks.split(", ")))) if weeks else []
+        self.pokemon = pokemon.split(", ") if pokemon else []
 
     def remove_week(self, week: int) -> None:
         self.weeks.remove(week)

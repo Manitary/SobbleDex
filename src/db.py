@@ -549,7 +549,9 @@ def query_type(t: PokemonType) -> TypeInfo:
 def add_reminder_week(user_id: int, week: int) -> None:
     shuffle_connection.execute(
         """
-        UPDATE reminders
+        INSERT INTO reminders (user_id, weeks)
+        VALUES (:user_id, :week)
+        ON CONFLICT DO UPDATE
         SET weeks = weeks || ", " || :week
         WHERE user_id = :user_id
         """,
@@ -561,7 +563,9 @@ def add_reminder_week(user_id: int, week: int) -> None:
 def add_reminder_pokemon(user_id: int, pokemon: str) -> None:
     shuffle_connection.execute(
         """
-        UPDATE reminders
+        INSERT INTO reminders (user_id, pokemon)
+        VALUES (:user_id, :pokemon)
+        ON CONFLICT DO UPDATE
         SET pokemon = pokemon || ", " || :pokemon
         WHERE user_id = :user_id
         """,

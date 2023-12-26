@@ -3,12 +3,14 @@ import discord
 import db
 import settings
 from koduck import KoduckContext
-from models import Reminder
+from models import Payload, Reminder
 
 from .lookup import lookup_pokemon
 
 
-async def remind_me(context: KoduckContext, *args: str) -> discord.Message | None:
+async def remind_me(
+    context: KoduckContext, *args: str
+) -> discord.Message | Payload | None:
     assert context.message
     assert context.message.author
     user_id = context.message.author.id
@@ -17,10 +19,10 @@ async def remind_me(context: KoduckContext, *args: str) -> discord.Message | Non
         user_reminders = Reminder(user_id, "", "")
 
     if not args:
-        return await context.send_message(
+        return Payload(
             content=settings.message_remind_me_status.format(
-                user_reminders.weeks, user_reminders.pokemon
-            ),
+                user_reminders.weeks_str, user_reminders.pokemon_str
+            )
         )
 
     if args[0].isdigit():
@@ -28,31 +30,28 @@ async def remind_me(context: KoduckContext, *args: str) -> discord.Message | Non
             query_week = int(args[0])
             assert 1 <= query_week <= settings.num_weeks
         except (ValueError, AssertionError):
-            return await context.send_message(
+            return Payload(
                 content=settings.message_week_invalid_param.format(
                     settings.num_weeks, settings.num_weeks
-                ),
+                )
             )
         if query_week in user_reminders.weeks:
-            return await context.send_message(
-                content=settings.message_remind_me_week_exists,
-            )
+            return Payload(content=settings.message_remind_me_week_exists)
         db.add_reminder_week(user_id, query_week)
-        return await context.send_message(
-            content=settings.message_remind_me_week_success.format(query_week),
+        return Payload(
+            content=settings.message_remind_me_week_success.format(query_week)
         )
 
     query_pokemon = await lookup_pokemon(context, _query=args[0])
     if not query_pokemon:
         print("Unrecognized Pokemon")
-        return
+        return Payload()
 
     if query_pokemon in user_reminders.pokemon:
-        return await context.send_message(
-            content=settings.message_remind_me_pokemon_exists,
-        )
+        return Payload(content=settings.message_remind_me_pokemon_exists)
+
     db.add_reminder_pokemon(user_id, query_pokemon)
-    return await context.send_message(
+    return Payload(
         content=settings.message_remind_me_pokemon_success.format(query_pokemon),
     )
 

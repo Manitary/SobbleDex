@@ -294,3 +294,10 @@ CREATE TABLE "events" (
 	"notes" TEXT,
 	"encounter_rates" TEXT	
 );
+
+CREATE TABLE "reminders" (
+	"id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	"user_id" INT NOT NULL UNIQUE,
+	"weeks" TEXT,
+	"pokemon" TEXT
+);
