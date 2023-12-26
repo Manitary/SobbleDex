@@ -8,7 +8,7 @@ from shuffle_commands import add_alias
 
 
 @pytest.mark.asyncio
-async def test_fail_no_args(patch_shuffle_db: None, context: KoduckContext) -> None:
+async def test_fail_no_args(context: KoduckContext) -> None:
     real = await add_alias(context)
     expected = Payload(content="I need at least two parameters: original, alias(es)")
     assert isinstance(real, dict)
@@ -16,7 +16,7 @@ async def test_fail_no_args(patch_shuffle_db: None, context: KoduckContext) -> N
 
 
 @pytest.mark.asyncio
-async def test_fail_one_arg(patch_shuffle_db: None, context: KoduckContext) -> None:
+async def test_fail_one_arg(context: KoduckContext) -> None:
     real = await add_alias(context, "test")
     expected = Payload(content="I need at least two parameters: original, alias(es)")
     assert isinstance(real, dict)
@@ -24,9 +24,7 @@ async def test_fail_one_arg(patch_shuffle_db: None, context: KoduckContext) -> N
 
 
 @pytest.mark.asyncio
-async def test_fail_too_many_args(
-    patch_shuffle_db: None, context: KoduckContext
-) -> None:
+async def test_fail_too_many_args(context: KoduckContext) -> None:
     real = await add_alias(context, *("test",) * 12)
     expected = Payload(content="Please only give me up to 10 aliases to add!")
     assert isinstance(real, dict)
@@ -34,9 +32,7 @@ async def test_fail_too_many_args(
 
 
 @pytest.mark.asyncio
-async def test_empty_db_add_one_alias_success(
-    patch_shuffle_db: None, context: KoduckContext
-) -> None:
+async def test_empty_db_add_one_alias_success(context: KoduckContext) -> None:
     real = await add_alias(context, "original", "alias")
     expected_message = Payload(
         content="Added an alias: 'original' is now also known as 'alias'"
@@ -52,9 +48,7 @@ async def test_empty_db_add_one_alias_success(
 
 
 @pytest.mark.asyncio
-async def test_empty_db_add_two_aliases_success(
-    patch_shuffle_db: None, context: KoduckContext
-) -> None:
+async def test_empty_db_add_two_aliases_success(context: KoduckContext) -> None:
     real = await add_alias(context, "original", "alias1", "alias2")
     expected_message = Payload(
         content=(
@@ -75,7 +69,7 @@ async def test_empty_db_add_two_aliases_success(
 
 @pytest.mark.asyncio
 async def test_empty_db_add_one_good_alias_one_bad_alias(
-    patch_shuffle_db: None, context: KoduckContext
+    context: KoduckContext,
 ) -> None:
     real = await add_alias(context, "original", "alias1", "<@!1234>")
     expected_message = Payload(
@@ -96,7 +90,7 @@ async def test_empty_db_add_one_good_alias_one_bad_alias(
 
 @pytest.mark.asyncio
 async def test_empty_db_add_one_good_alias_one_duplicate_alias(
-    patch_shuffle_db: None, context: KoduckContext
+    context: KoduckContext,
 ) -> None:
     real = await add_alias(context, "original", "alias1", "alias1")
     expected_message = Payload(
@@ -114,7 +108,7 @@ async def test_empty_db_add_one_good_alias_one_duplicate_alias(
 
 @pytest.mark.asyncio
 async def test_db_add_one_good_alias_one_duplicate_alias(
-    patch_shuffle_db: None, context: KoduckContext
+    context: KoduckContext,
 ) -> None:
     db.shuffle_connection.execute(
         "INSERT INTO aliases (alias, original_name) VALUES ('old_alias', 'original')"
@@ -143,9 +137,7 @@ async def test_db_add_one_good_alias_one_duplicate_alias(
 
 
 @pytest.mark.asyncio
-async def test_empty_db_add_empty_aliases(
-    patch_shuffle_db: None, context: KoduckContext
-) -> None:
+async def test_empty_db_add_empty_aliases(context: KoduckContext) -> None:
     real = await add_alias(context, "original", "", "", "", "")
     expected_message = Payload(content="No valid alias provided")
     expected_rows = db.shuffle_connection.execute("SELECT * FROM aliases").fetchall()
@@ -157,7 +149,7 @@ async def test_empty_db_add_empty_aliases(
 
 @pytest.mark.asyncio
 async def test_db_add_valid_duplicate_bad_empty_aliases_scrambled_order(
-    patch_shuffle_db: None, context: KoduckContext
+    context: KoduckContext,
 ) -> None:
     db.shuffle_connection.execute(
         "INSERT INTO aliases (alias, original_name) VALUES ('alias', 'original')"

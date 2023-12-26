@@ -8,7 +8,7 @@ from shuffle_commands import remove_alias
 
 
 @pytest.mark.asyncio
-async def test_no_arg(patch_shuffle_db: None, context: KoduckContext) -> None:
+async def test_no_arg(context: KoduckContext) -> None:
     all_aliases = db.shuffle_connection.execute("SELECT * FROM aliases").fetchall()
 
     real = await remove_alias(context)
@@ -23,7 +23,7 @@ async def test_no_arg(patch_shuffle_db: None, context: KoduckContext) -> None:
 
 
 @pytest.mark.asyncio
-async def test_too_many_args(patch_shuffle_db: None, context: KoduckContext) -> None:
+async def test_too_many_args(context: KoduckContext) -> None:
     all_aliases = db.shuffle_connection.execute("SELECT * FROM aliases").fetchall()
 
     real = await remove_alias(context, *("test",) * 11)
@@ -40,7 +40,7 @@ async def test_too_many_args(patch_shuffle_db: None, context: KoduckContext) -> 
 
 
 @pytest.mark.asyncio
-async def test_remove_one_alias(patch_shuffle_db: None, context: KoduckContext) -> None:
+async def test_remove_one_alias(context: KoduckContext) -> None:
     db.shuffle_connection.execute(
         "INSERT INTO aliases (alias, original_name) VALUES ('alias', 'original')"
     )
@@ -62,9 +62,7 @@ async def test_remove_one_alias(patch_shuffle_db: None, context: KoduckContext) 
 
 
 @pytest.mark.asyncio
-async def test_remove_one_alias_not_exist(
-    patch_shuffle_db: None, context: KoduckContext
-) -> None:
+async def test_remove_one_alias_not_exist(context: KoduckContext) -> None:
     all_aliases = db.shuffle_connection.execute("SELECT * FROM aliases").fetchall()
     real = await remove_alias(context, "alias1")
     expected_message = Payload(
@@ -80,9 +78,7 @@ async def test_remove_one_alias_not_exist(
 
 
 @pytest.mark.asyncio
-async def test_remove_one_alias_success_one_not_exist(
-    patch_shuffle_db: None, context: KoduckContext
-) -> None:
+async def test_remove_one_alias_success_one_not_exist(context: KoduckContext) -> None:
     db.shuffle_connection.execute(
         "INSERT INTO aliases (alias, original_name) VALUES ('alias', 'original')"
     )
@@ -108,7 +104,7 @@ async def test_remove_one_alias_success_one_not_exist(
 
 @pytest.mark.asyncio
 async def test_remove_one_alias_success_one_not_exist_with_duplicates(
-    patch_shuffle_db: None, context: KoduckContext
+    context: KoduckContext,
 ) -> None:
     db.shuffle_connection.execute(
         "INSERT INTO aliases (alias, original_name) VALUES ('alias', 'original')"

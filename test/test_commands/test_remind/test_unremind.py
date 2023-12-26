@@ -10,9 +10,7 @@ from shuffle_commands.remind import unremind_me
 
 
 @pytest.mark.asyncio
-async def test_unremind_no_arg(
-    patch_shuffle_db_wipe_reminders: None, context_with_fake_message: KoduckContext
-) -> None:
+async def test_unremind_no_arg(context_with_fake_message: KoduckContext) -> None:
     real = await unremind_me(context_with_fake_message)
     expected_message = Payload(content="I need a week number or a Pokémon name")
     table_rows = db.shuffle_connection.execute("SELECT id FROM reminders").fetchall()
@@ -25,7 +23,6 @@ async def test_unremind_no_arg(
 @pytest.mark.parametrize("week_num", (0, 25))
 @pytest.mark.asyncio
 async def test_unremind_invalid_week_num(
-    patch_shuffle_db_wipe_reminders: None,
     context_with_fake_message: KoduckContext,
     week_num: int,
 ) -> None:
@@ -45,7 +42,7 @@ async def test_unremind_invalid_week_num(
 
 @pytest.mark.asyncio
 async def test_remind_week_user_not_in_db(
-    patch_shuffle_db_wipe_reminders: None, context_with_fake_message: KoduckContext
+    context_with_fake_message: KoduckContext,
 ) -> None:
     real = await unremind_me(context_with_fake_message, "2")
     expected = Payload(content="You aren’t signed up for this rotation week")
@@ -58,7 +55,7 @@ async def test_remind_week_user_not_in_db(
 
 @pytest.mark.asyncio
 async def test_remind_week_not_in_user_list(
-    patch_shuffle_db_wipe_reminders: None, context_with_fake_message: KoduckContext
+    context_with_fake_message: KoduckContext,
 ) -> None:
     db.shuffle_connection.execute(
         """INSERT INTO reminders (user_id, weeks, pokemon)
@@ -83,9 +80,7 @@ async def test_remind_week_not_in_user_list(
 
 
 @pytest.mark.asyncio
-async def test_unremind_week_in_db(
-    patch_shuffle_db_wipe_reminders: None, context_with_fake_message: KoduckContext
-) -> None:
+async def test_unremind_week_in_db(context_with_fake_message: KoduckContext) -> None:
     db.shuffle_connection.execute(
         """INSERT INTO reminders (user_id, weeks, pokemon)
         VALUES (1, "12, 2, 3, 22", "Dugtrio")"""
@@ -113,7 +108,6 @@ async def test_unremind_week_in_db(
 
 @pytest.mark.asyncio
 async def test_unremind_invalid_pokemon(
-    patch_shuffle_db_wipe_reminders: None,
     context_with_fake_message: KoduckContext,
     monkeypatch: pytest.MonkeyPatch,
     do_nothing: Awaitable[None],
@@ -129,9 +123,7 @@ async def test_unremind_invalid_pokemon(
 
 
 @pytest.mark.asyncio
-async def test_unremind_pokemon_in_db(
-    patch_shuffle_db_wipe_reminders: None, context_with_fake_message: KoduckContext
-) -> None:
+async def test_unremind_pokemon_in_db(context_with_fake_message: KoduckContext) -> None:
     db.shuffle_connection.execute(
         """INSERT INTO reminders (user_id, weeks, pokemon)
         VALUES (1, "1, 3, 4", "Giratina (Origin Forme), Latios")"""
@@ -160,7 +152,7 @@ async def test_unremind_pokemon_in_db(
 
 @pytest.mark.asyncio
 async def test_unremind_pokemon_user_not_in_db(
-    patch_shuffle_db_wipe_reminders: None, context_with_fake_message: KoduckContext
+    context_with_fake_message: KoduckContext,
 ) -> None:
     real = await unremind_me(context_with_fake_message, "giratinao")
     expected = Payload(content="You aren’t signed up for this Pokémon")
@@ -175,7 +167,7 @@ async def test_unremind_pokemon_user_not_in_db(
 
 @pytest.mark.asyncio
 async def test_unremind_pokemon_not_in_user_list(
-    patch_shuffle_db_wipe_reminders: None, context_with_fake_message: KoduckContext
+    context_with_fake_message: KoduckContext,
 ) -> None:
     db.shuffle_connection.execute(
         """INSERT INTO reminders (user_id, weeks, pokemon)

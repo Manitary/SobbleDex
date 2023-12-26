@@ -3,7 +3,7 @@ from typing import Awaitable
 
 import discord
 import pytest
-from conftest import WEEK_EMBEDS
+from assets import WEEK_EMBEDS
 from freezegun import freeze_time
 from helper.helper_functions import check_payload_equal
 

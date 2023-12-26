@@ -16,7 +16,7 @@ async def test_no_args(context: KoduckContext) -> None:
 
 
 @pytest.mark.asyncio
-async def test_no_alias(patch_shuffle_db: None, context: KoduckContext) -> None:
+async def test_no_alias(context: KoduckContext) -> None:
     real = await list_aliases(context, "flabebe")
     expected = Payload(content="There are currently no aliases assigned to this name")
     assert isinstance(real, dict)
@@ -24,9 +24,7 @@ async def test_no_alias(patch_shuffle_db: None, context: KoduckContext) -> None:
 
 
 @pytest.mark.asyncio
-async def test_alias_search_by_original_exists_one(
-    patch_shuffle_db: None, context: KoduckContext
-) -> None:
+async def test_alias_search_by_original_exists_one(context: KoduckContext) -> None:
     db.shuffle_connection.execute(
         "INSERT INTO aliases (alias, original_name) VALUES ('alias', 'original')"
     )
@@ -38,9 +36,7 @@ async def test_alias_search_by_original_exists_one(
 
 
 @pytest.mark.asyncio
-async def test_alias_search_by_original_exist_multiple(
-    patch_shuffle_db: None, context: KoduckContext
-) -> None:
+async def test_alias_search_by_original_exist_multiple(context: KoduckContext) -> None:
     db.shuffle_connection.executemany(
         "INSERT INTO aliases (alias, original_name) VALUES (:alias, 'original')",
         ({"alias": f"alias{i}"} for i in range(4, -1, -1)),
@@ -55,9 +51,7 @@ async def test_alias_search_by_original_exist_multiple(
 
 
 @pytest.mark.asyncio
-async def test_alias_search_by_original_non_ascii(
-    patch_shuffle_db: None, context: KoduckContext
-) -> None:
+async def test_alias_search_by_original_non_ascii(context: KoduckContext) -> None:
     db.shuffle_connection.execute(
         "INSERT INTO aliases (alias, original_name) VALUES ('flabebe', 'Flabébé')"
     )
@@ -69,9 +63,7 @@ async def test_alias_search_by_original_non_ascii(
 
 
 @pytest.mark.asyncio
-async def test_alias_search_by_alias(
-    patch_shuffle_db: None, context: KoduckContext
-) -> None:
+async def test_alias_search_by_alias(context: KoduckContext) -> None:
     db.shuffle_connection.execute(
         "INSERT INTO aliases (alias, original_name) VALUES ('flabebe', 'Flabébé')"
     )

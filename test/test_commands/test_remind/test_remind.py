@@ -11,7 +11,7 @@ from shuffle_commands.remind import remind_me
 
 @pytest.mark.asyncio
 async def test_remind_no_arg_no_db_entry(
-    patch_shuffle_db_wipe_reminders: None, context_with_fake_message: KoduckContext
+    context_with_fake_message: KoduckContext,
 ) -> None:
     real = await remind_me(context_with_fake_message)
     expected_message = Payload(
@@ -26,7 +26,7 @@ async def test_remind_no_arg_no_db_entry(
 
 @pytest.mark.asyncio
 async def test_remind_no_arg_with_db_entry(
-    patch_shuffle_db_wipe_reminders: None, context_with_fake_message: KoduckContext
+    context_with_fake_message: KoduckContext,
 ) -> None:
     db.shuffle_connection.execute(
         """INSERT INTO reminders (user_id, weeks, pokemon)
@@ -47,7 +47,6 @@ async def test_remind_no_arg_with_db_entry(
 @pytest.mark.parametrize("week_num", (0, 25))
 @pytest.mark.asyncio
 async def test_remind_invalid_week_num(
-    patch_shuffle_db_wipe_reminders: None,
     context_with_fake_message: KoduckContext,
     week_num: int,
 ) -> None:
@@ -66,9 +65,7 @@ async def test_remind_invalid_week_num(
 
 
 @pytest.mark.asyncio
-async def test_remind_week_num_in_db(
-    patch_shuffle_db_wipe_reminders: None, context_with_fake_message: KoduckContext
-) -> None:
+async def test_remind_week_num_in_db(context_with_fake_message: KoduckContext) -> None:
     db.add_reminder_week(1, 2)
     db.shuffle_connection.commit()
 
@@ -82,9 +79,7 @@ async def test_remind_week_num_in_db(
 
 
 @pytest.mark.asyncio
-async def test_remind_week_new_record(
-    patch_shuffle_db_wipe_reminders: None, context_with_fake_message: KoduckContext
-) -> None:
+async def test_remind_week_new_record(context_with_fake_message: KoduckContext) -> None:
     real = await remind_me(context_with_fake_message, "2")
     expected = Payload(
         content="Okay, you’re signed up to be reminded when rotation week 2 starts"
@@ -101,7 +96,7 @@ async def test_remind_week_new_record(
 
 @pytest.mark.asyncio
 async def test_remind_week_append_to_record(
-    patch_shuffle_db_wipe_reminders: None, context_with_fake_message: KoduckContext
+    context_with_fake_message: KoduckContext,
 ) -> None:
     db.add_reminder_week(1, 2)
     db.shuffle_connection.commit()
@@ -121,7 +116,6 @@ async def test_remind_week_append_to_record(
 
 @pytest.mark.asyncio
 async def test_remind_invalid_pokemon(
-    patch_shuffle_db_wipe_reminders: None,
     context_with_fake_message: KoduckContext,
     monkeypatch: pytest.MonkeyPatch,
     do_nothing: Awaitable[None],
@@ -137,9 +131,7 @@ async def test_remind_invalid_pokemon(
 
 
 @pytest.mark.asyncio
-async def test_remind_pokemon_in_db(
-    patch_shuffle_db_wipe_reminders: None, context_with_fake_message: KoduckContext
-) -> None:
+async def test_remind_pokemon_in_db(context_with_fake_message: KoduckContext) -> None:
     await remind_me(context_with_fake_message, "Giratina-O")
     real = await remind_me(context_with_fake_message, "giratinao")
     expected = Payload(content="You already signed up for this Pokémon")
@@ -160,7 +152,7 @@ async def test_remind_pokemon_in_db(
 
 @pytest.mark.asyncio
 async def test_remind_pokemon_new_record(
-    patch_shuffle_db_wipe_reminders: None, context_with_fake_message: KoduckContext
+    context_with_fake_message: KoduckContext,
 ) -> None:
     real = await remind_me(context_with_fake_message, "giratinao")
     expected = Payload(
@@ -186,7 +178,7 @@ async def test_remind_pokemon_new_record(
 
 @pytest.mark.asyncio
 async def test_remind_pokemon_append_to_record(
-    patch_shuffle_db_wipe_reminders: None, context_with_fake_message: KoduckContext
+    context_with_fake_message: KoduckContext,
 ) -> None:
     await remind_me(context_with_fake_message, "meloetta")
     real = await remind_me(context_with_fake_message, "giratinao")
