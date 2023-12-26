@@ -1,4 +1,5 @@
 import sqlite3
+from pathlib import Path
 from typing import Any, Iterator
 
 from exceptions import InvalidBP, InvalidLevel
@@ -22,8 +23,8 @@ from models import (
     TypeInfo,
 )
 
-DB_BOT_PATH = "db\\bot.sqlite"
-DB_SHUFFLE_PATH = "db\\shuffle.sqlite"
+DB_BOT_PATH = Path(__file__).resolve().parent.parent / "db" / "bot.sqlite"
+DB_SHUFFLE_PATH = Path(__file__).resolve().parent.parent / "db" / "shuffle.sqlite"
 STAGE_TYPE_TABLE = {
     StageType.MAIN: "main_stages",
     StageType.EXPERT: "expert_stages",

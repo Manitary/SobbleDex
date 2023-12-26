@@ -1,6 +1,5 @@
 .venv
 __pycache__
 log.txt
-*.sqlite
 .env
 .coverage
