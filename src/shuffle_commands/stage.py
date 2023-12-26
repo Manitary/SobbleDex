@@ -1,7 +1,5 @@
 from typing import Any, Awaitable, Callable
 
-import discord
-
 import constants
 import db
 import embed_formatters
@@ -181,45 +179,35 @@ async def starting_board(context: KoduckContext, *args: str, **kwargs: Any) -> P
     return await stage(context, *args, **kwargs)
 
 
-async def next_stage(
-    context: KoduckContext, *args: str, **kwargs: Any
-) -> discord.Message | Payload | None:
+async def next_stage(context: KoduckContext, *args: str, **kwargs: Any) -> Payload:
     query_ = await latest_stage_query(context)
     if not query_:
-        return await context.send_message(
-            content=settings.message_no_previous_stage,
-        )
+        return Payload(content=settings.message_no_previous_stage)
 
     if not query_.args:
-        return await context.send_message(
-            content=settings.message_last_query_error,
-        )
+        return Payload(content=settings.message_last_query_error)
+
+    kwargs = query_.kwargs | kwargs
 
     last_stage_id = query_.args[0]
     assert isinstance(last_stage_id, str)
 
-    if last_stage_id.startswith("s"):
-        return await context.send_message(
-            content=settings.message_last_query_invalid_stage,
-        )
-    if last_stage_id.startswith("ex"):
-        return await stage(
-            context, f"ex{int(last_stage_id[2:]) + 1}", kwargs=query_.kwargs
-        )
+    if last_stage_id.startswith("s") and last_stage_id[1:].isdigit():
+        return Payload(content=settings.message_last_query_invalid_stage)
+    if last_stage_id.startswith("ex") and last_stage_id[2:].isdigit():
+        return await stage(context, f"ex{int(last_stage_id[2:]) + 1}", **kwargs)
     if last_stage_id.isdigit():
         next_id = int(last_stage_id) + 1
         if next_id == 701:
             next_id = 1
-        return await stage(context, str(next_id), kwargs=query_.kwargs)
+        return await stage(context, str(next_id), **kwargs)
 
-    return await context.send_message(
-        content=settings.message_last_query_error,
-    )
+    return Payload(content=settings.message_last_query_error)
 
 
 async def next_stage_shorthand(
     context: KoduckContext, *args: str, **kwargs: Any
-) -> discord.Message | Payload | None:
+) -> Payload:
     kwargs["shorthand"] = True
     return await next_stage(context, *args, **kwargs)
 

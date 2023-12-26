@@ -42,7 +42,7 @@ def context_with_fake_message(koduck_instance: Koduck) -> Iterator[KoduckContext
     koduck_context.message = MockMessage(MockAuthor(1))
     yield koduck_context
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="function")
 def context_with_fake_message_and_history(koduck_instance: Koduck) -> Iterator[KoduckContext]:
     koduck_context = KoduckContext()
     koduck_context.koduck = koduck_instance
