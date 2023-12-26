@@ -304,19 +304,21 @@ async def next_stage(
             content=settings.message_last_query_error,
         )
 
+    kwargs = query_.kwargs | kwargs
+
     last_stage_id = query_.args[0]
-    if last_stage_id.startswith("s"):
+    if last_stage_id.startswith("s") and last_stage_id[1:].isdigit():
         return await context.koduck.send_message(
             receive_message=context.message,
             content=settings.message_last_query_invalid_stage,
         )
-    if last_stage_id.startswith("ex"):
-        return await stage(context, f"ex{int(last_stage_id[2:]) + 1}", **query_.kwargs)
+    if last_stage_id.startswith("ex") and last_stage_id[2:].isdigit():
+        return await stage(context, f"ex{int(last_stage_id[2:]) + 1}", **kwargs)
     if last_stage_id.isdigit():
         next_id = int(last_stage_id) + 1
         if next_id == 701:
             next_id = 1
-        return await stage(context, str(next_id), **query_.kwargs)
+        return await stage(context, str(next_id), **kwargs)
 
     return await context.koduck.send_message(
             receive_message=context.message,
