@@ -26,7 +26,7 @@ import sqlite3
 import sys
 import traceback
 from collections import defaultdict
-from typing import Any, Callable, Coroutine, Optional, Self, Union
+from typing import Any, Callable, Coroutine, Optional, Union
 
 import discord
 import pytz
@@ -82,8 +82,10 @@ koduck_instance: Koduck | None = None
 
 
 class Koduck:
+    command_tree = None
+
     # singleton
-    def __new__(cls) -> Self:
+    def __new__(cls) -> Koduck:
         if koduck_instance:
             return koduck_instance
         return super(Koduck, cls).__new__(cls)
@@ -92,7 +94,8 @@ class Koduck:
         self.client = client
         global koduck_instance
         koduck_instance = self
-        self.command_tree = discord.app_commands.CommandTree(self.client)
+        if not self.command_tree:
+            self.command_tree = discord.app_commands.CommandTree(self.client)
 
         # command -> (function, type, tier)
         # ``command`` is a string which represents the command name

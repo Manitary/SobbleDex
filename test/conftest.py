@@ -22,35 +22,39 @@ def import_json_asset(path: Path) -> Any:
     return data
 
 
-@pytest.fixture(name="koduck_instance", scope="session")
+@pytest.fixture(name="koduck_instance", scope="function")
 def _koduck_instance() -> Iterator[Koduck]:
     _koduck = Koduck()
     yield _koduck
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="function")
 def context(koduck_instance: Koduck) -> Iterator[KoduckContext]:
     koduck_context = KoduckContext()
     koduck_context.koduck = koduck_instance
     yield koduck_context
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="function")
 def context_with_fake_message(koduck_instance: Koduck) -> Iterator[KoduckContext]:
     koduck_context = KoduckContext()
     koduck_context.koduck = koduck_instance
     koduck_context.message = MockMessage(MockAuthor(1))
     yield koduck_context
 
+
 @pytest.fixture(scope="function")
-def context_with_fake_message_and_history(koduck_instance: Koduck) -> Iterator[KoduckContext]:
+def context_with_fake_message_and_history(
+    koduck_instance: Koduck,
+) -> Iterator[KoduckContext]:
     koduck_context = KoduckContext()
     koduck_context.koduck = koduck_instance
     koduck_context.message = MockMessage(MockAuthor(1))
     koduck_context.koduck.query_history = {1: [UserQuery(QueryType.ANY, tuple())]}
     yield koduck_context
 
-@pytest.fixture(scope="session")
+
+@pytest.fixture(scope="function")
 def context_with_emoji(koduck_instance: Koduck) -> Iterator[KoduckContext]:
     koduck_context = KoduckContext()
     koduck_context.koduck = koduck_instance
