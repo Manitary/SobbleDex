@@ -2,14 +2,12 @@ import itertools
 from collections import defaultdict
 from typing import Any
 
-import discord
-
 import db
 import embed_formatters
 import settings
 import utils
 from koduck import KoduckContext
-from models import Param, PokemonType
+from models import Param, Payload, PokemonType
 
 
 def validate_query(subqueries: list[str]) -> list[tuple[str, str, str]]:
@@ -95,9 +93,7 @@ def validate_query(subqueries: list[str]) -> list[tuple[str, str, str]]:
     return validated_queries
 
 
-async def query(
-    context: KoduckContext, *args: str, **kwargs: Any
-) -> discord.Message | None:
+async def query(context: KoduckContext, *args: str, **kwargs: Any) -> Payload:
     use_emojis = kwargs.get("useemojis", False)
     queries = validate_query(context["params"])
 
@@ -164,9 +160,7 @@ async def query(
             sortby = right
 
     if not query_string:
-        return await context.send_message(
-            content=settings.message_query_invalid_param,
-        )
+        return Payload(content=settings.message_query_invalid_param)
 
     query_string = query_string[:-5]
 
@@ -198,14 +192,14 @@ async def query(
         len(hits), query_string, sortby_string
     )
 
-    return await context.send_message(
+    return Payload(
         embed=embed_formatters.format_query_results_embed(header, buckets, use_emojis),
     )
 
 
 async def query_with_emojis(
     context: KoduckContext, *args: str, **kwargs: Any
-) -> discord.Message | None:
+) -> Payload:
     kwargs["useemojis"] = True
     return await query(context, *args, **kwargs)
 
