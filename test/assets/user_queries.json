@@ -124,5 +124,23 @@
             ["mega", "farmable", "!farmable", "maxap>115"],
             {"skill": "eject", "sortby": "evospeed", "type": "dark"}
         ]
+    ],
+    [
+        "?q mega, farmable, skill=\"power of 4\"",
+        [
+            "q",
+            "mega, farmable, skill=\"power of 4\"",
+            ["mega", "farmable", "skill=power of 4"],
+            ["mega", "farmable"],
+            {"skill": "power of 4"}
+        ]
+    ],
+    [
+        "?q \"mega, farmable",
+        ["q", "\"mega, farmable", ["\"mega", "farmable"], ["\"mega", "farmable"], {}]
+    ],
+    [
+        "?q \"mega, !farmable\"",
+        ["q", "\"mega, !farmable\"", ["mega, !farmable"], ["mega, !farmable"], {}]
     ]
 ]
