@@ -26,7 +26,7 @@ import sqlite3
 import sys
 import traceback
 from collections import defaultdict
-from typing import Any, Callable, Coroutine, Optional, Union
+from typing import Any, Callable, Coroutine, Optional, Self, Union
 
 import discord
 import pytz
@@ -613,9 +613,9 @@ class KoduckContext:
         self.command = ""
         self.command_line = ""
         self.param_line = ""
-        self.params = []
-        self.args = []
-        self.kwargs = {}
+        self.params: list[str] = []
+        self.args: list[str] = []
+        self.kwargs: dict[str, str] = {}
 
     # Allows subscriptable (i.e. context["message"] and context.message both work)
     def __getitem__(self, item: str) -> Any:
@@ -637,6 +637,9 @@ class KoduckContext:
             ignore_cd=ignore_cd,
             **kwargs,
         )
+
+    def log(self, ctx: Self) -> None:
+        ...
 
 
 # Message-like object used in the "run" slash command
@@ -863,6 +866,7 @@ async def on_message(message: discord.Message) -> discord.Message | None:
             -settings.output_history_size :
         ]
         # RUN THE COMMAND
+        context.log(context)
         function = koduck_instance.commands[context.command].function
         try:
             result = await function(context, *args, **kwargs)
