@@ -142,5 +142,9 @@
     [
         "?q \"mega, !farmable\"",
         ["q", "\"mega, !farmable\"", ["mega, !farmable"], ["mega, !farmable"], {}]
+    ],
+    [
+        "?STage TESt",
+        ["stage", "TESt", ["TESt"], ["TESt"], {}]
     ]
 ]
