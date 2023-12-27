@@ -1,7 +1,83 @@
 [
     [
+        "?addalias",
+        ["addalias", "", [], [], {}]
+    ],
+    [
+        "?addalias test",
+        ["addalias", "test", ["test"], ["test"], {}]
+    ],
+    [
         "?addalias original, alias",
         ["addalias", "original, alias", ["original", "alias"], ["original", "alias"], {}]
+    ],
+    [
+        "?addalias original, alias1, alias2",
+        ["addalias", "original, alias1, alias2", ["original", "alias1", "alias2"], ["original", "alias1", "alias2"], {}]
+    ],
+    [
+        "?addalias , , , ",
+        ["addalias", ", , , ", ["", "", "", ""], ["", "", "", ""], {}]
+    ],
+    [
+        "?addalias new, <@123>",
+        ["addalias", "new, <@123>", ["new", "<@123>"], ["new", "<@123>"], {}]
+    ],
+    [
+        "?listaliases",
+        ["listaliases", "", [], [], {}]
+    ],
+    [
+        "?listaliases original",
+        ["listaliases", "original", ["original"], ["original"], {}]
+    ],
+    [
+        "?removealias",
+        ["removealias", "", [], [], {}]
+    ],
+    [
+        "?removealias test, test test",
+        ["removealias", "test, test test", ["test", "test test"], ["test", "test test"], {}]
+    ],
+    [
+        "?ebrewards",
+        ["ebrewards", "", [], [], {}]
+    ],
+    [
+        "?ebrewards test",
+        ["ebrewards", "test", ["test"], ["test"], {}]
+    ],
+    [
+        "?eb",
+        ["eb", "", [], [], {}]
+    ],
+    [
+        "?eb 0",
+        ["eb", "0", ["0"], ["0"], {}]
+    ],
+    [
+        "?eb primarina -1",
+        ["eb", "primarina -1", ["primarina -1"], ["primarina -1"], {}]
+    ],
+    [
+        "?event Pinsir 0",
+        ["event", "Pinsir 0", ["Pinsir 0"], ["Pinsir 0"], {}]
+    ],
+    [
+        "?event Pinsir, 4",
+        ["event", "Pinsir, 4", ["Pinsir", "4"], ["Pinsir", "4"], {}]
+    ],
+    [
+        "?skill mindzap, !farmable",
+        ["skill", "mindzap, !farmable", ["mindzap", "!farmable"], ["mindzap", "!farmable"], {}]
+    ],
+    [
+        "?skillp mindzap,farmable=yes",
+        ["skillp", "mindzap,farmable=yes", ["mindzap", "farmable=yes"], ["mindzap"], {"farmable": "yes"}]
+    ],
+    [
+        "?skillp mindzap,ss = no",
+        ["skillp", "mindzap,ss = no", ["mindzap", "ss=no"], ["mindzap"], {"ss": "no"}]
     ],
     [
         "?query rmls=7",
@@ -10,5 +86,43 @@
     [
         "?q rml = 7",
         ["q", "rml = 7", ["rml=7"], [], {"rml": "7"}]
+    ],
+    [
+        "?q dex < = 2",
+        ["q", "dex < = 2", ["dex <=2"], [], {"dex <": "2"}]
+    ],
+    [
+        "?q dex<=2,bp>=   40",
+        ["q", "dex<=2,bp>=   40", ["dex<=2", "bp>=40"], [], {"dex<": "2", "bp>": "40"}]
+    ],
+    [
+        "?query type=grass,bp=40,rmls=20,skill=power of 4,ss=mega boost+",
+        [
+            "query",
+            "type=grass,bp=40,rmls=20,skill=power of 4,ss=mega boost+",
+            ["type=grass", "bp=40", "rmls=20", "skill=power of 4", "ss=mega boost+"],
+            [],
+            {"type": "grass", "bp": "40", "rmls": "20", "skill": "power of 4", "ss": "mega boost+"}
+        ]
+    ],
+    [
+        "?q maxap>=105 , skill=   shot out   , sortby < =   bp, mega",
+       [
+           "q",
+           "maxap>=105 , skill=   shot out   , sortby < =   bp, mega",
+           ["maxap>=105", "skill=shot out", "sortby <=bp", "mega"],
+           ["mega"],
+           {"maxap>": "105", "skill": "shot out", "sortby <": "bp"}
+       ]
+    ],
+    [
+        "?q mega, farmable, skill=eject, !farmable, sortby=bp, maxap>115, sortby=evospeed, type=dark",
+        [
+            "q",
+            "mega, farmable, skill=eject, !farmable, sortby=bp, maxap>115, sortby=evospeed, type=dark",
+            ["mega", "farmable", "skill=eject", "!farmable", "sortby=bp", "maxap>115", "sortby=evospeed", "type=dark"],
+            ["mega", "farmable", "!farmable", "maxap>115"],
+            {"skill": "eject", "sortby": "evospeed", "type": "dark"}
+        ]
     ]
 ]
