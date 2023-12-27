@@ -1,3 +1,5 @@
+import json
+from pathlib import Path
 from typing import AsyncIterator
 
 import pytest
@@ -8,11 +10,13 @@ from models import Payload
 type CtxData = tuple[str, str, list[str], list[str], dict[str, str]]
 type Context_Payloads = tuple[KoduckContext, list[Payload], list[CtxData]]
 
+SAMPLES_PATH = Path(__file__).resolve().parent.parent / "assets" / "user_queries.json"
 
-@pytest.mark.parametrize(
-    "user_msg, expected",
-    [("?query rmls=7", ("query", "rmls=7", ["rmls=7"], list[str](), {"rmls": "7"}))],
-)
+with SAMPLES_PATH.open(encoding="utf-8") as f:
+    QUERIES_SAMPLES = json.load(f)
+
+
+@pytest.mark.parametrize("user_msg, expected", QUERIES_SAMPLES)
 @pytest.mark.asyncio
 async def test_on_message(
     context_archive: AsyncIterator[Context_Payloads], user_msg: str, expected: CtxData
@@ -22,4 +26,4 @@ async def test_on_message(
     context.message.content = user_msg
     await on_message(context.message)
 
-    assert context_data[-1] == expected
+    assert context_data[-1] == tuple(expected)

@@ -1,10 +1,13 @@
 import functools
-from typing import Any, AsyncIterator
+import shutil
+import sqlite3
+from typing import Any, AsyncIterator, Iterator
 
 import discord
 import pytest
 from helper_models import MockAuthor, MockMessage
 
+import db
 from koduck import ClientWithBackgroundTask, Koduck, KoduckContext
 from main import refresh_commands
 from models import Payload
@@ -57,3 +60,25 @@ async def context_archive(
     await refresh_commands(context)
 
     yield context, message_archive, context_data
+
+
+@pytest.fixture(scope="module")
+def monkeypatch_module() -> Iterator[pytest.MonkeyPatch]:
+    monkeypatch = pytest.MonkeyPatch()
+    yield monkeypatch
+    monkeypatch.undo()
+
+
+@pytest.fixture(name="db_copy", scope="module", autouse=True)
+def db_copy(
+    tmp_path_factory: pytest.TempPathFactory, monkeypatch_module: pytest.MonkeyPatch
+) -> Iterator[None]:
+    tmp_dir = tmp_path_factory.mktemp("db_copy")
+    original = db.DB_SHUFFLE_PATH
+    new_path = tmp_dir / "shuffle_copy.sqlite"
+    shutil.copy(original, new_path)
+    _db = sqlite3.Connection(new_path)
+    _db.row_factory = db.dict_factory
+    monkeypatch_module.setattr(db, "shuffle_connection", _db)
+    yield
+    _db.close()

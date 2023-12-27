@@ -1,0 +1,14 @@
+[
+    [
+        "?addalias original, alias",
+        ["addalias", "original, alias", ["original", "alias"], ["original", "alias"], {}]
+    ],
+    [
+        "?query rmls=7",
+        ["query", "rmls=7", ["rmls=7"], [], {"rmls": "7"}]
+    ],
+    [
+        "?q rml = 7",
+        ["q", "rml = 7", ["rml=7"], [], {"rml": "7"}]
+    ]
+]
