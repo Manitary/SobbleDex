@@ -146,5 +146,35 @@
     [
         "?STage TESt",
         ["stage", "TESt", ["TESt"], ["TESt"], {}]
+    ],
+    [
+        "?q mega, farmable, skill=\"power of 4\", \"mega, !farmable\"",
+        [
+            "q",
+            "mega, farmable, skill=\"power of 4\", \"mega, !farmable\"",
+            ["mega", "farmable", "skill=power of 4", "mega, !farmable"],
+            ["mega", "farmable", "mega, !farmable"],
+            {"skill": "power of 4"}
+        ]
+    ],
+    [
+        "?q mega, farmable, skill=\"power of 4\", \"mega\\\", !farmable\"",
+        [
+            "q",
+            "mega, farmable, skill=\"power of 4\", \"mega\\\", !farmable\"",
+            ["mega", "farmable", "skill=power of 4", "mega\\\", !farmable"],
+            ["mega", "farmable", "mega\\\", !farmable"],
+            {"skill": "power of 4"}
+        ]
+    ],
+    [
+        "?q mega, skill\\=\"power of 4\"",
+        [
+            "q",
+            "mega, skill\\=\"power of 4\"",
+            ["mega", "skill\\=power of 4"],
+            ["mega", "skill\\=power of 4"],
+            {}
+        ]
     ]
 ]

@@ -611,7 +611,6 @@ class KoduckContext:
         self.koduck: Koduck | None = None
         self.message: discord.Message | None = None
         self.command = ""
-        self.command_line = ""
         self.param_line = ""
         self.params: list[str] = []
         self.args: list[str] = []
@@ -732,23 +731,21 @@ async def on_message(message: discord.Message) -> discord.Message | None:
 
     try:
         # PARSE COMMAND AND PARAMS
-        context, args, kwargs = KoduckContext(), [], {}
+        context = KoduckContext()
+        args: list[str] = []
+        kwargs: dict[str, str] = {}
         context.koduck = koduck_instance
         context.message = message
 
         # PREFIX COMMANDS
         if message.content.startswith(settings.command_prefix):
             activity_type = "prefix_command"
-            context.command_line = message.content[len(settings.command_prefix) :]
-            try:
-                context.command = context.command_line[
-                    0 : context.command_line.index(" ")
-                ].lower()
-                context.param_line = context.command_line[
-                    context.command_line.index(" ") + 1 :
-                ]
-            except ValueError:
-                context.command = context.command_line.lower()
+            command_line = message.content[len(settings.command_prefix) :].split(
+                maxsplit=1
+            )
+            context.command = command_line[0].lower()
+            if len(command_line) > 1:
+                context.param_line = command_line[1]
 
             # Check if it's a valid prefix command
             if context.command not in koduck_instance.prefix_commands:
@@ -773,47 +770,38 @@ async def on_message(message: discord.Message) -> discord.Message | None:
                 # (which shouldn't have param delim)
                 temp = context.param_line
                 quotes: list[str] = []
-                quote_matches = list(re.finditer(r'(["])(?:\\.|[^\\])*?\1', temp))
-                quote_matches.reverse()
-                for quote in quote_matches:
-                    start = quote.span()[0]
-                    end = quote.span()[1]
+                quote_matches = list(re.finditer(r'(").*?(?<!\\)\1', temp))
+                for quote in reversed(quote_matches):
+                    start, end = quote.span()
                     temp = temp[0:start] + f'"{len(quotes)}"' + temp[end:]
                     quotes.append(quote.group())
 
                 parsed_params = temp.split(settings.param_delim)
                 # Weird thing
-                if len(parsed_params) == 1 and parsed_params[0] == "":
+                if parsed_params == [""]:
                     parsed_params = []
 
                 counter = len(quotes) - 1
 
                 # Put the quotes back in, without the quote marks themselves
                 def put_quotes_back(
-                    text: str, quotes: str, counter: int
+                    text: str, quotes: list[str], counter: int
                 ) -> tuple[str, int]:
                     ans = text
-                    while text.find(f'"{counter}"') != -1 and counter >= 0:
+                    while counter >= 0 and f'"{counter}"' in text:
                         ans = ans.replace(f'"{counter}"', quotes[counter][1:-1], 1)
                         counter -= 1
                     return (ans, counter)
 
                 for param in parsed_params:
                     # Find equal signs that aren't preceded by backslash
-                    equals = [
-                        match.span()[0]
-                        for match in filter(
-                            lambda match: match.span()[0] == 0
-                            or param[match.span()[0] - 1] != "\\",
-                            re.finditer(r"=", param),
-                        )
-                    ]
-                    if len(equals) > 0:
+                    if e := re.search(r"(?<!\\)=", param):
+                        idx = e.start()
                         keyword, counter = put_quotes_back(
-                            param[: param.index("=")].strip(), quotes, counter
+                            param[:idx].strip(), quotes, counter
                         )
                         value, counter = put_quotes_back(
-                            param[param.index("=") + 1 :].strip(), quotes, counter
+                            param[idx + 1 :].strip(), quotes, counter
                         )
                         kwargs[keyword] = value
                         context.params.append(f"{keyword}={value}")
