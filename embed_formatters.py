@@ -135,11 +135,11 @@ def format_stage_embed(values, eb_data=("", 0, "", 0), shorthand=False):
         if moves != "0":
             stats += f"\n**Damage/move**: {math.ceil(real_hp / int(moves))}"
             if "M+5" in items:
-                stats += f" ([M+5] {math.ceil(real_hp / (int(moves) + 5))})"
+                stats += utils.emojify(f" ([M+5] {math.ceil(real_hp / (int(moves) + 5))})")
         else:
             stats += f"\n**Damage/second**: {math.ceil(real_hp / int(seconds))}"
             if "T+10" in items:
-                stats += f" ([T+10] {math.ceil(real_hp / (int(seconds) + 10))})"
+                stats += utils.emojify(f" ([T+10] {math.ceil(real_hp / (int(seconds) + 10))})")
 
     stats += "\n**Experience**: {}".format(exp)
 
